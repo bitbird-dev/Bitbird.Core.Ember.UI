@@ -1,6 +1,6 @@
 import Editor from './tr-editor';
 import { inject } from '@ember/service';
-import { A } from '@ember';
+import { A } from '@ember/array';
 import { computed } from '@ember/object';
 import layout from '../templates/components/tr-button-editor';
 

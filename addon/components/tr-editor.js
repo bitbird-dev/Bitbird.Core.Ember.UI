@@ -1,16 +1,16 @@
-import BusyKeys from '../mixins/busy-keys';
+import BusyKeys from 'bitbird-core-ember-helpers';
 import Component from '@ember/component';
-import { inject } from '@ember/service';
+import { inject as service } from '@ember/service';
 import { computed, observer } from '@ember/object';
 import { isPresent } from '@ember/utils';
 import layout from '../templates/components/tr-editor';
-import { A } from '@ember';
+import { A } from '@ember/array';
 
 export default Component.extend(BusyKeys, {
     layout,
     concatenatedProperties: A('i18nProperties'),
 
-    i18n: inject.service(),
+    i18n: service(),
 
     attributeBindings: A('title'),
 

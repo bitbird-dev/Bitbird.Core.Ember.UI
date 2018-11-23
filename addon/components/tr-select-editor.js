@@ -1,7 +1,7 @@
 import { computed } from '@ember/object';
 import Editor from './tr-editor';
 import OutsideClick from '../mixins/tr-outside-click';
-import { A } from '@ember';
+import { A } from '@ember/array';
 import layout from '../templates/components/tr-select-editor';
 
 export default Editor.extend(OutsideClick, {

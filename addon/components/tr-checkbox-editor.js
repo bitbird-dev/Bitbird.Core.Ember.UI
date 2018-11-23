@@ -1,6 +1,6 @@
 import Editor from './tr-editor';
 import { computed } from '@ember/object';
-import { A } from '@ember';
+import { A } from '@ember/array';
 import layout from '../templates/components/tr-checkbox-editor';
 
 export default Editor.extend({

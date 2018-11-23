@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { inject } from '@ember/service';
+import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 import { observer } from '@ember/object';
 import layout from '../templates/components/tr-board';
@@ -7,8 +7,8 @@ import layout from '../templates/components/tr-board';
 export default Component.extend({
     layout,
 
-    settings: inject.service('settings'),
-    session: inject.service('session'),
+    settings: service('bitbird-core-ember-remote/settings'),
+    session: service('bitbird-core-ember-remote/session'),
 
     _gridSize: 168,
     _gridSpace: 8,

@@ -1,7 +1,7 @@
 import { computed, observer } from '@ember/object';
 import Editor from './tr-text-editor';
 import layout from '../templates/components/tr-time-editor';
-import { A } from '@ember';
+import { A } from '@ember/array';
 
 export default Editor.extend({
     layout,

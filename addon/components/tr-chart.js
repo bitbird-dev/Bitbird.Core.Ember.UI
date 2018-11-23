@@ -1,10 +1,10 @@
-import { inject } from '@ember/service';
+import { inject as service } from '@ember/service';
 import { observer } from '@ember/object';
 import EmberHighChartsComponent from 'ember-highcharts/components/high-charts';
 
 export default EmberHighChartsComponent.extend({
-    i18n: inject.service(),
-    moment: inject.service(),
+    i18n: service(),
+    moment: service(),
     i18nTextKeyPrefix: 'highcharts.',
 
     didReceiveAttrs() {

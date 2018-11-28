@@ -7,8 +7,8 @@ import layout from '../templates/components/tr-board';
 export default Component.extend({
     layout,
 
-    settings: service('bitbird-core-ember-remote/settings'),
-    session: service('bitbird-core-ember-remote/session'),
+    settings: service('settings'),
+    session: service('session'),
 
     _gridSize: 168,
     _gridSpace: 8,

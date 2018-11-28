@@ -1,6 +1,6 @@
 {
     "name": "bitbird-core-ember-ui",
-    "version": "1.0.0",
+    "version": "1.0.5",
     "description": "Bitbird components for ember.js.",
     "keywords": [
         "ember-addon",
@@ -28,7 +28,8 @@
         "ember-cli-htmlbars-inline-precompile": "^1.0.0"
     },
     "devDependencies": {
-        "bitbird-core-ember-helpers": "1.0.0",
+        "bitbird-core-ember-helpers": "1.0.3",
+        "bitbird-core-ember-i18n": "1.0.5",
         "broccoli-asset-rev": "^2.4.5",
         "ember-ajax": "^3.0.0",
         "ember-cli": "~2.18.1",

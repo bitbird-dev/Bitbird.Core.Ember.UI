@@ -4,7 +4,7 @@ import { A } from '@ember/array';
 
 export default Editor.extend({
     layout,
-    i18nProperties: A('placeholder'),
+    i18nProperties: ['placeholder'],
 
     classNames: 'tr-display',
 

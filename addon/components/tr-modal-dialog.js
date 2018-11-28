@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import layout from '../templates/components/tr-modal-dialog';
+import layout from 'bitbird-core-ember-ui/templates/components/tr-modal-dialog';
 
 export default Component.extend({
     layout,

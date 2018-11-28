@@ -1,4 +1,4 @@
-import { computed } from '@ember/object';
+import { computed, observer } from '@ember/object';
 import Editor from './tr-editor';
 import OutsideClick from '../mixins/tr-outside-click';
 import { A } from '@ember/array';
@@ -6,7 +6,7 @@ import layout from '../templates/components/tr-select-editor';
 
 export default Editor.extend(OutsideClick, {
     layout,
-    i18nProperties: A('placeholder'),
+    i18nProperties: ['placeholder'],
 
     init: function() {
         this._super();
@@ -50,7 +50,7 @@ export default Editor.extend(OutsideClick, {
         'isMultiple', 'i18n.locale', function() {
         if(this.get('isMultiple')) {
             let items = this.get('selectedItems'),
-                values = [];
+                values = A();
 
             if(!items) return null;
 
@@ -99,7 +99,7 @@ export default Editor.extend(OutsideClick, {
             let style = (this.get('style') || '').toString().toLowerCase(),
                 align = (this.get('align') || '').toString().toLowerCase();
 
-            let classNames = [];
+            let classNames = A();
 
             classNames.pushObject(['flat','select','popout'].indexOf(style) > -1 ? `tr-select-editor-${style}` : 'tr-select-editor-select');
             classNames.pushObject(['auto','left','right'].indexOf(align) > -1 ? `tr-select-editor-align-${align}` : 'tr-select-editor-align-auto');
@@ -140,7 +140,7 @@ export default Editor.extend(OutsideClick, {
     popoutPrimaryText: 'Ok',
 
     /*** OBSERVER ***/
-    _selectedItemChanged: computed('selectedItem', function() {
+    _selectedItemChanged: observer('selectedItem', function() {
         //next(this, function() {
             this.set('selectedKey', this._getKey(this.get('selectedItem')));
             this.set('selectedValue', this._getValue(this.get('selectedItem')));
@@ -149,16 +149,16 @@ export default Editor.extend(OutsideClick, {
         //});
     }),
 
-    _selectedKeyChanged: computed('selectedKey', function(){
+    _selectedKeyChanged: observer('selectedKey', function(){
         //next(this, function() {
-            var self = this,
+            let self = this,
                 items = this.get('items') || [];
 
             if(items.get('isFulfilled') === false) {
                 return;
             }
 
-            var matchedItems = items.filter(function(i){ return self._getKey(i) === self.get('selectedKey') });
+            let matchedItems = items.filter(function(i){ return self._getKey(i) === self.get('selectedKey') });
             if(matchedItems.length > 0) {
                 if(matchedItems[0] === this.get('selectedItem')) return;
                 this.set('selectedItem', matchedItems[0]);
@@ -168,7 +168,7 @@ export default Editor.extend(OutsideClick, {
         //});
     }),
 
-    _suggestedItemChanged: computed('suggestedItem', function(){
+    _suggestedItemChanged: observer('suggestedItem', function(){
         var suggestedItem = this.get('suggestedItem');
         //next(this, function() {
             this.set('suggestedValue', this._getValue(suggestedItem));
@@ -234,7 +234,7 @@ export default Editor.extend(OutsideClick, {
     /*** Helpers ***/
 
     onTextChanged: function(value) {
-        var all = this.get('items'),
+        let all = this.get('items'),
             editable = this.get('editable');
 
         if(editable && value && value.length > 0) {
@@ -261,7 +261,7 @@ export default Editor.extend(OutsideClick, {
         }
     },
 
-    _itemsDidChange: computed('items', function() {
+    _itemsDidChange: observer('items', function() {
         this.onTextChanged();
     }),
 

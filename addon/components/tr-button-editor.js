@@ -1,17 +1,17 @@
 import Editor from './tr-editor';
-import { inject } from '@ember/service';
+import { inject as service } from '@ember/service';
 import { A } from '@ember/array';
 import { computed } from '@ember/object';
-import layout from '../templates/components/tr-button-editor';
+import layout from 'bitbird-core-ember-ui/templates/components/tr-button-editor';
 
 export default Editor.extend({
     layout,
-    i18nProperties: A('placeholder'),
+    i18nProperties: ['placeholder'],
 
-    routing: inject.service('-routing'),
+    routing: service('-routing'),
 
     classNames: 'tr-button-editor',
-    classNameBindings: A('highlight:is-highlight', 'isOn:is-on:is-off', 'styleClassName', 'isBusy'),
+    classNameBindings: ['highlight:is-highlight', 'isOn:is-on:is-off', 'styleClassName', 'isBusy'],
     //placeholder: Ember.String.htmlSafe("&nbsp;"),
     placeholder: null,
     buttonClass: null,

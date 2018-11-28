@@ -6,6 +6,11 @@ import layout from '../../templates/components/widgets/tr-value-widget';
 export default Widget.extend({
     layout,
 
+    init: function() {
+        this._super();
+        this.displayValueInitializer();
+    },
+
     classNames: 'tr-value-widget',
 
     icon: null,
@@ -39,7 +44,7 @@ export default Widget.extend({
         let startValue = value-diff > 0 ? value-diff : value;
 
         this.count(startValue, value, timeout);
-    }).on('init'),
+    }),
 
     /**
      *

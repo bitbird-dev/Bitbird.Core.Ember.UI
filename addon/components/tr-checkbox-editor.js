@@ -5,10 +5,10 @@ import layout from '../templates/components/tr-checkbox-editor';
 
 export default Editor.extend({
     layout,
-    i18nProperties: A('placeholder'),
+    i18nProperties: ['placeholder'],
 
     classNames: 'tr-checkbox-editor',
-    classNameBindings: A('_checkStateClass', '_placeholderStateClass'),
+    classNameBindings: ['_checkStateClass', '_placeholderStateClass'],
 
     _checkStateClass: computed('value', {
         get() {

@@ -3,6 +3,10 @@ import { observer } from '@ember/object';
 import EmberHighChartsComponent from 'ember-highcharts/components/high-charts';
 
 export default EmberHighChartsComponent.extend({
+    didInsertElement() {
+        this.contentDidChange();
+    },
+
     i18n: service(),
     moment: service(),
     i18nTextKeyPrefix: 'highcharts.',
@@ -75,7 +79,7 @@ export default EmberHighChartsComponent.extend({
             chart.redraw();
         }
 
-    }).on('didInsertElement'),
+    }),
 
     redraw: observer('chartOptions', function() {
         let chart = this.get('chart'),

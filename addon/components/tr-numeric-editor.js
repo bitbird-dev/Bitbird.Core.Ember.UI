@@ -362,9 +362,9 @@ export default Editor.extend({
 
     _ctrlDown: false,
 
-    _controlKeyWhitelist: A(
+    _controlKeyWhitelist: [
         17,91/*ctrl,meta*/
-    ),
+    ],
 
     _updateControlKeyState: function(evt) {
         let isCtrl = this._controlKeyWhitelist.indexOf(evt.charCode || evt.which) > -1;

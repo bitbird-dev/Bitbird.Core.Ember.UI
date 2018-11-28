@@ -1,5 +1,5 @@
 import { computed } from '@ember/object';
-import { inject } from '@ember/service';
+import { inject as service } from '@ember/service';
 import Object from '@ember/object';
 import Editor from './tr-editor';
 import layout from '../templates/components/tr-language-select';
@@ -7,9 +7,9 @@ import layout from '../templates/components/tr-language-select';
 export default Editor.extend({
     layout,
 
-    i18n: inject.service(),
-    settings: inject.service(),
-    moment: inject.service(),
+    i18n: service(),
+    settings: service(),
+    moment: service(),
     classNames: ['tr-language-select'],
     buttonClass: '',
 

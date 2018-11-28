@@ -1,10 +1,10 @@
-import { inject } from '@ember/service';
+import { inject as service } from '@ember/service';
 import Editor from './tr-editor';
 import layout from '../templates/components/tr-qr-editor';
 
 export default Editor.extend({
     layout,
-    functions: inject.service(),
+    functions: service(),
     classNames: 'tr-editor tr-qrcode-editor',
     isEditing: false,
 

@@ -7,19 +7,15 @@ moduleForComponent('tr-time-editor', 'Integration | Component | tr time editor',
 
 test('it renders', function(assert) {
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  this.set('date', new Date(2018,0,1));
 
-  this.render(hbs`{{tr-time-editor}}`);
-
-  assert.equal(this.$().text().trim(), '');
+  this.render(hbs`{{tr-time-editor value='12:00:00' isTime=false}}`);
+  assert.equal(this.$().find('input').text().trim(), '');
 
   // Template block usage:
   this.render(hbs`
-    {{#tr-time-editor}}
-      template block text
-    {{/tr-time-editor}}
+    {{#tr-time-editor value='12:00:00' isTime=false}}{{/tr-time-editor}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$('input').text().trim(), '');
 });

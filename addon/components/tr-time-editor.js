@@ -1,7 +1,7 @@
 import { computed, observer } from '@ember/object';
-import Editor from './tr-text-editor';
-import layout from '../templates/components/tr-time-editor';
-import { A } from '@ember/array';
+import Editor from 'bitbird-core-ember-ui/components/tr-text-editor';
+import layout from 'bitbird-core-ember-ui/templates/components/tr-time-editor';
+//import { A } from '@ember/array';
 
 export default Editor.extend({
     layout,
@@ -40,13 +40,13 @@ export default Editor.extend({
             matches = str.match(regexp),
             allowSeconds = this.get('allowSeconds');
 
-        if(!matches || ((allowSeconds && matches.length != 4) || matches.length != 3) || !matches[0] || !matches[1]) {
+        if(!matches || ((allowSeconds && matches.length !== 4) || matches.length !== 3) || !matches[0] || !matches[1]) {
             return this._emptyStringValue;
         }
 
-        result.hours = Number.parseInt(matches[1] || 0);
-        result.minutes = Number.parseInt(matches[2] || 0) || 0;
-        result.seconds = allowSeconds ? Number.parseInt(matches[3] || 0) || 0 : 0;
+        result.hours = Number.parseInt(matches[1]) || 0;
+        result.minutes = Number.parseInt(matches[2]) || 0;
+        result.seconds = allowSeconds ? Number.parseInt(matches[3]) || 0 : 0;
         return result;
     },
     _getStringValue: function() {
@@ -270,9 +270,9 @@ export default Editor.extend({
 
     _ctrlDown: false,
 
-    _controlKeyWhitelist: A(
+    _controlKeyWhitelist: [
         17,91/*ctrl,meta*/
-    ),
+    ],
 
     _updateControlKeyState: function(evt) {
         let isCtrl = this._controlKeyWhitelist.indexOf(evt.charCode || evt.which) > -1;
@@ -280,7 +280,7 @@ export default Editor.extend({
         if(isCtrl) {
             if(evt.type === 'keydown') {
                 this._ctrlDown = true;
-            } else if(evt.type == 'keyup') {
+            } else if(evt.type === 'keyup') {
                 this._ctrlDown = false;
             }
         }

@@ -8,7 +8,7 @@ import layout from '../../templates/components/widgets/tr-widget';
 export default Component.extend({
     layout,
 
-    routing: inject.service('-routing'),
+    routing: inject('-routing'),
 
     tagName: 'div',
     classNames: 'tr-board-widget',
@@ -41,7 +41,7 @@ export default Component.extend({
         this.set('y', content[identifier].position.y);
         this.set('width', content[identifier].position.width);
         this.set('height', content[identifier].position.height);
-    }),//.on('init'),
+    }),
 
     _init: false,
     _size: 160,
@@ -190,5 +190,9 @@ export default Component.extend({
         this.$().css('top', this.get('absY'));
         this.$().css('width', this.get('absWidth'));
         this.$().css('height', this.get('absHeight'));
-    }).on('didInsertElement')
+    }),
+
+    didInsertElement() {
+        this._updateStyle();
+    }
 });

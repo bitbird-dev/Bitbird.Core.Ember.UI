@@ -1,11 +1,11 @@
 import { observer } from '@ember/object';
-import Editor from './tr-editor';
-import layout from '../templates/components/tr-text-editor';
-import { A } from '@ember/array';
+import Editor from 'bitbird-core-ember-ui/components/tr-editor';
+import layout from 'bitbird-core-ember-ui/templates/components/tr-text-editor';
+//import { A } from '@ember/array';
 
 export default Editor.extend({
     layout,
-    i18nProperties: A('placeholder'),
+    i18nProperties: ['placeholder'],
     classNames: 'tr-text-editor',
 
     placeholder: null,
@@ -44,7 +44,7 @@ export default Editor.extend({
             selection.start = selection.end = oSel.text.length;
         }
         // Firefox support
-        else if (oField.selectionStart || oField.selectionStart == '0')
+        else if (oField.selectionStart || oField.selectionStart === '0')
         {
             selection.start = oField.selectionStart;
             selection.end = oField.selectionEnd;

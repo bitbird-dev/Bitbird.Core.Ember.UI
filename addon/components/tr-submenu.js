@@ -1,11 +1,11 @@
 import Component from '@ember/component';
 import OutsideClick from '../mixins/tr-outside-click';
-import layout from '../templates/components/tr-submenu';
+import layout from 'bitbird-core-ember-ui/templates/components/tr-submenu';
 
 export default Component.extend(OutsideClick, {
     layout,
     text: null,
-    classNames: 'tr-submenu tr-editor',
+    classNames: ['tr-submenu tr-editor'],
     classNameBindings: ['highlight:is-highlight'],
 
     isOpen: false,

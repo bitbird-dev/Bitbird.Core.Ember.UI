@@ -1,18 +1,23 @@
-import BusyKeys from 'bitbird-core-ember-helpers';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { computed, observer } from '@ember/object';
 import { isPresent } from '@ember/utils';
 import layout from '../templates/components/tr-editor';
-import { A } from '@ember/array';
+import BusyKeys from 'bitbird-core-ember-helpers';
 
 export default Component.extend(BusyKeys, {
     layout,
-    concatenatedProperties: A('i18nProperties'),
+
+    didInsertElement() {
+        this._triggerFocus();
+        this._updateI18n();
+    },
+
+    concatenatedProperties: ['i18nProperties'],
 
     i18n: service(),
 
-    attributeBindings: A('title'),
+    attributeBindings: ['title'],
 
     classNames: 'tr-editor',
     classNameBindings: ['isDisabled:disabled:enabled', 'isReadonly:readonly'],
@@ -25,7 +30,7 @@ export default Component.extend(BusyKeys, {
     postfix: null,
 
     i18nKey: null,
-    i18nProperties: A('label', 'title', 'info', 'prefix', 'postfix'),
+    i18nProperties: ['label', 'title', 'info', 'prefix', 'postfix'],
 
     isDisabled: false,
     isReadonly: false,
@@ -79,7 +84,7 @@ export default Component.extend(BusyKeys, {
     _triggerFocus: observer('focus', function () {
         if (!this.get('focus')) return;
         this.$('input').focus();
-    }).on('didInsertElement'),
+    }),
 
     _updateI18n: observer('i18nKey', 'i18n.locale', function () {
         let i18nKey = this.get('i18nKey'),
@@ -92,7 +97,7 @@ export default Component.extend(BusyKeys, {
         i18nProperties.forEach(function(propertyName) {
             this._updateI18nForPropertyName(i18n, i18nKey, propertyName);
         }, this);
-    }).on('didInsertElement'),
+    }),
 
     _updateI18nForPropertyName: function(i18n, i18nKey, propertyName) {
         let translation = null;

@@ -8,7 +8,7 @@ export default Editor.extend({
     layout,
 
     i18n: service(),
-    settings: service(),
+    localeSettings: service(),
     moment: service(),
     classNames: ['tr-language-select'],
     buttonClass: '',
@@ -34,7 +34,7 @@ export default Editor.extend({
 
     actions: {
         setLocale(locale) {
-            this.set('settings.locale', locale.key);
+            this.set('localeSettings.locale', locale.key);
             this.get('moment').setLocale(locale.key);
         }
     }

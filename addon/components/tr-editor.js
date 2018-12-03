@@ -3,7 +3,7 @@ import { inject as service } from '@ember/service';
 import { computed, observer } from '@ember/object';
 import { isPresent } from '@ember/utils';
 import layout from '../templates/components/tr-editor';
-import BusyKeys from 'bitbird-core-ember-helpers';
+import BusyKeys from 'bitbird-core-ember-helpers/mixins/busy-keys';
 
 export default Component.extend(BusyKeys, {
     layout,

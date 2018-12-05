@@ -29,7 +29,7 @@
     },
     "devDependencies": {
         "bitbird-core-ember-helpers": "1.0.5",
-        "bitbird-core-ember-i18n": "1.0.9",
+        "bitbird-core-ember-i18n": "1.0.10",
         "bitbird-core-ember-remote": "1.0.8",
         "broccoli-asset-rev": "^2.4.5",
         "ember-ajax": "^3.0.0",

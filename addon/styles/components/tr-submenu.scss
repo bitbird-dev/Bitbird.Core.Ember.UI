@@ -1,0 +1,48 @@
+.tr-submenu {
+  position: relative;
+  > .tr-editor.tr-button-editor .tr-editor-content > button {
+    padding-right: 32px;
+  }
+  .tr-submenu-custom-text {
+    display: inline;
+  }
+  .tr-submenu-children {
+    display: none;
+    box-sizing: border-box;
+    border: 2px solid #f0f0f0;
+    border-top: none;
+    top: 50%;
+    @keyframes tr-submenu-open-v {
+      0% {
+        display: block;
+        opacity: 0;
+        top: 50%;
+      }
+      25% {
+        opacity: 0.25;
+        top: 100%;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    &.is-open {
+      display: block;
+      position: absolute;
+      top: 100%;
+      width: auto;
+      animation-name: tr-submenu-open-v;
+      animation-duration: 500ms;
+      animation-iteration-count: 1;
+      animation-timing-function: ease-out;
+    }
+    right: 0;
+    > .tr-container > .tr-editor {
+      display: block;
+    }
+  }
+  &.align-left .tr-submenu-children.is-open {
+    left: 0;
+    right: auto;
+  }
+}

@@ -1,0 +1,57 @@
+.tr-scroll-panel {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  @include clearfix();
+  > .tr-scroll-panel-bar >.tr-scroll-panel-force-overflow{
+    > .tr-alert {
+      border-radius: 0;
+      border-style: none;
+      border-bottom-style: solid;
+      border-width: 3px;
+      margin: 0;
+    }
+  }
+  > .tr-scroll-panel-bar,
+  &.scrollbar-autohide:hover > .tr-scroll-panel-bar {
+    float: left;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    transition: all 250ms;
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
+      background-color: transparent;
+      transition: all 250ms;
+    }
+
+    &::-webkit-scrollbar {
+      width: 4px;
+      background-color: transparent;
+      transition: all 250ms;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $color-foreground-lowest;
+      transition: all 250ms;
+    }
+  }
+
+  &.scrollbar-hidden, &.scrollbar-autohide {
+    > .tr-scroll-panel-bar {
+      &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 0 transparent;
+        background-color: transparent;
+      }
+
+      &::-webkit-scrollbar {
+        width: 0;
+        background-color: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+      }
+    }
+  }
+}

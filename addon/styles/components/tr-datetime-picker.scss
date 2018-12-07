@@ -1,0 +1,381 @@
+.tr-datetime-picker {
+  display: inline-block;
+}
+
+.tr-datetime-picker-wrapper {
+  $picker-item-size: 24px;
+  $picker-header-size: 20px;
+
+  position: absolute;
+  box-shadow: 3px 3px 10px -4px $color-background-highest;
+  background-color: $color-background;
+
+  &.allow-begin-time {
+    .tr-datetime-picker-date-panel {
+      box-shadow: 4px 0px 8px -4px #666;
+    }
+  }
+
+  &.allow-end-time {
+    .tr-datetime-picker-time-begin-panel {
+      box-shadow: 4px 0px 8px -4px #666;
+    }
+  }
+
+  .tr-datetime-picker-content {
+    @include clearfix();
+  }
+
+  .tr-datetime-picker-date-panel,
+  .tr-datetime-picker-time-begin-panel,
+  .tr-datetime-picker-time-end-panel {
+    float: left;
+  }
+
+  .tr-datetime-picker-date-header,
+  .tr-datetime-picker-time-header {
+    @include clearfix();
+    height: $picker-header-size;
+    line-height: $picker-header-size;
+    background-color: $color-accent-lower;
+    color: get-foreground-color($color-accent-lower);
+  }
+  .tr-datetime-picker-time-header {
+    background-color: $color-accent-normal;
+    font-size: 14px;
+    text-align: center;
+  }
+  .tr-datetime-picker-time-end-panel > .tr-datetime-picker-time-header {
+    background-color: $color-accent-high;
+  }
+
+  .tr-datetime-picker-date-panel {
+    .tr-datetime-picker-date-header {
+      //border-bottom: 1px solid $color-accent-normal;
+      @include clearfix();
+      .tr-datetime-picker-page-button,
+      .tr-datetime-picker-month-button,
+      .tr-datetime-picker-year-button {
+        background-color: $color-accent-lower;
+        color: get-foreground-color($color-accent-lower);
+        width: $picker-item-size;
+        float: left;
+        line-height: $picker-header-size;
+        padding: 0;
+        &:hover, &:focus {
+          background-color: $color-accent-lower-alt;
+        }
+        &:active {
+          background-color: $color-accent-lowest-alt;
+        }
+      }
+      .tr-datetime-picker-page-button {
+        font-size: 12px;
+      }
+      .tr-datetime-picker-month-button,
+      .tr-datetime-picker-year-button {
+        width: 2 * $picker-item-size;
+        font-weight: bold;
+        font-size: 14px;
+      }
+      .tr-datetime-picker-month-button {
+        text-align: right;
+        padding: 0 6px;
+      }
+      .tr-datetime-picker-year-button {
+        text-align: center;
+        padding: 0 6px;
+      }
+    }
+    .tr-datetime-picker-month-header,
+    .tr-datetime-picker-month-dates {
+      height: auto;
+      width: 7*$picker-item-size;
+      overflow: auto;
+      ol {
+        padding: 0;
+        margin: 0;
+        > li {
+          position: relative;
+          padding: 0;
+          margin: 0;
+          display: block;
+          float: left;
+          width: $picker-item-size;
+          height: $picker-item-size;
+          overflow: hidden;
+          text-align: center;
+          font-size: 12px;
+          line-height: $picker-item-size;
+          cursor: default;
+        }
+      }
+    }
+    .tr-datetime-picker-month-header {
+      font-weight: bold;
+    }
+    .tr-datetime-picker-month-dates {
+      ol {
+        > li {
+          &.is-disabled {
+            opacity: 0.25;
+          }
+          &.is-range-before {
+            opacity: 0.25;
+          }
+          &.is-other-month {
+            color: $color-foreground-lower;
+            background-color: $color-background-lowest;
+            &:hover {
+              color: get-foreground-color($color-accent);
+              background-color: $color-accent;
+            }
+          }
+          &.is-today::before {
+            content: ' ';
+            position: absolute;
+            top: 2px;
+            bottom: 2px;
+            left: 2px;
+            right: 2px;
+            border: 2px solid $color-accent;
+            box-sizing: border-box;
+            border-radius: $picker-item-size/2;
+          }
+          &.is-weekend {
+            color: $color-accent-low;
+          }
+          &.is-selected {
+            background-color: $color-highlight-low-alt;
+            color: get-foreground-color($color-highlight);
+            &.is-today::before {
+              border-color: get-foreground-color($color-highlight);
+            }
+          }
+          &.is-range-begin {
+            border-top-left-radius: $picker-item-size/2;
+            //border-bottom-left-radius: $picker-item-size/2;
+          }
+          &.is-range-end {
+            //border-top-right-radius: $picker-item-size/2;
+            border-bottom-right-radius: $picker-item-size/2;
+          }
+          &:hover {
+            color: get-foreground-color($color-accent);
+            background-color: $color-accent;
+            &.is-selected {
+              background-color: $color-highlight;
+              color: get-foreground-color($color-highlight);
+            }
+            &.is-today::before {
+              border-color: get-foreground-color($color-accent);
+            }
+          }
+        }
+      }
+    }
+  }
+  .tr-datetime-picker-time-begin-panel,
+  .tr-datetime-picker-time-end-panel {
+    height: 7*$picker-item-size + $picker-header-size;
+  }
+
+  .tr-datetime-picker-time-begin-panel,
+  .tr-datetime-picker-time-end-panel {
+    .tr-datetime-picker-time-header,
+    .tr-datetime-picker-times {
+      //padding: 0 16px;
+    }
+  }
+
+  .tr-datetime-picker-times {
+    position: relative;
+    height: 7*$picker-item-size;
+    font-size: 12px;
+    .tr-datetime-picker-hours, .tr-datetime-picker-minutes, .tr-datetime-picker-seconds {
+      float: left;
+      height: 100%;
+      width: 48px;
+      position: relative;
+      .tr-datetime-picker-detail-header {
+        line-height: 24px;
+        font-weight: bold;
+        text-align: center;
+      }
+      .tr-datetime-picker-detail-content {
+        //position: relative;
+        //width: $picker-item-size;
+        //height: 100%;
+        overflow: auto;
+        position: absolute;
+        top: $picker-item-size;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        &::-webkit-scrollbar-track {
+          -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.3);
+          background-color: transparent;
+          transition: all 250ms;
+        }
+
+        &::-webkit-scrollbar {
+          width: 1px;
+          background-color: transparent;
+          transition: all 250ms;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: $color-foreground-lowest;
+          transition: all 250ms;
+        }
+
+        ol, li {
+          padding: 0;
+          margin: 0;
+        }
+        li {
+          //padding: 0 8px;
+          position: relative;
+          text-align: center;
+          line-height: 18px;
+          cursor: default;
+          z-index: 1;
+          //width: 18px;
+          //margin: auto;
+          //border-radius: 9px;
+
+          &::before {
+            content: ' ';
+            position: absolute;
+            height: 18px;
+            width: 18px;
+            border-radius: 9px;
+            left: 50%;
+            margin-left: -9px;
+            z-index: -1;
+          }
+
+          &.is-selected {
+            color: get-foreground-color($color-highlight);
+            &::before {
+              background-color: $color-highlight-low-alt;
+            }
+          }
+          &:hover {
+            color: get-foreground-color($color-accent);
+            //background-color: $color-accent;
+            &::before {
+              background-color: $color-accent;
+            }
+            &.is-selected {
+              color: get-foreground-color($color-highlight);
+              &::before {
+                background-color: $color-highlight;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .tr-datetime-picker-footer {
+    .tr-datetime-picker-display {
+      font-size: 12px;
+      padding: 8px 0;
+      text-align: center;
+      background-color: $color-accent-lower;
+      color: $color-accent-high-alt;
+      max-height: 150px;
+      overflow: auto;
+      text-overflow: ellipsis;
+
+      &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.3);
+        background-color: transparent;
+        transition: all 250ms;
+      }
+
+      &::-webkit-scrollbar {
+        width: 1px;
+        background-color: transparent;
+        transition: all 250ms;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $color-foreground-lowest;
+        transition: all 250ms;
+      }
+
+      ol, li {
+        padding: 0;
+        margin: 0;
+      }
+    }
+    .tr-datetime-picker-display-button {
+      display: inline-block;
+      background-color: $color-accent-lower;
+      color: get-foreground-color($color-accent-lower);
+      line-height: $picker-header-size;
+      padding: 0 2px;
+      &:hover {
+        background-color: $color-accent-lower-alt;
+      }
+    }
+  }
+
+  .tr-datetime-picker-detail-overlay {
+    position: absolute;
+    background: transparentize($color-background-high, 0.05);
+    color: $color-background;
+    top: $picker-header-size;
+    right: 0;
+    left: 0;
+    height: 7*$picker-item-size;
+    z-index: 1;
+    .tr-datetime-picker-content {
+      background: transparentize($color-background-highest, 0.05);
+      width: 7*$picker-item-size;
+      height: 7*$picker-item-size;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    ol {
+      padding: 0;
+      margin: 0;
+    }
+    li {
+      float: left;
+      width: 50%;
+      height: 100%;
+      padding: 0 2px;
+      box-sizing: border-box;
+      line-height: 25px;
+      font-size: 12px;
+      text-align: center;
+      border-radius: 2px;
+      &:hover {
+        background-color: $color-accent;
+        color: get-foreground-color($color-accent);
+      }
+      &:active {
+        background-color: $color-accent-lowest-alt;
+        color: get-foreground-color($color-accent-lowest-alt);
+      }
+      &.is-selected {
+        background-color: $color-highlight;
+        color: get-foreground-color($color-highlight);
+        &:hover {
+          background-color: $color-highlight-lower;
+          color: get-foreground-color($color-highlight-lower);
+        }
+      }
+    }
+    .tr-datetime-year-picker {
+      li {
+        width: 20%;
+      }
+    }
+  }
+}

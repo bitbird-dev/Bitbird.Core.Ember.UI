@@ -1,0 +1,14 @@
+.tr-loader {
+  text-align: center;
+  padding: 16px;
+  position: relative;
+  > .tr-spinner {
+    margin: 0 auto;
+  }
+  > .tr-loader-label {
+    font-family: $font-family-caption;
+    font-size: 75%;
+    color: $color-foreground-normal-high;
+    padding-top: 16px;
+  }
+}

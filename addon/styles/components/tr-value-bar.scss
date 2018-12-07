@@ -1,0 +1,20 @@
+.tr-value-bar {
+  display: block;
+  position: relative;
+  .tr-value-bar-bar {
+    position: absolute;
+    width: 0;
+    opacity: 0;
+    z-index: 0;
+    background-color: $color-accent;
+    height: 2px;
+    bottom: -2px;
+    transition: width 5s, opacity 3s;
+  }
+  .tr-value-bar-value {
+
+  }
+  .tr-value-bar-label {
+
+  }
+}

@@ -1,0 +1,92 @@
+.tr-blade {
+  display: block;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  > .tr-blade-wrapper {
+    width: 200%;
+    height: 100%;
+    > .tr-blade-pane,
+    > .tr-blade-content {
+      position: relative;
+      z-index: 1;
+      box-sizing: border-box;
+      float: left;
+      width: 50%;
+      height: 100%;
+      box-shadow: 0 0 16px $color-background-low;
+      transition: margin-left 250ms;
+    }
+    > .tr-blade-nav-back {
+      display: none;
+      height: 32px;
+      width: 32px;
+      background: $color-highlight;
+      text-align: center;
+      color: $color-accent-highest-alt;
+      line-height: 32px;
+      padding: 8px;
+      font-size: 1.4em;
+
+      position: absolute;
+      z-index: 1;
+      //left: 8px;
+      bottom: 8px;
+      //right: 8px;
+      left: 50%;
+      margin-left: -16px;
+      border-radius: 64px;
+      box-shadow: 0 0 8px 0 #333;
+    }
+  }
+
+  &.has-content > .tr-blade-wrapper {
+    > .tr-blade-pane {
+      //width: 0;
+      margin-left: -100%;
+    }
+
+    > .tr-blade-content {
+      //width: 100%;
+    }
+
+    > .tr-blade-nav-back {
+      display: block;
+    }
+  }
+
+  @media screen and (min-width: $screen-min-width-tablet) {
+    .tr-blade-wrapper {
+      width: 100%;
+      > .tr-blade-pane, > .tr-blade-content {
+        width: 100%;
+        transition: width 250ms;
+      }
+    }
+    &.has-content > .tr-blade-wrapper {
+      > .tr-blade-pane {
+        margin-left: 0;
+      }
+      > .tr-blade-pane {
+        width: 40%;
+      }
+      > .tr-blade-content {
+        width: 60%;
+      }
+      > .tr-blade-nav-back {
+        display: none;
+      }
+    }
+  }
+
+  @media screen and (min-width: $screen-min-width-huge) {
+    &.has-content > .tr-blade-wrapper {
+      > .tr-blade-pane {
+        width: 25%;
+      }
+      > .tr-blade-content {
+        width: 75%;
+      }
+    }
+  }
+}

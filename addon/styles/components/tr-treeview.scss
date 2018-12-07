@@ -1,0 +1,215 @@
+.tr-treeview {
+  $tr-treeview-opener-size: 14px;
+  $tr-treeview-opener-padding-vertical: 3px;
+  $tr-treeview-opener-padding-horizontal: 3px;
+  overflow: hidden;
+  user-select: none;
+
+  > .tr-treeview-item {
+    position: relative;
+    margin: 2px 0 0 0;
+    padding-left: $tr-treeview-opener-size * 1.6;
+    min-height: $tr-treeview-opener-size + 2 * $tr-treeview-opener-padding-vertical;
+    line-height: $tr-treeview-opener-size + 2 * $tr-treeview-opener-padding-vertical;
+    > .tr-treeview {
+      height: 0;
+      opacity: 0;
+      margin-left: -24px;
+      -webkit-transition: opacity 350ms, margin 200ms;
+      -moz-transition: opacity 350ms, margin 200ms;
+      -ms-transition: opacity 350ms, margin 200ms;
+      -o-transition: opacity 350ms, margin 200ms;
+      transition: opacity 350ms, margin 200ms;
+    }
+
+    > .tr-treeview-item-opener, > .tr-treeview-item-label {
+      position: absolute;
+      width: $tr-treeview-opener-size;
+      left: $tr-treeview-opener-padding-horizontal;
+      top: $tr-treeview-opener-padding-vertical;
+      bottom: $tr-treeview-opener-padding-vertical;
+      min-height: $tr-treeview-opener-size;
+
+      -webkit-border-radius: $tr-treeview-opener-size / 2;
+      -moz-border-radius: $tr-treeview-opener-size / 2;
+      border-radius: $tr-treeview-opener-size / 2;
+
+      background-color: $color-foreground-high;
+    }
+    > .tr-treeview-item-opener:hover {
+      box-shadow: 0 0 2px 1px #fff;
+    }
+    > .tr-treeview-item-label {
+      background-color: $color-foreground-normal-low;
+      padding-left: $tr-treeview-opener-size + 2 * $tr-treeview-opener-padding-horizontal;
+      line-height: $tr-treeview-opener-size;
+      height: $tr-treeview-opener-size;
+    }
+    > a > .tr-treeview-item-label-placeholder {
+      padding-left: $tr-treeview-opener-size + 2 * $tr-treeview-opener-padding-horizontal;
+    }
+    > a > .tr-treeview-item-label-sorting {
+      opacity: 0.85;
+      position: absolute;
+      z-index: 1;
+      background: $color-foreground-lower;
+      height: $tr-treeview-opener-size + 2 * $tr-treeview-opener-padding-vertical - 2;
+      width: $tr-treeview-opener-size + 2 * $tr-treeview-opener-padding-vertical - 2;
+      right: 2px;
+      line-height: $tr-treeview-opener-size + 2 * $tr-treeview-opener-padding-vertical - 2;
+      text-align: center;
+      color: $color-foreground-highest;
+      text-shadow: none;
+      border-radius: 24px;
+    }
+    > a > .tr-treeview-item-favorite {
+      display: none;
+      float: right;
+      padding-right: 6px;
+      padding-left: 6px;
+      position: absolute;
+      right: 0;
+      color: $color-foreground-high;
+      background-color: $color-background-higher;
+      &.is-favorite {
+        display: initial;
+      }
+    }
+    > a > .tr-treeview-item-prefix {
+      color: #ffffff;
+      border-radius: 8px;
+      display: inline-block;
+      text-align: center;
+      position: relative;
+      left: 0;
+      top: 0;
+      background: #666;
+      height: $tr-treeview-opener-size;
+      width: $tr-treeview-opener-size;
+      line-height: $tr-treeview-opener-size + 2px;
+      font-size: $tr-treeview-opener-size / 2;
+    }
+
+    > a:hover > .tr-treeview-item-favorite {
+      display: initial;
+    }
+
+    > .tr-treeview-link {
+      display: block;
+      width: 100%;
+      text-align: left;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    > .path-view {
+      font-size: 0.7em;
+      font-family: $font-family-narrow;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &.is-expanded > .tr-treeview {
+      height: auto;
+      opacity: 1;
+      margin-left: 0px;
+    }
+    &.is-leaf > .tr-treeview-item-opener::after {
+      content: ' ';
+      position: absolute;
+      background-color: $color-foreground-high;
+      height: auto;
+      width: $tr-treeview-opener-size - 2*$tr-treeview-opener-padding-vertical;
+      top: $tr-treeview-opener-padding-vertical;
+      left: $tr-treeview-opener-padding-vertical;
+      bottom: $tr-treeview-opener-padding-vertical;
+
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+    }
+    &.in-progress > .tr-treeview-item-opener {
+      $spin-duration: 1s;
+      $spin-color: transparentize($color-foreground, 0.2);
+      $spin-border-width: 3px;
+
+      .spin {
+        background: none;
+        border: 0;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+
+        color: $spin-color;
+        font-size: inherit;
+        font-weight: 700;
+        border-radius: 100%;
+        box-shadow: none;
+
+        // Required, since we're setting absolute on pseudo-elements
+        position: relative;
+        vertical-align: middle;
+
+        height: $tr-treeview-opener-size;
+        width: $tr-treeview-opener-size;
+
+        padding: 0;
+
+        &::before,
+        &::after {
+          box-sizing: inherit;
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          border-radius: 100%;
+        }
+
+        @keyframes spin-comet {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+
+        @keyframes spin-comet-2 {
+          0% {
+            transform: rotate(-180deg);
+          }
+          100% {
+            transform: rotate(180deg);
+          }
+        }
+
+        &::after, &::before {
+          border: 0 solid transparent;
+          border-top-width: $spin-border-width;
+          border-left-width: $spin-border-width;
+          border-right: $spin-border-width solid $spin-color;
+          border-bottom-width: $spin-border-width;
+
+          animation-name: spin-comet;
+          animation-duration: $spin-duration;
+          animation-iteration-count: infinite;
+          animation-timing-function: linear;
+        }
+
+        &::before {
+          //animation-delay: $spin-duration/2;
+          animation-name: spin-comet-2;
+        }
+      }
+    }
+  }
+
+  &.is-sorting {
+    .tr-treeview-item > a > .tr-treeview-item-favorite.is-favorite {
+      display: none;
+    }
+  }
+}

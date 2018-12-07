@@ -1,0 +1,97 @@
+.tr-image-upload {
+  $image-width: 52px;
+  position: relative;
+  height: $image-width;
+  width: $image-width;
+  $spacing: 8px;
+  > .tr-image-upload-image, > .tr-image-upload-image-placeholder, > .tr-image-upload-placeholder {
+    position: absolute;
+    height: $image-width;
+    width: $image-width;
+  }
+  > .tr-image-upload-image {
+    background: $color-background no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+  > .tr-image-upload-image-placeholder, > .tr-image-upload-placeholder {
+    background-color: $color-background-low;
+    color: $color-background-normal-low;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-align: center;
+    line-height: $image-width;
+    font-family: $font-family-caption;
+    &:after {
+      position: absolute;
+      text-align: center;
+      line-height: $image-width;
+      top: 10%;
+      left: 10%;
+      width: 80%;
+      height: 80%;
+      content: ' ';
+      background-color: $color-background-lowest;
+      -webkit-border-radius: $image-width/2;
+      -moz-border-radius: $image-width/2;
+      border-radius: $image-width/2;
+      opacity: 0.5;
+    }
+  }
+  > .tr-image-upload-placeholder {
+    opacity: 0.001;
+    z-index: 1;
+    transition: opacity 150ms linear;
+    background-color: transparentize($color-background-low, 0.1);
+    > i {
+      line-height: $image-width;
+    }
+  }
+  > .tr-image-upload-image-remove {
+    position: absolute;
+    left: $image-width/2 - 24px/2;
+    height: 24px;
+    z-index: 1;
+    opacity: 0.001;
+    display: block;
+    line-height: 24px;
+    top: $image-width - 24px*0.75;
+    background: $color-accent;
+    width: 24px;
+    color: #fff;
+    border-radius: 12px;
+    font-size: 0.75em;
+    text-align: center;
+    &:hover {
+      background: $color-accent-low;
+    }
+    &:active {
+      background: $color-accent-high;
+    }
+  }
+  > .tr-image-upload-content {
+    min-height: $image-width;
+    padding: $spacing;
+    > h1, > h2, > h3 {
+      margin-top: 0;
+      padding-top: 0;
+    }
+  }
+
+  &:hover {
+    > .tr-image-upload-placeholder,
+    > .tr-image-upload-image-remove {
+      opacity: 1;
+    }
+  }
+
+  > .tr-image-upload-placeholder {
+    &:hover {
+      background-color: transparentize($color-background-lower, 0.1);
+    }
+    &:active {
+      background-color: transparentize($color-background-low, 0.1);
+    }
+  }
+}

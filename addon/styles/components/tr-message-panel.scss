@@ -1,0 +1,71 @@
+.tr-message-panel {
+  .tr-message {
+    $margin-top: 8px;
+    background: transparentize($color-foreground, 0.06);
+    color: $color-background;
+    min-height: 35px;
+    width: 280px;
+    box-shadow: -1px -1px 2px 0 $color-foreground;
+    margin-top: $margin-top;
+    padding: 8px;
+    font-family: $font-family-narrow;
+    opacity: 0;
+    -webkit-transition: all 150ms;
+    -moz-transition: all 150ms;
+    -ms-transition: all 150ms;
+    -o-transition: all 150ms;
+    transition: all 150ms;
+    > .title {
+      font-family: $font-family-caption;
+      padding: 0 0 0.5em 0;
+    }
+    > .content {
+      font-size: 0.8em;
+    }
+    > .buttons {
+      margin: 2*$margin-top 0 $margin-top 0;
+      button {
+        color: $color-foreground;
+        font-size: 0.8em;
+        font-family: $font-family;
+        border-radius: 0;
+      }
+    }
+    &.tr-message-with-icon {
+      > .title, > .content, > .buttons {
+        padding-left: 22px;
+      }
+    }
+    > .icon {
+      position: absolute;
+      top: 2*$margin-top;
+      left: $margin-top;
+    }
+    > .errors {
+      padding: 8px 0 0 0;
+      font-size: 0.75em;
+      color: $color-background-low;
+    }
+
+    &.tr-message-is-success {
+      background-color: transparentize($color-success, 0.06);
+    }
+    &.tr-message-is-warn {
+      background-color: transparentize($color-warning, 0.06);
+    }
+    &.tr-message-is-error {
+      background-color: transparentize($color-error, 0.06);
+    }
+    &.tr-message-is-info {
+
+    }
+
+    &.tr-message-visible {
+      opacity: 1;
+    }
+    &.tr-message-hidden {
+      opacity: 0;
+      margin-left: 100%;
+    }
+  }
+}

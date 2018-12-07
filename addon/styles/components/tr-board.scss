@@ -1,0 +1,158 @@
+$board-widget-size: 160px;
+.tr-board {
+  $board-widget-space: 8px;
+  $board-widget-padding: 8px;
+
+  position: relative;
+  display: block;
+  min-height: 100%;
+  min-width: 100%;
+  background-color: $color-background-lowest;
+  overflow: hidden;
+  height: auto;
+  > .tr-board-widget {
+    position: absolute;
+    left: $board-widget-space;
+    top: $board-widget-space;
+    overflow: hidden;
+    background: $color-background;
+    padding: $board-widget-padding;
+    box-sizing: border-box;
+    box-shadow: 3px 3px 1px -1px $color-background-normal;
+
+    width: $board-widget-size;
+
+    left: $board-widget-space;
+    top: $board-widget-space;
+
+    @for $i from 0 through 20 {
+      $offset: $i*$board-widget-size + ($i + 1)*$board-widget-space;
+      @if $i > 0 {
+        &.tr-board-widget-x-#{$i} {
+          left: $offset;
+        }
+        &.tr-board-widget-y-#{$i} {
+          top: $offset;
+        }
+      }
+      &.tr-widget-placeholder {
+        background: $color-background-lower;
+        box-shadow: 3px 3px 1px -1px $color-background-normal-low;
+      }
+    }
+
+    @for $i from 1 through 5 {
+      @if $i==1 {
+        & {
+          width: $board-widget-size;
+          height: $board-widget-size;
+        }
+        > .tr-board-widget-container {
+          width: $board-widget-size;
+          height: $board-widget-size;
+        }
+      } @else {
+        &.tr-board-widget-w-#{$i} {
+          width: $i * $board-widget-size + ($i - 1) * $board-widget-space;
+          > .tr-board-widget-container {
+            width: $i * $board-widget-size + ($i - 1) * $board-widget-space - ($i - 1) * $board-widget-padding;
+          }
+        }
+        &.tr-board-widget-h-#{$i} {
+          height: $i * $board-widget-size + ($i - 1) * $board-widget-space;
+          > .tr-board-widget-container {
+            height: $i * $board-widget-size + ($i - 1) * $board-widget-space - ($i - 1) * $board-widget-padding;
+          }
+        }
+      }
+    }
+  }
+  > .tr-board-widget > .tr-board-widget-container {
+    position: absolute;
+    overflow: hidden;
+    padding: 8px;
+    > .tr-board-widget-header {
+      height: fit-content;
+      td {
+        padding-bottom: $board-widget-padding;
+      }
+      h3 {
+        font-size: 100%;
+        padding: 0;
+        font-weight: lighter;
+        text-shadow: 0 0 3px white;
+      }
+      label {
+        font-size: 80%;
+        text-shadow: 0 0 3px white;
+      }
+    }
+    > .tr-board-widget-content {
+      font-size: 80%;
+    }
+    > .tr-board-widget-footer {
+      height: fit-content;
+      td {
+        padding-top: $board-widget-padding;
+      }
+      h3 {
+        font-size: 100%;
+        padding: 0;
+        font-weight: lighter;
+      }
+      label {
+        font-size: 80%;
+      }
+      font-size: 75%;
+    }
+  }
+  > .tr-board-trigger-panel {
+    display: none;
+    > div > .fa {
+      display: block;
+      padding: 16px;
+      margin: 8px;
+      border-radius: 24px;
+      background-color: $color-accent-low;
+      color: $color-accent-highest-alt;
+      &:hover {
+        background-color: $color-accent-lowest;
+      }
+      &:active {
+        background-color: $color-accent-lower;
+      }
+      &.fa-check {
+        background-color: $color-success;
+        &:hover {
+          background-color: $color-success-lowest;
+        }
+        &:active {
+          background-color: $color-success-lower;
+        }
+      }
+    }
+  }
+  &:hover > .tr-board-trigger-panel {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    right: 16px;
+    bottom: 60px;
+  }
+
+  &.tr-board-is-loading {
+    > .tr-loader {
+      z-index: 1;
+    }
+  }
+
+  > .tr-board-loading-overlay {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparentize($color-background-lowest, 0.04);
+  }
+}

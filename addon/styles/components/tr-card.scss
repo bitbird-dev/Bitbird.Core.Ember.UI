@@ -1,0 +1,39 @@
+.tr-card {
+  float: left;
+  width: 280px;
+  > .tr-card-content {
+    background-color: $color-background-lower;
+    margin: 8px;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 2px 2px 2px 0 $color-background-normal-low;
+    > header {
+      padding: 8px;
+      background-color: $color-accent;
+      color: $color-foreground-lowest-alt;
+      font-weight: bold;
+      font-size: 1.4rem;
+      border-radius: 8px 8px 0 0;
+      > summary {
+        font-size: 0.8rem;
+        font-weight: normal;
+        display: block;
+      }
+      > title {
+        font-weight: bold;
+      }
+    }
+    > main {
+      background-color: $color-background-lower;
+      margin: 8px 0;
+      padding: 8px;
+      color: $color-foreground-low;
+    }
+    > .tr-card-footer-wrapper {
+      padding: 8px;
+      > footer {
+        padding: 8px;
+        background-color: transparentize($color-background-low, 0.1);
+      }
+    }
+  }
+}

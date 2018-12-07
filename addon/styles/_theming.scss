@@ -1,0 +1,198 @@
+@import "functions";
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $color-background;
+  color: $color-foreground;
+  > .ember-view {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+a {
+  &:hover {
+    color: lighten($color-accent, 10%);
+  }
+  &:active {
+    color: $color-accent;
+    text-shadow: 1px 1px 0 #fff;
+  }
+  &.active {
+    color: $color-accent;
+  }
+
+}
+
+/****** FOREGROUND ONLY ******/
+.accent {
+  color: $color-accent;
+}
+
+.error {
+  color: $color-error;
+}
+
+.warning {
+  color: $color-warning;
+}
+
+.fade {
+  color: $color-foreground-low;
+}
+
+.highlight {
+  color: $color-highlight;
+}
+
+/****** BACKGROUND ******/
+
+.theme-background            { background-color: $color-background; color: get-foreground-color($color-background); }
+
+.theme-background-lowest     { background-color: $color-background-lowest; color: get-foreground-color($color-background-lowest); }
+.theme-background-lower      { background-color: $color-background-lower; color: get-foreground-color($color-background-lower); }
+.theme-background-interactive-lower {
+  -webkit-transition: background-color 150ms;
+  -moz-transition: background-color 150ms;
+  -ms-transition: background-color 150ms;
+  -o-transition: background-color 150ms;
+  transition: background-color 150ms;
+  &:hover {
+    background-color: $color-background-lower!important;
+    color: get-foreground-color($color-background-lower)!important;
+  }
+  &:active {
+    background-color: $color-background-normal-low!important;
+    color: get-foreground-color($color-background-normal-low)!important;
+  }
+  &.active {
+    background-color: $color-background-low!important;
+    color: get-foreground-color($color-background-low)!important;
+  }
+  &.disabled, &:disabled {
+    background-color: $color-background-lowest!important;
+    color: get-foreground-color($color-background-lowest, #ccc, #333)!important;
+    &:hover {
+      background-color: $color-background-lowest!important;
+      color: get-foreground-color($color-background-lowest, #ccc, #333)!important;
+    }
+  }
+}
+.theme-background-low        { background-color: $color-background-low; color: get-foreground-color($color-background-low); }
+.theme-background-normal     { background-color: $color-background-normal; color: get-foreground-color($color-background-normal); }
+.theme-background-high       { background-color: $color-background-high; color: get-foreground-color($color-background-high); }
+.theme-background-higher     { background-color: $color-background-higher; color: get-foreground-color($color-background-higher); }
+.theme-background-highest    { background-color: $color-background-highest; color: get-foreground-color($color-background-highest); }
+
+.theme-background-lowest-alt     { background-color: $color-background-lowest-alt; color: get-foreground-color($color-background-lowest-alt); }
+.theme-background-lower-alt      { background-color: $color-background-lower-alt; color: get-foreground-color($color-background-lower-alt); }
+.theme-background-low-alt        { background-color: $color-background-low-alt; color: get-foreground-color($color-background-low-alt); }
+.theme-background-normal-alt     { background-color: $color-background-normal-alt; color: get-foreground-color($color-background-normal-alt); }
+.theme-background-high-alt       { background-color: $color-background-high-alt; color: get-foreground-color($color-background-high-alt); }
+.theme-background-higher-alt     { background-color: $color-background-higher-alt; color: get-foreground-color($color-background-higher-alt); }
+.theme-background-highest-alt    { background-color: $color-background-highest-alt; color: get-foreground-color($color-background-highest-alt); }
+
+/****** BACKGROUND WITH ACCENT ******/
+
+.theme-background-accent            { background-color: $color-accent!important; color: get-foreground-color($color-accent)!important; }
+
+.theme-background-accent-lowest     { background-color: $color-accent-lowest!important; color: get-foreground-color($color-accent-lowest)!important; }
+.theme-background-accent-lower      { background-color: $color-accent-lower!important; color: get-foreground-color($color-accent-lower)!important }
+.theme-background-accent-low        { background-color: $color-accent-low!important; color: get-foreground-color($color-accent-low)!important; }
+.theme-background-accent-normal     { background-color: $color-accent-normal!important; color: get-foreground-color($color-accent-normal)!important; }
+.theme-background-accent-normal-interactive {
+  -webkit-transition: background-color 150ms;
+  -moz-transition: background-color 150ms;
+  -ms-transition: background-color 150ms;
+  -o-transition: background-color 150ms;
+  transition: background-color 150ms;
+  &:not([disabled]) {
+    &:hover, &.active:hover {
+      background-color: $color-accent-normal!important;
+      color: get-foreground-color($color-accent-normal)!important;
+    }
+    &:active, &.active:active {
+      background-color: $color-accent-low!important;
+      color: get-foreground-color($color-accent-low)!important;
+    }
+    &.active {
+      background-color: $color-accent;
+      color: get-foreground-color($color-accent)!important;
+    }
+  }
+}
+.theme-background-accent-high       { background-color: $color-accent-high; color: get-foreground-color($color-accent-high); }
+.theme-background-accent-higher     { background-color: $color-accent-higher; color: get-foreground-color($color-accent-higher); }
+.theme-background-accent-highest    { background-color: $color-accent-highest; color: get-foreground-color($color-accent-highest); }
+
+.theme-background-accent-lowest-alt     { background-color: $color-accent-lowest-alt; color: get-foreground-color($color-accent-lowest-alt); }
+.theme-background-accent-lower-alt      { background-color: $color-accent-lower-alt; color: get-foreground-color($color-accent-lower-alt); }
+.theme-background-accent-low-alt        { background-color: $color-accent-low-alt; color: get-foreground-color($color-accent-low-alt); }
+.theme-background-accent-normal-alt     { background-color: $color-accent-normal-alt; color: get-foreground-color($color-accent-normal-alt); }
+.theme-background-accent-high-alt       { background-color: $color-accent-high-alt; color: get-foreground-color($color-accent-high-alt); }
+.theme-background-accent-higher-alt     { background-color: $color-accent-higher-alt; color: get-foreground-color($color-accent-higher-alt); }
+.theme-background-accent-highest-alt    { background-color: $color-accent-highest-alt; color: get-foreground-color($color-accent-highest-alt); }
+
+/****** BACKGROUND WITH WARNING ******/
+
+.theme-background-warning            { background-color: $color-warning!important; color: get-foreground-color($color-warning)!important; }
+
+.theme-background-warning-lowest     { background-color: $color-warning-lowest!important; color: get-foreground-color($color-warning-lowest)!important; }
+.theme-background-warning-lower      { background-color: $color-warning-lower!important; color: get-foreground-color($color-warning-lower)!important }
+.theme-background-warning-low        { background-color: $color-warning-low!important; color: get-foreground-color($color-warning-low)!important; }
+.theme-background-warning-normal     { background-color: $color-warning-normal!important; color: get-foreground-color($color-warning-normal)!important; }
+.theme-background-warning-normal-interactive {
+  -webkit-transition: background-color 150ms;
+  -moz-transition: background-color 150ms;
+  -ms-transition: background-color 150ms;
+  -o-transition: background-color 150ms;
+  transition: background-color 150ms;
+  &:not([disabled]) {
+    &:hover, &.active:hover {
+      background-color: $color-warning-normal!important;
+      color: get-foreground-color($color-warning-normal)!important;
+    }
+    &:active, &.active:active {
+      background-color: $color-warning-low!important;
+      color: get-foreground-color($color-warning-low)!important;
+    }
+    &.active {
+      background-color: $color-warning;
+      color: get-foreground-color($color-warning)!important;
+    }
+  }
+}
+.theme-background-warning-high       { background-color: $color-warning-high; color: get-foreground-color($color-warning-high); }
+.theme-background-warning-higher     { background-color: $color-warning-higher; color: get-foreground-color($color-warning-higher); }
+.theme-background-warning-highest    { background-color: $color-warning-highest; color: get-foreground-color($color-warning-highest); }
+
+.theme-background-warning-lowest-alt     { background-color: $color-warning-lowest-alt; color: get-foreground-color($color-warning-lowest-alt); }
+.theme-background-warning-lower-alt      { background-color: $color-warning-lower-alt; color: get-foreground-color($color-warning-lower-alt); }
+.theme-background-warning-low-alt        { background-color: $color-warning-low-alt; color: get-foreground-color($color-warning-low-alt); }
+.theme-background-warning-normal-alt     { background-color: $color-warning-normal-alt; color: get-foreground-color($color-warning-normal-alt); }
+.theme-background-warning-high-alt       { background-color: $color-warning-high-alt; color: get-foreground-color($color-warning-high-alt); }
+.theme-background-warning-higher-alt     { background-color: $color-warning-higher-alt; color: get-foreground-color($color-warning-higher-alt); }
+.theme-background-warning-highest-alt    { background-color: $color-warning-highest-alt; color: get-foreground-color($color-warning-highest-alt); }
+
+/****** BACKGROUND WITH ACCENT ******/
+
+.theme-border-accent            { border-color: $color-accent!important;}
+
+.theme-border-accent-lowest     { border-color: $color-accent-lowest!important;}
+.theme-border-accent-lower      { border-color: $color-accent-lower!important;}
+.theme-border-accent-low        { border-color: $color-accent-low!important;}
+.theme-border-accent-normal     { border-color: $color-accent-normal!important;}
+.theme-border-accent-high       { border-color: $color-accent-high!important;}
+.theme-border-accent-higher     { border-color: $color-accent-higher!important;}
+.theme-border-accent-highest    { border-color: $color-accent-highest!important;}
+
+.theme-border-accent-lowest-alt     { border-color: $color-accent-lowest-alt!important;}
+.theme-border-accent-lower-alt      { border-color: $color-accent-lower-alt!important;}
+.theme-border-accent-low-alt        { border-color: $color-accent-low-alt!important;}
+.theme-border-accent-normal-alt     { border-color: $color-accent-normal-alt!important;}
+.theme-border-accent-high-alt       { border-color: $color-accent-high-alt!important;}
+.theme-border-accent-higher-alt     { border-color: $color-accent-higher-alt!important;}
+.theme-border-accent-highest-alt    { border-color: $color-accent-highest-alt!important;}

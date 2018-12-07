@@ -1,0 +1,280 @@
+.tr-toggle {
+  > .tr-editor {
+    width: 100%;
+  }
+  .tr-editor-content-wrapper > .tr-editor-content > div  {
+    $radius: 0;
+    $size: 24px;
+    $background: $color-background-low;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    user-select: none;
+
+    > label {
+      position: relative;
+      border: 0px none;
+      padding: 0;
+      margin: 0;
+      display: inline;
+    }
+    > fieldset.tr-toggle-label-wapper {
+      background-color: transparent;
+      input + label {
+        color: initial;
+      }
+    }
+    > fieldset {
+      width: 100%;
+      position: relative;
+      border: 0px none;
+      padding: 0;
+      margin: 0;
+      background-color: $background;
+      color: get-foreground-color($background);
+      display: inline;
+      *,
+      *:before,
+      *:after {
+        box-sizing: border-box;
+      }
+      input {
+        position: absolute;
+        left: 0;
+        opacity: 0;
+      }
+
+      input + label {
+        font-size: 0.8em;
+        color: get-foreground-color($background);
+        position: relative;
+        z-index: 2;
+        display: block;
+        float: left;
+        padding: 4px 4px;
+        margin: 0;
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0;
+        z-index: 2;
+        width: 10px;
+        height: 100%;
+        display: block;
+        transition: all 0.2s ease-out;
+      }
+
+      input:checked + label {
+        color: #fff;
+      }
+
+      /* 2 items
+       */
+      label:nth-child(2):nth-last-child(4),
+      label:nth-child(2):nth-last-child(4) ~ label,
+      label:nth-child(2):nth-last-child(4) ~ a {
+        width: 50%;
+      }
+
+      label:nth-child(2):nth-last-child(4) ~ input:checked:nth-child(3) + label ~ a {
+        left: 50%;
+      }
+
+      /* 3 items
+       */
+      label:nth-child(2):nth-last-child(6),
+      label:nth-child(2):nth-last-child(6) ~ label,
+      label:nth-child(2):nth-last-child(6) ~ a {
+        width: 33.33%;
+      }
+
+      label:nth-child(2):nth-last-child(6) ~ input:checked:nth-child(3) + label ~ a {
+        left: 33.33%;
+      }
+
+      label:nth-child(2):nth-last-child(6) ~ input:checked:nth-child(5) + label ~ a {
+        left: 66.66%;
+      }
+
+      /* 4 items
+       */
+      label:nth-child(2):nth-last-child(8),
+      label:nth-child(2):nth-last-child(8) ~ label,
+      label:nth-child(2):nth-last-child(8) ~ a {
+        width: 25%;
+      }
+
+      label:nth-child(2):nth-last-child(8) ~ input:checked:nth-child(3) + label ~ a {
+        left: 25%;
+      }
+
+      label:nth-child(2):nth-last-child(8) ~ input:checked:nth-child(5) + label ~ a {
+        left: 50%;
+      }
+
+      label:nth-child(2):nth-last-child(8) ~ input:checked:nth-child(7) + label ~ a {
+        left: 75%;
+      }
+
+      /* 5 items
+       */
+      label:nth-child(2):nth-last-child(10),
+      label:nth-child(2):nth-last-child(10) ~ label,
+      label:nth-child(2):nth-last-child(10) ~ a {
+        width: 20%;
+      }
+
+      label:nth-child(2):nth-last-child(10) ~ input:checked:nth-child(3) + label ~ a {
+        left: 20%;
+      }
+
+      label:nth-child(2):nth-last-child(10) ~ input:checked:nth-child(5) + label ~ a {
+        left: 40%;
+      }
+
+      label:nth-child(2):nth-last-child(10) ~ input:checked:nth-child(7) + label ~ a {
+        left: 60%;
+      }
+
+      label:nth-child(2):nth-last-child(10) ~ input:checked:nth-child(9) + label ~ a {
+        left: 80%;
+      }
+
+      /* 6 items
+       */
+      label:nth-child(2):nth-last-child(12),
+      label:nth-child(2):nth-last-child(12) ~ label,
+      label:nth-child(2):nth-last-child(12) ~ a {
+        width: 16.6%;
+      }
+
+      label:nth-child(2):nth-last-child(12) ~ input:checked:nth-child(3) + label ~ a {
+        left: 16.6%;
+      }
+
+      label:nth-child(2):nth-last-child(12) ~ input:checked:nth-child(5) + label ~ a {
+        left: 33.2%;
+      }
+
+      label:nth-child(2):nth-last-child(12) ~ input:checked:nth-child(7) + label ~ a {
+        left: 49.8%;
+      }
+
+      label:nth-child(2):nth-last-child(12) ~ input:checked:nth-child(9) + label ~ a {
+        left: 66.4%;
+      }
+
+      label:nth-child(2):nth-last-child(12) ~ input:checked:nth-child(11) + label ~ a {
+        left: 83%;
+      }
+    }
+    &.tr-toggle-style-switch {
+      $radius: 1em;
+      $size: $radius;
+      &.tr-toggle-size-0 > fieldset {
+        width: 0 * $size;
+      }
+      &.tr-toggle-size-1 > fieldset {
+        width: 1 * $size;
+      }
+      &.tr-toggle-size-2 > fieldset {
+        width: 2 * $size;
+      }
+      &.tr-toggle-size-3 > fieldset {
+        width: 3 * $size;
+      }
+      &.tr-toggle-size-4 > fieldset {
+        width: 4 * $size;
+      }
+      &.tr-toggle-size-5 > fieldset {
+        width: 5 * $size;
+      }
+      &.tr-toggle-size-6 > fieldset {
+        width: 6 * $size;
+      }
+      &.true > fieldset.options {
+        background-color: $color-success;
+        input:checked ~ a {
+          background-color: $color-background;
+          border: 2px solid $color-success;
+        }
+      }
+      &.false > fieldset.options {
+        background-color: $color-background-low;
+        input:checked ~ a {
+          background-color: $color-background;
+          border: 2px solid $color-background-low;
+        }
+      }
+      > fieldset.options {
+        background-color: $color-warning;
+        input:checked ~ a {
+          background-color: $color-background;
+          border: 2px solid $color-warning;
+        }
+      }
+      > fieldset {
+        z-index: 0;
+        border-radius: $radius;
+        a {
+          -webkit-border-radius: $radius;
+          -moz-border-radius: $radius;
+          border-radius: $radius;
+        }
+        input:checked:nth-child(1) ~ a {
+          //border-radius: $radius 0 0 $radius;
+        }
+        input:checked:nth-last-child(3) ~ a {
+          //border-radius: 0 $radius $radius 0;
+        }
+        input + label {
+          padding: 0px;
+          &:nth-child(2) {
+            border-radius: $radius 0 0 $radius;
+          }
+        }
+      }
+      &.is-disabled {
+        > fieldset.options {
+          input:checked ~ a {
+            opacity: 0.25;
+            border: 2px solid $color-foreground-high;
+          }
+        }
+      }
+    }
+    &.tr-toggle-style-toggle {
+      > fieldset {
+        border-radius: $radius;
+        input:checked ~ a {
+          background-color: $color-accent;
+        }
+        input:checked:nth-child(1) ~ a {
+          border-radius: $radius 0 0 $radius;
+        }
+        input:checked:nth-last-child(3) ~ a {
+          border-radius: 0 $radius $radius 0;
+        }
+        input + label {
+          &:nth-child(2) {
+            border-radius: $radius 0 0 $radius;
+          }
+        }
+      }
+    }
+  }
+
+  &.is-disabled .tr-editor-content-wrapper > .tr-editor-content > div {
+    > fieldset.options input:checked ~ a {
+      background-color: $color-background-lower!important;
+    }
+  }
+}

@@ -1,0 +1,47 @@
+.tr-text-loader {
+  position: relative;
+  color: $color-foreground-lower;
+
+  @keyframes tr-text-load {
+    25% {
+      content: '..'
+    }
+    50% {
+      content: '...'
+    }
+    75% {
+      content: '..'
+    }
+  }
+
+  $duration: 0.8s;
+
+  animation-delay: 0s;
+  animation-duration: $duration;
+
+  &:after {
+    position: relative;
+    content: '.';
+    width: 40px;
+    -webkit-animation: tr-text-load infinite linear;
+    animation: tr-text-load infinite linear;
+    animation-delay: inherit;
+    animation-duration: inherit;
+  }
+  /*&:nth-child(n+1):after {
+    -webkit-animation-duration: $duration*0.7;
+    animation-duration: $duration*0.7;
+  }
+  &:nth-child(n+2):after {
+   -webkit-animation-duration: $duration*1.3;
+   animation-duration: $duration*1.3;
+ }
+  &:nth-child(n+3):after {
+    -webkit-animation-delay: $duration*0.7;
+    animation-delay: $duration*0.7;
+  }
+  &:nth-child(n+4):after {
+    -webkit-animation-delay: $duration*0.3;
+    animation-delay: $duration*0.3;
+  }*/
+}

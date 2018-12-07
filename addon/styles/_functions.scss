@@ -1,3 +1,25 @@
-@function themed($key) {
-  @return map-get($theme-map, $key);
+/**
+ * Calculates a foreground color for a given background color
+ * $background-color
+ * $color-on-light-bg color to use on light background
+ * $color-on-dark-bg color to use on dark background
+ * $threshold: 50 lightness threshold to decide between light and dark between 0 and 100
+ */
+@function get-foreground-color($background-color, $color-on-light-bg:$color-one, $color-on-dark-bg:$color-two, $lightness-threshold: 50) {
+  @if (lightness($background-color) >= $lightness-threshold) {
+    @return $color-on-light-bg;
+  } @else {
+    @return $color-on-dark-bg;
+  }
+}
+
+@function get-neighbour-color($color, $color-dark:$color-one, $color-light:$color-two) {
+  $lightness: lightness($color);
+  $lightness-dark: lightness($color-dark);
+  $lightness-light: lightness($color-light);
+  @if (abs($lightness - $lightness-dark) < abs($lightness - $lightness-light)) {
+    @return $color-dark;
+  } @else {
+    @return $color-light;
+  }
 }

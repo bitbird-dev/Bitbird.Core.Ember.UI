@@ -1,0 +1,705 @@
+.tr-editor {
+  $editor-focus-box-shadow: inset 0 0 0px 1px $color-background-normal-low;
+  $editor-radius: 2px;
+  $editor-radius-bubble: 40px;
+  display: inline-block;
+  vertical-align: top;
+  color: $color-foreground;
+  position: relative;
+
+  &.tr-button-editor {
+    button {
+      position: relative;
+      padding: 4px 8px;
+      border: none;
+      background-color: $color-background-low;
+      margin: 0;
+      border-radius: 0;//$editor-radius;
+      box-sizing: border-box;
+      outline: none;
+      width: 100%;
+      height: 100%;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      &:focus {
+        //box-shadow: $editor-focus-box-shadow;
+      }
+    }
+    > .tr-editor > .tr-editor-content-wrapper {
+      border: 1px solid $color-background-low;
+    }
+    &.is-highlight {
+      button {
+        box-shadow: inset 0px -6px 0px -3px $color-highlight;
+      }
+    }
+    &.tr-button-editor-toggle {
+      .tr-button-editor-toggle-icon {
+        display: none;
+        opacity: 0.15;
+        text-align: center;
+        background-color: $color-success;
+        line-height: 16px;
+        position: absolute;
+        left: -2px;
+        top: -2px;
+        font-size: 11px;
+        width: 16px;
+        height: 16px;
+        border-radius: 16px;
+        color: #FFF;
+      }
+      button {
+        padding: 4px 16px;
+      }
+      &.is-on {
+        .tr-button-editor-toggle-icon {
+          display: block;
+          opacity: 1;
+          color: $color-accent-high-alt;
+        }
+        button {
+          background-color: $color-foreground-lowest;
+          color: $color-background;
+        }
+        > .tr-editor > .tr-editor-content-wrapper {
+          border-color: $color-accent-lower-alt;
+        }
+      }
+    }
+    &.tr-button-editor-bubble {
+      button {
+        font-size: 0.7em;
+        background-color: $color-background-low;
+        border-radius: $editor-radius-bubble;
+        color: $color-foreground-normal-low;
+        &:hover {
+          background-color: $color-background-lower;
+        }
+        &:active {
+          background-color: $color-background-normal-low;
+        }
+      }
+      > .tr-editor > .tr-editor-content-wrapper {
+        border: none;
+      }
+    }
+  }
+
+  &.tr-checkbox-editor {
+    text-align: left;
+    .tr-checkbox-editor-control {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      min-height: 28px;
+      min-width: 28px;
+      background-color: $color-background-low;
+      border-radius: 2px;
+      box-sizing: border-box;
+      > .tr-checkbox-editor-check, > .tr-checkbox-editor-placeholder {
+        -webkit-transition: background-color 150ms;
+        -moz-transition: background-color 150ms;
+        -ms-transition: background-color 150ms;
+        -o-transition: background-color 150ms;
+        transition: background-color 150ms;
+
+        display: block;
+        width: 60%;
+        height: 60%;
+        left: 20%;
+        top: 20%;
+        background-color: $color-background-lower;
+        position: absolute
+      }
+      > .tr-checkbox-editor-placeholder {
+        color: #ccc;
+      }
+      > input {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0.001;
+      }
+    }
+
+    &.tr-checkbox-editor-checked {
+      .tr-checkbox-editor-check {
+        background-color: $color-accent;
+        color: $color-accent-highest-alt;
+        &::before {
+          content: '\2714';
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          line-height: 100%;
+          vertical-align: middle;
+          text-align: center;
+          font-size: 15px;
+        }
+      }
+    }
+    &.tr-checkbox-editor-undefined {
+      .tr-checkbox-editor-control {
+
+      }
+      .tr-checkbox-editor-check {
+        &::before {
+          content: '?';
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          line-height: 100%;
+          vertical-align: middle;
+          text-align: center;
+          font-size: 15px;
+        }
+      }
+    }
+    &.disabled {
+      .tr-checkbox-editor-control {
+        opacity: 0.4;
+      }
+    }
+    &.enabled {
+      &:hover {
+        .tr-checkbox-editor-check {
+          background-color: $color-background-lowest;
+        }
+        &.tr-checkbox-editor-checked .tr-checkbox-editor-check {
+          background-color: $color-accent-lower;
+        }
+      }
+      &:active {
+        .tr-checkbox-editor-check {
+          background-color: $color-background-low;
+        }
+        &.tr-checkbox-editor-checked .tr-checkbox-editor-check {
+          background-color: $color-accent-low;
+        }
+      }
+      &:focus {
+        .tr-checkbox-editor-control {
+          box-shadow: $editor-focus-box-shadow;
+        }
+      }
+    }
+    &.disabled, &.enabled {
+      &.tr-checkbox-editor-checked {
+        .tr-checkbox-editor-check {
+          background-color: $color-background-normal-high;
+          color: $color-accent-highest-alt;
+        }
+      }
+    }
+
+    &.tr-checkbox-editor-checked {
+      .tr-checkbox-editor-placeholder {
+        background-color: $color-accent;
+        color: $color-accent-highest-alt;
+        &::before {
+          content: '\2714';
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          line-height: 100%;
+          vertical-align: middle;
+          text-align: center;
+          font-size: 15px;
+        }
+      }
+    }
+    &.tr-checkbox-editor-undefined {
+      .tr-checkbox-editor-control {
+
+      }
+      .tr-checkbox-editor-placeholder {
+        &::before {
+          content: '?';
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          line-height: 100%;
+          vertical-align: middle;
+          text-align: center;
+          font-size: 15px;
+        }
+      }
+    }
+    &.disabled {
+      .tr-checkbox-editor-control {
+        opacity: 0.4;
+      }
+    }
+    &.enabled {
+      &:hover {
+        .tr-checkbox-editor-placeholder {
+          background-color: $color-background-lowest;
+        }
+        &.tr-checkbox-editor-checked .tr-checkbox-editor-placeholder {
+          background-color: $color-accent-lower;
+        }
+      }
+      &:active {
+        .tr-checkbox-editor-placeholder {
+          background-color: $color-background-low;
+        }
+        &.tr-checkbox-editor-checked .tr-checkbox-editor-placeholder {
+          background-color: $color-accent-low;
+        }
+      }
+      &:focus {
+        .tr-checkbox-editor-control {
+          box-shadow: $editor-focus-box-shadow;
+        }
+      }
+    }
+    &.disabled, &.enabled {
+      &.tr-checkbox-editor-checked {
+        .tr-checkbox-editor-placeholder {
+          background-color: $color-background-normal-high;
+          color: $color-accent-highest-alt;
+        }
+      }
+    }
+  }
+  &.tr-datetime-editor {
+    .cal.cal-display-mode-picker {
+      right: auto;
+      left: 0;
+    }
+    input[type=text] {
+      height: 100%;
+    }
+    &.calendar {
+      > .tr-editor > .tr-editor-content-wrapper > .tr-editor-content > input {
+        display: none;
+      }
+    }
+  }
+  &.tr-text-editor, &.tr-textarea-editor, &.tr-password-editor, &.tr-datetime-editor, &.tr-select-editor {
+    $editor-width: 193px; //Chrome default for textbox
+    max-width: 100%;
+    //width: $editor-width;
+    min-width: auto;
+
+    &.tr-editor-c2 {
+      width: $editor-width / 2;
+    }
+    &.tr-editor-c2_3 {
+      width: $editor-width * 2 / 3;
+    }
+    &.tr-editor-x1 {
+      width: $editor-width;
+    }
+    &.tr-editor-x2 {
+      width: 4px + 2 * $editor-width;
+    }
+    &.tr-editor-x3 {
+      width: 8px + 3 * $editor-width;
+    }
+    &.tr-editor-x4 {
+      width: 12px + 4 * $editor-width;
+    }
+  }
+  &.tr-text-editor, &.tr-textarea-editor, &.tr-password-editor, &.tr-datetime-editor {
+    input, textarea {
+      padding: 4px 8px;
+      border: none;
+      margin: 0;
+      border-radius: 0;
+      box-sizing: border-box;
+      outline: none;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      resize: none;
+      &:focus {
+        box-shadow: inset 0 0 0px 1px $color-background-normal-low;
+      }
+    }
+    > .tr-editor > .tr-editor-content-wrapper {
+      border: 1px solid $color-background-low;
+      box-sizing: border-box;
+    }
+  }
+  &.tr-select-editor {
+    position: relative;
+    /* Style */
+    &.tr-select-editor-flat {
+      width: inherit;
+      .tr-button-editor {
+        min-width: 80px;
+        width: auto;
+        float: left;
+        margin: 0;
+        width: 50%;
+        padding: 0 2px 2px 0;
+        box-sizing: border-box;
+        line-height: 3em;
+        button {
+          background-color: $color-accent-low;
+          color: $color-accent-highest-alt;
+        }
+        .tr-editor-content-wrapper {
+          border: none;
+        }
+        &.is-on {
+          button {
+            background-color: $color-accent-normal;
+          }
+        }
+      }
+      .tr-editor > .tr-editor-content-wrapper {
+        border-radius: 0;
+      }
+    }
+    &.tr-select-editor-select,
+    &.tr-select-editor-popout {
+      @keyframes tr-select-open-v {
+        0% {
+          display: block;
+          opacity: 0;
+          margin-top: -50px;
+        }
+        25% {
+          opacity: 0.25;
+          margin-top: -1px;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      .tr-select-editor-empty {
+        display: block;
+        opacity: 0.5;
+        padding: 4px 8px;
+        font-size: 0.7em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 2em;
+        background-color: darken($color-background-low, 4%);
+      }
+      > .tr-listview {
+        display: block;
+        position: absolute;
+        z-index: 1;
+        border: 1px solid $color-background-low;
+        background-color: $color-background-lowest;
+        margin-top: -1px;
+        box-sizing: border-box;
+        max-height: 140px;
+        height: auto;
+        border-radius: 0 0 4px 4px;
+        animation-name: tr-select-open-v;
+        animation-duration: 150ms;
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        .tr-listview-item {
+          cursor: pointer;
+          -webkit-box-shadow: none;
+          -moz-box-shadow: none;
+          box-shadow: none;
+          padding: 4px 8px;
+          font-size: 0.7em;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+      > .tr-text-editor input {
+        background-color: transparent;
+      }
+      > .tr-textarea-editor textarea {
+        background-color: transparent;
+      }
+      > .tr-button-editor {
+        > .tr-editor {
+          > .tr-editor-content-wrapper {
+            border: 1px solid $color-background-low;
+            height: 28px;
+            > .tr-editor-content {
+              > button {
+                padding-right: 4px+25px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                position: relative;
+                text-align: left;
+                border-radius: $editor-radius 0 0 $editor-radius;
+                &:focus {
+                  box-shadow: none;
+                }
+                > .tr-select-editor-button-arrow, > .tr-select-editor-button-clear {
+                  position: absolute;
+                  top: 0;
+                  bottom: 0;
+                  right: 0;
+                  width: 25px;
+                  line-height: 28px;
+                  text-align: center;
+                  color: $color-foreground-normal-low;
+                  padding: 1px 0 0 0;
+                  font-size: 72%;
+                  outline: none;
+                  border: 0px none transparent;
+                  -webkit-box-shadow: none;
+                  -moz-box-shadow: none;
+                  box-shadow: none;
+                  transition: all 225ms;
+                  background-color: darken($color-background-low, 4%);
+                  border-radius: 0 $editor-radius $editor-radius 0;
+                  > span {
+                    transition: all 225ms;
+                    display: block;
+                  }
+                }
+                > .tr-select-editor-button-clear {
+                  opacity: 0;
+                  right: 25px;
+                  transition: all 225ms;
+                  border-radius: 0;
+                  &:active {
+                    opacity: 1;
+                    background-color: $color-background-normal !important;
+                  }
+                }
+              }
+            }
+          }
+        }
+        &:hover {
+          > .tr-editor {
+            > .tr-editor-content-wrapper {
+              > .tr-editor-content {
+                > button {
+                  > .tr-select-editor-button-arrow, > .tr-select-editor-button-clear {
+                    color: $color-foreground;
+                    background-color: darken($color-background-low, 8%);
+                  }
+                  > .tr-select-editor-button-clear {
+                    opacity: 1;
+                    background-color: transparentize($color-background-low, 0.2);
+                  }
+                }
+              }
+            }
+          }
+        }
+        &:active {
+          > .tr-editor {
+            > .tr-editor-content-wrapper {
+              > .tr-editor-content {
+                > button {
+                  > .tr-select-editor-button-arrow {
+                    //color: $color-foreground-highest;
+                    background-color: $color-background-normal;
+                  }
+                }
+              }
+            }
+          }
+        }
+        &:focus {
+          > .tr-editor {
+            > .tr-editor-content-wrapper {
+              box-shadow: $editor-focus-box-shadow;
+            }
+          }
+        }
+      }
+      > .tr-select-editor-suggestion {
+        position: absolute;
+        background-color: inherit;
+        border: 1px solid transparent;
+        box-shadow: none;
+        opacity: 0.5;
+        bottom: 0;
+        padding: 4px 8px;
+        margin: 0;
+        border-radius: 2px;
+        box-sizing: border-box;
+        outline: none;
+        &:focus {
+          box-shadow: none;
+        }
+      }
+      &.is-open {
+        .tr-select-editor-button-arrow > span {
+          -ms-transform: rotate(180deg); /* IE 9 */
+          -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+          transform: rotate(180deg);
+        }
+      }
+      &.disabled {
+        cursor: pointer;
+        > .tr-button-editor {
+          > .tr-editor, &:hover > .tr-editor, &:active > .tr-editor, &:focus > .tr-editor {
+            > .tr-editor-content-wrapper {
+              > .tr-editor-content {
+                > button {
+                  > .tr-select-editor-button-arrow, > .tr-select-editor-button-clear {
+                    color: $color-foreground-normal-high;
+                    background-color: transparent;
+                  }
+                  > .tr-select-editor-button-clear {
+                    background-color: transparent;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    /* Align */
+    &.tr-select-editor-align-auto {
+      &.tr-select-editor-select {
+        > .tr-listview {
+          left: 0;
+          right: 0;
+          min-width: 100%;
+          max-width: 100%;
+        }
+      }
+    }
+    &.tr-select-editor-align-right {
+      &.tr-select-editor-select {
+        > .tr-listview {
+          left: auto;
+          right: 0;
+          min-width: 100%;
+          max-width: 250%;
+        }
+      }
+    }
+    &.tr-select-editor-align-left {
+      &.tr-select-editor-select {
+        > .tr-listview {
+          left: 0;
+          right: auto;
+          min-width: 100%;
+          max-width: 250%;
+        }
+      }
+    }
+  }
+  &.tr-display {
+    > .tr-editor > .tr-editor-content-wrapper {
+      line-height: 28px;
+    }
+  }
+  &.tr-qrcode-editor {
+    > .tr-editor > .tr-editor-content-wrapper {
+      padding: 8px;
+      background-color: $color-background-lower;
+      width: 175px;
+    }
+    .tr-qrcode-editor-code, .tr-qrcode-editor-no-code {
+      display: inline-block;
+      padding: 4px;
+      float: left;
+    }
+    .tr-qrcode-editor-code {
+      background-color: white;
+    }
+    .tr-qrcode-editor-button {
+      border-radius: 80px;
+      font-size: 12px;
+      padding: 0;
+      margin: 0;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &.is-busy {
+    @keyframes spinner {
+      to {transform: rotate(360deg);}
+    }
+    &:before {
+      content: '';
+      box-sizing: border-box;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 14px;
+      height: 14px;
+      margin-top: -7px;
+      margin-left: -7px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: $color-accent;
+      border-bottom-color: $color-accent;
+      animation: spinner .8s linear infinite;
+      z-index: 1;
+    }
+  }
+
+  > .tr-label {
+    //overflow: hidden; //this makes
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 2px 0 0 0;
+  }
+
+  > .tr-editor,
+  > .tr-editor > input:not([type='checkbox']),
+  > .tr-contentpresenter,
+  > .tr-contentpresenter > input:not([type='checkbox']),
+  > input:not([type='checkbox']) {
+    display: block;
+    width: 100%;
+  }
+
+  > .tr-editor-content-wrapper {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    //overflow: hidden;
+    height: 100%;
+    border: 1px solid transparent;
+    border-radius: 2px;
+
+    > .tr-editor-content {
+      -webkit-flex: 1;
+      flex: 1 1 auto;
+    }
+    > .tr-editor-prefix, > .tr-editor-postfix {
+      padding: 4px 8px;
+      box-sizing: border-box;
+      margin-top: 0;
+      background-color: $color-background-lowest;
+      color: $color-foreground-low;
+      flex: 0 0 auto;
+      cursor: default;
+      min-width: 32px;
+      text-align: center;
+      width: auto;
+    }
+  }
+
+  .tr-info-tooltip {
+    //display: none;
+    opacity: 0.4;
+    background-color: $color-background-lower;
+    //background-color: transparent;
+    -webkit-transition: all 150ms;
+    -moz-transition: all 150ms;
+    -ms-transition: all 150ms;
+    -o-transition: all 150ms;
+    transition: all 150ms;
+  }
+  &:hover {
+    .tr-info-tooltip {
+      //display: inherit;
+      opacity: 1;
+      background-color: $color-background-low;
+    }
+  }
+}

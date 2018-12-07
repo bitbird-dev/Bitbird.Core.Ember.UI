@@ -1,0 +1,20 @@
+.tr-select-editor-popout {
+  user-select: none;
+  .modal-dialog-content.tr-scroll-panel {
+    padding: 0;
+  }
+  .tr-listview-item {
+    padding: 4px 8px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-color: transparentize($color-foreground, 0.85);
+    cursor: default;
+    &:hover {
+      background-color: $color-background-lowest;
+    }
+    &:active {
+      background-color: $color-background-low;
+    }
+  }
+}

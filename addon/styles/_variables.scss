@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans+Caption:400,700|PT+Sans+Narrow:400,700|PT+Sans:400,400i,700,700i');
+
+/****** SIZES ******/
+$screen-min-width-mobile: 0;
+$screen-min-width-tablet: 681px;
+$screen-min-width-desktop: 1280px;
+$screen-min-width-huge: 1480px;
+
+/****** BACKGROUND ******/
+$color-background-lowest:     mix($color-background, $color-foreground, 95%);
+$color-background-lower:      mix($color-background, $color-foreground, 90%);
+$color-background-low:        mix($color-background, $color-foreground, 85%);
+$color-background-normal-low: mix($color-background, $color-foreground, 70%);
+$color-background-normal:     mix($color-background, $color-foreground, 50%);
+$color-background-normal-high:mix($color-background, $color-foreground, 35%);
+$color-background-high:       mix($color-background, $color-foreground, 10%);
+$color-background-higher:     mix($color-background, $color-foreground, 3%);
+$color-background-highest:    mix($color-background, $color-foreground, 0%);
+
+$color-background-lowest-alt:   mix($color-background, $color-background, 95%);
+$color-background-lower-alt:    mix($color-background, $color-background, 90%);
+$color-background-low-alt:      mix($color-background, $color-background, 85%);
+$color-background-normal-alt:   mix($color-background, $color-background, 50%);
+$color-background-high-alt:     mix($color-background, $color-background, 10%);
+$color-background-higher-alt:   mix($color-background, $color-background, 3%);
+$color-background-highest-alt:  mix($color-background, $color-background, 0%);
+
+
+/****** FOREGROUND ******/
+$color-foreground-lowest:     mix($color-foreground, $color-background, 95%);
+$color-foreground-lower:      mix($color-foreground, $color-background, 90%);
+$color-foreground-low:        mix($color-foreground, $color-background, 85%);
+$color-foreground-normal-low: mix($color-foreground, $color-background, 70%);
+$color-foreground-normal:     mix($color-foreground, $color-background, 50%);
+$color-foreground-normal-high:mix($color-foreground, $color-background, 35%);
+$color-foreground-high:       mix($color-foreground, $color-background, 10%);
+$color-foreground-higher:     mix($color-foreground, $color-background, 3%);
+$color-foreground-highest:    mix($color-foreground, $color-background, 0%);
+
+$color-foreground-lowest-alt:   mix($color-background, $color-foreground, 95%);
+$color-foreground-lower-alt:    mix($color-background, $color-foreground, 90%);
+$color-foreground-low-alt:      mix($color-background, $color-foreground, 85%);
+$color-foreground-normal-alt:   mix($color-background, $color-foreground, 50%);
+$color-foreground-high-alt:     mix($color-background, $color-foreground, 10%);
+$color-foreground-higher-alt:   mix($color-background, $color-foreground, 3%);
+$color-foreground-highest-alt:  mix($color-background, $color-foreground, 0%);
+
+
+/****** ACCENT ******/
+
+$color-accent-lowest:   mix($color-accent, $color-foreground, 95%);
+$color-accent-lower:    mix($color-accent, $color-foreground, 90%);
+$color-accent-low:      mix($color-accent, $color-foreground, 85%);
+$color-accent-normal:   mix($color-accent, $color-foreground, 50%);
+$color-accent-high:     mix($color-accent, $color-foreground, 25%);
+$color-accent-higher:   mix($color-accent, $color-foreground, 10%);
+$color-accent-highest:  mix($color-accent, $color-foreground, 0%);
+
+$color-accent-lowest-alt:   mix($color-accent, $color-background, 95%);
+$color-accent-lower-alt:    mix($color-accent, $color-background, 90%);
+$color-accent-low-alt:      mix($color-accent, $color-background, 85%);
+$color-accent-normal-alt:   mix($color-accent, $color-background, 50%);
+$color-accent-high-alt:     mix($color-accent, $color-background, 10%);
+$color-accent-higher-alt:   mix($color-accent, $color-background, 3%);
+$color-accent-highest-alt:  mix($color-accent, $color-background, 0%);
+
+/****** HIGHLIGHT ******/
+
+$color-highlight-lowest:   mix($color-highlight, $color-foreground, 95%);
+$color-highlight-lower:    mix($color-highlight, $color-foreground, 90%);
+$color-highlight-low:      mix($color-highlight, $color-foreground, 85%);
+$color-highlight-normal:   mix($color-highlight, $color-foreground, 50%);
+$color-highlight-high:     mix($color-highlight, $color-foreground, 25%);
+$color-highlight-higher:   mix($color-highlight, $color-foreground, 10%);
+$color-highlight-highest:  mix($color-highlight, $color-foreground, 0%);
+
+$color-highlight-lowest-alt:   mix($color-highlight, $color-background, 95%);
+$color-highlight-lower-alt:    mix($color-highlight, $color-background, 90%);
+$color-highlight-low-alt:      mix($color-highlight, $color-background, 85%);
+$color-highlight-normal-alt:   mix($color-highlight, $color-background, 50%);
+$color-highlight-high-alt:     mix($color-highlight, $color-background, 10%);
+$color-highlight-higher-alt:   mix($color-highlight, $color-background, 3%);
+$color-highlight-highest-alt:  mix($color-highlight, $color-background, 0%);
+
+/****** SUCCESS ******/
+
+$color-success-lowest:   mix($color-success, $color-foreground, 95%);
+$color-success-lower:    mix($color-success, $color-foreground, 90%);
+$color-success-low:      mix($color-success, $color-foreground, 85%);
+$color-success-normal:   mix($color-success, $color-foreground, 50%);
+$color-success-high:     mix($color-success, $color-foreground, 25%);
+$color-success-higher:   mix($color-success, $color-foreground, 10%);
+$color-success-highest:  mix($color-success, $color-foreground, 0%);
+
+$color-success-lowest-alt:   mix($color-success, $color-background, 95%);
+$color-success-lower-alt:    mix($color-success, $color-background, 90%);
+$color-success-low-alt:      mix($color-success, $color-background, 85%);
+$color-success-normal-alt:   mix($color-success, $color-background, 50%);
+$color-success-high-alt:     mix($color-success, $color-background, 10%);
+$color-success-higher-alt:   mix($color-success, $color-background, 3%);
+$color-success-highest-alt:  mix($color-success, $color-background, 0%);
+
+/****** WARNING ******/
+
+$color-warning-lowest:   mix($color-warning, $color-foreground, 95%);
+$color-warning-lower:    mix($color-warning, $color-foreground, 90%);
+$color-warning-low:      mix($color-warning, $color-foreground, 85%);
+$color-warning-normal:   mix($color-warning, $color-foreground, 50%);
+$color-warning-high:     mix($color-warning, $color-foreground, 25%);
+$color-warning-higher:   mix($color-warning, $color-foreground, 10%);
+$color-warning-highest:  mix($color-warning, $color-foreground, 0%);
+
+$color-warning-lowest-alt:   mix($color-warning, $color-background, 95%);
+$color-warning-lower-alt:    mix($color-warning, $color-background, 90%);
+$color-warning-low-alt:      mix($color-warning, $color-background, 85%);
+$color-warning-normal-alt:   mix($color-warning, $color-background, 50%);
+$color-warning-high-alt:     mix($color-warning, $color-background, 10%);
+$color-warning-higher-alt:   mix($color-warning, $color-background, 3%);
+$color-warning-highest-alt:  mix($color-warning, $color-background, 0%);
+
+
+/****** COMPONENT: SPLITVIEW ******/
+
+$cb-splitview-pane-split-width: 320px;
+$cb-splitview-pane-split-width-large: 480px;
+$cb-splitview-pane-split-width-larger: 720px;
+
+@mixin clearfix(){
+  &:after {
+    content: " "; //instead of "."
+    clear: both;
+    display: block;
+    visibility: hidden;
+    height: 0px;
+  }
+}

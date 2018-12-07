@@ -1,0 +1,43 @@
+/*!****** FONTS ******!
+$font-family: 'PT Sans', sans-serif;
+$font-family-narrow:  'PT Sans Narrow', sans-serif;
+$font-family-caption:  'PT Sans Caption', sans-serif;
+
+!****** COLORS ******!
+
+$color-accent: #3ca934;//#009fe3;
+$color-highlight: #d00345;
+$color-one: #222;
+$color-two: #fff;
+
+$color-success: #2fc066;
+$color-warning: #e1ba53;
+$color-error: #e15356;
+
+$color-foreground: $color-one;
+$color-background: $color-two;*/
+
+/******* FONTS ******/
+@if($font-family == null) { $font-family: 'PT Sans', sans-serif; }
+@if($font-family-narrow == null) { $font-family-narrow:  'PT Sans Narrow', sans-serif; }
+@if($font-family-caption == null) { $font-family-caption:  'PT Sans Caption', sans-serif; }
+
+/****** COLORS ******/
+
+@if($color-accent == null) { $color-accent: #009fe4; }
+@if($color-highlight == null) { $color-highlight: #e431ae; }
+@if($color-one == null) { $color-one: #222; }
+@if($color-two == null) { $color-two: #fff; }
+
+@if($color-success == null) { $color-success: #2fc066; }
+@if($color-warning == null) { $color-warning: #e1ba53; }
+@if($color-error == null) { $color-error: #e15356; }
+
+@if($color-foreground == null) { $color-foreground: $color-one; }
+@if($color-background == null) { $color-background: $color-two; }
+
+@import "normalize";
+@import "variables";
+@import "html";
+@import "theming";
+@import "flexgrid";

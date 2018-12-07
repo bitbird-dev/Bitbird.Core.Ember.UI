@@ -1,0 +1,86 @@
+.tr-listview {
+  display: block;
+  height: 100%;
+  overflow: auto;
+  user-select: none;
+  .tr-sticky-header {
+    background-color: transparentize($color-background-lowest, 0.05);
+    border-bottom: 1px solid $color-background-lower;
+    > .tr-menubar {
+      border-top: 1px solid $color-background-lower;
+      .tr-editor.tr-text-editor.list-filter > .tr-editor > .tr-editor-content-wrapper {
+        border: none;
+        input {
+          background-color: transparent;
+          text-align: right;
+          &:focus, &:active {
+            background: $color-background;
+          }
+        }
+      }
+    }
+  }
+  .tr-listview-items-header, .tr-listview-items-footer {
+    > .tr-alert {
+      border-radius: 0;
+      border-style: none;
+      border-width: 3px;
+      margin: 0;
+    }
+  }
+  .tr-listview-items-header > .tr-alert {
+    border-bottom-style: solid;
+  }
+  .tr-listview-items-footer > .tr-alert {
+    border-top-style: solid;
+  }
+  .tr-listview-item {
+    display: block;
+    border-bottom: 1px solid $color-background-lower;
+    -webkit-box-shadow: inset 0 1px 0 $color-background;
+    -moz-box-shadow: inset 0 1px 0 $color-background;
+    box-shadow: inset 0 1px 0 $color-background;
+    a > .tr-listview-item-content,
+    .tr-listview-item-content {
+      padding: 8px;
+      display: block;
+      position: relative;
+    }
+  }
+  .tr-listview-busy {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    left: 0;
+  }
+  &.tr-list-style {
+    .tr-listview-item-content > .tr-container {
+      display: flex;
+      display: -webkit-flex;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: stretch;
+      align-content: stretch;
+    }
+
+    .tr-listview-item a > .tr-listview-item-content,
+    .tr-listview-item .tr-listview-item-content {
+      padding: 0;
+    }
+
+    .tr-listview-item-content-column,
+    .tr-listview-item-content-column-fullsize,
+    .tr-listview-item-content-column-main {
+      flex: 0 0 auto;
+      margin: 8px;
+    }
+    .tr-listview-item-content-column-fullsize {
+      margin: 1px 0 0 0;
+    }
+    .tr-listview-item-content-column-main {
+      flex-grow: 1;
+    }
+  }
+}

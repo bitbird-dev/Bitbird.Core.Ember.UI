@@ -1,0 +1,111 @@
+.tr-menubar {
+  height: 100%;
+  margin: 0;
+  padding-bottom: 0;
+  border-bottom: 1px solid $color-background-lowest;
+  background-color: $color-background-lowest;
+  position: relative;
+  //box-shadow: 0px 4px 8px -7px #999;
+  @include clearfix;
+  > .tr-editor {
+    float: left;
+  }
+  .tr-editor {
+    height: 100%;
+    > .tr-editor-content-wrapper {
+      border: none;
+    }
+    > label {
+      display: none;
+    }
+  }
+
+  > .tr-contentpresenter.tr-menubar-move-right {
+    width: auto;
+    float: right;
+    /*
+    position: absolute;
+    top: 0;
+    right: 0;*/
+    > .tr-editor {
+      float: left;
+    }
+  }
+
+  .tr-editor {
+    &.tr-select-editor.tr-select-editor-select > .tr-button-editor {
+      > .tr-editor > .tr-editor-content-wrapper > .tr-editor-content > button {
+        > .tr-select-editor-button-arrow,
+        > .tr-select-editor-button-clear {
+          background-color: transparent;
+          //color: $color-foreground-highest;
+        }
+      }
+      &:hover > .tr-editor > .tr-editor-content-wrapper > .tr-editor-content > button {
+        > .tr-select-editor-button-arrow,
+        > .tr-select-editor-button-clear {
+          background-color: transparentize($color-background-highest, 0.85);
+          //color: $color-foreground-highest;
+        }
+      }
+      > .tr-editor > .tr-editor-content-wrapper {
+        border: none;
+        border-right: 1px solid $color-background-lower;
+        height: 100%;
+      }
+    }
+    &.tr-button-editor, &.tr-datetime-editor, &.tr-text-editor {
+      .tr-editor > .tr-editor-content-wrapper {
+        border: none;
+        border-right: 1px solid $color-background-lower;
+        height: 100%;
+        border-radius: 0;
+      }
+      button, input {
+        background: $color-background;
+        border-radius: 0;
+        color: $color-foreground-normal-low;
+        font-size: 0.8em;
+        font-family: $font-family-narrow;
+        padding: 8px 16px;
+      }
+      button {
+        &.tr-select-editor-button-arrow {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          width: 25px;
+          line-height: 28px;
+          text-align: center;
+          color: $color-foreground-normal-low;
+          padding: 1px 0 0 0;
+          font-size: 72%;
+          outline: none;
+          border: 0px none transparent;
+          /*-webkit-box-shadow: none;
+          -moz-box-shadow: none;
+          box-shadow: none;*/
+          transition: all 225ms;
+        }
+        &:hover {
+          background-color: transparentize($color-background-highest, 0.85);
+          color: $color-foreground-highest;
+        }
+      }
+      input {
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        &:focus, &:active {
+          background: $color-background;
+        }
+      }
+    }
+    &.tr-datetime-editor {
+      input {
+        text-align: center;
+      }
+    }
+  }
+}

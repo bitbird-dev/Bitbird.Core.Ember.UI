@@ -1,0 +1,34 @@
+.tr-map-editor {
+  position: relative;
+  .ember-google-map {
+    min-height: 350px;
+  }
+  .tr-map-editor-pin {
+    position: relative;
+    max-width: 200px;
+    padding: 6px 10px;
+    color: get-foreground-color($color-accent);
+    background-color: $color-accent;
+    border-radius: .25rem;
+    font-size: 1rem;
+    font-weight: 500;
+    will-change: transform;
+    transition: transform .2s cubic-bezier(.485,1.65,.545,.835);
+    box-shadow: 0 10px 20px rgba(0,0,0,.19), 0 6px 6px rgba(0,0,0,.23);
+    &:after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      left: 50%;
+      margin: -7px;
+      background: inherit;
+      transform: rotate(45deg);
+      bottom: 0;
+    }
+  }
+  .tr-map-editor-location {
+    position: absolute;
+    top: 0;
+  }
+}

@@ -1,0 +1,22 @@
+.tr-legend {
+  font-size: 0.8em;
+  margin: 8px 0;
+  text-transform: uppercase;
+  > li {
+    display: inline-block;
+    margin-right: 8px;
+    &.true > i {
+      background-color: $color-success;
+    }
+    &.false > i {
+      background-color: $color-background-low;
+    }
+    > i {
+      width: 0.6em;
+      height: 0.6em;
+      display: inline-block;
+      background-color: $color-warning;
+      border: 1px solid transparentize($color-foreground, 0.75);
+    }
+  }
+}

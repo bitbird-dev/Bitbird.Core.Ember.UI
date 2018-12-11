@@ -121,9 +121,12 @@ $color-warning-highest-alt:  mix($color-warning, $color-background, 0%);
 
 /****** COMPONENT: SPLITVIEW ******/
 
+$cb-splitview-top-pane-split-height: 48px;
+
 $cb-splitview-pane-split-width: 320px;
 $cb-splitview-pane-split-width-large: 480px;
 $cb-splitview-pane-split-width-larger: 720px;
+$cb-splitview-pane-split-width-icon: 64px;
 
 @mixin clearfix(){
   &:after {

@@ -1,0 +1,177 @@
+.tr-splitview {
+  display: block;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+
+  > .tr-splitview-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+
+  &.left {
+    > .tr-splitview-wrapper {
+      > .tr-splitview-content, > .tr-splitview-pane {
+        height: 100%;
+        display: block;
+        overflow: auto;
+      }
+      > .tr-splitview-pane {
+        position: absolute;
+        height: 100%;
+      }
+      > .tr-splitview-content {
+        position: relative;
+        width: 0;
+        height: 100%;
+      }
+    }
+    &.is-open {
+      > .tr-splitview-wrapper {
+        > .tr-splitview-pane {
+          width: 100%;
+        }
+      }
+    }
+    &.has-content {
+      > .tr-splitview-wrapper {
+        > .tr-splitview-content {
+          width: 100%;
+        }
+      }
+    }
+    &.is-open.has-content {
+      padding-left: $cb-splitview-pane-split-width;
+      > .tr-splitview-wrapper {
+        > .tr-splitview-pane {
+          width: $cb-splitview-pane-split-width;
+        }
+        > .tr-splitview-content {
+          width: 100%;
+        }
+      }
+      &.large {
+        padding-left: $cb-splitview-pane-split-width-large;
+        > .tr-splitview-wrapper {
+          > .tr-splitview-pane {
+            width: $cb-splitview-pane-split-width-large;
+          }
+        }
+      }
+      &.larger {
+        padding-left: $cb-splitview-pane-split-width-larger;
+        > .tr-splitview-wrapper {
+          > .tr-splitview-pane {
+            width: $cb-splitview-pane-split-width-larger;
+          }
+        }
+      }
+      &.icon {
+        padding-left: $cb-splitview-pane-split-width-icon;
+        > .tr-splitview-wrapper {
+          > .tr-splitview-pane {
+            width: $cb-splitview-pane-split-width-icon;
+          }
+        }
+      }
+    }
+    /**
+    * Menu mode, toggles via 'left' property
+    */
+    &.sidebar-mode {
+      transition: padding 150ms;
+      > .tr-splitview-wrapper {
+        > .tr-splitview-pane {
+          width: $cb-splitview-pane-split-width;
+          left: 0;
+          transition: left 150ms;
+        }
+      }
+      &.is-open.has-content {
+        > .tr-splitview-wrapper {
+          > .tr-splitview-pane {
+            width: $cb-splitview-pane-split-width;
+          }
+          > .tr-splitview-content {
+            width: 100%;
+          }
+        }
+        &.large {
+          padding-left: $cb-splitview-pane-split-width-large;
+          > .tr-splitview-wrapper {
+            > .tr-splitview-pane {
+              width: $cb-splitview-pane-split-width-large;
+            }
+          }
+        }
+        &.larger {
+          padding-left: $cb-splitview-pane-split-width-larger;
+          > .tr-splitview-wrapper {
+            > .tr-splitview-pane {
+              width: $cb-splitview-pane-split-width-larger;
+            }
+          }
+        }
+      }
+    }
+    /**
+    * Content mode, toggles via 'padding-left' property
+    */
+    &.content-mode {
+      > .tr-splitview-wrapper {
+        > .tr-splitview-pane {
+          left: 0;
+          transition: width 150ms;
+        }
+      }
+    }
+  }
+
+  &.top {
+    > .tr-splitview-wrapper {
+      > .tr-splitview-content, > .tr-splitview-pane {
+        width: 100%;
+        display: block;
+        overflow: auto;
+      }
+      > .tr-splitview-pane {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        width: 100%;
+        height: $cb-splitview-top-pane-split-height;
+        background-color: $color-accent;
+        color: get-foreground-color($color-accent);
+      }
+      > .tr-splitview-content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding-top: $cb-splitview-top-pane-split-height;
+      }
+    }
+  }
+
+  .tr-splitview-toggle {
+    position: absolute;
+    top: 0;
+    left: 320px;
+    bottom: 0;
+    background-color: $color-accent;
+    color: get-foreground-color($color-accent);
+    z-index: 9999;
+    width: 64px;
+    display: none;
+    text-align: center;
+    box-shadow: inset -16px 0 8px -10px rgba(0, 0, 0, 0.2)
+  }
+  .tr-splitview-backdrop {
+    background-color: transparentize($color-background, 0.15);
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 9998;
+  }
+}

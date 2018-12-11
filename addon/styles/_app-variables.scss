@@ -1,10 +1,9 @@
 /******* FONTS ******/
-$font-family: 'PT Sans', sans-serif;
-$font-family-narrow:  'PT Sans Narrow', sans-serif;
-$font-family-caption:  'PT Sans Caption', sans-serif;
+$font-family: unquote("'PT Sans', sans-serif");
+$font-family-narrow:  unquote("'PT Sans Narrow', sans-serif");
+$font-family-caption:  unquote("'PT Sans Caption', sans-serif");
 
 /****** COLORS ******/
-
 $color-accent: #009fe4;
 $color-highlight: #e431ae;
 $color-one: #222;

@@ -1,0 +1,48 @@
+{{#if header}}
+    <div class="form-block-header" {{action 'toggleIsCollapsed'}}>
+        <h3>{{header}}</h3>
+        {{#if useCustomMenu}}
+            {{yield (hash
+                        menu=(component 'tr-container' tagName='span' classNames='form-block-header-menu')
+                        isMaximized=isMaximized
+                        onMaximize=(action 'maximize')
+                        onMinimize=(action 'minimize')
+                        isCollapsible=isCollapsible
+                        isCollapsed=isCollapsed
+                        onCollapse=(action 'collapse')
+                        onExpand=(action 'expand')
+                    )}}
+        {{else}}
+            <div class="form-block-header-menu">
+                {{#if canMaximize}}
+                    {{#if isMaximized}}
+                        {{#tr-method-target tagName="button" title="Minimieren" onClick=(action 'minimize') bubbles=false}}
+                            <i class="fa fa-window-minimize"></i>
+                        {{/tr-method-target}}
+                    {{else}}
+                        {{#tr-method-target tagName="button" title="Maximieren" onClick=(action 'maximize') bubbles=false}}
+                            <i class="fa fa-window-maximize"></i>
+                        {{/tr-method-target}}
+                    {{/if}}
+                {{/if}}
+                {{#if canCollapse}}
+                    {{#if isCollapsed}}
+                        {{#tr-method-target tagName="button" title="Ausklappen" onClick=(action 'expand') bubbles=false}}
+                            <i class="fa fa-angle-double-down"></i>
+                        {{/tr-method-target}}
+                    {{else}}
+                        {{#tr-method-target tagName="button" title="Einklappen" onClick=(action 'collapse') bubbles=false}}
+                            <i class="fa fa-angle-double-up"></i>
+                        {{/tr-method-target}}
+                    {{/if}}
+                {{/if}}
+            </div>
+        {{/if}}
+        {{yield (hash header-sub=(component 'tr-container' classNames='form-block-header-sub') isCollapsed=isCollapsed)}}
+    </div>
+{{/if}}
+{{#unless isCollapsed}}
+    {{yield (hash
+                content=(component 'tr-container' classNames=(concat 'form-block-content ' (if fullSizeContent 'form-block-content-full-size')))
+            )}}
+{{/unless}}

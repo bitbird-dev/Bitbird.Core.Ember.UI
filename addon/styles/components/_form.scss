@@ -1,0 +1,284 @@
+.form {
+  position: relative;
+
+  @include clearfix;
+
+  > h1, > h2 {
+    display: none;
+  }
+  > h3, > h4, > h5, > h6 {
+    color: $color-foreground-lower;
+    padding: 8px 0;
+    font-weight: lighter;
+    margin: 8px 8px 0px 8px;
+    text-shadow: 1px 1px 0px #fff;
+  }
+  > h4 {
+    font-weight: bold;
+  }
+
+  &.form-section {
+    margin-top: 32px;
+    border-top: 1px solid $color-background-low;
+    &::before {
+      position: relative;
+      display: block;
+      content: '';
+      border-top: 1px solid $color-background-lowest-alt;
+      height: 0;
+      width: 100%;
+    }
+  }
+
+  > .form-block > .form-block-content {
+    position: relative;
+    //overflow: hidden;
+    margin: 8px;
+    padding: 8px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 2px 6px -6px $color-foreground-lowest;
+    -moz-box-shadow: 0px 2px 6px -6px $color-foreground-lowest;
+    box-shadow: 0px 2px 6px -6px $color-foreground-lowest;
+    &.form-block-content-full-size {
+      padding: 0;
+    }
+  }
+
+  > .form-block {
+    &.form-block-overflow-right, &.form-block-overflow-left {
+      > .form-block-content {
+        overflow-x: hidden;
+        &:after {
+          content: ' ';
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 12px;
+          background-color: transparent;
+        }
+      }
+    }
+    &.form-block-overflow-right > .form-block-content:after {
+      right: 0;
+      background-image: linear-gradient(90deg, transparent, $color-background-low 10px);
+    }
+    &.form-block-overflow-left > .form-block-content:after {
+      left: 0;
+      background-image: linear-gradient(90deg, $color-background-low, transparent 2px);
+    }
+
+    &.form-block-maximized {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 1;
+      background-color: transparentize($color-background-highest, 0.1);
+      overflow: auto;
+      transition: all 1500ms;
+      padding: 16px;
+      min-width: 800px;
+    }
+  }
+
+  > .form-block > .form-block-content > .form  {
+    > .form-block > .form-block-content {
+      background-color: unset;
+      margin: 0;
+      padding: 0;
+      border-radius: 0;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+
+  > .form-block, > .form-block-break {
+    box-sizing: border-box;
+    min-width: 300px;
+    float: left;
+    width: 100%;
+  }
+
+  > .form-block {
+    &.form-block-pad {
+      padding-right: 32px;
+    }
+
+    @include clearfix;
+    > .form-block-content > .tr-editor,
+    .tr-editor-container{
+      margin-bottom: 8px;
+    }
+    &.form-1 {
+      width: 100%;
+    }
+  }
+
+  > .form-block.form-block-with-header {
+    > .form-block-header {
+      position: relative;
+      margin: 8px 8px 0 8px;
+      padding: 4px 8px;
+      border-radius: 4px 4px 0 0;
+      font-family: $font-family;
+      color: $color-foreground-lowest;
+      border-bottom: 1px solid $color-background-lowest;
+      background-color: darken($color-background-lowest, 2%);
+      font-size: 12px;
+      box-shadow: 0px -2px 8px -4px $color-one;
+      cursor: default;
+    }
+    > .form-block-header-sub {
+      position: relative;
+      margin: 8px 8px 0 8px;
+      padding: 4px 8px;
+      border-radius: 4px 4px 0 0;
+      font-family: $font-family;
+      color: $color-foreground-lowest;
+      border-bottom: 1px solid $color-background-lowest;
+      background-color: darken($color-background-lowest, 2%);
+      font-size: 1em;
+    }
+    > .form-block-header > h2, h3, h4, h5, h6 {
+      display: inline-block;
+      text-transform: uppercase;
+      font-weight: bold;
+      padding: 0;
+      margin: 0;
+
+      &.no-margin {
+        margin: 0;
+      }
+      &.no-padding {
+        padding: 0;
+      }
+      &.no-border {
+        border: 0px none;
+      }
+    }
+    > .form-block-header .form-block-header-menu {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      font-size: 1.4em;
+      line-height: 1.4em;
+      > button {
+        display: inline-block;
+        height: 100%;
+        line-height: 1em;
+        background-color: transparent;
+        -webkit-transition: background-color 150ms;
+        -moz-transition: background-color 150ms;
+        -ms-transition: background-color 150ms;
+        -o-transition: background-color 150ms;
+        transition: background-color 150ms;
+        &:hover {
+          background-color: $color-background-low!important;
+          color: get-foreground-color($color-background-low)!important;
+        }
+        &:active {
+          background-color: $color-background-normal-low!important;
+          color: get-foreground-color($color-background-normal-low)!important;
+        }
+        &.active {
+          background-color: $color-background-low!important;
+          color: get-foreground-color($color-background-low)!important;
+        }
+        &.disabled, &:disabled {
+          background-color: $color-background-lowest!important;
+          color: get-foreground-color($color-background-lowest, #ccc, #333)!important;
+          &:hover {
+            background-color: $color-background-lowest!important;
+            color: get-foreground-color($color-background-lowest, #ccc, #333)!important;
+          }
+        }
+      }
+    }
+    > .form-block-content
+    {
+      margin-top: 0;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+    &.form-block-collapsed > .form-block-header {
+      border-bottom: 3px solid $color-background-normal-low;
+    }
+  }
+
+  &.form-2 {
+    > .form-block {
+      &.form-1 {
+        width: 100%;
+      }
+      width: percentage(1/2);
+    }
+  }
+
+  &.form-3 {
+    > .form-block {
+      width: percentage(1/3);
+      &.form-1 {
+        width: 100%;
+      }
+      &.form-2 {
+        width: percentage(2/3);
+      }
+    }
+  }
+
+  &.form-4 {
+    > .form-block {
+      &.form-1 {
+        width: 100%;
+      }
+      width: percentage(1/4);
+    }
+  }
+
+  &.form-fullscreen {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    background: $color-background;
+    padding: 0 16px;
+  }
+
+  > .form-icons {
+    position: absolute;
+    right: 32px;
+    top: 8px;
+    padding: 0;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 125ms;
+    > i {
+      background-color: $color-accent;
+      border-radius: 14px;
+      height: 24px;
+      width: 24px;
+      display: block;
+      padding: 2px;
+      margin: 0;
+      text-align: center;
+      line-height: 24px;
+      &:hover {
+        background-color: $color-accent-normal;
+      }
+      &:active {
+        background-color: $color-accent-low;
+      }
+    }
+  }
+
+  &:hover {
+    > .form-icons {
+      opacity: 1;
+    }
+  }
+}

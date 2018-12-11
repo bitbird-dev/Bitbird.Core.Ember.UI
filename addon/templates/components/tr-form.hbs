@@ -1,0 +1,13 @@
+{{#if header}}
+    {{#if section}}
+        <h3>{{header}}</h3>
+    {{else}}
+        <h4>{{header}}</h4>
+    {{/if}}
+{{/if}}
+{{#if isFullScreen}}
+    <div class="form-icons">
+        <i class="fa fa-window-maximize" {{action 'fullscreen'}}></i>
+    </div>
+{{/if}}
+{{yield}}

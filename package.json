@@ -1,6 +1,6 @@
 {
     "name": "bitbird-core-ember-ui",
-    "version": "1.0.11",
+    "version": "1.0.12",
     "description": "Bitbird components for ember.js.",
     "keywords": [
         "ember-addon",
@@ -23,7 +23,7 @@
         "test": "ember try:each"
     },
     "dependencies": {
-        "bitbird-core-ember-i18n": "^1.0.12",
+        "bitbird-core-ember-i18n": "^1.0.13",
         "ember-cli-babel": "^6.6.0",
         "ember-cli-htmlbars": "^2.0.1",
         "ember-cli-htmlbars-inline-precompile": "^1.0.0"
@@ -45,7 +45,7 @@
         "ember-disable-prototype-extensions": "^1.1.2",
         "ember-export-application-global": "^2.0.0",
         "ember-highcharts": "^1.0.0",
-        "ember-i18n": "^5.2.1",
+        "ember-i18n": "~5.2.1",
         "ember-load-initializers": "^1.0.0",
         "ember-modal-dialog": "^3.0.0-beta.3",
         "ember-moment": "^7.8.0",

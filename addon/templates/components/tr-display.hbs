@@ -1,7 +1,7 @@
 {{#tr-editor as |e|}}
     {{#e.label}}{{label}}{{/e.label}}
     {{#e.content}}
-        {{#if type 'date'}}
+        {{#if (compare type 'date')}}
             {{#if format}}
                 {{moment-format value format}}
             {{else}}

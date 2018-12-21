@@ -1,6 +1,6 @@
 {{#if isEditing}}
-    {{#each (tr-range 0 20) as |x-index|}}
-        {{#each (tr-range 0 20) as |y-index|}}
+    {{#each (range 0 20) as |x-index|}}
+        {{#each (range 0 20) as |y-index|}}
             <div class="tr-board-widget tr-widget-placeholder tr-board-widget-x-{{x-index}} tr-board-widget-y-{{y-index}} tr-board-widget-w-1 tr-board-widget-h-1 ember-view">{{range}}</div>
         {{/each}}
     {{/each}}

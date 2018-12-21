@@ -32,6 +32,17 @@
                     {{/if}}
                     <button class="tr-qrcode-editor-button" {{action 'edit'}}><i class="fa fa-pencil"></i></button>
                     <button class="tr-qrcode-editor-button" {{action 'generateNew'}}><i class="fa fa-refresh"></i></button>
+                    {{#if value}}
+                        <button class="tr-qrcode-editor-button" {{action 'print'}}><i class="fa fa-print"></i></button>
+                        {{#if isPrinting}}
+                            <div class="tr-qrcode-editor-printable" style="opacity: 0.0001; position: absolute;">
+                                {{qr-code text=value width=printSize height=printSize correctLevel="L" style="inline-block"}}
+                                <p>
+                                    Code: <i>{{value}}</i>
+                                </p>
+                            </div>
+                        {{/if}}
+                    {{/if}}
                 {{/if}}
             </small>
         </div>

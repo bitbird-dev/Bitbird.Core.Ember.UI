@@ -1,6 +1,6 @@
 {
     "name": "bitbird-core-ember-ui",
-    "version": "1.0.15",
+    "version": "1.0.16",
     "description": "Bitbird components for ember.js.",
     "keywords": [
         "ember-addon",
@@ -29,7 +29,9 @@
         "ember-cli-htmlbars-inline-precompile": "^1.0.0",
         "ember-highcharts": "^1.0.0",
         "highcharts": "^6.1.0",
-        "jquery-ui": "^1.12.1"
+        "jquery-ui": "^1.12.1",
+        "ember-file-upload": "^2.5.3",
+        "ember-qrcode-shim": "^0.3.0"
     },
     "devDependencies": {
         "bitbird-core-ember-helpers": "1.0.5",
@@ -51,7 +53,6 @@
         "ember-load-initializers": "^1.0.0",
         "ember-modal-dialog": "^3.0.0-beta.3",
         "ember-moment": "^7.8.0",
-        "ember-qrcode-shim": "^0.3.0",
         "ember-resolver": "^4.0.0",
         "ember-source": "~2.18.0",
         "eslint-plugin-ember": "^5.0.0",

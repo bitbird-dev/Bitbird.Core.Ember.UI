@@ -1,10 +1,31 @@
 import Component from '@ember/component';
 import layout from '../templates/components/tr-form-block';
 
+const ESC_KEY = 27;
+
 export default Component.extend({
     layout,
+
+    didInsertElement() {
+        this._super(...arguments);
+        this._initEscListener();
+    },
+
+    willDestroyElement(){
+        this._super(...arguments);
+        Ember.$('body').off('keyup.modal-dialog');
+    },
+
+    _initEscListener() {
+        const closeOnEscapeKey = (ev) => {
+            if (ev.keyCode === ESC_KEY) { this.minimize(); }
+        };
+
+        Ember.$('body').on('keyup.modal-dialog', closeOnEscapeKey);
+    },
+
     classNames: 'form-block',
-    classNameBindings: ['header:form-block-with-header', 'sizeClassName', 'overflowClassName', 'isMaximized:form-block-maximized', 'isCollapsed:form-block-collapsed'],
+    classNameBindings: ['header:form-block-with-header', 'sizeClassName', 'overflowClassName', 'isCollapsed:form-block-collapsed'],
 
     header: null,
     size: null,

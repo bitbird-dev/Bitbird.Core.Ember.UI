@@ -41,8 +41,14 @@
         {{yield (hash header-sub=(component 'tr-container' classNames='form-block-header-sub') isCollapsed=isCollapsed)}}
     </div>
 {{/if}}
-{{#unless isCollapsed}}
+{{#if isMaximized}}
+    {{#modal-dialog hasOverlay=true translucentOverlay=true clickOutsideToClose=true onClose=(action 'minimize') wrapperClass='tr-form-block-modal-wrapper'}}
+        {{yield (hash
+                        content=(component 'tr-container' classNames=(concat 'form-block-content ' (if fullSizeContent 'form-block-content-full-size')))
+                )}}
+    {{/modal-dialog}}
+{{else}}
     {{yield (hash
-                content=(component 'tr-container' classNames=(concat 'form-block-content ' (if fullSizeContent 'form-block-content-full-size')))
+                    content=(component 'tr-container' classNames=(concat 'form-block-content ' (if fullSizeContent 'form-block-content-full-size')))
             )}}
-{{/unless}}
+{{/if}}

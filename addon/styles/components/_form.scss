@@ -282,3 +282,13 @@
     }
   }
 }
+
+.tr-form-block-modal-wrapper.ember-modal-wrapper.emd-static.emd-wrapper-target-attachment-center .ember-modal-dialog {
+  top: 5%;
+  left: 10%;
+  max-height: 90%;
+  overflow: hidden;
+  transform: translate(-5%, 0%);
+  width: 90%;
+  max-width: 100%;
+}

@@ -15,7 +15,9 @@ $color-warning: #e1ba53;
 $color-error: #e15356;
 
 $color-foreground: $color-one;
-$color-background: $color-two;*/
+$color-background: $color-two;
+
+$space: 8px;*/
 
 /******* FONTS ******/
 @if($font-family == null) { $font-family: 'PT Sans', sans-serif; }
@@ -35,6 +37,8 @@ $color-background: $color-two;*/
 
 @if($color-foreground == null) { $color-foreground: $color-one; }
 @if($color-background == null) { $color-background: $color-two; }
+
+@if($space == null) { $space: 8px; }
 
 @import "normalize";
 @import "variables";

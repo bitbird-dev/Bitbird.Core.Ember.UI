@@ -6,6 +6,10 @@ $screen-min-width-tablet: 681px;
 $screen-min-width-desktop: 1280px;
 $screen-min-width-huge: 1480px;
 
+/****** SPACES ******/
+$space-2x: 2*$space;
+$space-4x: 4*$space;
+
 /****** BACKGROUND ******/
 $color-background-lowest:     mix($color-background, $color-foreground, 95%);
 $color-background-lower:      mix($color-background, $color-foreground, 90%);

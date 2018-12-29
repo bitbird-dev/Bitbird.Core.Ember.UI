@@ -283,12 +283,36 @@
   }
 }
 
-.tr-form-block-modal-wrapper.ember-modal-wrapper.emd-static.emd-wrapper-target-attachment-center .ember-modal-dialog {
-  top: 5%;
-  left: 10%;
-  max-height: 90%;
-  overflow: hidden;
-  transform: translate(-5%, 0%);
-  width: 90%;
-  max-width: 100%;
+.tr-form-block-modal-wrapper {
+  .ember-modal-dialog .modal-dialog-content {
+    padding: 0;
+    .form-block-header {
+      position: sticky;
+      z-index: 1;
+      top: 0;
+      background: $color-background;
+      padding: $space;
+      margin: 0;
+      border-radius: 0;
+      box-shadow: none;
+      line-height: 3em;
+    }
+    .form-block-content {
+      margin: 0;
+    }
+    .form-block-header-menu {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+  &.ember-modal-wrapper.emd-static.emd-wrapper-target-attachment-center .ember-modal-dialog {
+    top: 5%;
+    left: 10%;
+    max-height: 90%;
+    overflow: hidden;
+    transform: translate(-5%, 0%);
+    width: 90%;
+    max-width: 100%;
+  }
 }

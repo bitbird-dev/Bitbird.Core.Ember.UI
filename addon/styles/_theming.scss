@@ -196,3 +196,9 @@ a {
 .theme-border-accent-high-alt       { border-color: $color-accent-high-alt!important;}
 .theme-border-accent-higher-alt     { border-color: $color-accent-higher-alt!important;}
 .theme-border-accent-highest-alt    { border-color: $color-accent-highest-alt!important;}
+
+/****** SPACING ******/
+
+.space { margin: $space; };
+.space-2x { margin: $space-2x; };
+.space-4x { margin: $space-4x; };

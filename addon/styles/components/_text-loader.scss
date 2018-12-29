@@ -1,32 +1,45 @@
 .tr-text-loader {
-  position: relative;
-  color: $color-foreground-lower;
-
-  @keyframes tr-text-load {
-    25% {
-      content: '..'
-    }
-    50% {
-      content: '...'
-    }
-    75% {
-      content: '..'
-    }
-  }
+  color: inherit;
+  font-size: inherit;
 
   $duration: 0.8s;
 
-  animation-delay: 0s;
-  animation-duration: $duration;
-
-  &:after {
+  > span {
     position: relative;
-    content: '.';
-    width: 40px;
-    -webkit-animation: tr-text-load infinite linear;
-    animation: tr-text-load infinite linear;
-    animation-delay: inherit;
-    animation-duration: inherit;
+    @keyframes tr-text-load {
+      25% {
+        content: '..'
+      }
+      50% {
+        content: '...'
+      }
+      75% {
+        content: '..'
+      }
+    }
+
+    animation-delay: 0s;
+    animation-duration: $duration;
+
+    &:after, &:before {
+      position: relative;
+      content: '.';
+      width: 40px;
+    }
+
+    &:before {
+      content: '...';
+      opacity: 0.0001;
+    }
+
+    &:after {
+      position: absolute;
+      left: 0;
+      -webkit-animation: tr-text-load infinite linear;
+      animation: tr-text-load infinite linear;
+      animation-delay: inherit;
+      animation-duration: inherit;
+    }
   }
   /*&:nth-child(n+1):after {
     -webkit-animation-duration: $duration*0.7;

@@ -9,8 +9,8 @@ export default Component.extend({
     didInsertElement: function() {
         //min 250, max 500
         let time = Math.floor(Math.random() * 250 + 250);
-        this.$().css('animation-delay', time + "ms");
-        this.$().css('animation-duration', 3*time + "ms");
+        this.$('span').css('animation-delay', time + "ms");
+        this.$('span').css('animation-duration', 3*time + "ms");
         this._super();
     }
 });

@@ -1,5 +1,8 @@
 .tr-datetime-picker {
   display: inline-block;
+  > .tr-datetime-picker-control {
+    height: 100%;
+  }
 }
 
 .tr-datetime-picker-wrapper {

@@ -1,0 +1,43 @@
+{{#tr-editor as |e|}}
+    {{#e.label}}
+        {{tr-error-tooltip errors=errors}}
+        {{label}}
+        {{tr-info-tooltip title=title content=info}}
+    {{/e.label}}
+    {{#e.content}}
+        <div class="{{{sizeClass}}} {{{styleClass}}} {{{optionClassNames}}}">
+            <fieldset class="options">
+                {{#each options as |option|}}
+                    {{#if (compare option.value selectedValue)}}
+                        <input {{action 'select' option}} type="radio" id="{{elementId}}-{{option.value}}-Option" name="{{elementId}}-Options" value="{{option.value}}" checked="checked">
+                    {{else}}
+                        <input {{action 'select' option}} type="radio" id="{{elementId}}-{{option.value}}-Option" name="{{elementId}}-Options" value="{{option.value}}">
+                    {{/if}}
+                    <label for="{{elementId}}-{{option.value}}-Option">
+                        {{#if (compare style 'switch')}}
+                            &nbsp;
+                        {{else}}
+                            {{#if hasBlock}}
+                                {{yield (hash option=option itemTemplate=(component 'tr-container'))}}
+                            {{else}}
+                                {{{option.content}}}
+                            {{/if}}
+                        {{/if}}
+                    </label>
+                {{/each}}
+                <a{{action 'select'}}></a>
+            </fieldset>
+            {{#if postfix}}
+                <fieldset class="tr-toggle-label-wapper">
+                    <input>
+                    <label{{action 'select'}}>{{postfix}}</label>
+                </fieldset>
+            {{else if (compare postfix '===' undefined)}}
+                <fieldset class="tr-toggle-label-wapper">
+                    <input>
+                    <label{{action 'select'}}>{{selectedOption.content}}</label>
+                </fieldset>
+            {{/if}}
+        </div>
+    {{/e.content}}
+{{/tr-editor}}

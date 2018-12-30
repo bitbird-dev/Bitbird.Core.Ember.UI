@@ -1,6 +1,6 @@
 {
     "name": "bitbird-core-ember-ui",
-    "version": "1.0.16",
+    "version": "1.0.17",
     "description": "Bitbird components for ember.js.",
     "keywords": [
         "ember-addon",
@@ -35,7 +35,7 @@
         "ember-qrcode-shim": "^0.3.0"
     },
     "devDependencies": {
-        "bitbird-core-ember-helpers": "1.0.5",
+        "bitbird-core-ember-helpers": "1.0.6",
         "bitbird-core-ember-int-base": "^5.2.2",
         "bitbird-core-ember-remote": "1.0.9",
         "broccoli-asset-rev": "^2.4.5",

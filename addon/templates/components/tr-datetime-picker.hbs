@@ -1,0 +1,182 @@
+<div class="tr-datetime-picker-control">
+    {{yield displayValue mode date range selectedItems}}
+</div>
+{{#ember-wormhole to="datetime-pickers"}}
+    <div class="tr-datetime-picker-wrapper {{timeCssClass}}">
+        <div class="tr-datetime-picker-content">
+            <div class="tr-datetime-picker-date-panel">
+                <div class="tr-datetime-picker-date-header">
+                    <button class="tr-datetime-picker-page-button" {{action 'page' -1}}>&lt;</button>
+                    <button class="tr-datetime-picker-page-button" {{action 'page'}}>&bigodot;</button>
+                    <button class="tr-datetime-picker-page-button" {{action  'page' 1}}>&gt;</button>
+                    <button class="tr-datetime-picker-month-button" {{action 'toggleMonthPicker'}}>{{moment-format currentMonth 'MMM'}}</button>
+                    <button class="tr-datetime-picker-year-button" {{action 'toggleYearPicker'}}>{{year}}</button>
+                </div>
+                <div class="tr-datetime-picker-month-header">
+                    <ol>
+                        {{#each weeks.[0] as |day|}}
+                            <li>{{moment-format day.date 'dd'}}</li>
+                        {{/each}}
+                    </ol>
+                </div>
+                <div class="tr-datetime-picker-month-dates">
+                    {{#each weeks as |week|}}
+                        <ol>
+                            {{#each week as |day|}}
+                                <li {{action 'select' day}} class="
+                    {{unless day.isCurrentMonth 'is-other-month '}}
+                                    {{if day.isDisabled 'is-disabled '}}
+                                    {{if day.isSelected 'is-selected '}}
+                                    {{if day.isToday ' is-today'}}
+                                    {{if day.isRangeBegin ' is-range-begin'}}
+                                    {{if day.isRange ' is-range'}}
+                                    {{if day.isRangeEnd ' is-range-end'}}
+                                    {{if day.isBeforeRangeBegin ' is-range-before'}}
+                                    {{if day.isWeekend 'is-weekend'}}">{{moment-format day.date 'DD'}}</li>
+                            {{/each}}
+                        </ol>
+                    {{/each}}
+                </div>
+                <div class="tr-datetime-picker-month-footer">
+
+                </div>
+            </div>
+            {{#if (starts-with timeMode 'hm')}}
+                {{#with (split (unless beginTime '00:00:00' beginTime) ':') as |timeParts|}}
+                    <div class="tr-datetime-picker-time-begin-panel">
+                        <div class="tr-datetime-picker-time-header">
+                            Zeitpunkt
+                        </div>
+                        <div class="tr-datetime-picker-times">
+                            <div class="tr-datetime-picker-hours">
+                                <div class="tr-datetime-picker-detail-header">Stunde</div>
+                                <div class="tr-datetime-picker-detail-content">
+                                    <ol>
+                                        {{#each (range 0 24) as |hour|}}
+                                            <li {{action 'selectBeginTimePart' 'h' hour}} class="{{if (compare (pad-start hour 2 '0') '==' timeParts.[0]) 'is-selected'}}">{{pad-start hour 2}}</li>
+                                        {{/each}}
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="tr-datetime-picker-minutes">
+                                <div class="tr-datetime-picker-detail-header">Minute</div>
+                                <div class="tr-datetime-picker-detail-content">
+                                    <ol>
+                                        {{#each (range 0 60) as |minute|}}
+                                            <li {{action 'selectBeginTimePart' 'm' minute}} class="{{if (compare (pad-start minute 2 '0') '==' timeParts.[1]) 'is-selected'}}">{{pad-start minute 2}}</li>
+                                        {{/each}}
+                                    </ol>
+                                </div>
+                            </div>
+                            {{#if (starts-with timeMode 'hms')}}
+                                <div class="tr-datetime-picker-seconds">
+                                    <div class="tr-datetime-picker-detail-header">Sekunde</div>
+                                    <div class="tr-datetime-picker-detail-content">
+                                        <ol>
+                                            {{#each (range 0 60) as |second|}}
+                                                <li {{action 'selectBeginTimePart' 's' second}} class="{{if (compare (pad-start second 2 '0') '==' timeParts.[2]) 'is-selected'}}">{{pad-start second 2}}</li>
+                                            {{/each}}
+                                        </ol>
+                                    </div>
+                                </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                {{/with}}
+                {{#if (compare mode 'range')}}
+                    {{#with (split (unless endTime '00:00:00' endTime) ':') as |timeParts|}}
+                        <div class="tr-datetime-picker-time-end-panel">
+                            <div class="tr-datetime-picker-time-header">
+                                Endzeit
+                            </div>
+                            <div class="tr-datetime-picker-times">
+                                <div class="tr-datetime-picker-hours">
+                                    <div class="tr-datetime-picker-detail-header">Stunde</div>
+                                    <div class="tr-datetime-picker-detail-content">
+                                        <ol>
+                                            {{#each (range 0 24) as |hour|}}
+                                                <li {{action 'selectEndTimePart' 'h' hour}} class="{{if (compare (pad-start hour 2 '0') '==' timeParts.[0]) 'is-selected'}}">{{pad-start hour 2}}</li>
+                                            {{/each}}
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div class="tr-datetime-picker-minutes">
+                                    <div class="tr-datetime-picker-detail-header">Minute</div>
+                                    <div class="tr-datetime-picker-detail-content">
+                                        <ol>
+                                            {{#each (range 0 60) as |minute|}}
+                                                <li {{action 'selectEndTimePart' 'm' minute}} class="{{if (compare (pad-start minute 2 '0') '==' timeParts.[1]) 'is-selected'}}">{{pad-start minute 2}}</li>
+                                            {{/each}}
+                                        </ol>
+                                    </div>
+                                </div>
+                                {{#if (starts-with timeMode 'hms')}}
+                                    <div class="tr-datetime-picker-seconds">
+                                        <div class="tr-datetime-picker-detail-header">Sekunde</div>
+                                        <div class="tr-datetime-picker-detail-content">
+                                            <ol>
+                                                {{#each (range 0 60) as |second|}}
+                                                    <li {{action 'selectEndTimePart' 's' second}} class="{{if (compare (pad-start second 2 '0') '==' timeParts.[2]) 'is-selected'}}">{{pad-start second 2}}</li>
+                                                {{/each}}
+                                            </ol>
+                                        </div>
+                                    </div>
+                                {{/if}}
+                            </div>
+                        </div>
+                    {{/with}}
+                {{/if}}
+            {{/if}}
+        </div>
+        <div class="tr-datetime-picker-footer">
+            {{#if hasValue}}
+                <div class="tr-datetime-picker-display">
+                    {{#if (compare mode 'single')}}
+                        <button class="tr-datetime-picker-display-button"{{action 'focus' date}}>{{displayValue}}</button>
+                        <i class="tr-datetime-picker-clear-button fa fa-trash"{{action 'reset'}}></i>
+                    {{else if (compare mode 'range')}}
+                        {{#if displayValues.[0].value}}
+                            <button class="tr-datetime-picker-display-button"{{action 'focus' displayValues.[0].value}}>{{displayValues.[0].displayValue}}</button>
+                        {{else}}
+                            ?
+                        {{/if}}
+                        -
+                        {{#if displayValues.[1].value}}
+                            <button class="tr-datetime-picker-display-button"{{action 'focus' displayValues.[1].value}}>{{displayValues.[1].displayValue}}</button>
+                        {{else}}
+                            ?
+                        {{/if}}
+                        <i class="tr-datetime-picker-clear-button fa fa-trash"{{action 'reset'}}></i>
+                    {{else if (compare mode 'multiple')}}
+                        <ol class="tr-datetime-picker-display">
+                            {{#each displayValues as |item|}}
+                                <li>
+                                    <button class="tr-datetime-picker-display-button"{{action 'focus' item.value}}>{{item.displayValue}}</button> <i class="tr-datetime-picker-clear-button fa fa-trash"{{action 'deselect' item.value}}></i>
+                                </li>
+                            {{/each}}
+                        </ol>
+                    {{/if}}
+                </div>
+            {{/if}}
+        </div>
+        {{#if isDetailPickerVisible}}
+            <div class="tr-datetime-picker-detail-overlay">
+                <div class="tr-datetime-picker-content">
+                    {{#if isMonthPickerVisible}}
+                        <ol>
+                            {{#each months as |month| }}
+                                <li class="{{if (compare month '==' currentMonth) 'is-selected'}}" {{action 'setMonth' month}}>{{moment-format month 'MMMM'}}</li>
+                            {{/each}}
+                        </ol>
+                    {{else if isYearPickerVisible}}
+                        <ol class="tr-datetime-year-picker">
+                            {{#each years as |thisYear| }}
+                                <li class="{{if (compare year '==' thisYear) 'is-selected'}}" {{action 'setYear' thisYear}}>{{thisYear}}</li>
+                            {{/each}}
+                        </ol>
+                    {{/if}}
+                </div>
+            </div>
+        {{/if}}
+    </div>
+{{/ember-wormhole}}

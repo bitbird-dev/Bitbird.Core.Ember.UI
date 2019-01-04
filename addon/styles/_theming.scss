@@ -177,6 +177,47 @@ a {
 .theme-background-warning-higher-alt     { background-color: $color-warning-higher-alt; color: get-foreground-color($color-warning-higher-alt); }
 .theme-background-warning-highest-alt    { background-color: $color-warning-highest-alt; color: get-foreground-color($color-warning-highest-alt); }
 
+/****** BACKGROUND WITH ERROR ******/
+
+.theme-background-error            { background-color: $color-error!important; color: get-foreground-color($color-error)!important; }
+
+.theme-background-error-lowest     { background-color: $color-error-lowest!important; color: get-foreground-color($color-error-lowest)!important; }
+.theme-background-error-lower      { background-color: $color-error-lower!important; color: get-foreground-color($color-error-lower)!important }
+.theme-background-error-low        { background-color: $color-error-low!important; color: get-foreground-color($color-error-low)!important; }
+.theme-background-error-normal     { background-color: $color-error-normal!important; color: get-foreground-color($color-error-normal)!important; }
+.theme-background-error-normal-interactive {
+  -webkit-transition: background-color 150ms;
+  -moz-transition: background-color 150ms;
+  -ms-transition: background-color 150ms;
+  -o-transition: background-color 150ms;
+  transition: background-color 150ms;
+  &:not([disabled]) {
+    &:hover, &.active:hover {
+      background-color: $color-error-normal!important;
+      color: get-foreground-color($color-error-normal)!important;
+    }
+    &:active, &.active:active {
+      background-color: $color-error-low!important;
+      color: get-foreground-color($color-error-low)!important;
+    }
+    &.active {
+      background-color: $color-error;
+      color: get-foreground-color($color-error)!important;
+    }
+  }
+}
+.theme-background-error-high       { background-color: $color-error-high; color: get-foreground-color($color-error-high); }
+.theme-background-error-higher     { background-color: $color-error-higher; color: get-foreground-color($color-error-higher); }
+.theme-background-error-highest    { background-color: $color-error-highest; color: get-foreground-color($color-error-highest); }
+
+.theme-background-error-lowest-alt     { background-color: $color-error-lowest-alt; color: get-foreground-color($color-error-lowest-alt); }
+.theme-background-error-lower-alt      { background-color: $color-error-lower-alt; color: get-foreground-color($color-error-lower-alt); }
+.theme-background-error-low-alt        { background-color: $color-error-low-alt; color: get-foreground-color($color-error-low-alt); }
+.theme-background-error-normal-alt     { background-color: $color-error-normal-alt; color: get-foreground-color($color-error-normal-alt); }
+.theme-background-error-high-alt       { background-color: $color-error-high-alt; color: get-foreground-color($color-error-high-alt); }
+.theme-background-error-higher-alt     { background-color: $color-error-higher-alt; color: get-foreground-color($color-error-higher-alt); }
+.theme-background-error-highest-alt    { background-color: $color-error-highest-alt; color: get-foreground-color($color-error-highest-alt); }
+
 /****** BACKGROUND WITH ACCENT ******/
 
 .theme-border-accent            { border-color: $color-accent!important;}

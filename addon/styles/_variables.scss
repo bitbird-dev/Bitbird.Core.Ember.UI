@@ -122,6 +122,24 @@ $color-warning-high-alt:     mix($color-warning, $color-background, 10%);
 $color-warning-higher-alt:   mix($color-warning, $color-background, 3%);
 $color-warning-highest-alt:  mix($color-warning, $color-background, 0%);
 
+/****** WARNING ******/
+
+$color-error-lowest:   mix($color-error, $color-foreground, 95%);
+$color-error-lower:    mix($color-error, $color-foreground, 90%);
+$color-error-low:      mix($color-error, $color-foreground, 85%);
+$color-error-normal:   mix($color-error, $color-foreground, 50%);
+$color-error-high:     mix($color-error, $color-foreground, 25%);
+$color-error-higher:   mix($color-error, $color-foreground, 10%);
+$color-error-highest:  mix($color-error, $color-foreground, 0%);
+
+$color-error-lowest-alt:   mix($color-error, $color-background, 95%);
+$color-error-lower-alt:    mix($color-error, $color-background, 90%);
+$color-error-low-alt:      mix($color-error, $color-background, 85%);
+$color-error-normal-alt:   mix($color-error, $color-background, 50%);
+$color-error-high-alt:     mix($color-error, $color-background, 10%);
+$color-error-higher-alt:   mix($color-error, $color-background, 3%);
+$color-error-highest-alt:  mix($color-error, $color-background, 0%);
+
 
 /****** COMPONENT: SPLITVIEW ******/
 

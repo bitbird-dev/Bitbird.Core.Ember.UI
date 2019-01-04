@@ -202,3 +202,12 @@ a {
 .space { margin: $space; };
 .space-2x { margin: $space-2x; };
 .space-4x { margin: $space-4x; };
+
+.space-h { margin: 0 $space; };
+.space-h-2x { margin: 0 $space-2x; };
+.space-h-4x { margin: 0 $space-4x; };
+
+.space-v { margin: $space 0; };
+.space-v-4x { margin: $space-4x 0; };
+.space-v-2x { margin: $space-2x 0; };
+

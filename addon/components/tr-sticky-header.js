@@ -13,6 +13,7 @@ export default Component.extend({
     imagePlaceholder: null,
     showImage: false,
     showImageUpload: false,
+    showImageDelete: false,
     showImagePlaceholder: true,
 
     onUpload: null,

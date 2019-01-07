@@ -4,6 +4,7 @@ import EmberHighChartsComponent from 'ember-highcharts/components/high-charts';
 
 export default EmberHighChartsComponent.extend({
     didInsertElement() {
+        this._super(...arguments);
         this.contentDidChange();
     },
 

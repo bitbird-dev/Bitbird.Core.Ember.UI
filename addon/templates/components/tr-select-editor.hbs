@@ -34,7 +34,7 @@
                         {{yield (hash data=item.data isSelected=(contains selectedItems item.data selectedItems.length) itemTemplate=(component 'tr-container'))}}
                     {{else}}
                         {{#if valueProperty}}
-                            <span title="{{get item.data valueProperty}}">{{get item.data valueProperty}}</span>
+                            {{tr-select-editor-item content=item.data valueProperty=valueProperty}}
                         {{else}}
                             <span title="{{item.data}}">{{item.data}}</span>
                         {{/if}}
@@ -72,11 +72,10 @@
     <!--</div>-->
     {{#unless isDisabled}}
         {{#if isOpen}}
-            {{!#if filteredItems}}
             {{#with emptyText}}
                 {{#tr-listview items=filteredItems selectedItem=(readonly selectedItem) onSelectedItemChanged=(action 'onSelectedItemChanged') as |item|}}
                     {{#if valueProperty}}
-                        <span title="{{get item.data valueProperty}}">{{get item.data valueProperty}}</span>
+                        {{tr-select-editor-item content=item.data valueProperty=valueProperty}}
                     {{else}}
                         <span title="{{item.data}}">{{item.data}}</span>
                     {{/if}}

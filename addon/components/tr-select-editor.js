@@ -238,7 +238,7 @@ export default Editor.extend(OutsideClick, {
             editable = this.get('editable');
 
         if(editable && value && value.length > 0) {
-            var filtered = all.filter(function(item) {
+            let filtered = all.filter(function(item) {
                 if(item.get) {
                     return item.get('value').toLowerCase().indexOf(value.toLowerCase()) == 0;
                 }

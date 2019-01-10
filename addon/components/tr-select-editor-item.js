@@ -25,26 +25,19 @@ export default Component.extend({
             return;
         }
 
-        //Check if value comes from ajax call (i18n)
-        let value = content.get(valueProperty);
+        let value = content.get(valueProperty),
+            self = this;
+
         if(value.then) {
-            let self = this;
             self.set('isLoading', true);
-            value.then(function(v) {
-                for(let prop in v) {
-                    if(!v.hasOwnProperty(prop)) continue;
-                    self.set('value', v[prop].toString());
-                    break;
-                }
+            value.then(() => {
                 self.set('isLoading', false);
-            }, function() {
-                self.set('value', null);
+            }, () => {
                 self.set('isLoading', false);
             });
-            return;
         }
 
-        this.set('value', value.toString());
+        this.set('value', value);
     }).on('init'),
 
     isLoading: false,

@@ -16,11 +16,21 @@ export default Component.extend({
     showImageUpload: false,
     showImageDelete: false,
     showImagePlaceholder: true,
+    canOpenImage: false,
 
     onUpload: null,
     onDelete: null,
 
     actions: {
+        openFile(image) {
+            if(!this.get('canOpenImage')) return;
+
+            let img = new Image();
+            img.src = image;
+
+            let w = window.open("");
+            w.document.write(img.outerHTML);
+        },
         uploadFile(file) {
             let onUpload = this.get('onUpload'),
                 showImageUpload = this.get('showImageUpload');

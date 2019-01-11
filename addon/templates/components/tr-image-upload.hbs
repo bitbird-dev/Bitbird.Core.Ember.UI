@@ -1,21 +1,32 @@
 {{#if image}}
-    <div class="tr-image-upload-image" style="{{safeImage}}"></div>
+    <div class="tr-image-upload-image" style="{{safeImage}}" {{action 'openFile' image}}></div>
+    <span class="tr-image-upload-image-controls">
+        {{#if showImageUpload}}
+            <span class="tr-image-upload-image-control">
+                {{#if showImageUpload}}
+                    {{#file-upload name=elementId
+                                   accept="image/*"
+                                   multiple=false
+                                   onfileadd=(action "uploadFile")}}
+                        <i class="fa fa-upload"></i>
+                    {{/file-upload}}
+                {{/if}}
+            </span>
+        {{/if}}
+        {{#if showImageDelete}}
+            <span class="tr-image-upload-image-control" {{action 'deleteFile' image bubbles=false}}><i class="fa fa-trash-o"></i></span>
+        {{/if}}
+    </span>
 {{else}}
     {{#if showImagePlaceholder}}
         <div class="tr-image-upload-image-placeholder">{{imagePlaceholder}}</div>
     {{/if}}
-{{/if}}
-
-{{#if showImageUpload}}
-    {{#file-upload name=elementId
-        accept="image/*"
-        multiple=false
-        onfileadd=(action "uploadFile") class="tr-image-upload-placeholder"}}
-        <i class="fa fa-upload fa-2x"></i>
-    {{/file-upload}}
-{{/if}}
-{{#if showImageDelete}}
-    {{#if image}}
-        <span class="tr-image-upload-image-remove" {{action 'deleteFile' image bubbles=false}}><i class="fa fa-trash-o"></i></span>
+    {{#if showImageUpload}}
+        {{#file-upload name=elementId
+                       accept="image/*"
+                       multiple=false
+                       onfileadd=(action "uploadFile") class="tr-image-upload-placeholder"}}
+            <i class="fa fa-upload fa-2x"></i>
+        {{/file-upload}}
     {{/if}}
 {{/if}}

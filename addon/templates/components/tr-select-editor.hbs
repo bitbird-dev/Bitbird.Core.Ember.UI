@@ -27,6 +27,7 @@
     {{/tr-button-editor}}
     {{#unless isDisabled}}
         {{#tr-modal-dialog header=popoutHeader isVisible=isOpen wrapperClass="tr-select-editor-popout" isMessage=false
+                           onClickOverlay=(action 'onClickOverlay')
              primaryAction=(action 'onToggleState') primaryText=popoutPrimaryText}}
             {{#with emptyText}}
                 {{#tr-listview items=filteredItems itemClass=null selectedItem=(readonly selectedItem) onSelectedItemChanged=(action 'onSelectedItemChanged') as |item|}}
@@ -55,7 +56,8 @@
         {{input value=(readonly suggestedValue) class="tr-select-editor-suggestion" readonly="readonly"}}
         {{tr-text-editor value=(readonly selectedValue) label=label placeholder=placeholder errors=errors onTextChanged=(action 'onTextChanged') prefix=prefix postfix=postfix}}
     {{else}}
-        {{#tr-button-editor text=displayValue label=label placeholder=placeholder errors=errors buttonClass=buttonClass isDisabled=isDisabled readonly=isReadonly prefix=prefix postfix=postfix}}
+        {{#tr-button-editor text=displayValue label=label placeholder=placeholder errors=errors buttonClass=buttonClass isDisabled=isDisabled readonly=isReadonly prefix=prefix postfix=postfix
+            onClick=(action 'onToggleState' bubbles=false)}}
             {{#unless isDisabledOrReadonly}}
                 {{#if allowNull}}
                     <button class="tr-select-editor-button-clear" {{action 'onClearValue' bubbles=false}} disabled={{isDisabled}}><span>&#10006;</span></button>

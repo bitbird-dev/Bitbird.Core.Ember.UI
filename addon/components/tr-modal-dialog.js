@@ -15,6 +15,7 @@ export default Component.extend({
     secondaryIsDisabled: false,
 
     onClose: null,
+    onClickOverlay: null,
 
     isVisible: true,
     isMessage: true,
@@ -34,6 +35,10 @@ export default Component.extend({
         onClose: function() {
             let onClose = this.get('onClose');
             if(onClose) onClose();
+        },
+        onClickOverlay: function() {
+            let onClickOverlay = this.get('onClickOverlay');
+            if(onClickOverlay) onClickOverlay();
         }
     }
 });

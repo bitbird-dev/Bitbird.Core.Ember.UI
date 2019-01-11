@@ -1,5 +1,5 @@
 {{#if isVisible}}
-    {{#modal-dialog onClose=(action (mut onClose) true) translucentOverlay=true wrapperClass=wrapperClass containerClassNames=containerClassNames}}
+    {{#modal-dialog onClickOverlay=(action 'onClickOverlay') onClose=(action 'onClose') translucentOverlay=true wrapperClass=wrapperClass containerClassNames=containerClassNames}}
         {{#if header}}
             <div class="modal-dialog-header">
                 {{header}}

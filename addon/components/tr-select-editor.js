@@ -169,7 +169,7 @@ export default Editor.extend(OutsideClick, {
     }),
 
     _suggestedItemChanged: observer('suggestedItem', function(){
-        var suggestedItem = this.get('suggestedItem');
+        let suggestedItem = this.get('suggestedItem');
         //next(this, function() {
             this.set('suggestedValue', this._getValue(suggestedItem));
         //});
@@ -182,13 +182,20 @@ export default Editor.extend(OutsideClick, {
     /*** UI MEthods ***/
 
     open: function() {
+        this._attachClickOutsideHandler();
         this.set('isOpen', true);
     },
     close: function() {
         this.set('isOpen', false);
+        this._removeClickOutsideHandler();
     },
     toggle: function() {
-        this.set('isOpen', !this.get('isOpen'));
+        let isOpen = this.get('isOpen');
+        if(isOpen) {
+            this.close();
+        } else {
+            this.open();
+        }
     },
 
     /*** Events **/
@@ -266,7 +273,7 @@ export default Editor.extend(OutsideClick, {
     }),
 
     updateSuggestedValue: function(text) {
-        var value = this._getValue(this.get('suggestedItem'));
+        let value = this._getValue(this.get('suggestedItem'));
 
         if(!text || !value) {
             this.set('suggestedValue', null);
@@ -304,7 +311,7 @@ export default Editor.extend(OutsideClick, {
             if(this.get('isDisabled') || this.get('isReadonly')) return;
 
             this.set('selectedItem', item);
-            var action = this.get('onSelectedItemChanged');
+            let action = this.get('onSelectedItemChanged');
             if(action) {
                 action(item);
             }
@@ -343,6 +350,9 @@ export default Editor.extend(OutsideClick, {
         },
         onClose() {
           this.close();
-        }
+        },
+        onClickOverlay() {
+            this.close();
+        },
     }
 });

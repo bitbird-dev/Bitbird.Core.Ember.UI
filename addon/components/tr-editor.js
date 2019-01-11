@@ -99,6 +99,16 @@ export default Component.extend(BusyKeys, {
         }, this);
     }),
 
+    /**
+     * Translates properties with i18n
+     * @param {service} i18n - The i18n service instance to use for translation
+     * @param {string} i18nKey - The key to use for translation for this class
+     * @param {string} propertyName - The name of the property to translate
+     * @description Tries to find the appropriate translation for <{i18nKey}.{propertyName}>.
+     * If not found, the first alternative <editor.default.{propertyName}> is searched.
+     * If again not found, <editor.default.null> is searched. ATTENTION: This key MUST be available with value \null\!
+     * @private
+     */
     _updateI18nForPropertyName: function(i18n, i18nKey, propertyName) {
         let translation = null;
         if(isPresent(propertyName)) {

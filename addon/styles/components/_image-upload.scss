@@ -102,6 +102,9 @@
       opacity: 1;
     }
   }
+  &.can-open-image > .tr-image-upload-image {
+    cursor: zoom-in;
+  }
 
   > .tr-image-upload-placeholder {
     &:hover {

@@ -6,6 +6,7 @@ import layout from '../templates/components/tr-image-upload';
 export default Component.extend({
     layout,
 
+    classNameBindings: ['canOpenImage'],
     classNames: 'tr-image-upload',
 
     image: null,

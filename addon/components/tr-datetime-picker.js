@@ -235,7 +235,10 @@ export default Component.extend(OutsideClick, {
         }
     },
 
+    isOpen: false,
+
     open() {
+        this.set('isOpen', true);
         //if(this.$popup.is(':visible')) return;
         this._closeDetailPickers();
         this._updatePopupPosition();
@@ -260,7 +263,16 @@ export default Component.extend(OutsideClick, {
     },
 
     close() {
+        this.set('isOpen', false);
         this.$(this.$popup[0]).hide('fast');
+    },
+
+    toggle() {
+        if(this.get('isOpen')) {
+            this.close();
+        } else {
+            this.open();
+        }
     },
 
     /**
@@ -773,6 +785,9 @@ export default Component.extend(OutsideClick, {
         },
         focus(date) {
             this._focus(date);
+        },
+        toggle() {
+            this.toggle();
         },
         selectBeginTimePart(type, value) {
             let beginTime = this.get('beginTime');

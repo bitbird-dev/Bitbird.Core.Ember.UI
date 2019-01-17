@@ -1,0 +1,50 @@
+<table>
+  <thead>
+    <tr>
+      {{#each headerDefinition as |h|}}
+        <th>
+          {{yield (hash headerTemplate=(component "tr-table-column-header-presenter" 
+            columnDefinition=h
+            toggleSorting=(action "toggleSorting" h)
+            columnState=(get columnStates h.attributeName)
+            applyColumnFilter=(action "applyColumnFilter" h)
+            ))}}
+        </th>
+      {{/each}}
+    </tr>
+  </thead>
+  <tbody>
+    {{#each tableData as |rowData|}}
+      {{!-- TODO --}}
+      {{!--{{bitbird-table-row-presenter}} --}}
+      <tr {{action "toggle" rowData "rowClick"}} class={{if rowData.isExpanded "is-expanded"}} style="tr:nth-child(2) {background: #CCC}">
+        {{#each headerDefinition as |column|}}
+          <td>          
+            {{!-- we create a cell-presenter component, 
+            which is passed to the template which utilizes properties yielded by this component. 
+            the itemTemplate contains information about the cell's value and column --}}   
+            {{yield (hash itemTemplate=(component "tr-table-cell-presenter" 
+              value=(get rowData (get column "attributeName"))
+              column=column.attributeName 
+              toggleRowExpansion=(action "toggle" rowData "custom")))}}
+          </td>
+        {{/each}}
+      </tr>
+      {{#if rowData.isExpanded}}
+        <tr>
+          <td colspan={{get headerDefinition "length"}}>
+            {{yield (hash childTemplate=(component "tr-table-row-extend-presenter" rowData=rowData))}}
+          </td>
+        </tr>
+      {{/if}}
+    {{/each}}
+  </tbody>
+  <tfoot>
+    <tr>
+      <div>
+        <button {{action "previousPage"}}>&lt;&lt;</button>
+        <button {{action "nextPage"}}>&gt;&gt;</button>
+      </div>
+    </tr>
+  </tfoot>
+</table>

@@ -5,7 +5,7 @@ import layout from '../templates/components/tr-scroll-panel';
 export default Component.extend({
     layout,
     classNames: 'tr-scroll-panel',
-    classNameBindings: ['showScrollbar:scrollbar-visible:scrollbar-hidden', '_autohide:scrollbar-autohide'],
+    classNameBindings: ['showScrollbar:scrollbar-visible:scrollbar-hidden', '_autohide:scrollbar-autohide', 'disabled:scrollbar-disabled'],
 
     _autohide: computed('autohide', 'showScrollbar', {
         get(){
@@ -17,5 +17,6 @@ export default Component.extend({
     }),
 
     showScrollbar: true,
-    autohide: true
+    autohide: true,
+    disabled: false
 });

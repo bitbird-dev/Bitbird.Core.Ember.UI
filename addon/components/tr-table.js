@@ -2,74 +2,43 @@ import Component from '@ember/component';
 import EmberObject from '@ember/object';
 import { observer } from '@ember/object';
 import layout from '../templates/components/tr-table';
-
 export default Component.extend({
-  layout,
-  tableData: null,
+    layout,
+    tableData: null,
     headerDefinition: null,
     columnStates: null,
     toggleOnRowClick: false,
-
+    onFilterChanged: null,
+    onSortingChanged: null,
+    
     _refreshColumnStates: observer('headerDefinition', function() {
         let columnStates = EmberObject.create({});
         (this.get('headerDefinition') || []).forEach(definition => {
-            columnStates.set(definition.attributeName, EmberObject.create({ sortOrder: 'noSort', filterValue: '' }));
+            columnStates.set(definition.attributeName, EmberObject.create({ sortOrder: 'noSort', filterValue: '', filterType: 'FREETEXT' }));
         });
         this.set('columnStates', columnStates);
     }).on('init'),
 
     init(){
         this._super(...arguments);
-        this.activeFilters = new Map();
-        this.queryCallback(Object.create(null)).then((queryResult) => this.set('tableData', queryResult.results));
     },
-    requestfilterData(){
-        let queryParams = Object.create(null);
-        this.activeFilters.forEach((value,key)=>{
-            if(value !== '') {
-                queryParams[key]=value;
-            }
-        });
-        let filterAction = this.queryCallback;
-        filterAction(queryParams).then((filterResults) => { 
-            this.set('tableData', filterResults.results);
-        });
-    },
-    toggle(row, trigger) {
+
+    toggleRowExpansion(row, trigger) {
         if(trigger === 'rowClick' && !this.get('toggleOnRowClick')) return;
         if(!row) return;
         row.set('isExpanded', !row.get('isExpanded'));
     },
+
     actions : {
-        /* Build a query like this: 
-        param = {page[size] : 100, page[number] : 1, sort : -name, filter[firstname]=FREETEXT(flo*), filter[carId]=RANGE(12,13), filter[muh]=IN(muh1, muh3, anderemuh)}*/
         applyColumnFilter(columnDefinition){
-            let filterValue = this.columnStates[columnDefinition.attributeName].filterValue;
-            this.activeFilters.set(`Filter[${columnDefinition.attributeName}]`, filterValue);
-            this.requestfilterData();
-        },
-        setPageSize(pagesize){
-            this.activeFilters.set('Page[size]', pagesize);
-        },
-        gotoPage(index){
-            this.activeFilters.set('Page[number]', index);
-            this.requestfilterData();
-        },
-        nextPage(){
-            let current = this.activeFilters.get('Page[number]');
-            if(current === undefined) { current = 0;}
-            this.activeFilters.set('Page[number]', current + 1);
-            this.requestfilterData();
-        },
-        previousPage(){
-            let current = this.activeFilters.get('Page[number]');
-            if(current === undefined) { current = 1;}
-            let prev = current - 1; 
-            this.activeFilters.set('Page[number]', (prev < 0) ? 0 : prev);
-            this.requestfilterData();
+            let state = this.columnStates[columnDefinition.attributeName];
+            let filterAction = this.onFilterChanged;
+            if(filterAction !== null){
+                filterAction({attr: columnDefinition.attributeName, filter: state.filterValue, filterType: state.filterType});
+            }
         },
         toggle(row, trigger) {
-            this.toggle(row, trigger);
+            this.toggleRowExpansion(row, trigger);
         },
         toggleSorting(columnDefinition){
             //get column sort order for column
@@ -91,15 +60,11 @@ export default Component.extend({
             // apply new state
             this.columnStates.get(columnDefinition.attributeName).set('sortOrder', newState);
             
-            // set query filter
-            let sortString = '';
-            if(newState !== 'noSort'){
-                sortString = (newState === 'asc') ? columnDefinition.attributeName : `-${columnDefinition.attributeName}`;
+            let sortAction = this.onSortingChanged;
+            if(sortAction !== null){
+                sortAction({attr: columnDefinition.attributeName, state: newState});
             }
-            this.activeFilters.set('sort', sortString);
-
-            // reload data
-            this.requestfilterData();
+            
         },
     }
 });

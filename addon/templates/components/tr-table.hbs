@@ -15,14 +15,9 @@
   </thead>
   <tbody>
     {{#each tableData as |rowData|}}
-      {{!-- TODO --}}
-      {{!--{{bitbird-table-row-presenter}} --}}
-      <tr {{action "toggle" rowData "rowClick"}} class={{if rowData.isExpanded "is-expanded"}} style="tr:nth-child(2) {background: #CCC}">
+      <tr {{action "toggle" rowData "rowClick"}} class={{if rowData.isExpanded "is-expanded"}}>
         {{#each headerDefinition as |column|}}
           <td>          
-            {{!-- we create a cell-presenter component, 
-            which is passed to the template which utilizes properties yielded by this component. 
-            the itemTemplate contains information about the cell's value and column --}}   
             {{yield (hash itemTemplate=(component "tr-table-cell-presenter" 
               value=(get rowData (get column "attributeName"))
               column=column.attributeName 
@@ -39,12 +34,4 @@
       {{/if}}
     {{/each}}
   </tbody>
-  <tfoot>
-    <tr>
-      <div>
-        <button {{action "previousPage"}}>&lt;&lt;</button>
-        <button {{action "nextPage"}}>&gt;&gt;</button>
-      </div>
-    </tr>
-  </tfoot>
 </table>

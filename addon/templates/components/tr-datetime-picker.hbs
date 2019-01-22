@@ -1,5 +1,5 @@
 <div class="tr-datetime-picker-control">
-    {{yield displayValue mode date range selectedItems}}
+    {{yield displayValue mode date range selectedItems (action 'toggle')}}
 </div>
 {{#ember-wormhole to="datetime-pickers"}}
     <div class="tr-datetime-picker-wrapper {{timeCssClass}}">

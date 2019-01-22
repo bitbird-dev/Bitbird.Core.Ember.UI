@@ -25,17 +25,17 @@
                         {{/if}}
                     </label>
                 {{/each}}
-                <a{{action 'select'}}></a>
+                <a {{action 'select'}}></a>
             </fieldset>
             {{#if postfix}}
                 <fieldset class="tr-toggle-label-wapper">
                     <input>
-                    <label{{action 'select'}}>{{postfix}}</label>
+                    <label {{action 'select'}}>{{postfix}}</label>
                 </fieldset>
             {{else if (compare postfix '===' undefined)}}
                 <fieldset class="tr-toggle-label-wapper">
                     <input>
-                    <label{{action 'select'}}>{{selectedOption.content}}</label>
+                    <label {{action 'select'}}>{{selectedOption.content}}</label>
                 </fieldset>
             {{/if}}
         </div>

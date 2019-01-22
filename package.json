@@ -1,6 +1,6 @@
 {
     "name": "bitbird-core-ember-ui",
-    "version": "1.0.27",
+    "version": "1.0.28",
     "description": "Bitbird components for ember.js.",
     "keywords": [
         "ember-addon",
@@ -25,18 +25,19 @@
     "dependencies": {
         "bitbird-core-ember-i18n": "^1.0.18",
         "ember-cli-babel": "^6.6.0",
+        "ember-cli-cjs-transform": "^1.3.0",
         "ember-cli-htmlbars": "^2.0.1",
         "ember-cli-htmlbars-inline-precompile": "^1.0.0",
+        "ember-file-upload": "^2.5.3",
         "ember-google-maps": "^2.1.0",
         "ember-highcharts": "^1.1.0",
         "ember-modal-dialog": "^3.0.0-beta.3",
+        "ember-qrcode-shim": "^0.3.0",
         "highcharts": "^7.0.1",
-        "jquery-ui": "^1.12.1",
-        "ember-file-upload": "^2.5.3",
-        "ember-qrcode-shim": "^0.3.0"
+        "jquery-ui": "^1.12.1"
     },
     "devDependencies": {
-        "bitbird-core-ember-helpers": "^1.0.7",
+        "bitbird-core-ember-helpers": "^1.0.8",
         "bitbird-core-ember-int-base": "^5.2.2",
         "bitbird-core-ember-remote": "^1.0.14",
         "broccoli-asset-rev": "^2.4.5",
@@ -53,7 +54,6 @@
         "ember-disable-prototype-extensions": "^1.1.2",
         "ember-export-application-global": "^2.0.0",
         "ember-load-initializers": "^1.0.0",
-        "ember-modal-dialog": "^3.0.0-beta.3",
         "ember-moment": "^7.8.0",
         "ember-resolver": "^4.0.0",
         "ember-source": "~2.18.0",

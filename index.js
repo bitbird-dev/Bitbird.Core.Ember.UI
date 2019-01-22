@@ -21,6 +21,7 @@ module.exports = {
       this.import('node_modules/jquery-ui/ui/widget.js');
       this.import('node_modules/jquery-ui/ui/widgets/mouse.js');
       this.import('node_modules/jquery-ui/ui/widgets/draggable.js');
+      this.import('node_modules/jquery-ui/ui/widgets/droppable.js');
       this.import('node_modules/jquery-ui/ui/widgets/sortable.js');
 
       this.import('node_modules/jquery-ui/ui/disable-selection.js');

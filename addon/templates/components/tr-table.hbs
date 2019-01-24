@@ -3,7 +3,7 @@
     <tr>
       {{#each headerDefinition as |h|}}
         <th>
-          {{yield (hash headerTemplate=(component "tr-table-column-header-presenter" 
+          {{yield (hash headerTemplate=(component "tr-table/tr-table-column-header-presenter" 
             columnDefinition=h
             toggleSorting=(action "toggleSorting" h)
             columnState=(get columnStates h.attributeName)
@@ -18,7 +18,7 @@
       <tr {{action "toggle" rowData "rowClick"}} class={{if rowData.isExpanded "is-expanded"}}>
         {{#each headerDefinition as |column|}}
           <td>          
-            {{yield (hash itemTemplate=(component "tr-table-cell-presenter" 
+            {{yield (hash itemTemplate=(component "tr-table/tr-table-cell-presenter" 
               value=(get rowData (get column "attributeName"))
               column=column.attributeName 
               toggleRowExpansion=(action "toggle" rowData "custom")))}}
@@ -28,7 +28,7 @@
       {{#if rowData.isExpanded}}
         <tr>
           <td colspan={{get headerDefinition "length"}}>
-            {{yield (hash childTemplate=(component "tr-table-row-extend-presenter" rowData=rowData))}}
+            {{yield (hash childTemplate=(component "tr-table/tr-table-row-extend-presenter" rowData=rowData))}}
           </td>
         </tr>
       {{/if}}

@@ -75,20 +75,24 @@
     {{#unless isDisabled}}
         {{#if isOpen}}
             {{#with emptyText}}
-                {{#tr-listview items=filteredItems selectedItem=(readonly selectedItem) onSelectedItemChanged=(action 'onSelectedItemChanged') as |item|}}
-                    {{#if valueProperty}}
-                        {{tr-select-editor-item content=item.data valueProperty=valueProperty}}
-                    {{else}}
-                        <span title="{{item.data}}">{{item.data}}</span>
-                    {{/if}}
-                    {{#item.empty}}
-                        {{#if emptyText}}
-                            <span class="tr-select-editor-empty">
-                                {{emptyText}}
-                            </span>
+                {{#ember-wormhole to=destinationElement}}
+                    <div>
+                    {{#tr-listview items=filteredItems selectedItem=(readonly selectedItem) onSelectedItemChanged=(action 'onSelectedItemChanged') as |item|}}
+                        {{#if valueProperty}}
+                            {{tr-select-editor-item content=item.data valueProperty=valueProperty}}
+                        {{else}}
+                            <span title="{{item.data}}">{{item.data}}</span>
                         {{/if}}
-                    {{/item.empty}}
-                {{/tr-listview}}
+                        {{#item.empty}}
+                            {{#if emptyText}}
+                                <span class="tr-select-editor-empty">
+                                    {{emptyText}}
+                                </span>
+                            {{/if}}
+                        {{/item.empty}}
+                    {{/tr-listview}}
+                    </div>
+                {{/ember-wormhole}}
             {{/with}}
             {{!/if}}
         {{/if}}

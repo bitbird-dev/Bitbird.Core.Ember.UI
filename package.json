@@ -1,6 +1,6 @@
 {
     "name": "bitbird-core-ember-ui",
-    "version": "1.0.31",
+    "version": "1.0.32",
     "description": "Bitbird components for ember.js.",
     "keywords": [
         "ember-addon",
@@ -23,7 +23,7 @@
         "test": "ember try:each"
     },
     "dependencies": {
-        "bitbird-core-ember-i18n": "^1.0.20",
+        "bitbird-core-ember-i18n": "^1.0.21",
         "ember-cli-babel": "^6.6.0",
         "ember-cli-cjs-transform": "^1.3.0",
         "ember-cli-htmlbars": "^2.0.1",

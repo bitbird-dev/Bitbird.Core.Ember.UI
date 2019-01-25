@@ -186,10 +186,10 @@ export default Component.extend(OutsideClick, {
         this._initUI();
 
         if(mode === 'multiple' && this.get('selectedItems.length') > 0) {
-            baseDate = this.set('selectedItems').objectAt(0);
+            baseDate = this.get('selectedItems').objectAt(0);
         }
         else if(mode === 'range' && this.get('rangeBegin')) {
-            baseDate = this.set('rangeBegin');
+            baseDate = this.get('rangeBegin');
         }
         else {
             baseDate = this.get('date');

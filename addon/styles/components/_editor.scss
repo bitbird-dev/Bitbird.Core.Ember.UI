@@ -736,4 +736,15 @@
       border-bottom-width: 0;
     }
   }
+  .tr-select-editor-empty {
+    display: block;
+    opacity: 0.5;
+    padding: 4px 8px;
+    font-size: 0.7em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 4em;
+    text-align: center;
+  }
 }

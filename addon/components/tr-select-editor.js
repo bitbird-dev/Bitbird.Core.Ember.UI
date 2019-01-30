@@ -2,16 +2,18 @@ import { computed, observer } from '@ember/object';
 import Editor from './tr-editor';
 import OutsideClick from '../mixins/tr-outside-click';
 import { A } from '@ember/array';
+import { next } from '@ember/runloop';
 import layout from '../templates/components/tr-select-editor';
+import Ember from 'ember';
 
 export default Editor.extend(OutsideClick, {
     layout,
     i18nProperties: ['placeholder'],
 
     init: function() {
+        let self = this;
         this._super();
         this.on('didInsertElement', this, function() {
-            //this.set('filteredItems', this.get('items'));
             this._itemsDidChange();
 
             if(this.get('selectedItem')) {
@@ -21,10 +23,96 @@ export default Editor.extend(OutsideClick, {
                 this._selectedKeyChanged();
             }
         });
+
+        this.on('willDestroyElement', this, function() {
+            this._resetList();
+        });
     },
 
+    _updateListPosition() {
+        if(!this.get('destinationElement')) return;
+
+        let $target = $('#' + this.get('destinationElement')),
+            $source = $('#' + this.get('elementId')),
+            $innerSource = $('#' + this.get('elementId') + ' .tr-button-editor .tr-editor-content > button');;
+
+        if(!$target.length) return;
+
+        $target.removeClass("tr-select-editor-below");
+        $target.removeClass("tr-select-editor-above");
+
+        $target.css('min-width', $source.outerWidth());
+        $target.css('opacity', '1');
+
+        let topWhenBelow = $innerSource.offset().top  + $innerSource.outerHeight();
+        let bottomWhenBelow = topWhenBelow + $target.outerHeight();
+        let viewPortBottom = this.$(window).height();
+        let canOpenBelow = bottomWhenBelow <= viewPortBottom;
+        if(canOpenBelow) {
+            this.set('_listPosition', 'is-open-below');
+            $target.addClass("tr-select-editor-below");
+            $target.css('top', $innerSource.offset().top + $innerSource.outerHeight());
+            $target.css('left', $source.offset().left);
+            $target.css('right', '');
+            $target.css('bottom', '');
+            return;
+        }
+
+        let topWhenAbove = $innerSource.offset().top  - $target.outerHeight();
+        let canOpenAbove = topWhenAbove > 0;
+        if(canOpenAbove) {
+            this.set('_listPosition', 'is-open-above');
+            $target.addClass("tr-select-editor-above");
+            $target.css('top', $innerSource.offset().top - $target.outerHeight());
+            $target.css('left', $source.offset().left);
+            $target.css('right', '');
+            $target.css('bottom', '');
+            return;
+        }
+
+        this.set('_listPosition', null);
+        $target.css('top', 0);
+        $target.css('left', 0);
+        $target.css('right', 0);
+        $target.css('bottom', 0);
+    },
+    _resetList() {
+        let destinationElement = this.get('destinationElement');
+        if(!destinationElement) return;
+
+        this.set('destinationElement', null);
+        $('#' + destinationElement).remove();
+    },
+    _resetListPositionClassName: observer('isOpen', function() {
+        let self = this;
+
+        if(this.get('isOpen')) {
+            if(this.get('destinationElement')) return;
+            //Create wormhole combo
+            let destinationElement = "select-editor-" + this.get('elementId');
+            Ember.$('body.ember-application').append(`<div id="${destinationElement}" class="tr-select-editor-wormhole-list" style="opacity:0.0001;"></div>`);
+            this.set('destinationElement', destinationElement);
+
+            //Refresh position on all parent scrolls
+            let $scrollParent = this.$().scrollParent();
+            while($scrollParent.length > 0) {
+                $scrollParent.scroll(function() { self._updateListPosition(); });
+                if($scrollParent[0] === document) break;
+                $scrollParent = $scrollParent.scrollParent();
+            }
+
+            //Refresh position on resizing
+            this.$(window).resize(function() { self._updateListPosition(); });
+        } else {
+            this._resetList();
+            this.set('_listPosition', null);
+        }
+    }),
+
+    destinationElement: null,
+
     classNames: 'tr-select-editor',
-    classNameBindings: ['isOpen', 'styleClassName'],
+    classNameBindings: ['isOpen', '_listPosition', 'styleClassName'],
 
     /*** DATA PROPERTIES ***/
 
@@ -136,6 +224,11 @@ export default Editor.extend(OutsideClick, {
      */
     idPropertyName: 'id',
 
+    /**
+     *  The position where the list is open
+     */
+    _listPosition: null,
+
     popoutHeader: null,
     popoutPrimaryText: 'Ok',
 
@@ -184,6 +277,10 @@ export default Editor.extend(OutsideClick, {
     open: function() {
         this._attachClickOutsideHandler();
         this.set('isOpen', true);
+        //this._updateListPosition();
+        next(this, function() {
+            this._updateListPosition(true);
+        });
     },
     close: function() {
         this.set('isOpen', false);

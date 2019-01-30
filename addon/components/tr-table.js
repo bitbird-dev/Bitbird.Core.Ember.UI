@@ -4,7 +4,7 @@ import { observer } from '@ember/object';
 import layout from '../templates/components/tr-table';
 export default Component.extend({
     layout,
-    // classNames: 'btbrd-table',
+    classNames: 'btbrd-table',
     tableData: null,
     headerDefinition: null,
     columnStates: null,

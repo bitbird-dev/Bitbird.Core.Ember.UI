@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import EmberObject from '@ember/object';
+import { filterBy } from '@ember/object/computed';
 import { observer } from '@ember/object';
 import layout from '../templates/components/tr-table';
 export default Component.extend({
@@ -11,7 +12,7 @@ export default Component.extend({
     toggleOnRowClick: false,
     onFilterChanged: null,
     onSortingChanged: null,
-    
+    selectedItems: filterBy('tableData', 'isSelected', true),
     _refreshColumnStates: observer('headerDefinition', function() {
         let columnStates = EmberObject.create({});
         (this.get('headerDefinition') || []).forEach(definition => {
@@ -30,7 +31,28 @@ export default Component.extend({
         row.set('isExpanded', !row.get('isExpanded'));
     },
 
+    toggleRowSelection(row, trigger) {
+        if(!row) return;
+        row.set('isSelected', !row.get('isSelected'));
+    },
+
     actions : {
+        rowClicked(rowData, trigger){
+            this.toggleRowSelection(rowData, trigger);
+            
+        },
+        rowDragStart(rowData, event){
+            let items = this.get('selectedItems');
+            let idArray = [];
+            if(items.length > 0){
+                
+                items.forEach( i => {idArray.push(i.id)});
+            }
+            else{
+                idArray.push(rowData.id);
+            }
+            event.dataTransfer.setData('text/data', idArray);
+        },
         applyColumnFilter(columnDefinition){
             let state = this.columnStates[columnDefinition.attributeName];
             let filterAction = this.onFilterChanged;

@@ -1,0 +1,44 @@
+import Component from '@ember/component';
+import layout from '../../templates/components/tr-table/tr-table-row';
+
+export default Component.extend({
+  layout,
+  classNames: ['btbrd-table-row'],
+  classNameBindings: ['isExtended:is-extended','isSelected:is-selected'],
+  attributeBindings: ['draggable'],
+  draggable: 'true',
+  isSelected: false,
+  isExtended: false,
+
+  /**
+   * id to reference row data in model
+   */
+  dataId: null,
+
+  /**
+   * register onClick callback here
+   */
+  onClick:null,
+
+  /**
+   * register onClick callback here
+   */
+  onDrag:null,
+
+  dragStart(event){
+    let dragCb = this.get('onDrag');
+    if(dragCb !== null) {
+      return dragCb(event);
+    }
+  },
+
+  click(){
+    let clickCb = this.get('onClick');
+    if(clickCb !== null) {
+      clickCb();
+    }
+    //this.set('isSelected', !this.get('isSelected'));
+  }
+
+});
+

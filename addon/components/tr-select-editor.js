@@ -283,7 +283,9 @@ export default Editor.extend(OutsideClick, {
         });
     },
     close: function() {
-        this.set('isOpen', false);
+        if(!this.get('isDestroyed')) {
+            this.set('isOpen', false);
+        }
         this._removeClickOutsideHandler();
     },
     toggle: function() {

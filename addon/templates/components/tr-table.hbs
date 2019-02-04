@@ -1,37 +1,39 @@
-<table>
-  <thead>
-    <tr>
+<div class="btbrd-table">
+  <div class="btbrd-table-header-group">
+    <div class="btbrd-table-row">
       {{#each headerDefinition as |h|}}
-        <th>
+        <div class="btbrd-table-cell">
           {{yield (hash headerTemplate=(component "tr-table/tr-table-column-header-presenter" 
             columnDefinition=h
             toggleSorting=(action "toggleSorting" h)
             columnState=(get columnStates h.attributeName)
             applyColumnFilter=(action "applyColumnFilter" h)
             ))}}
-        </th>
+        </div>
       {{/each}}
-    </tr>
-  </thead>
-  <tbody>
+    </div>
+  </div>
+  <div class="btbrd-table-row-group">
     {{#each tableData as |rowData|}}
-      <tr {{action "toggle" rowData "rowClick"}} class={{if rowData.isExpanded "is-expanded"}}>
+      {{!-- <div class="btbrd-table-row{{if rowData.isExpanded " is-expanded"}}{{if rowData.isSelected " is-selected"}}" {{action "rowClicked" rowData "rowClick"}}> --}}
+      {{#tr-table/tr-table-row dataId=rowData.id isSelected=rowData.isSelected onClick=(action "rowClicked" rowData "rowClick") onDrag=(action "rowDragStart" rowData)}}
         {{#each headerDefinition as |column|}}
-          <td>          
+          <div class="btbrd-table-cell">          
             {{yield (hash itemTemplate=(component "tr-table/tr-table-cell-presenter" 
               value=(get rowData (get column "attributeName"))
               column=column.attributeName 
               toggleRowExpansion=(action "toggle" rowData "custom")))}}
-          </td>
+          </div>
         {{/each}}
-      </tr>
+      {{/tr-table/tr-table-row}}
+      {{!-- </div> --}}
       {{#if rowData.isExpanded}}
-        <tr>
-          <td colspan={{get headerDefinition "length"}}>
+        <div class="btbrd-table-row">
+          <div class="btbrd-table-cell" colspan={{get headerDefinition "length"}}>
             {{yield (hash childTemplate=(component "tr-table/tr-table-row-extend-presenter" rowData=rowData))}}
-          </td>
-        </tr>
+          </div>
+        </div>
       {{/if}}
     {{/each}}
-  </tbody>
-</table>
+  </div>
+</div>

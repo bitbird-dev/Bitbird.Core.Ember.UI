@@ -13,5 +13,5 @@ export default Component.extend({
 
   value: null,
   column: null,
-  toggleRowExpansion: null
+  toggleRowExpansion: null,
 });

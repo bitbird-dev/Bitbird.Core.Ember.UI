@@ -16,6 +16,7 @@ export default Component.extend({
     _refreshColumnStates: observer('headerDefinition', function() {
         let columnStates = EmberObject.create({});
         (this.get('headerDefinition') || []).forEach(definition => {
+            // TODO: change default filter type
             columnStates.set(definition.attributeName, EmberObject.create({ sortOrder: 'noSort', filterValue: '', filterType: 'FREETEXT' }));
         });
         this.set('columnStates', columnStates);
@@ -23,32 +24,11 @@ export default Component.extend({
 
     init(){
         this._super(...arguments);
-        // if (this.onRowSelect === null) {
-        //     this.onRowSelect = (row, trigger) =>{
-        //         if(!row) return;
-        //         row.set('isSelected', !row.get('isSelected'));
-        //     };
-        // }
-        // if (this.onRowDragStart === null) {
-        //     this.onRowDragStart = (rowData, event) =>{
-        //         let items = this.get('selectedItems');
-        //         if(item === null) return;
-        //         let idArray = [];
-        //         if(items.length > 0){
-                    
-        //             items.forEach( i => {idArray.push(i.id)});
-        //         }
-        //         else{
-        //             idArray.push(rowData.id);
-        //         }
-        //         event.dataTransfer.setData('text/data', idArray);
-        //     };
-        // }
-        
     },
 
-    toggleRowExpansion(row, trigger) {
-        if(trigger === 'rowClick' && !this.get('toggleOnRowClick')) return;
+    /** TODO: no need for the trigger */
+    toggleRowExpansion(row/*, trigger*/) {
+        // if(trigger === 'rowClick' && !this.get('toggleOnRowClick')) return;
         if(!row) return;
         row.set('isExpanded', !row.get('isExpanded'));
     },
@@ -58,24 +38,38 @@ export default Component.extend({
     onRowDragStart: null,
 
     actions : {
+        /**
+         * @param  {} rowData
+         */
         rowClicked(rowData){
             let callback = this.get('onRowClicked');
             if(callback !== null){
                 callback(rowData);
             }
         },
+        /**
+         * @param  {} rowData
+         */
         rowCtrlClicked(rowData){
             let callback = this.get('onRowCtrlClicked');
             if(callback !== null){
                 callback(rowData);
             }
         },
+        /**
+         * @param  {} rowData
+         * @param  {} event
+         */
         rowDragStart(rowData, event){
             let callback = this.get('onRowDragStart');
             if(callback !== null){
                 callback(rowData, event);
             }
         },
+        /**
+         * Calls the Filter callback. 
+         * @param  {} columnDefinition
+         */
         applyColumnFilter(columnDefinition){
             let state = this.columnStates[columnDefinition.attributeName];
             let filterAction = this.onFilterChanged;
@@ -83,9 +77,14 @@ export default Component.extend({
                 filterAction({attr: columnDefinition.attributeName, filter: state.filterValue, filterType: state.filterType});
             }
         },
-        toggle(row, trigger) {
-            this.toggleRowExpansion(row, trigger);
-        },
+        /** TODO: This is obsolete now */
+        // toggle(row, trigger) {
+        //     this.toggleRowExpansion(row, trigger);
+        // },
+        /**
+         * Toggles the sorting mode for the colum
+         * @param  {} columnDefinition
+         */
         toggleSorting(columnDefinition){
             //get column sort order for column
             let lastState = this.columnStates[columnDefinition.attributeName].sortOrder;

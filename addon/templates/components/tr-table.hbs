@@ -15,18 +15,20 @@
   </div>
   <div class="btbrd-table-row-group">
     {{#each tableData as |rowData|}}
-      {{!-- <div class="btbrd-table-row{{if rowData.isExpanded " is-expanded"}}{{if rowData.isSelected " is-selected"}}" {{action "rowClicked" rowData "rowClick"}}> --}}
       {{#tr-table/tr-table-row data=rowData isSelected=rowData.isSelected onClick=(action "rowClicked") onCtrlClick=(action "rowCtrlClicked" allowedKeys="ctrl") onDrag=(action "rowDragStart")}}
         {{#each headerDefinition as |column|}}
           <div class="btbrd-table-cell">          
             {{yield (hash itemTemplate=(component "tr-table/tr-table-cell-presenter" 
+              rowValue=rowData
+              value=(get rowData (get column "attributeName"))
+              column=column.attributeName ))}}
+            {{!-- {{yield (hash itemTemplate=(component "tr-table/tr-table-cell-presenter" 
               value=(get rowData (get column "attributeName"))
               column=column.attributeName 
-              toggleRowExpansion=(action "toggle" rowData "custom")))}}
+              toggleRowExpansion=(action "toggle" rowData "custom")))}} --}}
           </div>
         {{/each}}
       {{/tr-table/tr-table-row}}
-      {{!-- </div> --}}
       {{#if rowData.isExpanded}}
         <div class="btbrd-table-row">
           <td class="btbrd-table-cell" colspan={{get headerDefinition "length"}}>

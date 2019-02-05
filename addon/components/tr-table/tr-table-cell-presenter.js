@@ -3,15 +3,14 @@ import layout from '../../templates/components/tr-table/tr-table-cell-presenter'
 
 /**
  * Represents the state of a table cell.
- * @param  {null} value the cells data
- * @param  {null} column the column which contains the cell
- * @param  {null} toggleRowExpansion action to trigger whether the cells row should be expanded
+ * @property  {null} value the cells data
+ * @property  {null} column the column which contains the cell
  */
 export default Component.extend({
   layout,
   classNames: "cell-presenter",
 
+  rowValue: null,
   value: null,
   column: null,
-  toggleRowExpansion: null,
 });

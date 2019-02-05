@@ -16,7 +16,7 @@
   <div class="btbrd-table-row-group">
     {{#each tableData as |rowData|}}
       {{!-- <div class="btbrd-table-row{{if rowData.isExpanded " is-expanded"}}{{if rowData.isSelected " is-selected"}}" {{action "rowClicked" rowData "rowClick"}}> --}}
-      {{#tr-table/tr-table-row dataId=rowData.id isSelected=rowData.isSelected onClick=(action "rowClicked" rowData "rowClick") onDrag=(action "rowDragStart" rowData)}}
+      {{#tr-table/tr-table-row data=rowData isSelected=rowData.isSelected onClick=(action "rowClicked") onCtrlClick=(action "rowCtrlClicked" allowedKeys="ctrl") onDrag=(action "rowDragStart")}}
         {{#each headerDefinition as |column|}}
           <div class="btbrd-table-cell">          
             {{yield (hash itemTemplate=(component "tr-table/tr-table-cell-presenter" 
@@ -29,9 +29,9 @@
       {{!-- </div> --}}
       {{#if rowData.isExpanded}}
         <div class="btbrd-table-row">
-          <div class="btbrd-table-cell" colspan={{get headerDefinition "length"}}>
+          <td class="btbrd-table-cell" colspan={{get headerDefinition "length"}}>
             {{yield (hash childTemplate=(component "tr-table/tr-table-row-extend-presenter" rowData=rowData))}}
-          </div>
+          </td>
         </div>
       {{/if}}
     {{/each}}

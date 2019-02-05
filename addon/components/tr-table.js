@@ -12,7 +12,7 @@ export default Component.extend({
     toggleOnRowClick: false,
     onFilterChanged: null,
     onSortingChanged: null,
-    selectedItems: filterBy('tableData', 'isSelected', true),
+    
     _refreshColumnStates: observer('headerDefinition', function() {
         let columnStates = EmberObject.create({});
         (this.get('headerDefinition') || []).forEach(definition => {
@@ -23,6 +23,28 @@ export default Component.extend({
 
     init(){
         this._super(...arguments);
+        // if (this.onRowSelect === null) {
+        //     this.onRowSelect = (row, trigger) =>{
+        //         if(!row) return;
+        //         row.set('isSelected', !row.get('isSelected'));
+        //     };
+        // }
+        // if (this.onRowDragStart === null) {
+        //     this.onRowDragStart = (rowData, event) =>{
+        //         let items = this.get('selectedItems');
+        //         if(item === null) return;
+        //         let idArray = [];
+        //         if(items.length > 0){
+                    
+        //             items.forEach( i => {idArray.push(i.id)});
+        //         }
+        //         else{
+        //             idArray.push(rowData.id);
+        //         }
+        //         event.dataTransfer.setData('text/data', idArray);
+        //     };
+        // }
+        
     },
 
     toggleRowExpansion(row, trigger) {
@@ -31,27 +53,28 @@ export default Component.extend({
         row.set('isExpanded', !row.get('isExpanded'));
     },
 
-    toggleRowSelection(row, trigger) {
-        if(!row) return;
-        row.set('isSelected', !row.get('isSelected'));
-    },
+    onRowClicked: null,
+    onRowCtrlClicked: null,
+    onRowDragStart: null,
 
     actions : {
-        rowClicked(rowData, trigger){
-            this.toggleRowSelection(rowData, trigger);
-            
+        rowClicked(rowData){
+            let callback = this.get('onRowClicked');
+            if(callback !== null){
+                callback(rowData);
+            }
+        },
+        rowCtrlClicked(rowData){
+            let callback = this.get('onRowCtrlClicked');
+            if(callback !== null){
+                callback(rowData);
+            }
         },
         rowDragStart(rowData, event){
-            let items = this.get('selectedItems');
-            let idArray = [];
-            if(items.length > 0){
-                
-                items.forEach( i => {idArray.push(i.id)});
+            let callback = this.get('onRowDragStart');
+            if(callback !== null){
+                callback(rowData, event);
             }
-            else{
-                idArray.push(rowData.id);
-            }
-            event.dataTransfer.setData('text/data', idArray);
         },
         applyColumnFilter(columnDefinition){
             let state = this.columnStates[columnDefinition.attributeName];

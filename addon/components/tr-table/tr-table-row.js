@@ -7,18 +7,24 @@ export default Component.extend({
   classNameBindings: ['isExtended:is-extended','isSelected:is-selected'],
   attributeBindings: ['draggable'],
   draggable: 'true',
+
   isSelected: false,
   isExtended: false,
 
   /**
-   * id to reference row data in model
+   * reference to row data in model
    */
-  dataId: null,
+  data: null,
 
   /**
    * register onClick callback here
    */
   onClick:null,
+
+  /**
+   * register onCtrlClick callback here
+   */
+  onCtrlClick: null,
 
   /**
    * register onClick callback here
@@ -28,17 +34,16 @@ export default Component.extend({
   dragStart(event){
     let dragCb = this.get('onDrag');
     if(dragCb !== null) {
-      return dragCb(event);
+      return dragCb(this.data, event);
     }
   },
 
-  click(){
-    let clickCb = this.get('onClick');
+  click(event){
+    let clickCb = (event.ctrlKey)?this.get('onCtrlClick'):this.get('onClick');
     if(clickCb !== null) {
-      clickCb();
+      clickCb(this.data);
     }
-    //this.set('isSelected', !this.get('isSelected'));
-  }
+  },
 
 });
 

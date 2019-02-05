@@ -283,7 +283,9 @@ export default Editor.extend(OutsideClick, {
         });
     },
     close: function() {
-        this.set('isOpen', false);
+        if(!this.get('isDestroyed')) {
+            this.set('isOpen', false);
+        }
         this._removeClickOutsideHandler();
     },
     toggle: function() {
@@ -305,8 +307,11 @@ export default Editor.extend(OutsideClick, {
         let selectedItem = this.get('selectedItem'),
             suggestedItem = this.get('suggestedItem') || selectedItem;
 
-        this.set('selectedItem', suggestedItem);
-        this.set('suggestedItem', null);
+        if(!this.get('isDestroyed')) {
+            this.set('selectedItem', suggestedItem);
+            this.set('suggestedItem', null);
+        }
+
         this.close();
     },
 

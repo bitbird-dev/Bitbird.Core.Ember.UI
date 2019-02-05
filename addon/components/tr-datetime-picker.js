@@ -229,6 +229,7 @@ export default Component.extend(OutsideClick, {
         if(this.$popup.length > 0)
         {
             let $popup = this.$(this.$popup[0]);
+            if(!$popup || !$popup.css) return;
             $popup.css('top', v + 'px');
             $popup.css('left', h + 'px');
             $popup.css('z-index', 50);

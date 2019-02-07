@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import EmberObject from '@ember/object';
-import { filterBy } from '@ember/object/computed';
+import { camelize } from '@ember/string';
 import { observer } from '@ember/object';
 import layout from '../templates/components/tr-table';
 export default Component.extend({
@@ -17,7 +17,7 @@ export default Component.extend({
         let columnStates = EmberObject.create({});
         (this.get('headerDefinition') || []).forEach(definition => {
             // TODO: change default filter type
-            columnStates.set(definition.attributeName, EmberObject.create({ sortOrder: 'noSort', filterValue: '', filterType: 'FREETEXT' }));
+            columnStates.set(definition.attributeName.camelize(), EmberObject.create({ sortOrder: 'noSort', filterValue: '', filterType: 'FREETEXT' }));
         });
         this.set('columnStates', columnStates);
     }).on('init'),
@@ -71,7 +71,7 @@ export default Component.extend({
          * @param  {} columnDefinition
          */
         applyColumnFilter(columnDefinition){
-            let state = this.columnStates[columnDefinition.attributeName];
+            let state = this.columnStates[columnDefinition.attributeName.camelize()];
             let filterAction = this.onFilterChanged;
             if(filterAction !== null){
                 filterAction({attr: columnDefinition.attributeName, filter: state.filterValue, filterType: state.filterType});
@@ -87,12 +87,13 @@ export default Component.extend({
          */
         toggleSorting(columnDefinition){
             //get column sort order for column
-            let lastState = this.columnStates[columnDefinition.attributeName].sortOrder;
+            let camelizedAttributeName = columnDefinition.attributeName.camelize();
+            let lastState = this.columnStates[camelizedAttributeName].sortOrder;
             let newState = 'noSort';
 
             //clear column sort order for all columns
             this.headerDefinition.forEach((header)=> {
-                this.columnStates.get(header.attributeName).set('sortOrder', 'noSort');
+                this.columnStates.get(header.attributeName.camelize()).set('sortOrder', 'noSort');
             });
 
             // select new state
@@ -103,7 +104,7 @@ export default Component.extend({
             }
 
             // apply new state
-            this.columnStates.get(columnDefinition.attributeName).set('sortOrder', newState);
+            this.columnStates.get(camelizedAttributeName).set('sortOrder', newState);
             
             let sortAction = this.onSortingChanged;
             if(sortAction !== null){

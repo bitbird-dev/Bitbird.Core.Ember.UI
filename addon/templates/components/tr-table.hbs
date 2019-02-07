@@ -6,7 +6,7 @@
           {{yield (hash headerTemplate=(component "tr-table/tr-table-column-header-presenter" 
             columnDefinition=h
             toggleSorting=(action "toggleSorting" h)
-            columnState=(get columnStates h.attributeName)
+            columnState=(get columnStates (camelize-string h.attributeName))
             applyColumnFilter=(action "applyColumnFilter" h)
             ))}}
         </div>
@@ -20,7 +20,6 @@
           <div class="btbrd-table-cell">          
             {{yield (hash itemTemplate=(component "tr-table/tr-table-cell-presenter" 
               rowValue=rowData
-              value=(get rowData (get column "attributeName"))
               column=column.attributeName ))}}
             {{!-- {{yield (hash itemTemplate=(component "tr-table/tr-table-cell-presenter" 
               value=(get rowData (get column "attributeName"))

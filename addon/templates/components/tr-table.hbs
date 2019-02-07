@@ -19,6 +19,7 @@
         {{#each headerDefinition as |column|}}
           <div class="btbrd-table-cell">          
             {{yield (hash itemTemplate=(component "tr-table/tr-table-cell-presenter" 
+              value=(get rowData (get column "attributeName"))
               rowValue=rowData
               column=column.attributeName ))}}
             {{!-- {{yield (hash itemTemplate=(component "tr-table/tr-table-cell-presenter" 

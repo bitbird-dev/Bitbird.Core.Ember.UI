@@ -150,24 +150,26 @@
     align-items: stretch;
 
     > .split-view-item:nth-child(1) {
-      height: 1px;
+      overflow: auto;
+      height: 0px;
+      -webkit-order: 0;
+      -ms-flex-order: 0;
+      order: 0;
+      -webkit-flex: 0 1 auto;
+      -ms-flex: 0 1 auto;
+      flex: 0 1 auto;
+      -webkit-align-self: auto;
+      -ms-flex-item-align: auto;
+      align-self: auto;
+    }
+    > .split-view-item:nth-child(2) {
+      overflow: auto;
       -webkit-order: 0;
       -ms-flex-order: 0;
       order: 0;
       -webkit-flex: 1 0 auto;
       -ms-flex: 1 0 auto;
       flex: 1 0 auto;
-      -webkit-align-self: auto;
-      -ms-flex-item-align: auto;
-      align-self: auto;
-    }
-    > .split-view-item:nth-child(2) {
-      -webkit-order: 0;
-      -ms-flex-order: 0;
-      order: 0;
-      -webkit-flex: 0 0 auto;
-      -ms-flex: 0 0 auto;
-      flex: 0 0 auto;
       -webkit-align-self: auto;
       -ms-flex-item-align: auto;
       align-self: auto;

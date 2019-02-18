@@ -3,6 +3,8 @@ html, body {
   height: 100%;
   font-family: $font-family;
   font-size: 1em;
+  color: $color-foreground;
+  background-color: $color-background;
 }
 
 h1, h2, h3, h4, h5, h5 {

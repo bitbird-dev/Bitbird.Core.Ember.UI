@@ -1,0 +1,1 @@
+export { default } from 'bitbird-core-ember-ui/components/split-view/split-view-content';

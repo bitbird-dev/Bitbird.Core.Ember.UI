@@ -12,7 +12,7 @@ export default Component.extend({
 
     rowValue: null,
     value: null,
-    column: null,
+    columnDefinition: null,
 
     init(){
       this._super(...arguments);

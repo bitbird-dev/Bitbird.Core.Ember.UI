@@ -21,11 +21,7 @@
             {{yield (hash itemTemplate=(component "tr-table/tr-table-cell-presenter" 
               value=(get rowData (get column "attributeName"))
               rowValue=rowData
-              column=column.attributeName ))}}
-            {{!-- {{yield (hash itemTemplate=(component "tr-table/tr-table-cell-presenter" 
-              value=(get rowData (get column "attributeName"))
-              column=column.attributeName 
-              toggleRowExpansion=(action "toggle" rowData "custom")))}} --}}
+              columnDefinition=column ))}}
           </div>
         {{/each}}
       {{/tr-table/tr-table-row}}

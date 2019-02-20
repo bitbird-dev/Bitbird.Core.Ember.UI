@@ -17,7 +17,8 @@ export default Component.extend({
         let columnStates = EmberObject.create({});
         (this.get('headerDefinition') || []).forEach(definition => {
             // TODO: change default filter type
-            columnStates.set(definition.attributeName.camelize(), EmberObject.create({ sortOrder: 'noSort', filterValue: '', filterType: 'FREETEXT' }));
+            let key = `_${definition.attributeName.camelize()}`;
+            columnStates.set(key, EmberObject.create({ sortOrder: 'noSort', filterValue: '', filterType: 'FREETEXT' }));
         });
         this.set('columnStates', columnStates);
     }).on('init'),
@@ -71,7 +72,8 @@ export default Component.extend({
          * @param  {} columnDefinition
          */
         applyColumnFilter(columnDefinition){
-            let state = this.columnStates[columnDefinition.attributeName.camelize()];
+            let key = `_${header.attributeName.camelize()}`;
+            let state = this.columnStates[key];
             let filterAction = this.onFilterChanged;
             if(filterAction !== null){
                 filterAction({attr: columnDefinition.attributeName, filter: state.filterValue, filterType: state.filterType});
@@ -87,13 +89,14 @@ export default Component.extend({
          */
         toggleSorting(columnDefinition){
             //get column sort order for column
-            let camelizedAttributeName = columnDefinition.attributeName.camelize();
+            let camelizedAttributeName = `_${columnDefinition.attributeName.camelize()}`;
             let lastState = this.columnStates[camelizedAttributeName].sortOrder;
             let newState = 'noSort';
 
             //clear column sort order for all columns
             this.headerDefinition.forEach((header)=> {
-                this.columnStates.get(header.attributeName.camelize()).set('sortOrder', 'noSort');
+                let key = `_${header.attributeName.camelize()}`;
+                this.columnStates.get(key).set('sortOrder', 'noSort');
             });
 
             // select new state

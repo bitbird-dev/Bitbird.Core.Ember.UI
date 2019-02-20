@@ -7,7 +7,12 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('home');
+  //this.route('home', { path: '/' });
+  this.route('demos', { path: '/' }, function() {
+    this.route('checkboxeditor');
+    this.route('toggle');
+    this.route('treeview');
+  });
 });
 
 export default Router;

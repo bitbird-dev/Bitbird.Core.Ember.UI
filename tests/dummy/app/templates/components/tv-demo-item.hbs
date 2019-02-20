@@ -1,0 +1,5 @@
+{{tr-toggle
+  selectedValue=item.isExpanded
+  isDisabled=(if item.hasAnyChild false true)
+  postfix=(concat "Level " item.level " - " item.id)}}
+{{yield}}

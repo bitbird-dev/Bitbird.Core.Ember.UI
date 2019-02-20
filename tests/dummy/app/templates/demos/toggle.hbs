@@ -1,0 +1,38 @@
+<ul>
+  <li>
+    {{tr-toggle 
+      label="diabledSwitch" 
+      isDisabled=true
+      errors=errorTest}}
+  </li>
+  <li>
+    {{tr-toggle 
+      label="enabledSwitch" 
+      selectedValue=enSwValue 
+      isDisabled=false 
+      postfix=false}}
+  </li>
+  <li>
+    {{tr-toggle 
+      label="postfixSwitch" 
+      selectedValue=psSwValue 
+      isDisabled=false 
+      postfix=(if psSwValue "ON" "OFF")}}
+  </li>
+  <li>
+    {{tr-toggle 
+      label="optionsSwitch" 
+      options=opSwOptions 
+      selectedValue=opSwValue 
+      isDisabled=false 
+      postfix=opSwValue.content}}
+  </li>
+  <li>
+    {{tr-toggle 
+      label="callbackSwitch" 
+      selectedValue=cbSwValue 
+      isDisabled=false 
+      postfix=statusText 
+      onChange=(action "onSwitch")}}
+  </li>
+</ul>

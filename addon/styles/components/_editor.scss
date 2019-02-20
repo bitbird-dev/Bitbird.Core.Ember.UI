@@ -4,7 +4,7 @@
   $editor-radius-bubble: 40px;
   display: inline-block;
   vertical-align: top;
-  color: $color-foreground;
+  color: inherit;/*$color-foreground*/;
   position: relative;
 
   &.tr-button-editor {

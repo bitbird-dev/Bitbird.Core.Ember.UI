@@ -22,6 +22,11 @@ export default Component.extend({
   onClick:null,
 
   /**
+   * register onClick callback here
+   */
+  onDoubleClick:null,
+
+  /**
    * register onCtrlClick callback here
    */
   onCtrlClick: null,
@@ -44,6 +49,11 @@ export default Component.extend({
       clickCb(this.data);
     }
   },
-
+  doubleClick(event){
+    let clickCb = this.get('onDoubleClick');
+    if(clickCb !== null) {
+      clickCb(this.data);
+    }
+  }
 });
 

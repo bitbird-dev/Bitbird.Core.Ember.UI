@@ -35,6 +35,7 @@ export default Component.extend({
     },
 
     onRowClicked: null,
+    onRowDoubleClicked: null,
     onRowCtrlClicked: null,
     onRowDragStart: null,
 
@@ -44,6 +45,15 @@ export default Component.extend({
          */
         rowClicked(rowData){
             let callback = this.get('onRowClicked');
+            if(callback !== null){
+                callback(rowData);
+            }
+        },
+        /**
+         * @param  {} rowData
+         */
+        rowDoubleClicked(rowData){
+            let callback = this.get('onRowDoubleClicked');
             if(callback !== null){
                 callback(rowData);
             }

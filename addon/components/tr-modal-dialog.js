@@ -18,7 +18,7 @@ export default Component.extend({
     onClickOverlay: null,
 
     isVisible: true,
-    isMessage: true,
+    isMessage: false,
 
     wrapperClass: null,
     containerClassNames: computed('isMessage', function() {

@@ -18,7 +18,7 @@ export default Component.extend({
         (this.get('headerDefinition') || []).forEach(definition => {
             // TODO: change default filter type
             let key = `_${definition.attributeName.camelize()}`;
-            columnStates.set(key, EmberObject.create({ sortOrder: 'noSort', filterValue: '', filterType: 'FREETEXT' }));
+            columnStates.set(key, EmberObject.create({ sortOrder: 'noSort', filterValue: '', filterType: definition.allowedFilterType }));
         });
         this.set('columnStates', columnStates);
     }).on('init'),
@@ -76,7 +76,7 @@ export default Component.extend({
             let state = this.columnStates[key];
             let filterAction = this.onFilterChanged;
             if(filterAction !== null){
-                filterAction({attr: columnDefinition.attributeName, filter: state.filterValue, filterType: state.filterType});
+                filterAction({attr: columnDefinition.attributeName, filter: columnDefinition.filterValue, filterType: columnDefinition.allowedFilterType});
             }
         },
         /** TODO: This is obsolete now */

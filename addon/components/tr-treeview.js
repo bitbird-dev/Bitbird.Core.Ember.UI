@@ -4,6 +4,15 @@ import { computed } from '@ember/object';
 const { later, cancel } = run;
 import layout from '../templates/components/tr-treeview';
 
+/**
+ * A sortable Treeview with expandable nodes.
+ * 
+ * @module
+ * @augments ember/component
+ * @kind class
+ * @public
+ * @name addon.components.trTreeView
+*/
 export default Component.extend({
     layout,
 
@@ -11,19 +20,59 @@ export default Component.extend({
     classNameBindings: 'isSorting',
     tagName: 'ul',
 
+    /**
+     * The Tree data.
+     * 
+     * @type {Object}
+     * @public
+     * @memberof addon.components.trTreeView
+     */
     model: null,
 
     enableSorting: false,
     isSorting: false,
     showPath: false,
 
+    /**
+     * Name of the property containing the child items.
+     * 
+     * @type {String}
+     * @public
+     * @memberof addon.components.trTreeView
+     */
     childItemsPropertyName: 'items',
+
+    /**
+     * Name of the property tracking the busy state.
+     * 
+     * @type {String}
+     * @public
+     * @memberof addon.components.trTreeView
+     */
     isBusyPropertyName: 'isBusy',
+
+    /**
+     * Name of the property tracking the tree item's expandsion state.
+     * 
+     * @type {String}
+     * @public
+     * @memberof addon.components.trTreeView
+     */
     isExpandedPropertyName: 'isExpanded',
+
+    /**
+     * Name of the property indicating wether the item is a leaf node.
+     * 
+     * @type {String}
+     * @public
+     * @memberof addon.components.trTreeView
+     */
     hasAnyChildItemPropertyName: 'hasAnyChild',
+
     isDirtyPropertyName: 'isDirty',
 
     routeName: null,
+
     itemComponentName: 'tr-container',
 
     didInsertElement: function(){

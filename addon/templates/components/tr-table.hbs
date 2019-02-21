@@ -6,7 +6,7 @@
           {{yield (hash headerTemplate=(component "tr-table/tr-table-column-header-presenter" 
             columnDefinition=h
             toggleSorting=(action "toggleSorting" h)
-            columnState=(get columnStates (camelize-string h.attributeName))
+            columnState=(get columnStates (concat "_" (camelize-string (h.attributeName)) ))
             applyColumnFilter=(action "applyColumnFilter" h)
             ))}}
         </div>

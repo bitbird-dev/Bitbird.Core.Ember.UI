@@ -72,11 +72,11 @@ export default Component.extend({
          * @param  {} columnDefinition
          */
         applyColumnFilter(columnDefinition){
-            let key = `_${header.attributeName.camelize()}`;
+            let key = `_${columnDefinition.attributeName.camelize()}`;
             let state = this.columnStates[key];
             let filterAction = this.onFilterChanged;
             if(filterAction !== null){
-                filterAction({attr: columnDefinition.attributeName, filter: columnDefinition.filterValue, filterType: columnDefinition.allowedFilterType});
+                filterAction({attr: columnDefinition.attributeName, filter: state.filterValue, filterType: state.filterType});
             }
         },
         /** TODO: This is obsolete now */

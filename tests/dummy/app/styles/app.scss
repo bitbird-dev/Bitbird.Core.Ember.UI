@@ -1,2 +1,17 @@
 @import '../../../../addon/styles/app-variables';
 @import '../../../../addon/styles/app';
+
+.listview-demo-container {
+  .tr-listview {
+    display: inline-block;
+    height: 200px;
+    width: 160px;
+  }
+}
+
+.select-editor-demo-container {
+  .tr-select-editor {
+    display: block;
+    width: 160px;
+  }
+}

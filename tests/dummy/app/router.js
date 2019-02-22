@@ -12,6 +12,8 @@ Router.map(function() {
     this.route('checkboxeditor');
     this.route('toggle');
     this.route('treeview');
+    this.route('select-editor');
+    this.route('listview');
   });
 });
 

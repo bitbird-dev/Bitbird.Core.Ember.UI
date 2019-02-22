@@ -1,0 +1,38 @@
+<div class="select-editor-demo-container">
+  select {{#tr-select-editor 
+    items=model
+    keyProperty="key"
+    valueProperty="value"
+    idPropertyName= "id"
+    emptyText="emptyText"
+    popoutHeader="popoutHeader"
+    popoutPrimaryText="popoutPrimaryText"
+    editable=false
+    style="select"}}
+  {{/tr-select-editor}}
+
+  flat {{#tr-select-editor 
+    items=model
+    keyProperty="key"
+    valueProperty="value"
+    idPropertyName= "id"
+    emptyText="emptyText"
+    popoutHeader="popoutHeader"
+    popoutPrimaryText="popoutPrimaryText"
+    editable=false
+    style="flat"}}
+  {{/tr-select-editor}}
+  
+  popout {{#tr-select-editor 
+    items=model
+    keyProperty="key"
+    valueProperty="value"
+    idPropertyName= "id"
+    emptyText="emptyText"
+    popoutHeader="popoutHeader"
+    popoutPrimaryText="popoutPrimaryText"
+    editable=false
+    style="popout"
+    }}
+  {{/tr-select-editor}}
+</div>

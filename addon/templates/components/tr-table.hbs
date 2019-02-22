@@ -3,10 +3,10 @@
     <div class="btbrd-table-row">
       {{#each headerDefinition as |h|}}
         <div class="btbrd-table-cell">
-          {{yield (hash headerTemplate=(component "tr-table/tr-table-column-header-presenter" 
+          {{yield (hash headerTemplate=(component "tr-table/tr-table-column-header-presenter"
             columnDefinition=h
             toggleSorting=(action "toggleSorting" h)
-            columnState=(get columnStates (concat "_" (camelize-string h.attributeName) ))
+            columnState=(get columnStates (concat "_" (camelize h.attributeName) ))
             applyColumnFilter=(action "applyColumnFilter" h)
             ))}}
         </div>
@@ -15,16 +15,16 @@
   </div>
   <div class="btbrd-table-row-group">
     {{#each tableData as |rowData|}}
-      {{#tr-table/tr-table-row 
-        data=rowData 
-        isSelected=rowData.isSelected 
-        onClick=(action "rowClicked") 
-        onDoubleClick=(action "rowDoubleClicked") 
-        onCtrlClick=(action "rowCtrlClicked" allowedKeys="ctrl") 
+      {{#tr-table/tr-table-row
+        data=rowData
+        isSelected=rowData.isSelected
+        onClick=(action "rowClicked")
+        onDoubleClick=(action "rowDoubleClicked")
+        onCtrlClick=(action "rowCtrlClicked" allowedKeys="ctrl")
         onDrag=(action "rowDragStart")}}
         {{#each headerDefinition as |column|}}
-          <div class="btbrd-table-cell">          
-            {{yield (hash itemTemplate=(component "tr-table/tr-table-cell-presenter" 
+          <div class="btbrd-table-cell">
+            {{yield (hash itemTemplate=(component "tr-table/tr-table-cell-presenter"
               value=(get rowData (get column "attributeName"))
               rowValue=rowData
               columnDefinition=column ))}}

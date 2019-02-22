@@ -7,11 +7,4 @@
       {{item.id}} - {{item.key}} - {{item.value}}
     {{/listview.itemTemplate}}
   {{/tr-listview}}
-
-  {{#tr-listview 
-    items=model
-    idPropertyName="id"
-    as |listview| }}
-      {{listview.data.id}} - {{listview.data.key}} - {{listview.data.value}}
-  {{/tr-listview}}
 </div>

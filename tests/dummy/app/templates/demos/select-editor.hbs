@@ -1,5 +1,6 @@
 <div class="select-editor-demo-container">
-  select {{#tr-select-editor 
+  <h1>select</h1> 
+  {{tr-select-editor 
     items=model
     keyProperty="key"
     valueProperty="value"
@@ -9,9 +10,9 @@
     popoutPrimaryText="popoutPrimaryText"
     editable=false
     style="select"}}
-  {{/tr-select-editor}}
 
-  flat {{#tr-select-editor 
+  <h1>flat</h1>  
+  {{tr-select-editor 
     items=model
     keyProperty="key"
     valueProperty="value"
@@ -21,9 +22,9 @@
     popoutPrimaryText="popoutPrimaryText"
     editable=false
     style="flat"}}
-  {{/tr-select-editor}}
   
-  popout {{#tr-select-editor 
+  <h1>popout - TODO: Selection is not working</h1>  
+  {{#tr-select-editor 
     items=model
     keyProperty="key"
     valueProperty="value"
@@ -33,6 +34,10 @@
     popoutPrimaryText="popoutPrimaryText"
     editable=false
     style="popout"
+    as |popoutItem|
     }}
+      {{#popoutItem.itemTemplate}}
+        {{tr-select-editor-item content=popoutItem.data valueProperty="value"}}
+      {{/popoutItem.itemTemplate}}
   {{/tr-select-editor}}
 </div>

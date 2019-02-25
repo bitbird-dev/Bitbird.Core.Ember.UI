@@ -14,6 +14,10 @@ Router.map(function() {
     this.route('treeview');
     this.route('select-editor');
     this.route('listview');
+    this.route('range-slider');
+    this.route('form');
+    this.route('label');
+    this.route('editor');
   });
 });
 

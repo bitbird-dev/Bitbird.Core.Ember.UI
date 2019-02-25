@@ -1,5 +1,17 @@
-{{#tr-checkbox-editor 
-  label="label"
+<ul>
+  <li>{{input type="checkbox" class="checkbox" checked=allowNull}} allowNull</li>
+  <li>label {{input type="text" value=label}}</li>
+  <li>placeholder {{input type="text" value=placeholder}}</li>
+  <li>info title {{input type="text" value=info.title}}</li>
+  <li>info content {{input type="text" value=info.content}}</li>
+  <li>{{input type="checkbox" class="checkbox" checked=isSelected}} isSelected</li>
+</ul>
+<hr>
+{{tr-checkbox-editor 
+  label=label
+  info=info.content
+  title=info.title
+  errors=errors
+  placeholder=placeholder
+  allowNull=allowNull
   value=isSelected}}
-{{/tr-checkbox-editor}}
-<h1>State: {{if isSelected "ON" "OFF"}}</h1>

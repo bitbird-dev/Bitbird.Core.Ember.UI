@@ -31,19 +31,27 @@ export default Component.extend({
         }
     }),
 
+    _onResize: ()=>{},
+
+    willDestroyElement() {
+        this.$(window).off('resize', this._onResize);
+    },
+
     didInsertElement() {
         let self = this;
 
         this._updateSize();
 
-        this.$(window).on('resize', function() {
-          let orientation = self.get('orientation');
-          if(orientation === 'vertical')
-          {
-            self.set('panelSize', self.$().css('width'));
-          } else {
-            self.set('panelSize', self.$().css('height'));
-          }
-        });
+        this._onResize = function() {
+            let orientation = self.get('orientation');
+            if(orientation === 'vertical')
+            {
+                self.set('panelSize', self.$().css('width'));
+            } else {
+                self.set('panelSize', self.$().css('height'));
+            }
+        };
+
+        this.$(window).on('resize', this._onResize);
     }
 });

@@ -1,7 +1,6 @@
 .btbrd-table {
   width: 100%;
   display: table;
-  font-size: 0.8em;
   color: $color-accent-high;
   border: 1px solid $color-background-lower;
   text-align: left;
@@ -12,7 +11,7 @@
   
   .btbrd-table-header-group {
     display: table-header-group;
-    font-size: 1.5em;
+    font-size: 1.0em;
     .btbrd-table-row {
       display: table-row;
       .btbrd-table-cell {
@@ -26,6 +25,7 @@
   }
 
   .btbrd-table-row-group {
+    font-size: 1.0em;
     display: table-row-group;
     .btbrd-table-row {
       display: table-row;

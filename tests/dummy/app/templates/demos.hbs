@@ -1,13 +1,16 @@
-<ul>
-  <li>{{#link-to "demos.label"}}tr-label{{/link-to}}</li>
-  <li>{{#link-to "demos.editor"}}tr-editor{{/link-to}}</li>
-  <li>{{#link-to "demos.checkboxeditor"}}tr-checkbox-editor{{/link-to}}</li>
-  <li>{{#link-to "demos.toggle"}}tr-toggle{{/link-to}}</li>
-  <li>{{#link-to "demos.treeview"}}tr-treeview{{/link-to}}</li>
-  <li>{{#link-to "demos.select-editor"}}tr-select-editor{{/link-to}}</li>
-  <li>{{#link-to "demos.listview"}}tr-listview{{/link-to}}</li>
-  <li>{{#link-to "demos.range-slider"}}tr-slider{{/link-to}}</li>
-  <li>{{#link-to "demos.form"}}tr-form{{/link-to}}</li>
-</ul>
-<hr>
+{{#tr-sticky-header header="Btbrd-Components" subheader="demo" as |header|}}
+  {{#header.menu}}
+    {{#link-to "demos.label"}}tr-label{{/link-to}}
+    {{#link-to "demos.editor"}}tr-editor{{/link-to}}
+    {{#link-to "demos.checkboxeditor"}}tr-checkbox-editor{{/link-to}}
+    {{#link-to "demos.toggle"}}tr-toggle{{/link-to}}
+    {{#link-to "demos.treeview"}}tr-treeview{{/link-to}}
+    {{#link-to "demos.select-editor"}}tr-select-editor{{/link-to}}
+    {{#link-to "demos.listview"}}tr-listview{{/link-to}}
+    {{#link-to "demos.form"}}tr-form{{/link-to}}
+  {{/header.menu}}
+  {{#header.content}}
+    content
+  {{/header.content}}
+{{/tr-sticky-header}}
 {{outlet}}

@@ -26,6 +26,9 @@ export default Component.extend({
       let self = this;
 
       this.$('>.split-view-pane').resizable({
+        create: function() {
+          self.$().find('.ui-resizable-handle').css('z-index', 49);
+        },
         handles: self.get('orientation').indexOf("vertical") === 0 ? "e" : "s",
         minHeight: 2,
         maxHeight: self.$().height()-6

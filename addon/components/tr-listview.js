@@ -63,10 +63,12 @@ export default Component.extend({
 
     _items: computed('items.@each', function() {
       let self=this;
+      let idPropertyName = self.get('idPropertyName');
+      let hasId = idPropertyName && idPropertyName.length > 0;
       return this.get('items').map(function(item){
         return {
           item: item,
-          id: item.get ? item.get(self.get('idPropertyName')) : item[self.get('idPropertyName')]
+          id: hasId? (item.get ? item.get(self.get('idPropertyName')) : item[self.get('idPropertyName')]) : 'noIdDefined'
         }
       })
     }),

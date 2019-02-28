@@ -16,11 +16,17 @@ module.exports = function(environment) {
         Date: false
       }
     },
-
+    i18n: {
+      defaultLocale: "de",
+      autoFetchTranslationFiles: false,
+      autoFetchMissingTranslations: false,
+      loadedRemoteLocales: []
+    },
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
     }
+    
   };
 
   if (environment === 'development') {
@@ -44,6 +50,8 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
+    // Allow ember-cli-addon-docs to update the rootURL in compiled assets
+    ENV.rootURL = 'ADDON_DOCS_ROOT_URL';
     // here you can enable a production-specific feature
   }
 

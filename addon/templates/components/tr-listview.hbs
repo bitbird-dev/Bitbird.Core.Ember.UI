@@ -1,3 +1,11 @@
+{{!--#tr-listview--}}
+    {{!-- yields {tr-sticky-header} header --}}
+    {{!-- yields {tr-container} menu --}}
+    {{!-- yields {tr-container} itemsHeader --}}
+    {{!-- yields {*} data --}}
+    {{!-- yields {tr-container} itemTemplate --}}
+{{!--/tr-listview--}}
+
 {{#tr-scroll-panel autohide=scrollbarAutohide}}
     {{yield (hash header=(component 'tr-sticky-header'))}}
     {{yield (hash menu=(component 'tr-container'))}}

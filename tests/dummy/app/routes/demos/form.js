@@ -17,8 +17,10 @@ export default Route.extend({
         overflow: null,
       }));
     }
+    // BEGIN-SNIPPET form.js
     controller.set('model', items);
     controller.set('formSettings', EmberObject.create({isFullScreen:false, section:false, escape:false, size:2}));
     controller.set('overflowOptions', A(['null','left','right','both']));
+    // END-SNIPPET
   }
 });

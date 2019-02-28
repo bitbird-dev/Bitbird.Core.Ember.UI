@@ -30,14 +30,14 @@
                            onClickOverlay=(action 'onClickOverlay')
              primaryAction=(action 'onToggleState') primaryText=popoutPrimaryText}}
             {{#with emptyText}}
-                {{#tr-listview items=filteredItems itemClass=null selectedItem=(readonly selectedItem) onSelectedItemChanged=(action 'onSelectedItemChanged') as |item|}}
-                    {{#if item.itemTemplate}}
-                        {{yield (hash data=item.data isSelected=(contains selectedItems item.data selectedItems.length) itemTemplate=(component 'tr-container'))}}
+                {{#tr-listview items=filteredItems itemClass=null selectedItem=(readonly selectedItem) onSelectedItemChanged=(action 'onSelectedItemChanged') as |listView|}}
+                    {{#if listView.itemTemplate}}
+                        {{yield (hash data=listView.data isSelected=(contains selectedItems listView.data selectedItems.length) itemTemplate=(component 'tr-container'))}}
                     {{else}}
                         {{#if valueProperty}}
-                            {{tr-select-editor-item content=item.data valueProperty=valueProperty}}
+                            {{tr-select-editor-item content=listView.data valueProperty=valueProperty}}
                         {{else}}
-                            <span title="{{item.data}}">{{item.data}}</span>
+                            <span title="{{listView.data}}">{{listView.data}}</span>
                         {{/if}}
                     {{/if}}
                     {{#item.empty}}
@@ -77,11 +77,11 @@
             {{#with emptyText}}
                 {{#ember-wormhole to=destinationElement}}
                     <div>
-                    {{#tr-listview items=filteredItems selectedItem=(readonly selectedItem) onSelectedItemChanged=(action 'onSelectedItemChanged') as |item|}}
+                    {{#tr-listview items=filteredItems selectedItem=(readonly selectedItem) onSelectedItemChanged=(action 'onSelectedItemChanged') as |listView|}}
                         {{#if valueProperty}}
-                            {{tr-select-editor-item content=item.data valueProperty=valueProperty}}
+                            {{tr-select-editor-item content=listView.data valueProperty=valueProperty}}
                         {{else}}
-                            <span title="{{item.data}}">{{item.data}}</span>
+                            <span title="{{listView.data}}">{{listView.data}}</span>
                         {{/if}}
                         {{#item.empty}}
                             {{#if emptyText}}

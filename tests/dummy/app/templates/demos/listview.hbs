@@ -1,4 +1,8 @@
 <div class="listview-demo-container">
+  <h1>idPropertyName is MANDATORY</h1>
+  <h5>if idPropertyName does not point to an existing propertyname th control will not work.</h5>
+  <h5>the id property affects the control only if the linkRouteName is set.</h5>
+  <h5>as long as linkRouteName is not used, the idPropertyName must contain data !==undefined.</h5>
   {{#tr-listview 
     items=model
     idPropertyName="id"

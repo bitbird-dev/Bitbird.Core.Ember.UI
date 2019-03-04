@@ -18,10 +18,10 @@ export default Route.extend({
     ]);
     controller.set('actions', { 
 // BEGIN-SNIPPET tr-toggle-cb.js
-      onSwitch(){
+      onSwitch(value){
         let v = this.get('cbSwValue');
-        this.set('cbSwValue', !v);
-        this.set('statusText', `changed callbackSwitch value from ${v} to ${!v}.`);
+        this.set('cbSwValue', value);
+        this.set('statusText', `changed callbackSwitch value to ${v} to ${value}.`);
       }
 // END-SNIPPET
     });

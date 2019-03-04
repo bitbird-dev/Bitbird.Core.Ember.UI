@@ -15,3 +15,11 @@
     width: 160px;
   }
 }
+// BEGIN-SNIPPET tr-select-editor.css
+.tr-select-editor {
+  width: 160px;
+  .tr-editor.tr-button-editor button{
+    padding: 0px 0px 0px 4px;
+  }
+}
+// END-SNIPPET

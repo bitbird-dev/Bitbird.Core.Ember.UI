@@ -7,41 +7,18 @@ const Router = AddonDocsRouter.extend({
 });
 
 Router.map(function() {
-  docsRoute(this, function() { 
-
-    this.route('index');
-    this.route('setup');
+  docsRoute(this, function() {
+    this.route('setup',{ path: '/' });
     this.route('components',function() {
       this.route('tr-toggle');
+      this.route('tr-select-editor');
+      this.route('tr-numeric-editor');
     });
-    // this.route('not-found', { path: '/*path' }); 
+    this.route('api',function() {
+      this.route('test');
+    });
   });
-  
+  this.route('not-found', { path: '/*path' });
 });
 
 export default Router;
-
-// import EmberRouter from '@ember/routing/router';
-// import config from './config/environment';
-
-// const Router = EmberRouter.extend({
-//   location: config.locationType,
-//   rootURL: config.rootURL
-// });
-
-// Router.map(function() {
-//   //this.route('home', { path: '/' });
-//   this.route('demos', { path: '/' }, function() {
-//     this.route('checkboxeditor');
-//     this.route('toggle');
-//     this.route('treeview');
-//     this.route('select-editor');
-//     this.route('listview');
-//     this.route('range-slider');
-//     this.route('form');
-//     this.route('label');
-//     this.route('editor');
-//   });
-// });
-
-// export default Router;

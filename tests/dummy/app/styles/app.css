@@ -6782,4 +6782,12 @@ a.active {
   display: block;
   width: 160px;
 }
+
+.tr-select-editor {
+  width: 160px;
+}
+
+.tr-select-editor .tr-editor.tr-button-editor button {
+  padding: 0px 0px 0px 4px;
+}
 /*# sourceMappingURL=app.css.map */

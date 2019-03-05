@@ -5,6 +5,7 @@ import {A} from '@ember/array';
 export default Controller.extend({
   item: null,
   selectedItem: null,
+  toggleAllowNull:true,
   init(){
     this._super(...arguments);
 // BEGIN-SNIPPET tr-select-editor.js

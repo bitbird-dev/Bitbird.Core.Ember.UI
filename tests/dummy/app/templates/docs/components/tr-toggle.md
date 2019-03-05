@@ -43,4 +43,3 @@ If the onChange callback is used, the selected value has to be set manually, oth
   {{demo.snippet 'tr-toggle-cb.hbs'}}
   {{demo.snippet 'tr-toggle-cb.js'}}
 {{/docs-demo}}
-

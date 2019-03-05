@@ -13,6 +13,9 @@ Router.map(function() {
     this.route('setup');
     this.route('components',function() {
       this.route('tr-toggle');
+      this.route('tr-table');
+      this.route('tr-splitview');
+      this.route('tr-menubar');
     });
     // this.route('not-found', { path: '/*path' }); 
   });

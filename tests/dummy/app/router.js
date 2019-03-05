@@ -9,6 +9,7 @@ const Router = AddonDocsRouter.extend({
 Router.map(function() {
   docsRoute(this, function() {
     this.route('setup',{ path: '/' });
+    this.route('howto');
     this.route('components',function() {
       this.route('tr-toggle');
       this.route('tr-select-editor');

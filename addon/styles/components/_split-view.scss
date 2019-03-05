@@ -5,7 +5,7 @@
     position: relative;
   }
 
-  &.split-view-horizontal {
+  &.split-view-horizontal, &.split-view-horizontal-inverse {
     height: 100%;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -26,7 +26,7 @@
     -ms-flex-align: stretch;
     align-items: stretch;
 
-    > .split-view-item:nth-child(1) {
+    > .split-view-pane {
       -webkit-order: 0;
       -ms-flex-order: 0;
       order: 0;
@@ -37,7 +37,7 @@
       -ms-flex-item-align: auto;
       align-self: auto;
     }
-    > .split-view-item:nth-child(2) {
+    > .split-view-content {
       height: 1px;
       -webkit-order: 0;
       -ms-flex-order: 0;
@@ -59,9 +59,9 @@
 
     &.split-view-resizable {
       > .split-view-pane {
-        > .ui-resizable-handle.ui-resizable-s {
+        > .ui-resizable-handle {
           background-color: $color-background-lowest;
-          box-shadow: 0px -1px 5px -1px $color-background-high;
+          box-shadow: 0px -1px 2px 0px $color-background-low;
           &:after {
             content: '\ff1d';
             position: absolute;
@@ -76,6 +76,27 @@
       }
       > .split-view-content {
         padding-top: 6px;
+      }
+      &.is-reverse {
+        > .split-view-content {
+          > .ui-resizable-handle {
+            background-color: $color-background-lowest;
+            box-shadow: 0px -1px 2px 0px $color-background-low;
+            &:after {
+              content: '\ff1d';
+              position: absolute;
+              top: 1px;
+              left: 50%;
+              right: 50%;
+              line-height: 5px;
+              font-size: 12px;
+              color: $color-background-normal;
+            }
+          }
+        }
+        > .split-view-pane {
+          padding-top: 6px;
+        }
       }
     }
 
@@ -84,7 +105,7 @@
       box-sizing: border-box;
     }
   }
-  &.split-view-vertical {
+  &.split-view-vertical, &.split-view-vertical-inverse {
     height: 100%;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -105,7 +126,7 @@
     -ms-flex-align: stretch;
     align-items: stretch;
 
-    > .split-view-item:nth-child(1) {
+    > .split-view-pane {
       -webkit-order: 0;
       -ms-flex-order: 0;
       order: 0;
@@ -116,54 +137,7 @@
       -ms-flex-item-align: auto;
       align-self: auto;
     }
-    > .split-view-item:nth-child(2) {
-      -webkit-order: 0;
-      -ms-flex-order: 0;
-      order: 0;
-      -webkit-flex: 1 0 auto;
-      -ms-flex: 1 0 auto;
-      flex: 1 0 auto;
-      -webkit-align-self: auto;
-      -ms-flex-item-align: auto;
-      align-self: auto;
-    }
-  }
-  &.split-view-horizontal-inverse {
-    height: 100%;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    -webkit-justify-content: flex-start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
-    -webkit-align-content: stretch;
-    -ms-flex-line-pack: stretch;
-    align-content: stretch;
-    -webkit-align-items: stretch;
-    -ms-flex-align: stretch;
-    align-items: stretch;
-
-    > .split-view-item:nth-child(1) {
-      overflow: auto;
-      height: 0px;
-      -webkit-order: 0;
-      -ms-flex-order: 0;
-      order: 0;
-      -webkit-flex: 0 1 auto;
-      -ms-flex: 0 1 auto;
-      flex: 0 1 auto;
-      -webkit-align-self: auto;
-      -ms-flex-item-align: auto;
-      align-self: auto;
-    }
-    > .split-view-item:nth-child(2) {
-      overflow: auto;
+    > .split-view-content {
       -webkit-order: 0;
       -ms-flex-order: 0;
       order: 0;
@@ -176,23 +150,23 @@
     }
 
     > .split-view-pane {
-      height: 50%;
+      width: 50%;
       > .tr-scroll-panel > .tr-scroll-panel-bar {
-        overflow-x: hidden;
+        overflow-y: hidden;
       }
     }
 
     &.split-view-resizable {
       > .split-view-pane {
-        > .ui-resizable-handle.ui-resizable-s {
+        > .ui-resizable-handle {
           background-color: $color-background-lowest;
-          box-shadow: 0px -1px 5px -1px $color-background-high;
+          box-shadow: -1px 0px 2px 0px $color-background-low;
           &:after {
             content: '\ff1d';
             position: absolute;
-            top: 1px;
-            left: 50%;
-            right: 50%;
+            right: 1px;
+            top: 50%;
+            bottom: 50%;
             line-height: 5px;
             font-size: 12px;
             color: $color-background-normal;
@@ -200,57 +174,36 @@
         }
       }
       > .split-view-content {
-        padding-top: 6px;
+        padding-right: 6px;
+      }
+      &.is-reverse {
+        > .split-view-content {
+          > .ui-resizable-handle {
+            background-color: $color-background-lowest;
+            box-shadow: 1px 0px 2px 0px $color-background-low;
+            right: 0;
+            &:after {
+              content: '\ff1d';
+              position: absolute;
+              right: -5px;
+              top: 50%;
+              bottom: 50%;
+              line-height: 5px;
+              font-size: 12px;
+              color: $color-background-normal;
+              transform: rotate(90deg);
+            }
+          }
+        }
+        > .split-view-pane {
+          padding-right: 6px;
+        }
       }
     }
 
     > .split-view-pane {
-      height: 50%;
+      width: 50%;
       box-sizing: border-box;
-    }
-  }
-  &.split-view-vertical-inverse {
-    height: 100%;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    -webkit-justify-content: flex-start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
-    -webkit-align-content: stretch;
-    -ms-flex-line-pack: stretch;
-    align-content: stretch;
-    -webkit-align-items: stretch;
-    -ms-flex-align: stretch;
-    align-items: stretch;
-
-    > .split-view-item:nth-child(1) {
-      -webkit-order: 0;
-      -ms-flex-order: 0;
-      order: 0;
-      -webkit-flex: 1 0 auto;
-      -ms-flex: 1 0 auto;
-      flex: 1 0 auto;
-      -webkit-align-self: auto;
-      -ms-flex-item-align: auto;
-      align-self: auto;
-    }
-    > .split-view-item:nth-child(2) {
-      -webkit-order: 0;
-      -ms-flex-order: 0;
-      order: 0;
-      -webkit-flex: 0 0 auto;
-      -ms-flex: 0 0 auto;
-      flex: 0 0 auto;
-      -webkit-align-self: auto;
-      -ms-flex-item-align: auto;
-      align-self: auto;
     }
   }
 

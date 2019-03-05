@@ -1,6 +1,12 @@
 @import '../../../../addon/styles/app-variables';
 @import '../../../../addon/styles/app';
 
+.docu-options-block{
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
 .listview-demo-container {
   .tr-listview {
     display: inline-block;
@@ -15,5 +21,46 @@
     width: 160px;
   }
 }
+// BEGIN-SNIPPET tr-select-editor.css
+.tr-select-editor {
+  width: 160px;
+  .tr-editor.tr-button-editor button{
+    padding: 0px 0px 0px 4px;
+  }
+}
+// END-SNIPPET
 
-// .tr-splitview{}
+// BEGIN-SNIPPET myForm.css
+.myForm {
+  input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+}
+// END-SNIPPET

@@ -6,11 +6,12 @@ import { A } from '@ember/array';
 export default Component.extend({
     layout,
 
-    classNameBindings: ['computedClassNames'],
+    classNameBindings: ['computedClassNames', 'isReverse'],
     classNames: 'split-view',
 
     orientation: 'vertical', //horizontal, vertical, horizontal-inverse, vertical-inverse
     isResizable: false,
+    isReverse: false,
 
     panelSize: 'auto',
 
@@ -23,15 +24,20 @@ export default Component.extend({
     _resizable: observer('isResizable', function() {
       if(!this.get('isResizable')) return;
 
-      let self = this;
+      let self = this,
+        isVertical = this.get('orientation').indexOf("vertical") === 0,
+        isReverse = self.get('isReverse'),
+        resizable = isReverse ? '.split-view-content' : '.split-view-pane';
 
-      this.$('>.split-view-pane').resizable({
+      this.$('>' + resizable).resizable({
         create: function() {
           self.$().find('.ui-resizable-handle').css('z-index', 49);
         },
-        handles: self.get('orientation').indexOf("vertical") === 0 ? "e" : "s",
-        minHeight: 2,
-        maxHeight: self.$().height()-6
+        handles: isVertical ? "e" : "s",
+        minHeight: isVertical ? null : 2,
+        maxHeight: isVertical ? null : self.$().height()-6,
+        minWidth: isVertical ? 2 : null,
+        maxWidth: isVertical ? self.$().width()-6 : null
       });
     }),
 
@@ -44,11 +50,19 @@ export default Component.extend({
     },
 
     didInsertElement() {
-      let self = this;
+      let self = this,
+        isVertical = this.get('orientation').indexOf("vertical") === 0;
       this._resizable();
       this.__onResize = function() {
         if(!self.get('isResizable')) return;
-        self.$('>.split-view-pane').resizable( "option", "maxHeight", self.$().height()-6 );
+        let isReverse = self.get('isReverse'),
+            resizable = isReverse ? '.split-view-content' : '.split-view-pane';
+
+        if(isVertical) {
+            self.$('>'+resizable).resizable( "option", "maxWidth", self.$().width()-6 );
+        } else {
+            self.$('>'+resizable).resizable( "option", "maxHeight", self.$().height()-6 );
+        }
       };
       this.$(window).on('resize', this.__onResize);
     },

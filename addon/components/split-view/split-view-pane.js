@@ -13,9 +13,10 @@ export default Component.extend({
         let orientation = this.get('orientation'),
           panelSize = this.get('panelSize'),
           panelSizeIsNumber = Number.isFinite(panelSize),
-          finalPanelSize = panelSizeIsNumber ? `${panelSize}px` : panelSize;
+          finalPanelSize = panelSizeIsNumber ? `${panelSize}px` : panelSize,
+          isVertical = orientation.indexOf('vertical') === 0;
 
-        if(orientation === 'vertical')
+        if(isVertical)
         {
             this.$().css('width', finalPanelSize);
             this.$().css('height', '');
@@ -43,8 +44,8 @@ export default Component.extend({
         this._updateSize();
 
         this._onResize = function() {
-            let orientation = self.get('orientation');
-            if(orientation === 'vertical')
+            let isVertical = self.get('orientation').indexOf('vertical') === 0;
+            if(isVertical)
             {
                 self.set('panelSize', self.$().css('width'));
             } else {

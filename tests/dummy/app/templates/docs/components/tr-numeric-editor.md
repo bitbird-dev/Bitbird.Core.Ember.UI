@@ -1,5 +1,11 @@
 # tr-numeric-editor
 
+## Issues
+
+Multiple commas can be entered...
+
+## Demo
+
 {{#docs-demo as |demo|}}
   {{#demo.example name='tr-numeric-editor.hbs'}}
     {{tr-numeric-editor

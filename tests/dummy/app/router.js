@@ -10,6 +10,7 @@ Router.map(function() {
   docsRoute(this, function() {
     this.route('setup',{ path: '/' });
     this.route('howto');
+    this.route('api');
     this.route('components',function() {
       this.route('tr-toggle');
       this.route('tr-table');
@@ -17,9 +18,6 @@ Router.map(function() {
       this.route('tr-select-editor');
       this.route('tr-numeric-editor');
       this.route('tr-menubar');
-    });
-    this.route('api',function() {
-      this.route('test');
     });
   });
   this.route('not-found', { path: '/*path' });

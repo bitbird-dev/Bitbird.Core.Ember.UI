@@ -11,9 +11,7 @@ export default Controller.extend({
     this._super(...arguments);
     this.set('orientationOptions', [
       {value:'vertical', name:'vertical'},
-      {value:'vertical-inverse', name:'vertical-inverse'},
       {value:'horizontal', name:'horizontal'},
-      {value:'horizontal-inverse', name:'horizontal-inverse'},
     ]);
     this.set('selectedOption', 'vertical');
   },

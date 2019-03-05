@@ -16,19 +16,30 @@
         <span>isResizeable</span>
         {{input type="checkbox" checked=toggleIsResizeable}}
       </div>
+      <div>
+      <span>isReverse</span>
+        {{input type="checkbox" checked=toggleIsReverse}}
+      </div>
+      <div>
+      <span>panelSize</span>
+        {{input type="text" value=panelSize}} (px, initially % is accepted)
+      </div>
     </div>
-    {{#split-view 
-      orientation=selectedOption
-      panelSize = "50%"
-      isResizable=toggleIsResizeable
-      as |sv|}}
-      {{#sv.pane}}
-        <h1>PANE</h1>
-      {{/sv.pane}}
-      {{#sv.content}}
-        <h1>CONTENT</h1>
-      {{/sv.content}}
-    {{/split-view}}
+    <div style="width:100%;height:500px;">
+        {{#split-view 
+              orientation=selectedOption
+              panelSize=panelSize
+              isResizable=toggleIsResizeable
+              isReverse=toggleIsReverse
+              as |sv|}}
+              {{#sv.pane style="background-color:#E0E0E0;"}}
+                <h1>PANE</h1>
+              {{/sv.pane}}
+              {{#sv.content style="background-color:#EE99FF;"}}
+                <h1>CONTENT</h1>
+              {{/sv.content}}
+            {{/split-view}}
+    </div>
   {{/demo.example}}
   {{demo.snippet "split-view.hbs" label="template.hbs"}}
 {{/docs-demo}}

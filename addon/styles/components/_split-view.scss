@@ -5,7 +5,7 @@
     position: relative;
   }
 
-  &.split-view-horizontal, &.split-view-horizontal-inverse {
+  &.split-view-horizontal {
     height: 100%;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -105,7 +105,7 @@
       box-sizing: border-box;
     }
   }
-  &.split-view-vertical, &.split-view-vertical-inverse {
+  &.split-view-vertical {
     height: 100%;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -208,12 +208,12 @@
   }
 
   &.split-view-reverse {
-    &.split-view-horizontal, &.split-view-horizontal-inverse {
+    &.split-view-horizontal {
       -webkit-flex-direction: column-reverse;
       -ms-flex-direction: column-reverse;
       flex-direction: column-reverse;
     }
-    &.split-view-vertical, &.split-view-vertical-inverse {
+    &.split-view-vertical {
       -webkit-flex-direction: row-reverse;
       -ms-flex-direction: row-reverse;
       flex-direction: row-reverse;

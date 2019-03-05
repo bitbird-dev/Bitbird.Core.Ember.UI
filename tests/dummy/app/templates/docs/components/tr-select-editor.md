@@ -1,7 +1,16 @@
 # tr-select-editor
 
+## Issues
+
+Dropdown appears in the wrong place if browser-window is scrolled.
+
+## Demo
+
 {{#docs-demo as |demo|}}
   {{#demo.example name='tr-select-editor.hbs'}}
+    <div class="docu-options-block">
+      {{input type="checkbox" checked=toggleAllowNull}} <span>allowNull</span>
+    </div>
     {{tr-select-editor 
       items=items
       selectedItem=selectedItem
@@ -12,6 +21,7 @@
       popoutHeader="popoutHeader"
       popoutPrimaryText="popoutPrimaryText"
       editable=false
+      allowNull=toggleAllowNull
       style="select"}}
       <p>Selected: {{selectedItem.value}}</p>
   {{/demo.example}}

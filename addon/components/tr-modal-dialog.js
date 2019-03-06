@@ -20,6 +20,8 @@ export default Component.extend({
     isVisible: true,
     isMessage: false,
 
+    scrollingDisabled: false,
+
     wrapperClass: null,
     containerClassNames: computed('isMessage', function() {
         return this.get('isMessage') ? 'tr-message-box' : null;

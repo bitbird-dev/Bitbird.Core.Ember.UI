@@ -3741,16 +3741,16 @@ a.active {
 .tr-spinner .lds-ring {
   display: inline-block;
   position: relative;
-  width: 64px;
-  height: 64px; }
+  width: 4em;
+  height: 4em; }
 .tr-spinner .lds-ring div {
   box-sizing: border-box;
   display: block;
   position: absolute;
-  width: 51px;
-  height: 51px;
-  margin: 6px;
-  border: 6px solid #009fe4;
+  width: 4em;
+  height: 4em;
+  margin: 0;
+  border: 0.25em solid #009fe4;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: #009fe4 transparent transparent transparent; }
@@ -3760,6 +3760,21 @@ a.active {
   animation-delay: -0.3s; }
 .tr-spinner .lds-ring div:nth-child(3) {
   animation-delay: -0.15s; }
+.tr-spinner.tr-spinner-xs .lds-ring {
+  width: 1.2em;
+  height: 1.2em; }
+.tr-spinner.tr-spinner-xs .lds-ring div {
+  width: 1.2em;
+  height: 1.2em;
+  border-width: 0.2em; }
+.tr-spinner.tr-spinner-xxs .lds-ring {
+  width: 12px;
+  height: 12px; }
+.tr-spinner.tr-spinner-xxs .lds-ring div {
+  width: 8px;
+  height: 8px;
+  margin: 2px;
+  border-width: 2px; }
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg); }

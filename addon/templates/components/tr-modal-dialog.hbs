@@ -5,7 +5,7 @@
                 {{header}}
             </div>
         {{/if}}
-        {{#tr-scroll-panel class='modal-dialog-content'}}
+        {{#tr-scroll-panel class='modal-dialog-content' disabled=scrollingDisabled}}
             {{yield}}
         {{/tr-scroll-panel}}
         {{#if isFooterVisible}}

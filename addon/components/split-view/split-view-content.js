@@ -4,5 +4,6 @@ import {computed, observer} from '@ember/object';
 import { A } from '@ember/array';
 
 export default Component.extend({
-    classNames: 'split-view-item split-view-content'
+    classNames: 'split-view-item split-view-content',
+    attributeBindings: ['style']
 });

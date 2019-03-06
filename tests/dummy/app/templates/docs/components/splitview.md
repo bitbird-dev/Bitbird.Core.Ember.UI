@@ -25,14 +25,14 @@
         {{input type="text" value=panelSize}} (px, initially % is accepted)
       </div>
     </div>
-    <div style="width:100%;height:500px;">
+    <div style="width:100%;height:500px;padding:4px;background:#91cec0;">
         {{#split-view 
               orientation=selectedOption
               panelSize=panelSize
               isResizable=toggleIsResizeable
               isReverse=toggleIsReverse
               as |sv|}}
-              {{#sv.pane style="background-color:#E0E0E0;"}}
+              {{#sv.pane style="background-color:#cb91ce;"}}
                 <h1>PANE</h1>
               {{/sv.pane}}
               {{#sv.content style="background-color:#EE99FF;"}}

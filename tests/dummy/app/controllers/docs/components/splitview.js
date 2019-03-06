@@ -3,7 +3,7 @@ export default Controller.extend({
   status: "click a row...",
   isOpen: true,
   sidebarMode: false,
-  toggleIsResizeable: false,
+  toggleIsResizable: false,
   enableBackdrop: false,
   selectedOption: 'vertical',
   orientationOptions: null,
@@ -13,7 +13,6 @@ export default Controller.extend({
       {value:'vertical', name:'vertical'},
       {value:'horizontal', name:'horizontal'},
     ]);
-    this.set('selectedOption', 'vertical');
   },
   // BEGIN-SNIPPET tr-splitview-actions.js
   actions:{

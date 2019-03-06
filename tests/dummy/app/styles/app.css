@@ -3932,8 +3932,6 @@ a.active {
       content: '#';
       position: absolute;
       color: #919191; }
-  .split-view.split-view-resizable > .split-view-content {
-    padding-top: 6px; }
   .split-view.split-view-horizontal {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;

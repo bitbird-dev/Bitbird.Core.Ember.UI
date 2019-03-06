@@ -13,8 +13,8 @@
         </select>
       </div>
       <div>
-        <span>isResizeable</span>
-        {{input type="checkbox" checked=toggleIsResizeable}}
+        <span>isResizable</span>
+        {{input type="checkbox" checked=toggleIsResizable}}
       </div>
       <div>
       <span>isReverse</span>
@@ -29,7 +29,7 @@
         {{#split-view 
               orientation=selectedOption
               panelSize=panelSize
-              isResizable=toggleIsResizeable
+              isResizable=toggleIsResizable
               isReverse=toggleIsReverse
               as |sv|}}
               {{#sv.pane style="background-color:#cb91ce;"}}
@@ -37,6 +37,12 @@
               {{/sv.pane}}
               {{#sv.content style="background-color:#EE99FF;"}}
                 <h1>CONTENT</h1>
+                <ol>
+                    <li>One</li>
+                    <li>Two</li>
+                    <li>Three</li>
+                    <li>Four</li>
+                </ol>
               {{/sv.content}}
             {{/split-view}}
     </div>

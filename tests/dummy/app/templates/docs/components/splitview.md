@@ -25,7 +25,7 @@
         {{input type="text" value=panelSize}} (px, initially % is accepted)
       </div>
     </div>
-    <div style="width:100%;height:500px;padding:4px;background:#91cec0;">
+    <div style="width:100%;height:350px;padding:4px;background:#91cec0;">
         {{#split-view 
               orientation=selectedOption
               panelSize=panelSize

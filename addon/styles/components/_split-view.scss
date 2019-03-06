@@ -7,6 +7,18 @@
 
   > .split-view-pane {
     z-index: 1;
+    > .ui-resizable-w {
+      left: 0;
+    }
+    > .ui-resizable-e {
+      right: 0;
+    }
+    > .ui-resizable-n {
+      top: 0;
+    }
+    > .ui-resizable-s {
+      bottom: 0;
+    }
   }
 
   height: 100%;

@@ -17,23 +17,18 @@ export default Component.extend({
     panelSize: 'auto',
 
     _panelSizeDidChange: observer('panelSize', function() {
-        let self = this,
-            isVertical = this.get('orientation') === "vertical",
-            isReverse = this.get('isReverse');
+        let isVertical = this.get('orientation') === "vertical",
+        panelSize = this.get('panelSize');
 
         if(isVertical) {
-            this.$('>.split-view-pane').width(this.get('panelSize'));
+            this.$('>.split-view-pane').width(panelSize);
         } else {
-            this.$('>.split-view-pane').height(this.get('panelSize'));
+            this.$('>.split-view-pane').height(panelSize);
         }
+        next(this, this._fixPanelSize);
     }),
 
     _orientationDidChange: observer('orientation', 'isReverse', function() {
-        let self = this,
-            isVertical = this.get('orientation') === "vertical",
-            isReverse = this.get('isReverse'),
-            resizable = isReverse ? '.split-view-content' : '.split-view-pane';
-
         this.$('>.split-view-pane').height('');
         this.$('>.split-view-pane').width('');
 
@@ -59,10 +54,10 @@ export default Component.extend({
         next(this, function(){
 
             let jqHandles = isVertical ? (isReverse ? "w" : "e") : (isReverse ? "n" : "s"),
-                jqMinHeight = isVertical ? 0 : 2,
-                jqMaxHeight = isVertical ? 0 : self.$().height() - 5,
-                jqMinWidth = isVertical ? 2 : 0,
-                jqMaxWidth = isVertical ? self.$().width() - 5 : 0;
+                jqMinHeight = isVertical ? 0 : 7,
+                jqMaxHeight = isVertical ? 0 : self.$().height(),
+                jqMinWidth = isVertical ? 7 : 0,
+                jqMaxWidth = isVertical ? self.$().width() : 0;
 
             if (this.$('>.split-view-pane').is('.ui-resizable')) {
                 this.$('>.split-view-pane').resizable("option", "handles", jqHandles);
@@ -107,6 +102,29 @@ export default Component.extend({
         }
     },
 
+    _fixPanelSize() {
+        if (!this.$('>.split-view-pane').is('.ui-resizable')) {
+            return;
+        }
+
+        if(this.get('orientation') === "vertical")
+        {
+            let paneWidth = this.$('>.split-view-pane').width(),
+                availableWidth = this.$().width();
+
+            if(paneWidth > availableWidth) {
+                this.set('panelSize', availableWidth);
+            }
+        } else {
+            let paneHeight = this.$('>.split-view-pane').height(),
+                availableHeight = this.$().height();
+
+            if(paneHeight > availableHeight) {
+                this.set('panelSize', availableHeight);
+            }
+        }
+    },
+
     didInsertElement() {
         let self = this;
 
@@ -114,13 +132,12 @@ export default Component.extend({
 
         this.__onResize = function () {
             if (!self.get('isResizable')) return;
-            let isReverse = self.get('isReverse'),
-                isVertical = self.get('orientation') === "vertical";
+            let isVertical = self.get('orientation') === "vertical";
 
             if (isVertical) {
-                self.$('>.split-view-pane').resizable("option", "maxWidth", self.$().width() - 6);
+                self.$('>.split-view-pane').resizable("option", "maxWidth", self.$().width());
             } else {
-                self.$('>.split-view-pane').resizable("option", "maxHeight", self.$().height() - 6);
+                self.$('>.split-view-pane').resizable("option", "maxHeight", self.$().height());
             }
         };
 

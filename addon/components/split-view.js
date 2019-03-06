@@ -115,12 +115,20 @@ export default Component.extend({
             if(paneWidth > availableWidth) {
                 this.set('panelSize', availableWidth);
             }
+            else if(paneWidth < 7)
+            {
+                this.set('panelSize', 7);
+            }
         } else {
             let paneHeight = this.$('>.split-view-pane').height(),
                 availableHeight = this.$().height();
 
             if(paneHeight > availableHeight) {
                 this.set('panelSize', availableHeight);
+            }
+            else if(paneHeight < 7)
+            {
+                this.set('panelSize', 7);
             }
         }
     },

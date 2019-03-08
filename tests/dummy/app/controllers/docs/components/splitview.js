@@ -4,6 +4,7 @@ export default Controller.extend({
   isOpen: true,
   sidebarMode: false,
   toggleIsResizable: false,
+  toggleIsFullSIze: false,
   enableBackdrop: false,
   selectedOption: 'vertical',
   orientationOptions: null,

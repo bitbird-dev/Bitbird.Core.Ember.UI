@@ -15,14 +15,45 @@ export default Component.extend({
     orientation: 'vertical', //horizontal, vertical
     isResizable: false,
     isReverse: false,
+    isFullSize: false,
 
     panelSize: null,
 
-    _panelSizeDidChange: observer('orientation', 'isReverse', 'panelSize', function() {
-        let isVertical = this.get('orientation') === "vertical",
-            panelSize = this.get('panelSize');
+    _panelSizeChange: observer('orientation', 'panelSize', function(sender, key) {
+        if(this.get('panelSize') !== null  && (key === 'panelSize' || key === undefined)) {
+            let paneSize, availableSize;
+            if(this.get('orientation') === "vertical")
+            {
+                paneSize = this.$('>.split-view-pane').width();
+                availableSize = this.$().width();
+            } else {
+                paneSize = this.$('>.split-view-pane').height();
+                availableSize = this.$().height();
+            }
 
-        if(panelSize)
+            this.set('isFullSize', paneSize === availableSize);
+        } else {
+
+        }
+
+        this._sizeDidChange();
+    }).on('didInsertElement'),
+
+    _sizeDidChange: observer('isReverse', 'isFullSize', function() {
+        let isVertical = this.get('orientation') === "vertical",
+            panelSize = this.get('panelSize'),
+            isFullSize = this.get('isFullSize');
+
+        if(isFullSize) {
+            if(isVertical) {
+                this.$('>.split-view-pane').height('');
+                this.$('>.split-view-pane').width(this.$().width());
+            } else {
+                this.$('>.split-view-pane').width('');
+                this.$('>.split-view-pane').height(this.$().height());
+            }
+        }
+        else if(panelSize)
         {
             if(isVertical) {
                 this.$('>.split-view-pane').height('');
@@ -109,9 +140,22 @@ export default Component.extend({
             return;
         }
 
-        let minPanelSize = this.get('isResizable') ? RESIZE_HANDLE_SIZE : 0;
+        let minPanelSize = this.get('isResizable') ? RESIZE_HANDLE_SIZE : 0,
+            isVertical = this.get('orientation') === "vertical",
+            isFullSize = this.get('isFullSize');
 
-        if(this.get('orientation') === "vertical")
+        if(isFullSize) {
+            if(isVertical) {
+                this.$('>.split-view-pane').height('');
+                this.$('>.split-view-pane').width(this.$().width());
+            } else {
+                this.$('>.split-view-pane').width('');
+                this.$('>.split-view-pane').height(this.$().height());
+            }
+            return;
+        }
+
+        if(isVertical)
         {
             let paneWidth = this.$('>.split-view-pane').width(),
                 availableWidth = this.$().width();
@@ -125,6 +169,8 @@ export default Component.extend({
             {
                 this.set('panelSize', minPanelSize);
             }
+
+
         } else {
             let paneHeight = this.$('>.split-view-pane').height(),
                 availableHeight = this.$().height();

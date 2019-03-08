@@ -65,11 +65,11 @@
         {{/tr-datetime-picker}}
         <div>
             {{#if (compare selectedMode 'range')}}
-                {{tr-display label="Begin" value=rangeBegin}}<br>
-                {{tr-display label="End" value=rangeEnd}}
+                {{tr-display label="Begin" value=rangeBegin type='date' format='LLL'}}<br>
+                {{tr-display label="End" value=rangeEnd type='date' format='LLL'}}
             {{else if (compare selectedMode 'multiple')}}
                 {{#each selectedItems as |date idx|}}
-                    {{tr-display label=(concat 'Selection ' idx) value=date}}<br>
+                    {{tr-display label=(concat 'Selection ' idx) value=date type='date' format='LLL'}}<br>
                 {{/each}}            
             {{/if}}
         </div>

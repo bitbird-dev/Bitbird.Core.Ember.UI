@@ -194,6 +194,9 @@ export default Component.extend({
         this._fixPanelSize();
 
         this.__onResize = function () {
+            //Prevent events triggered from inside
+            if(self.$().has(arguments[0].target).length) return;
+
             self._fixPanelSize();
             self._resizable();
         };

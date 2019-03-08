@@ -17,6 +17,7 @@ Router.map(function() {
       this.route('splitview');
       this.route('tr-select-editor');
       this.route('tr-numeric-editor');
+      this.route('tr-datetime-picker');
       this.route('tr-menubar');
     });
   });

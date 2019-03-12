@@ -34,7 +34,11 @@ export default Editor.extend(OutsideClick, {
 
         let $target = $('#' + this.get('destinationElement')),
             $source = $('#' + this.get('elementId')),
-            $innerSource = $('#' + this.get('elementId') + ' .tr-button-editor .tr-editor-content > button');;
+            $innerSource = $('#' + this.get('elementId') + ' .tr-button-editor .tr-editor-content > button');
+
+        //console.log($source.scrollParent().scrollTop());
+        let topOffset = $source[0].getBoundingClientRect().top;
+        let leftOffset = $source[0].getBoundingClientRect().left;
 
         if(!$target.length) return;
 
@@ -44,26 +48,26 @@ export default Editor.extend(OutsideClick, {
         $target.css('min-width', $source.outerWidth());
         $target.css('opacity', '1');
 
-        let topWhenBelow = $innerSource.offset().top  + $innerSource.outerHeight();
+        let topWhenBelow = topOffset + $innerSource.outerHeight();
         let bottomWhenBelow = topWhenBelow + $target.outerHeight();
         let viewPortBottom = this.$(window).height();
         let canOpenBelow = bottomWhenBelow <= viewPortBottom;
         if(canOpenBelow) {
             this.set('_listPosition', 'is-open-below');
             $target.addClass("tr-select-editor-below");
-            $target.css('top', $innerSource.offset().top + $innerSource.outerHeight());
+            $target.css('top', topOffset + $innerSource.outerHeight());
             $target.css('left', $source.offset().left);
             $target.css('right', '');
             $target.css('bottom', '');
             return;
         }
 
-        let topWhenAbove = $innerSource.offset().top  - $target.outerHeight();
+        let topWhenAbove = topOffset  - $target.outerHeight();
         let canOpenAbove = topWhenAbove > 0;
         if(canOpenAbove) {
             this.set('_listPosition', 'is-open-above');
             $target.addClass("tr-select-editor-above");
-            $target.css('top', $innerSource.offset().top - $target.outerHeight());
+            $target.css('top', topOffset - $target.outerHeight());
             $target.css('left', $source.offset().left);
             $target.css('right', '');
             $target.css('bottom', '');
@@ -388,15 +392,16 @@ export default Editor.extend(OutsideClick, {
     },
 
     _getValue: function(obj) {
-        if(!obj) return obj;
+        if(!obj || typeof obj !== 'object') return obj;
         if(obj.get) {
             return obj.get(this.get('valueProperty'));
         }
+
         return obj[this.get('valueProperty')];
     },
 
     _getKey: function(obj) {
-        if(!obj) return null;
+        if(!obj || typeof obj !== 'object') return obj;
         if(obj.get) {
             return obj.get(this.get('keyProperty'));
         }

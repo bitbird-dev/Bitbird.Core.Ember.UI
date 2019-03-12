@@ -77,19 +77,25 @@
             {{#with emptyText}}
                 {{#ember-wormhole to=destinationElement}}
                     <div>
-                    {{#tr-listview items=filteredItems selectedItem=(readonly selectedItem) onSelectedItemChanged=(action 'onSelectedItemChanged') as |listView|}}
-                        {{#if valueProperty}}
-                            {{tr-select-editor-item content=listView.data valueProperty=valueProperty}}
+                    {{#tr-listview items=filteredItems selectedItem=(readonly selectedItem) onSelectedItemChanged=(action 'onSelectedItemChanged') as |listView item|}}
+                        {{#if hasBlock}}
+                            {{#listView.itemTemplate}}
+                                {{yield (hash itemTemplate=(component 'tr-contentpresenter' context=listView.data))}}
+                            {{/listView.itemTemplate}}
                         {{else}}
-                            <span title="{{listView.data}}">{{listView.data}}</span>
-                        {{/if}}
-                        {{#item.empty}}
-                            {{#if emptyText}}
-                                <span class="tr-select-editor-empty">
-                                    {{emptyText}}
-                                </span>
+                            {{#if valueProperty}}
+                                {{tr-select-editor-item content=listView.data valueProperty=valueProperty}}
+                            {{else}}
+                                <span title="{{listView.data}}">{{listView.data}}</span>
                             {{/if}}
-                        {{/item.empty}}
+                            {{#item.empty}}
+                                {{#if emptyText}}
+                                    <span class="tr-select-editor-empty">
+                                        {{emptyText}}
+                                    </span>
+                                {{/if}}
+                            {{/item.empty}}
+                        {{/if}}
                     {{/tr-listview}}
                     </div>
                 {{/ember-wormhole}}

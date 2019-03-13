@@ -278,11 +278,14 @@
       }
     }
   }
-  &.tr-text-editor, &.tr-textarea-editor, &.tr-password-editor, &.tr-datetime-editor, &.tr-select-editor {
+  &.tr-text-editor, &.tr-textarea-editor, &.tr-password-editor, &.tr-datetime-editor, &.tr-datetime-picker, &.tr-select-editor, &.tr-display {
     $editor-width: 193px; //Chrome default for textbox
     max-width: 100%;
-    //width: $editor-width;
     min-width: auto;
+
+    &.tr-display {
+      width: $editor-width;
+    }
 
     &.tr-editor-c2 {
       width: $editor-width / 2;

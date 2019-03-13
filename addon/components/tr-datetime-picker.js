@@ -33,6 +33,13 @@ export default Component.extend(OutsideClick, {
         return this.get('isMonthPickerVisible') || this.get('isYearPickerVisible');
     }),
 
+    /**
+     * single, range, multiple
+     */
+    mode: 'single',
+
+    startsOnMonday: true,
+    isOpen: false,
 
     /**
      * Enables time-picker support
@@ -236,7 +243,13 @@ export default Component.extend(OutsideClick, {
         }
     },
 
-    isOpen: false,
+    _isOpenDidChange: Ember.observer('isOpen', function() {
+        if(this.get('isOpen')) {
+            this.open();
+        } else {
+            this.close();
+        }
+    }),
 
     open() {
         this.set('isOpen', true);
@@ -276,15 +289,8 @@ export default Component.extend(OutsideClick, {
         }
     },
 
-    /**
-     * single, range, multiple
-     */
-    mode: 'single',
-
     pageStartOffset: 0,
     pageEndOffset: 1,
-
-    startsOnMonday: true,
 
     renderStart: null,
     renderEnd: null,

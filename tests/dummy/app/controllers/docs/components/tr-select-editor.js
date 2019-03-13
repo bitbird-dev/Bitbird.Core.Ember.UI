@@ -3,18 +3,37 @@ import EmberObject from '@ember/object';
 import {A} from '@ember/array';
 
 export default Controller.extend({
-  item: null,
   selectedItem: null,
+  selectedKey: 'key 1',
+  items: null,
+
+  selectedValue: 'Item 3',
+  values: null,
+
   toggleAllowNull:false,
   init(){
     this._super(...arguments);
 // BEGIN-SNIPPET tr-select-editor.js
-    let items = A();
-    for (let index = 0; index < 10; index++) {
-      items.push(EmberObject.create({ key: `key ${index}`, value: `value ${index}`}));
+    let items = A(),
+        values = A();
+    for (let index = 1; index < 11; index++) {
+        for (let iidx = 1, imax = 4; iidx < imax; iidx++) {
+            values.pushObject(`Item ${iidx}${index}`);
+            items.pushObject(EmberObject.create({ key: `key ${index}`, value: `value ${iidx}${index}`}));
+        }
     }
-    this.set('items', items);
-    this.set('selectedItem', items[0]);
+    this.setProperties({
+        items: items,
+        values: values
+    });
 // END-SNIPPET
   },
+  actions: {
+      selectItemByKey(key) {
+          this.set('selectedItem', this.get('items').findBy('key', key));
+      },
+      selectKey(key) {
+          this.set('selectedKey', key);
+      }
+  }
 });

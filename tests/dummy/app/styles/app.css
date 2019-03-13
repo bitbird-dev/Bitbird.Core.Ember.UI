@@ -2632,20 +2632,22 @@ a.active {
     height: 100%; }
   .tr-editor.tr-datetime-editor.calendar > .tr-editor > .tr-editor-content-wrapper > .tr-editor-content > input {
     display: none; }
-  .tr-editor.tr-text-editor, .tr-editor.tr-textarea-editor, .tr-editor.tr-password-editor, .tr-editor.tr-datetime-editor, .tr-editor.tr-select-editor {
+  .tr-editor.tr-text-editor, .tr-editor.tr-textarea-editor, .tr-editor.tr-password-editor, .tr-editor.tr-datetime-editor, .tr-editor.tr-datetime-picker, .tr-editor.tr-select-editor, .tr-editor.tr-display {
     max-width: 100%;
     min-width: auto; }
-    .tr-editor.tr-text-editor.tr-editor-c2, .tr-editor.tr-textarea-editor.tr-editor-c2, .tr-editor.tr-password-editor.tr-editor-c2, .tr-editor.tr-datetime-editor.tr-editor-c2, .tr-editor.tr-select-editor.tr-editor-c2 {
-      width: 96.5px; }
-    .tr-editor.tr-text-editor.tr-editor-c2_3, .tr-editor.tr-textarea-editor.tr-editor-c2_3, .tr-editor.tr-password-editor.tr-editor-c2_3, .tr-editor.tr-datetime-editor.tr-editor-c2_3, .tr-editor.tr-select-editor.tr-editor-c2_3 {
-      width: 128.6666666667px; }
-    .tr-editor.tr-text-editor.tr-editor-x1, .tr-editor.tr-textarea-editor.tr-editor-x1, .tr-editor.tr-password-editor.tr-editor-x1, .tr-editor.tr-datetime-editor.tr-editor-x1, .tr-editor.tr-select-editor.tr-editor-x1 {
+    .tr-editor.tr-text-editor.tr-display, .tr-editor.tr-textarea-editor.tr-display, .tr-editor.tr-password-editor.tr-display, .tr-editor.tr-datetime-editor.tr-display, .tr-editor.tr-datetime-picker.tr-display, .tr-editor.tr-select-editor.tr-display, .tr-editor.tr-display.tr-display {
       width: 193px; }
-    .tr-editor.tr-text-editor.tr-editor-x2, .tr-editor.tr-textarea-editor.tr-editor-x2, .tr-editor.tr-password-editor.tr-editor-x2, .tr-editor.tr-datetime-editor.tr-editor-x2, .tr-editor.tr-select-editor.tr-editor-x2 {
+    .tr-editor.tr-text-editor.tr-editor-c2, .tr-editor.tr-textarea-editor.tr-editor-c2, .tr-editor.tr-password-editor.tr-editor-c2, .tr-editor.tr-datetime-editor.tr-editor-c2, .tr-editor.tr-datetime-picker.tr-editor-c2, .tr-editor.tr-select-editor.tr-editor-c2, .tr-editor.tr-display.tr-editor-c2 {
+      width: 96.5px; }
+    .tr-editor.tr-text-editor.tr-editor-c2_3, .tr-editor.tr-textarea-editor.tr-editor-c2_3, .tr-editor.tr-password-editor.tr-editor-c2_3, .tr-editor.tr-datetime-editor.tr-editor-c2_3, .tr-editor.tr-datetime-picker.tr-editor-c2_3, .tr-editor.tr-select-editor.tr-editor-c2_3, .tr-editor.tr-display.tr-editor-c2_3 {
+      width: 128.6666666667px; }
+    .tr-editor.tr-text-editor.tr-editor-x1, .tr-editor.tr-textarea-editor.tr-editor-x1, .tr-editor.tr-password-editor.tr-editor-x1, .tr-editor.tr-datetime-editor.tr-editor-x1, .tr-editor.tr-datetime-picker.tr-editor-x1, .tr-editor.tr-select-editor.tr-editor-x1, .tr-editor.tr-display.tr-editor-x1 {
+      width: 193px; }
+    .tr-editor.tr-text-editor.tr-editor-x2, .tr-editor.tr-textarea-editor.tr-editor-x2, .tr-editor.tr-password-editor.tr-editor-x2, .tr-editor.tr-datetime-editor.tr-editor-x2, .tr-editor.tr-datetime-picker.tr-editor-x2, .tr-editor.tr-select-editor.tr-editor-x2, .tr-editor.tr-display.tr-editor-x2 {
       width: 390px; }
-    .tr-editor.tr-text-editor.tr-editor-x3, .tr-editor.tr-textarea-editor.tr-editor-x3, .tr-editor.tr-password-editor.tr-editor-x3, .tr-editor.tr-datetime-editor.tr-editor-x3, .tr-editor.tr-select-editor.tr-editor-x3 {
+    .tr-editor.tr-text-editor.tr-editor-x3, .tr-editor.tr-textarea-editor.tr-editor-x3, .tr-editor.tr-password-editor.tr-editor-x3, .tr-editor.tr-datetime-editor.tr-editor-x3, .tr-editor.tr-datetime-picker.tr-editor-x3, .tr-editor.tr-select-editor.tr-editor-x3, .tr-editor.tr-display.tr-editor-x3 {
       width: 587px; }
-    .tr-editor.tr-text-editor.tr-editor-x4, .tr-editor.tr-textarea-editor.tr-editor-x4, .tr-editor.tr-password-editor.tr-editor-x4, .tr-editor.tr-datetime-editor.tr-editor-x4, .tr-editor.tr-select-editor.tr-editor-x4 {
+    .tr-editor.tr-text-editor.tr-editor-x4, .tr-editor.tr-textarea-editor.tr-editor-x4, .tr-editor.tr-password-editor.tr-editor-x4, .tr-editor.tr-datetime-editor.tr-editor-x4, .tr-editor.tr-datetime-picker.tr-editor-x4, .tr-editor.tr-select-editor.tr-editor-x4, .tr-editor.tr-display.tr-editor-x4 {
       width: 784px; }
   .tr-editor.tr-text-editor input, .tr-editor.tr-text-editor textarea, .tr-editor.tr-textarea-editor input, .tr-editor.tr-textarea-editor textarea, .tr-editor.tr-password-editor input, .tr-editor.tr-password-editor textarea, .tr-editor.tr-datetime-editor input, .tr-editor.tr-datetime-editor textarea {
     padding: 4px 8px;
@@ -3741,16 +3743,16 @@ a.active {
 .tr-spinner .lds-ring {
   display: inline-block;
   position: relative;
-  width: 64px;
-  height: 64px; }
+  width: 4em;
+  height: 4em; }
 .tr-spinner .lds-ring div {
   box-sizing: border-box;
   display: block;
   position: absolute;
-  width: 51px;
-  height: 51px;
-  margin: 6px;
-  border: 6px solid #009fe4;
+  width: 4em;
+  height: 4em;
+  margin: 0;
+  border: 0.25em solid #009fe4;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: #009fe4 transparent transparent transparent; }
@@ -3760,6 +3762,21 @@ a.active {
   animation-delay: -0.3s; }
 .tr-spinner .lds-ring div:nth-child(3) {
   animation-delay: -0.15s; }
+.tr-spinner.tr-spinner-xs .lds-ring {
+  width: 1.2em;
+  height: 1.2em; }
+.tr-spinner.tr-spinner-xs .lds-ring div {
+  width: 1.2em;
+  height: 1.2em;
+  border-width: 0.2em; }
+.tr-spinner.tr-spinner-xxs .lds-ring {
+  width: 12px;
+  height: 12px; }
+.tr-spinner.tr-spinner-xxs .lds-ring div {
+  width: 8px;
+  height: 8px;
+  margin: 2px;
+  border-width: 2px; }
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg); }
@@ -3932,8 +3949,6 @@ a.active {
       content: '#';
       position: absolute;
       color: #919191; }
-  .split-view.split-view-resizable > .split-view-content {
-    padding-top: 6px; }
   .split-view.split-view-horizontal {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;

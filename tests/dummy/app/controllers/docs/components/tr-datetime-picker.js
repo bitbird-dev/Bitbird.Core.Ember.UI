@@ -1,43 +1,44 @@
 import Controller from '@ember/controller';
 
 export default Controller.extend({
-  timeModeOptions: null,
-  selectedTimeMode : null,
-  
-  modeOptions: null,
-  selectedMode: 'single',
+    modeOptions: null,
+    selectedMode: 'single',
 
-  startsOnMonday: true,
+    selectedDate: null,
+    selectedItems: null,
+    rangeBegin: null,
+    rangeEnd: null,
 
-  selectedDate: null,
+    timeModeOptions: null,
+    selectedTimeMode: null,
 
-  isOpen: true,
+    isOpen: false,
 
-  init(){
-    this._super(...arguments);
-    this.set('timeModeOptions', [
-      {value:'null', name:'null'},
-      {value:'hm', name:'hm'},
-      {value:'hms', name:'hms'},
-    ]);
-    this.set('modeOptions', [
-      {value:'single', name:'single'},
-      {value:'range', name:'range'},
-      {value:'multiple', name:'multiple'},
-    ]);
-// BEGIN-SNIPPET tr-datetime-picker.js
-    this.set('selectedDate', new Date(Date.now()));
-// END-SNIPPET
-  },
-  actions:{
-    toggleIsOpen(){
-      this.toggleProperty('isOpen');
+    init() {
+        this._super(...arguments);
+        this.set('selectedDate', new Date());
+        this.set('modeOptions', [
+            {value: 'single', name: 'single'},
+            {value: 'range', name: 'range'},
+            {value: 'multiple', name: 'multiple'}
+        ]);
+        this.set('timeModeOptions', [
+            {value: null, name: ''},
+            {value: 'hm', name: 'hm'},
+            {value: 'hms', name: 'hms'}
+        ]);
     },
-    setSelectedTimeMode: function(selected) {
-      this.set('selectedTimeMode', selected);
+    // BEGIN-SNIPPET tr-datetime-picker-actions.js
+    actions: {
+        toggleIsOpen() {
+            this.toggleProperty('isOpen');
+        },
+        selectMode: function (selected) {
+            this.set('selectedMode', selected);
+        },
+        selectTimeMode: function (selected) {
+            this.set('selectedTimeMode', selected);
+        }
     },
-    setSelectedMode: function(selected) {
-      this.set('selectedMode', selected);
-    },
-  },
+    // END-SNIPPET
 });

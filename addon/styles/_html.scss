@@ -105,6 +105,17 @@ input::-ms-input-placeholder { /* Microsoft Edge */
   color:    $color-foreground-normal-high;
 }
 
+/**
+ * Prevent select on doubleclick
+ */
+* {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .input-placeholder {
   color: $color-foreground-normal-high;
 }

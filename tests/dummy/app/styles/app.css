@@ -477,6 +477,16 @@ input::-ms-input-placeholder {
   /* Microsoft Edge */
   color: #b2b2b2; }
 
+/**
+ * Prevent select on doubleclick
+ */
+* {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
 .input-placeholder {
   color: #b2b2b2; }
 
@@ -3953,8 +3963,6 @@ a.active {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column; }
-    .split-view.split-view-horizontal > .split-view-pane > .tr-scroll-panel > .tr-scroll-panel-bar {
-      overflow-x: hidden; }
     .split-view.split-view-horizontal > .split-view-content {
       height: 1px; }
     .split-view.split-view-horizontal.split-view-resizable > .split-view-pane > .ui-resizable-handle:after {
@@ -3968,8 +3976,6 @@ a.active {
     -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row; }
-    .split-view.split-view-vertical > .split-view-pane > .tr-scroll-panel > .tr-scroll-panel-bar {
-      overflow-y: hidden; }
     .split-view.split-view-vertical > .split-view-content {
       width: 1px; }
     .split-view.split-view-vertical.split-view-resizable > .split-view-pane > .ui-resizable-handle:after {
@@ -4532,6 +4538,7 @@ a.active {
 
 .btbrd-table {
   width: 100%;
+  box-sizing: border-box;
   display: table;
   color: #1a4153;
   border: 1px solid #e9e9e9;

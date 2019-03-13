@@ -83,7 +83,7 @@
     flex-direction: column;
     > .split-view-pane {
       > .tr-scroll-panel > .tr-scroll-panel-bar {
-        overflow-x: hidden;
+        //overflow-x: hidden;
       }
     }
     > .split-view-content {
@@ -111,7 +111,7 @@
     flex-direction: row;
     > .split-view-pane {
       > .tr-scroll-panel > .tr-scroll-panel-bar {
-        overflow-y: hidden;
+        //overflow-y: hidden;
       }
     }
     > .split-view-content {

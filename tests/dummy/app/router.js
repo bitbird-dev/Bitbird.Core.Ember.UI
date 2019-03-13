@@ -18,6 +18,7 @@ Router.map(function() {
       this.route('tr-select-editor');
       this.route('tr-numeric-editor');
       this.route('tr-menubar');
+      this.route('tr-datetime-picker');
     });
   });
   this.route('not-found', { path: '/*path' });

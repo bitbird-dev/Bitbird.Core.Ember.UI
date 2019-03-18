@@ -455,6 +455,10 @@ dl {
     margin: 0 0 0 110px;
     padding: 0 0 0.5em 0; }
 
+input {
+  color: #222;
+  background-color: #fff; }
+
 input::-webkit-input-placeholder {
   /* WebKit, Blink, Edge */
   color: #b2b2b2; }

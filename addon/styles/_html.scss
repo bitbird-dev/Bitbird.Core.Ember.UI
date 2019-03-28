@@ -86,6 +86,11 @@ margin: 0;
   }
 }
 
+input {
+  color: $color-foreground;
+  background-color: $color-background;
+}
+
 input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
   color:    $color-foreground-normal-high;
 
@@ -103,6 +108,17 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
 }
 input::-ms-input-placeholder { /* Microsoft Edge */
   color:    $color-foreground-normal-high;
+}
+
+/**
+ * Prevent select on doubleclick
+ */
+* {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .input-placeholder {

@@ -1,5 +1,6 @@
 .btbrd-table {
   width: 100%;
+  box-sizing: border-box;
   display: table;
   color: $color-accent-high;
   border: 1px solid $color-background-lower;
@@ -8,7 +9,7 @@
   .btbrd-table-caption {
     display: table-caption;
   }
-  
+
   .btbrd-table-header-group {
     display: table-header-group;
     font-size: 1.0em;
@@ -43,7 +44,7 @@
         padding: 4px 8px;
       }
     }
-    
+
   }
 
   .btbrd-table-column-group {

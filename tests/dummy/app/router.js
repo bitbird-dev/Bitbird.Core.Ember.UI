@@ -19,7 +19,7 @@ Router.map(function() {
       this.route('tr-numeric-editor');
       this.route('tr-datetime-picker');
       this.route('tr-menubar');
-      this.route('tr-datetime-picker');
+      this.route('tr-button-editor');
     });
   });
   this.route('not-found', { path: '/*path' });

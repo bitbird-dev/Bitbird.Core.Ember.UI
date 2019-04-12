@@ -1,0 +1,36 @@
+{{#if isVisible}}
+    {{#modal-dialog onClickOverlay=(action 'onClickOverlay') onClose=(action 'onClose') translucentOverlay=true wrapperClass=(concat 'bb-dialog-wrapper ' wrapperClass) containerClassNames=containerClassNames}}
+        <div class="modal-dialog-header">
+            {{#if header}}
+                {{header}}
+            {{else}}
+                {{yield (hash header=(component 'tr-contentpresenter' content=header))}}
+            {{/if}}
+        </div>
+        {{#tr-scroll-panel class='modal-dialog-content' disabled=scrollingDisabled}}
+            {{yield (hash content=(component 'tr-contentpresenter'))}}
+        {{/tr-scroll-panel}}
+        {{#if (or primaryAction secondaryAction showSubmenu)}}
+            <div class="modal-dialog-footer">
+                {{#if primaryAction}}
+                    {{tr-button-editor onClick=primaryAction text=primaryText isDisabled=primaryIsDisabled buttonClass="theme-background-accent-normal-interactive" class="pull-right"}}
+                {{/if}}
+                {{#if showSubmenu}}
+                    <div class="modal-dialog-submenu">
+                        <button class="modal-dialog-submenu-label theme-background-accent-normal-interactive">
+                            &#9900;
+                            &#9900;
+                            &#9900;
+                        </button>
+                        <div class="modal-dialog-submenu-overlay">
+                            {{yield (hash submenu=(component 'tr-contentpresenter'))}}
+                        </div>
+                    </div>
+                {{/if}}
+                {{#if secondaryAction}}
+                    {{tr-button-editor onClick=secondaryAction text=secondaryText isDisabled=secondaryIsDisabled buttonClass="theme-background-accent-normal-interactive"}}
+                {{/if}}
+            </div>
+        {{/if}}
+    {{/modal-dialog}}
+{{/if}}

@@ -1,0 +1,153 @@
+.ember-modal-wrapper.bb-dialog-wrapper {
+  .ember-modal-dialog {
+    border-radius: 4px;
+    background-color: $color-background;
+    box-shadow: 0 0 10px $color-foreground;
+    padding: 0;
+    z-index: 51;
+    position: fixed;
+    min-width: 400px;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+
+    &.emd-in-place {
+      position: static;
+    }
+
+    .modal-dialog-header {
+      border-radius: 4px 4px 0 0;
+      background-color: $color-background-low;
+      color: $color-foreground;
+      padding: 16px;
+      font-family: $font-family-caption;
+      font-size: 140%;
+      order: 0;
+    }
+
+    .modal-dialog-content {
+      order: 1;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      padding: 16px;
+      /*color: $color-accent-high-alt;
+      .tr-label {
+        color: $color-accent-high-alt;
+      }*/
+    }
+
+    .modal-dialog-footer {
+      position: relative;
+      order: 2;
+      background-color: $color-background-low;
+      border-radius: 0 0 4px 4px;
+      padding: 0;
+      > .tr-editor.tr-button-editor > .tr-editor > .tr-editor-content-wrapper {
+        border: none;
+        button {
+          padding: 12px 32px;
+        }
+      }
+      .modal-dialog-submenu {
+        position: absolute;
+        margin-left: -1.5em;
+        left: 50%;
+        width: 3em;
+        bottom: 0;
+        top: 0;
+        > .modal-dialog-submenu-overlay {
+          display: none;
+          top: -100%;
+          z-index: 1;
+          padding: 0.5em;
+          left: -0.5em;
+        }
+        > .modal-dialog-submenu-label {
+          text-align: center;
+          height: 100%;
+          width: 100%;
+          background-color: transparent;
+        }
+        &:hover {
+          > .modal-dialog-submenu-overlay {
+            display: block;
+            position: absolute;
+            height: auto;
+          }
+        }
+      }
+    }
+
+    &.tr-message-box {
+      background-color: $color-accent;
+      .modal-dialog-content {
+        color: get-foreground-color($color-accent);
+        .tr-label {
+          color: get-foreground-color($color-accent);
+        }
+      }
+    }
+
+    &.fullsize {
+      min-width: 96%;
+      min-height: 96%;
+      border-radius: 0;
+    }
+  }
+  .ember-modal-overlay {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    &.translucent {
+      background-color: rgba($color-foreground, .95);
+    }
+  }
+  &.emd-static.emd-wrapper-target-attachment-center {
+    .ember-modal-dialog {
+      /*top: 50%;
+      transform: translate(-50%, -50%);*/
+      top: 15%;
+      left: 50%;
+      max-height: 70%;
+      overflow: hidden;
+      transform: translate(-50%, -0%);
+      &.fullsize {
+        top: auto;
+        left: auto;
+        transform: none;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        padding: 30px;
+        box-sizing: border-box;
+        background: no-repeat;
+      }
+    }
+  }
+  &.emd-animatable {
+    &.emd-wrapper-target-attachment-center {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &.emd-wrapper-target-attachment-center .ember-modal-overlay {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ember-modal-dialog {
+      position: relative;
+    }
+  }
+}

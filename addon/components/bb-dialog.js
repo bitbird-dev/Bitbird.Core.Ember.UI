@@ -1,9 +1,10 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import layout from 'bitbird-core-ember-ui/templates/components/tr-modal-dialog';
+import layout from 'bitbird-core-ember-ui/templates/components/bb-dialog';
 
 export default Component.extend({
     layout,
+    classNames: 'bb-dialog',
     header: null,
 
     primaryAction: null,
@@ -27,12 +28,6 @@ export default Component.extend({
     wrapperClass: null,
     containerClassNames: computed('isMessage', function() {
         return this.get('isMessage') ? 'tr-message-box' : null;
-    }),
-
-    isFooterVisible: computed('primaryAction', 'secondaryAction', {
-        get() {
-            return this.get('primaryAction') || this.get('secondaryAction');
-        }
     }),
 
     actions: {

@@ -2552,12 +2552,12 @@ a.active {
     .tr-datetime-picker-wrapper .tr-datetime-picker-footer .tr-datetime-picker-display-button:hover {
       background-color: #1aa9e7; }
   .tr-datetime-picker-wrapper .tr-datetime-picker-footer .tr-datetime-picker-hint {
-    max-width: 20em;
+    max-width: 160px;
     margin: 1em auto 0;
     background-color: #007bb1;
-    -webkit-border-radius: 1em;
-    -moz-border-radius: 1em;
-    border-radius: 1em;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
     padding: 0.2em 1em;
     font-size: 0.6rem;
     line-height: 0.9rem; }

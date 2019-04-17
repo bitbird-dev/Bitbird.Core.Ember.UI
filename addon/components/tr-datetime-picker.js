@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import { observer, computed } from '@ember/object';
 import layout from '../templates/components/tr-datetime-picker';
 import Ember from 'ember';
 import Moment from 'moment';
@@ -8,39 +9,12 @@ import { next } from '@ember/runloop';
 export default Component.extend(OutsideClick, {
     layout,
 
-    init() {
-        this.setProperties({
-            hours: [
-               0,1,2,3,4,5,6,7,8,9,
-               10,11,12,13,14,15,16,17,18,19,
-               20,21,22,23
-            ],
-            minutes: [
-               0,1,2,3,4,5,6,7,8,9,
-               10,11,12,13,14,15,16,17,18,19,
-               20,21,22,23,24,25,26,27,28,29,
-               30,31,42,33,34,35,36,37,38,39,
-               40,41,52,43,44,45,46,47,48,49,
-               50,51,62,53,54,55,56,57,58,59
-            ],
-            seconds: [
-               0,1,2,3,4,5,6,7,8,9,
-               10,11,12,13,14,15,16,17,18,19,
-               20,21,22,23,24,25,26,27,28,29,
-               30,31,42,33,34,35,36,37,38,39,
-               40,41,52,43,44,45,46,47,48,49,
-               50,51,62,53,54,55,56,57,58,59
-            ],
-        });
-        this._super(...arguments);
-    },
-
     classNames: ['tr-editor', 'tr-datetime-picker'],
     classNameBindings: ['timeMode'],
 
     year: null,
     month: null,
-    currentMonth: Ember.computed('year', 'month', function() {
+    currentMonth: computed('year', 'month', function() {
         let y = this.get('year'),
             m = this.get('month');
 
@@ -55,13 +29,39 @@ export default Component.extend(OutsideClick, {
     beginTime: null,
     endTime: null,
 
-    hours: null,
-    minutes: null,
-    seconds: null,
+    hours: [
+        0,1,2,3,4,5,6,7,8,9,
+        10,11,12,13,14,15,16,17,18,19,
+        20,21,22,23
+    ],
+    minutes: [
+        0,1,2,3,4,5,6,7,8,9,
+        10,11,12,13,14,15,16,17,18,19,
+        20,21,22,23,24,25,26,27,28,29,
+        30,31,42,33,34,35,36,37,38,39,
+        40,41,52,43,44,45,46,47,48,49,
+        50,51,62,53,54,55,56,57,58,59
+    ],
+    seconds: [
+        0,1,2,3,4,5,6,7,8,9,
+        10,11,12,13,14,15,16,17,18,19,
+        20,21,22,23,24,25,26,27,28,29,
+        30,31,42,33,34,35,36,37,38,39,
+        40,41,52,43,44,45,46,47,48,49,
+        50,51,62,53,54,55,56,57,58,59
+    ],
+
+    _updateRangeChanges: observer('minutes', function() {
+        //this.__updateUiForAllDays();
+        //this.notifyPropertyChange('timeMode');
+        //let b = this.set('beginTime');
+        //this.set('beginTime', null);
+        //this.set('beginTime', b);
+    }),
 
     isMonthPickerVisible: false,
     isYearPickerVisible: false,
-    isDetailPickerVisible: Ember.computed('isMonthPickerVisible', 'isYearPickerVisible', function() {
+    isDetailPickerVisible: computed('isMonthPickerVisible', 'isYearPickerVisible', function() {
         return this.get('isMonthPickerVisible') || this.get('isYearPickerVisible');
     }),
 
@@ -79,7 +79,7 @@ export default Component.extend(OutsideClick, {
      */
     timeMode: null,
 
-    timeCssClass: Ember.computed('mode', function() {
+    timeCssClass: computed('mode', function() {
         let mode = this.get('mode'),
             timeMode = this.get('timeMode') || '',
             cssClassNames = [];
@@ -92,7 +92,7 @@ export default Component.extend(OutsideClick, {
         return cssClassNames.join(' ');
     }),
 
-    hasValue: Ember.computed('date', 'selectedItems', 'selectedItems.length', 'rangeBegin', 'rangeEnd', function() {
+    hasValue: computed('date', 'selectedItems', 'selectedItems.length', 'rangeBegin', 'rangeEnd', function() {
         let mode = this.get('mode');
 
         switch(mode) {
@@ -109,10 +109,10 @@ export default Component.extend(OutsideClick, {
 
     $popup: null,
 
-    rangeBeginDisplayValue: Ember.computed('mode', 'date', 'selectedItems', 'selectedItems.length', 'rangeBegin', {
+    rangeBeginDisplayValue: computed('mode', 'date', 'selectedItems', 'selectedItems.length', 'rangeBegin', {
         set(key, value) {
             this._setValueFromString(value, 'rangeBegin');
-            return this.get('rangeBegin');
+            return this.get('rangeBeginDisplayValue');
         },
         get() {
             let date = this.get('rangeBegin');
@@ -124,10 +124,10 @@ export default Component.extend(OutsideClick, {
         }
     }),
 
-    rangeEndDisplayValue: Ember.computed('mode', 'date', 'selectedItems', 'selectedItems.length', 'rangeEnd', {
+    rangeEndDisplayValue: computed('mode', 'date', 'selectedItems', 'selectedItems.length', 'rangeEnd', {
         set(key, value) {
             this._setValueFromString(value, 'rangeEnd');
-            return this.get('rangeEnd');
+            return this.get('rangeEndDisplayValue');
         },
         get() {
             let date = this.get('rangeEnd');
@@ -139,7 +139,7 @@ export default Component.extend(OutsideClick, {
         }
     }),
 
-    displayValue: Ember.computed('mode', 'date', 'selectedItems', 'selectedItems.length', 'rangeBegin', 'rangeEnd', {
+    displayValue: computed('mode', 'date', 'selectedItems', 'selectedItems.length', 'rangeBegin', 'rangeEnd', {
         set(key, value) {
             let mode = this.get('mode');
 
@@ -169,7 +169,7 @@ export default Component.extend(OutsideClick, {
         }
     }),
 
-    displayValues: Ember.computed('mode', 'date', 'selectedItems', 'selectedItems.length', 'rangeBegin', 'rangeEnd', {
+    displayValues: computed('mode', 'date', 'selectedItems', 'selectedItems.length', 'rangeBegin', 'rangeEnd', {
         get() {
             let mode = this.get('mode'),
                 result = [];
@@ -255,7 +255,7 @@ export default Component.extend(OutsideClick, {
         }
     },
 
-    _updateTimeFromValue: Ember.observer('date', function() {
+    _updateTimeFromValue: observer('date', function() {
         let mode = this.get('mode');
         if(mode === 'single') {
             let date = this.get('date');
@@ -324,7 +324,7 @@ export default Component.extend(OutsideClick, {
         }
     },
 
-    _isOpenDidChange: Ember.observer('isOpen', function() {
+    _isOpenDidChange: observer('isOpen', function() {
         if(this.get('isOpen')) {
             this.open();
         } else {
@@ -377,7 +377,7 @@ export default Component.extend(OutsideClick, {
     renderEnd: null,
     weeks: null,
 
-    months: Ember.computed('year', function() {
+    months: computed('year', function() {
         let arr = [],
             year = this.get('year');
 
@@ -388,7 +388,7 @@ export default Component.extend(OutsideClick, {
         return arr;
     }),
 
-    years: Ember.computed('year', function() {
+    years: computed('year', function() {
         let arr = [],
             year = this.get('year'),
             offsetBefore = 12,
@@ -407,7 +407,7 @@ export default Component.extend(OutsideClick, {
      */
     disabledItems: null,
 
-    _refreshIntervalWeeks: Ember.observer(
+    _refreshIntervalWeeks: observer(
         'mode',
         'items',
         'year',
@@ -575,7 +575,7 @@ export default Component.extend(OutsideClick, {
             el.scrollIntoView();
         });
     },
-    _resetValue: Ember.observer('mode', function() {
+    _resetValue: observer('mode', function() {
         this.setProperties({
             date: null,
             rangeBegin: null,
@@ -709,7 +709,7 @@ export default Component.extend(OutsideClick, {
             return true;
         }
     },
-    _updateFromTime: Ember.observer('mode', 'date', 'rangeBegin', 'rangeEnd', 'selectedItems', 'beginTime', 'endTime', function() {
+    _updateFromTime: observer('mode', 'date', 'rangeBegin', 'rangeEnd', 'selectedItems', 'beginTime', 'endTime', function() {
         let mode = this.get('mode');
         switch(mode) {
             case 'single':

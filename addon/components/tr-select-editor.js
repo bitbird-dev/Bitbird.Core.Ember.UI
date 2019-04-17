@@ -2,7 +2,7 @@ import { computed, observer } from '@ember/object';
 import Editor from './tr-editor';
 import OutsideClick from '../mixins/tr-outside-click';
 import { A } from '@ember/array';
-import { next } from '@ember/runloop';
+import { next, debounce } from '@ember/runloop';
 import layout from '../templates/components/tr-select-editor';
 import Ember from 'ember';
 
@@ -348,14 +348,14 @@ export default Editor.extend(OutsideClick, {
 
     onTextChanged: function(value) {
         let all = this.get('items'),
-            editable = this.get('editable');
+            editable = this.get('editable'),
+            self = this;
 
         if(editable && value && value.length > 0) {
             let filtered = all.filter(function(item) {
-                if(item.get) {
-                    return item.get('value').toLowerCase().indexOf(value.toLowerCase()) == 0;
-                }
-                return item['value'].toLowerCase().indexOf(value.toLowerCase()) == 0;
+                let currentValue = self._getValue(item) || '';
+                let isMatch = currentValue.toLowerCase().indexOf(value.toLowerCase()) === 0;
+                return isMatch;
             });
 
             if(filtered && filtered.length > 0) {
@@ -375,7 +375,8 @@ export default Editor.extend(OutsideClick, {
     },
 
     _itemsDidChange: observer('items', function() {
-        this.onTextChanged();
+        debounce(this, this.onTextChanged, 150);
+        //this.onTextChanged();
     }),
 
     updateSuggestedValue: function(text) {

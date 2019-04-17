@@ -51,6 +51,11 @@ export default Component.extend(OutsideClick, {
         50,51,62,53,54,55,56,57,58,59
     ],
 
+    /**
+     * Text to show if range is waiting for an end date
+     */
+    waitingForEndDateText: 'Um ein anderes Enddatum zu wählen, klicken Sie bitte auf einen anderen Tag.',
+
     _updateRangeChanges: observer('minutes', function() {
         //this.__updateUiForAllDays();
         //this.notifyPropertyChange('timeMode');
@@ -677,19 +682,47 @@ export default Component.extend(OutsideClick, {
         this.set('date', date);
         return true;
     },
+    ___rangeSelectionState: 0,
     __selectRange(date) {
         let rangeBeginDate = this._extractDateWithoutTime(this.get('rangeBegin')),
-            rangeEndDate = this._extractDateWithoutTime(this.get('rangeEnd'));
+            rangeEndDate = this._extractDateWithoutTime(this.get('rangeEnd')),
+            ___rangeSelectionState = this.get('___rangeSelectionState');
 
-        if(this.get('rangeBegin') === null || date < rangeBeginDate || rangeEndDate !== null) {
+        //Fix state
+        if(rangeBeginDate && date < rangeBeginDate) {
+            ___rangeSelectionState = this.set('___rangeSelectionState', 0);
+        }
+
+        //Set new state
+        if(___rangeSelectionState === 0) {
+            this.setProperties({
+                rangeBegin: date,
+                rangeEnd: date,
+                ___rangeSelectionState: 1
+            });
+            return true;
+        }
+
+        if(___rangeSelectionState === 1) {
+            if(rangeEndDate && date && rangeEndDate.getTime() !== date.getTime()) {
+                this.setProperties({
+                    rangeEnd: date,
+                    ___rangeSelectionState: 0
+                });
+                return true;
+            }
+        }
+
+        return false;
+
+        /*if(this.get('rangeBegin') === null || date < rangeBeginDate || rangeEndDate !== null) {
             this.set('rangeBegin', date);
             this.set('rangeEnd', null);
             return true;
         } else if(this.get('rangeEnd') === null) {
             this.set('rangeEnd', date);
             return true;
-        }
-        return false;
+        }*/
     },
     __selectMultiple(date) {
         let selectedItems = this.get('selectedItems');

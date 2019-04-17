@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 
 export default Controller.extend({
     modeOptions: null,
-    selectedMode: 'single',
+    selectedMode: 'range',
 
     selectedDate: null,
     selectedItems: null,

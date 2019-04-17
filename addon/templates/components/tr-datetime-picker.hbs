@@ -135,16 +135,23 @@
                         <button class="tr-datetime-picker-display-button"{{action 'focus' date}}>{{displayValue}}</button>
                         <i class="tr-datetime-picker-clear-button fa fa-trash"{{action 'reset'}}></i>
                     {{else if (compare mode 'range')}}
-                        {{#if displayValues.[0].value}}
+                        {{#if (compare displayValues.[0].value displayValues.[1].value)}}
                             <button class="tr-datetime-picker-display-button"{{action 'focus' displayValues.[0].value}}>{{displayValues.[0].displayValue}}</button>
                         {{else}}
-                            ?
+                            {{#if displayValues.[0].value}}
+                                <button class="tr-datetime-picker-display-button"{{action 'focus' displayValues.[0].value}}>{{displayValues.[0].displayValue}}</button>
+                            {{else}}
+                                ?
+                            {{/if}}
+                            -
+                            {{#if displayValues.[1].value}}
+                                <button class="tr-datetime-picker-display-button"{{action 'focus' displayValues.[1].value}}>{{displayValues.[1].displayValue}}</button>
+                            {{else}}
+                                ?
+                            {{/if}}
                         {{/if}}
-                        -
-                        {{#if displayValues.[1].value}}
-                            <button class="tr-datetime-picker-display-button"{{action 'focus' displayValues.[1].value}}>{{displayValues.[1].displayValue}}</button>
-                        {{else}}
-                            ?
+                        {{#if (and (compare ___rangeSelectionState 1) waitingForEndDateText)}}
+                            <div class="tr-datetime-picker-hint"><span>{{waitingForEndDateText}}</span></div>
                         {{/if}}
                         <i class="tr-datetime-picker-clear-button fa fa-trash"{{action 'reset'}}></i>
                     {{else if (compare mode 'multiple')}}

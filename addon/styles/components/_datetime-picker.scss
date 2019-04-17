@@ -326,6 +326,17 @@
         background-color: $color-accent-lower-alt;
       }
     }
+    .tr-datetime-picker-hint {
+      max-width: 20em;
+      margin: 1em auto 0;
+      background-color: darken($color-accent, 10%);
+      -webkit-border-radius: 1em;
+      -moz-border-radius: 1em;
+      border-radius: 1em;
+      padding: 0.2em 1em;
+      font-size: 0.6rem;
+      line-height: 0.9rem;
+    }
   }
 
   .tr-datetime-picker-detail-overlay {

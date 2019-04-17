@@ -3,10 +3,38 @@ import layout from '../templates/components/tr-datetime-picker';
 import Ember from 'ember';
 import Moment from 'moment';
 import OutsideClick from '../mixins/tr-outside-click';
-const { next } = Ember.run;
+import { next } from '@ember/runloop';
 
 export default Component.extend(OutsideClick, {
     layout,
+
+    init() {
+        this.setProperties({
+            hours: [
+               0,1,2,3,4,5,6,7,8,9,
+               10,11,12,13,14,15,16,17,18,19,
+               20,21,22,23
+            ],
+            minutes: [
+               0,1,2,3,4,5,6,7,8,9,
+               10,11,12,13,14,15,16,17,18,19,
+               20,21,22,23,24,25,26,27,28,29,
+               30,31,42,33,34,35,36,37,38,39,
+               40,41,52,43,44,45,46,47,48,49,
+               50,51,62,53,54,55,56,57,58,59
+            ],
+            seconds: [
+               0,1,2,3,4,5,6,7,8,9,
+               10,11,12,13,14,15,16,17,18,19,
+               20,21,22,23,24,25,26,27,28,29,
+               30,31,42,33,34,35,36,37,38,39,
+               40,41,52,43,44,45,46,47,48,49,
+               50,51,62,53,54,55,56,57,58,59
+            ],
+        });
+        this._super(...arguments);
+    },
+
     classNames: ['tr-editor', 'tr-datetime-picker'],
     classNameBindings: ['timeMode'],
 
@@ -26,6 +54,10 @@ export default Component.extend(OutsideClick, {
 
     beginTime: null,
     endTime: null,
+
+    hours: null,
+    minutes: null,
+    seconds: null,
 
     isMonthPickerVisible: false,
     isYearPickerVisible: false,
@@ -76,6 +108,36 @@ export default Component.extend(OutsideClick, {
     }),
 
     $popup: null,
+
+    rangeBeginDisplayValue: Ember.computed('mode', 'date', 'selectedItems', 'selectedItems.length', 'rangeBegin', {
+        set(key, value) {
+            this._setValueFromString(value, 'rangeBegin');
+            return this.get('rangeBegin');
+        },
+        get() {
+            let date = this.get('rangeBegin');
+            if(!date)
+            {
+                return null;
+            }
+            return this._displayValueForDate(date);
+        }
+    }),
+
+    rangeEndDisplayValue: Ember.computed('mode', 'date', 'selectedItems', 'selectedItems.length', 'rangeEnd', {
+        set(key, value) {
+            this._setValueFromString(value, 'rangeEnd');
+            return this.get('rangeEnd');
+        },
+        get() {
+            let date = this.get('rangeEnd');
+            if(!date)
+            {
+                return null;
+            }
+            return this._displayValueForDate(date);
+        }
+    }),
 
     displayValue: Ember.computed('mode', 'date', 'selectedItems', 'selectedItems.length', 'rangeBegin', 'rangeEnd', {
         set(key, value) {
@@ -155,21 +217,40 @@ export default Component.extend(OutsideClick, {
         return Moment(date).format(formatString);
     },
 
-    _setValueFromString(value) {
+    _setValueFromString(value, valuePropertyName) {
         let mode = this.get('mode'),
             parsedValue = Moment(value, "DD.MM.YYYY HH:mm");
 
         if(parsedValue.isValid())
         {
+            let date = parsedValue.toDate(),
+                self = this;
+
             if(mode === 'single') {
-                let date = parsedValue.toDate(),
-                    self = this;
                 this.set('beginTime', this._buildTime(date.getHours(), date.getMinutes(), date.getSeconds()));
                 next(function() {
                     self._focusTime();
                 });
                 this._select(date, false);
                 this._focus(date);
+            } else if(mode === 'range') {
+                if(valuePropertyName === 'rangeBegin') {
+                    this.set('beginTime', this._buildTime(date.getHours(), date.getMinutes(), date.getSeconds()));
+                    next(this, function() {
+                        this.set('rangeBegin', date);
+                        let day = this.days[date.toDateString()];
+                        if(day) day.set('isSelected', true);
+                    });
+
+                    this.__updateUiForAllDays();
+                } else if(valuePropertyName === 'rangeEnd') {
+                    this.set('endTime', this._buildTime(date.getHours(), date.getMinutes(), date.getSeconds()));
+                    this.set('rangeEnd', date);
+                    let day = this.days[date.toDateString()];
+                    if(day) day.set('isSelected', true);
+
+                    this.__updateUiForAllDays();
+                }
             }
         }
     },

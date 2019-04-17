@@ -1,5 +1,5 @@
 <div class="tr-datetime-picker-control">
-    {{yield displayValue mode date range selectedItems (action 'toggle')}}
+    {{yield displayValue mode date (hash begin=rangeBegin beginDisplayValue=rangeBeginDisplayValue end=rangeEnd endDisplayValue=rangeEndDisplayValue) selectedItems (action 'toggle')}}
 </div>
 {{#ember-wormhole to="datetime-pickers"}}
     <div class="tr-datetime-picker-wrapper {{timeCssClass}}">
@@ -52,7 +52,7 @@
                                 <div class="tr-datetime-picker-detail-header">Stunde</div>
                                 <div class="tr-datetime-picker-detail-content">
                                     <ol>
-                                        {{#each (range 0 24) as |hour|}}
+                                        {{#each hours as |hour|}}
                                             <li {{action 'selectBeginTimePart' 'h' hour}} class="{{if (compare (pad-start hour 2 '0') '==' timeParts.[0]) 'is-selected'}}">{{pad-start hour 2}}</li>
                                         {{/each}}
                                     </ol>
@@ -62,7 +62,7 @@
                                 <div class="tr-datetime-picker-detail-header">Minute</div>
                                 <div class="tr-datetime-picker-detail-content">
                                     <ol>
-                                        {{#each (range 0 60) as |minute|}}
+                                        {{#each minutes as |minute|}}
                                             <li {{action 'selectBeginTimePart' 'm' minute}} class="{{if (compare (pad-start minute 2 '0') '==' timeParts.[1]) 'is-selected'}}">{{pad-start minute 2}}</li>
                                         {{/each}}
                                     </ol>
@@ -73,7 +73,7 @@
                                     <div class="tr-datetime-picker-detail-header">Sekunde</div>
                                     <div class="tr-datetime-picker-detail-content">
                                         <ol>
-                                            {{#each (range 0 60) as |second|}}
+                                            {{#each seconds as |second|}}
                                                 <li {{action 'selectBeginTimePart' 's' second}} class="{{if (compare (pad-start second 2 '0') '==' timeParts.[2]) 'is-selected'}}">{{pad-start second 2}}</li>
                                             {{/each}}
                                         </ol>
@@ -94,7 +94,7 @@
                                     <div class="tr-datetime-picker-detail-header">Stunde</div>
                                     <div class="tr-datetime-picker-detail-content">
                                         <ol>
-                                            {{#each (range 0 24) as |hour|}}
+                                            {{#each hours as |hour|}}
                                                 <li {{action 'selectEndTimePart' 'h' hour}} class="{{if (compare (pad-start hour 2 '0') '==' timeParts.[0]) 'is-selected'}}">{{pad-start hour 2}}</li>
                                             {{/each}}
                                         </ol>
@@ -104,7 +104,7 @@
                                     <div class="tr-datetime-picker-detail-header">Minute</div>
                                     <div class="tr-datetime-picker-detail-content">
                                         <ol>
-                                            {{#each (range 0 60) as |minute|}}
+                                            {{#each minutes as |minute|}}
                                                 <li {{action 'selectEndTimePart' 'm' minute}} class="{{if (compare (pad-start minute 2 '0') '==' timeParts.[1]) 'is-selected'}}">{{pad-start minute 2}}</li>
                                             {{/each}}
                                         </ol>
@@ -115,7 +115,7 @@
                                         <div class="tr-datetime-picker-detail-header">Sekunde</div>
                                         <div class="tr-datetime-picker-detail-content">
                                             <ol>
-                                                {{#each (range 0 60) as |second|}}
+                                                {{#each seconds as |second|}}
                                                     <li {{action 'selectEndTimePart' 's' second}} class="{{if (compare (pad-start second 2 '0') '==' timeParts.[2]) 'is-selected'}}">{{pad-start second 2}}</li>
                                                 {{/each}}
                                             </ol>

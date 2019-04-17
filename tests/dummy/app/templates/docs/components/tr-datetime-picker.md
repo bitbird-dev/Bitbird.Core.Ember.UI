@@ -30,6 +30,30 @@
   {{demo.snippet "tr-datetime-picker.hbs" label="template.hbs"}}
 {{/docs-demo}}
 
+## Custom hours, minutes and seconds 
+{{#docs-demo as |demo|}}
+    <div>
+        {{#demo.example name="tr-datetime-picker-custom-hms.hbs"}}
+        {{#tr-datetime-picker 
+            timeMode='hms' 
+            rangeBegin=rangeBegin 
+            rangeEnd=rangeEnd 
+            minutes=(array 0 15 30 45) 
+            hours=(array 6 7 8 9 10 11 12 13 14 15 16 17 18)
+            seconds=(array 0 30)
+            as |displayValue mode date range selectedItems toggle|}}
+            {{#if displayValue}}
+                <div {{action toggle}}>{{displayValue}}</div>
+            {{else}}
+                <a {{action toggle}}>Click to select a date</a>
+            {{/if}}
+        {{/tr-datetime-picker}}
+        {{/demo.example}}
+    </div>
+  {{demo.snippet "tr-datetime-picker-custom-hms.hbs" label="template.hbs"}}
+{{/docs-demo}}
+
+
 ## Use with editables
 {{#docs-demo as |demo|}}
      <div>
@@ -78,3 +102,21 @@
   {{demo.snippet "tr-datetime-picker-selection-mode.hbs" label="template.hbs"}}
 {{/docs-demo}}
 
+## Enhanced Range Mode 
+{{#docs-demo as |demo|}}
+    <div>
+        {{#demo.example name="tr-datetime-picker-enhanced-range.hbs"}}
+        {{#tr-datetime-picker 
+            timeMode='hm' 
+            mode='range' 
+            rangeBegin=rangeBegin 
+            rangeEnd=rangeEnd 
+            as |displayValue mode date range selectedItems toggle|}}
+            {{tr-text-editor label="Bound Begin" value=range.beginDisplayValue}}
+            {{tr-text-editor label="Bound End" value=range.endDisplayValue}}
+            {{tr-text-editor isDisabled=true label="ReadOnly Range" value=displayValue}}
+        {{/tr-datetime-picker}}
+        {{/demo.example}}
+    </div>
+  {{demo.snippet "tr-datetime-picker-enhanced-range.hbs" label="template.hbs"}}
+{{/docs-demo}}

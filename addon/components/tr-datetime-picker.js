@@ -51,6 +51,11 @@ export default Component.extend(OutsideClick, {
         50,51,62,53,54,55,56,57,58,59
     ],
 
+    init() {
+        this._updateTimeFromValue();
+        this._super(...arguments);
+    },
+
     /**
      * Text to show if range is waiting for an end date
      */
@@ -260,13 +265,26 @@ export default Component.extend(OutsideClick, {
         }
     },
 
-    _updateTimeFromValue: observer('date', function() {
+    _updateTimeFromValue: observer('date', 'rangeBegin', 'rangeEnd', function() {
         let mode = this.get('mode');
         if(mode === 'single') {
             let date = this.get('date');
             if(date)
             {
                 this.set('beginTime', this._buildTime(date.getHours(), date.getMinutes(), date.getSeconds()));
+            }
+        } else if(mode === 'range') {
+            let rangeBegin = this.get('rangeBegin'),
+                rangeEnd = this.get('rangeEnd');
+
+            if(rangeBegin)
+            {
+                this.set('beginTime', this._buildTime(rangeBegin.getHours(), rangeBegin.getMinutes(), rangeBegin.getSeconds()));
+            }
+
+            if(rangeEnd)
+            {
+                this.set('endTime', this._buildTime(rangeEnd.getHours(), rangeEnd.getMinutes(), rangeEnd.getSeconds()));
             }
         }
     }),

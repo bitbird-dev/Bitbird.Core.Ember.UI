@@ -1,4 +1,4 @@
-{{#g-map lat=(if lat lat 0.0001) lng=(if lng lng 0.0001) zoom=zoom
+{{#g-map lat=lat lng=lng zoom=zoom
          disableDefaultUI=disableDefaultUI
          zoomControl=zoomControl zoomControlOptions=zoomControlOptions
          onClick=(action "onClick") as |g|}}
@@ -8,12 +8,16 @@
         </div>
     {{/g.overlay}}
 {{/g-map}}
+{{#unless disableCoordinates}}
 <small class="tr-map-editor-location fade margin-h">Latitude {{lat}}, Longitude {{lng}}</small>
-<div class="padding-all">
-    {{#tr-label}}Adresse suchen{{/tr-label}}
-    <div>
-        {{tr-text-editor value=address}}
-        {{tr-button-editor text="Suchen" onClick=(action 'geocodeAddress')}}
+{{/unless}}
+{{#unless disableAddressSearch}}
+    <div class="padding-all">
+        {{#tr-label}}Adresse suchen{{/tr-label}}
+        <div>
+            {{tr-text-editor value=address}}
+            {{tr-button-editor text="Suchen" onClick=(action 'geocodeAddress')}}
+        </div>
     </div>
-</div>
+{{/unless}}
 {{yield}}

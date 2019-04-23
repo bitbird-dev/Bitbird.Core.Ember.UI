@@ -5,6 +5,14 @@ import { reads } from '@ember/object/computed';
 
 export default Component.extend({
     layout,
+
+    init() {
+        this._super(...arguments);
+        if(this.get('autoGeocode') === true) {
+            this.addObserver('address', this, '_autoGeocodeAddress');
+        }
+    },
+
     classNames: 'tr-map-editor',
 
     googleMapsApi: Ember.inject.service(),
@@ -13,8 +21,11 @@ export default Component.extend({
         if(this._geocoder) return this._geocoder;
 
         let google = this.get('googleMapsApi.google').content;
-        return this._geocoder = new google.maps.Geocoder();
-    }),
+        if(google && google.maps) return this._geocoder = new google.maps.Geocoder();
+        return null;
+    }).volatile(),
+
+    autoGeocode: false,
 
     zoom: 11,
     lat: 0.0001,
@@ -22,24 +33,41 @@ export default Component.extend({
     title: null,
 
     address: null,
+    disableAddressSearch: false,
+    disableCoordinates: false,
 
     disableDefaultUI: true,
     zoomControl: true,
 
-    geocodeAddress(address) {
+    _autoGeocodeAddress() {
+        this.geocodeAddress(this.get('address'), false)
+    },
+
+    geocodeAddress(address, updateAddress) {
         let self = this,
             geocoder = this.get('geocoder');
+
+        if(!geocoder) {
+            return;
+        }
 
         geocoder.geocode({'address': address}, function(results, status) {
             if (status === 'OK') {
                 let result = results[0];
                 self.setProperties({
                     lat: result.geometry.location.lat(),
-                    lng: result.geometry.location.lng(),
-                    address: result.formatted_address
+                    lng: result.geometry.location.lng()
                 });
+                if(updateAddress !== false) {
+                    self.set('address', result.formatted_address);
+                }
             } else {
-                Ember.Warn('Geocode was not successful for the following reason: ' + status);
+                //Ember.Warn('Geocode was not successful for the following reason: ' + status);
+                self.setProperties({
+                    lat: null,
+                    lng: null,
+                    zoom: 1
+                });
             }
         });
     },

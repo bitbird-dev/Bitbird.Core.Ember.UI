@@ -1,6 +1,6 @@
 {
     "name": "bitbird-core-ember-ui",
-    "version": "1.0.72",
+    "version": "1.0.73",
     "description": "Bitbird components for ember.js.",
     "keywords": [
         "ember-addon",

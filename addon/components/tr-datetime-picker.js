@@ -314,11 +314,18 @@ export default Component.extend(OutsideClick, {
         });
     },
 
+    willDestroyElement() {
+        let id = `datetime-pickers-${this.get('elementId')}`;
+        this.$(document).find(`#${id}`).remove();
+    },
+
     _initUI() {
         let self = this;
 
-        if(this.$(window).find('#datetime-pickers').length === 0) {
-            this.$('<div id="datetime-pickers"></div>').appendTo('body');
+        let id = `datetime-pickers-${this.get('elementId')}`;
+
+        if(this.$(document).find(`#${id}`).length === 0) {
+            this.$(`<div id="${id}"></div>`).appendTo('body');
         }
 
         this.$popup = this.$('.tr-datetime-picker-wrapper');

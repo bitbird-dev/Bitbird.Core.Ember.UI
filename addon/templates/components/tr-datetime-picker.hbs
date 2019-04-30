@@ -1,7 +1,7 @@
 <div class="tr-datetime-picker-control">
     {{yield displayValue mode date (hash begin=rangeBegin beginDisplayValue=rangeBeginDisplayValue end=rangeEnd endDisplayValue=rangeEndDisplayValue) selectedItems (action 'toggle')}}
 </div>
-{{#ember-wormhole to="datetime-pickers"}}
+{{#ember-wormhole to=(concat "datetime-pickers-" elementId)}}
     <div class="tr-datetime-picker-wrapper {{timeCssClass}}">
         <div class="tr-datetime-picker-content">
             <div class="tr-datetime-picker-date-panel">

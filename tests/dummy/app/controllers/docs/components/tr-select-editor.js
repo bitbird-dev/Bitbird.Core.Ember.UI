@@ -10,7 +10,10 @@ export default Controller.extend({
   selectedValue: 'Item 3',
   values: null,
 
+  style: 'popout',
+
   toggleAllowNull:false,
+
   init(){
     this._super(...arguments);
 // BEGIN-SNIPPET tr-select-editor.js
@@ -34,6 +37,9 @@ export default Controller.extend({
       },
       selectKey(key) {
           this.set('selectedKey', key);
+      },
+      selectStyle(key) {
+          this.set('style', key);
       }
   }
 });

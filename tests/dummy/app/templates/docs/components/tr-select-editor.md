@@ -59,9 +59,9 @@ Dropdown appears in the wrong place if browser-window is scrolled.
       <button {{action 'selectItemByKey' 'key 2'}}>Select item 2</button>
       <button {{action 'selectItemByKey' 'key 3'}}>Select item 3</button>
     </div>
-    {{tr-select-editor items=items selectedItem=selectedItem editable=true suggestedValue=suggestedValue}}
-      <p>Selected: {{selectedItem.value}}</p>
-      <p>Suggested: {{suggestedValue}}</p>
+    <p>Selected: {{selectedItem.value}}</p>
+    <p>Suggested: {{suggestedValue}}</p>
+    {{tr-select-editor items=items selectedItem=selectedItem editable=true _suggestedValue=suggestedValue}}
   {{/demo.example}}
   {{demo.snippet 'tr-select-editor-filter.hbs' label='template.hbs'}}
   {{demo.snippet 'tr-select-editor-filter.js' label='controller.js'}}
@@ -88,6 +88,31 @@ Dropdown appears in the wrong place if browser-window is scrolled.
   {{demo.snippet 'tr-select-editor-template.hbs' label='template.hbs'}}
   {{demo.snippet 'tr-select-editor-template.js' label='controller.js'}}
   {{demo.snippet 'tr-select-editor-template.css' label='style.scss'}}
+{{/docs-demo}}
+
+## Alternative styles
+
+{{#docs-demo as |demo|}}
+  {{#demo.example name='tr-select-editor-styles.hbs'}}
+    <div class="docu-options-block">
+      <button {{action 'selectStyle' 'select'}}>Select</button>
+      <button {{action 'selectStyle' 'flat'}}>Flat</button>
+      <button {{action 'selectStyle' 'popout'}}>Popout</button><br>
+      <button {{action 'selectItemByKey' 'key 1'}}>Select item 1</button>
+      <button {{action 'selectItemByKey' 'key 2'}}>Select item 2</button>
+      <button {{action 'selectItemByKey' 'key 3'}}>Select item 3</button>      
+    </div>
+    {{#tr-select-editor items=items selectedItem=selectedItem style=style as |select|}}
+        {{#select.itemTemplate as |item|}}
+            <strong>Item with super {{item.key}}</strong><br>
+            <small>{{item.value}}</small>        
+        {{/select.itemTemplate}}
+    {{/tr-select-editor}}
+      <p>Selected: {{selectedItem.value}}</p>
+  {{/demo.example}}
+  {{demo.snippet 'tr-select-editor-objects.hbs' label='template.hbs'}}
+  {{demo.snippet 'tr-select-editor-objects.js' label='controller.js'}}
+  {{demo.snippet 'tr-select-editor-objects.css' label='style.scss'}}
 {{/docs-demo}}
 
 ## Simple usage within scrollables

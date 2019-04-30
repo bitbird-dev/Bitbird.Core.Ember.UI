@@ -53,7 +53,7 @@
     {{/unless}}
 {{else}}
     {{#if editable}}
-        {{input value=(readonly suggestedValue) class="tr-select-editor-suggestion" readonly="readonly"}}
+        {{input value=(readonly suggestedValue) class="tr-select-editor-suggestion" readonly="readonly" click=(action "editableClick")}}
         {{tr-text-editor value=(readonly selectedValue) label=label placeholder=placeholder errors=errors onTextChanged=(action 'onTextChanged') prefix=prefix postfix=postfix}}
     {{else}}
         {{#tr-button-editor text=displayValue label=label placeholder=placeholder errors=errors buttonClass=buttonClass isDisabled=isDisabled readonly=isReadonly prefix=prefix postfix=postfix

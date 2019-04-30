@@ -32,9 +32,10 @@ export default Editor.extend(OutsideClick, {
     _updateListPosition() {
         if(!this.get('destinationElement')) return;
 
-        let $target = $('#' + this.get('destinationElement')),
+        let editable = this.get('editable'),
+            $target = $('#' + this.get('destinationElement')),
             $source = $('#' + this.get('elementId')),
-            $innerSource = $('#' + this.get('elementId') + ' .tr-button-editor .tr-editor-content > button');
+            $innerSource = $('#' + this.get('elementId') + ' > .tr-editor > .tr-editor > .tr-editor-content-wrapper');
 
         //console.log($source.scrollParent().scrollTop());
         let topOffset = $source[0].getBoundingClientRect().top;
@@ -414,6 +415,9 @@ export default Editor.extend(OutsideClick, {
             if(this.get('isDisabled') || this.get('isReadonly')) return;
 
             this.onTextChanged(value);
+        },
+        editableClick: function(event) {
+            event.preventDefault();
         },
         onSelectedItemChanged(item) {
             if(this.get('isDisabled') || this.get('isReadonly')) return;

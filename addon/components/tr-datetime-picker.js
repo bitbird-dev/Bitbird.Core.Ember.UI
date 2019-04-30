@@ -428,13 +428,15 @@ export default Component.extend(OutsideClick, {
      * Return false to disable selection
      * @param args
      */
-    disabledItems: null,
+    canSelect: null,
 
     _refreshIntervalWeeks: observer(
         'mode',
         'items',
         'year',
         'month',
+        'rangeBegin',
+        'rangeEnd',
         'startsOnMonday',
         function () {
             let self = this,
@@ -642,13 +644,18 @@ export default Component.extend(OutsideClick, {
     __updateUiSelection(day) {
         let mode = this.get('mode'),
             date = day.get('date'),
-            disabledItemsFun = this.get('disabledItems');
+            canSelect = this.get('canSelect');
 
-        let isCustomDisabled = disabledItemsFun && disabledItemsFun({
+        let isDisabled = canSelect && canSelect({
             mode: mode,
             date: date,
-            selection: mode === 'range' ? { begin: this.get('rangeBegin'), end: this.get('rangeEnd') } : (mode === 'multiple' ? this.get('selectedItems') : this.get('date'))
-        }) === true;
+            selection: mode === 'range' ?
+                {
+                    begin: this.get('rangeBegin'),
+                    end: this.get('rangeEnd'),
+                    waitingForEndSelection: this.get('___rangeSelectionState') === 1
+                } : (mode === 'multiple' ? this.get('selectedItems') : this.get('date'))
+        }) === false;
 
         if(mode === 'single')
         {
@@ -657,7 +664,7 @@ export default Component.extend(OutsideClick, {
                 isRange: false,
                 isRangeEnd: false,
                 isSelected: date && this.get('date') && date.toDateString() === this.get('date').toDateString(),
-                isDisabled: isCustomDisabled
+                isDisabled: isDisabled
             });
         } else if(mode === 'range') {
             let rangeBegin = this.get('rangeBegin'),
@@ -673,7 +680,7 @@ export default Component.extend(OutsideClick, {
                 isRangeEnd: isRangeEnd,
                 isSelected: isInRange,
                 isBeforeRangeBegin: !rangeEnd && rangeBegin && day.date < rangeBegin,
-                isDisabled: isCustomDisabled
+                isDisabled: isDisabled
             });
         } else if (mode === 'multiple') {
             let selectedItems = this.get('selectedItems') || [];
@@ -683,7 +690,7 @@ export default Component.extend(OutsideClick, {
                 isRange: false,
                 isRangeEnd: false,
                 isSelected: date && selectedItems.map(function(d) { return d.toDateString(); }).includes(date.toDateString()),
-                isDisabled: isCustomDisabled
+                isDisabled: isDisabled
             });
         }
     },

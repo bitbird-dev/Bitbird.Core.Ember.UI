@@ -23,7 +23,7 @@
                     {{#each weeks as |week|}}
                         <ol>
                             {{#each week as |day|}}
-                                <li {{action 'select' day}} class="
+                                <li {{action 'select' day}}  {{action 'selectWithReset' day on="doubleClick"}} class="
                     {{unless day.isCurrentMonth 'is-other-month '}}
                                     {{if day.isDisabled 'is-disabled '}}
                                     {{if day.isSelected 'is-selected '}}

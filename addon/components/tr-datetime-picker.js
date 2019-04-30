@@ -425,7 +425,7 @@ export default Component.extend(OutsideClick, {
     }),
 
     /**
-     * Return false to disable selection
+     * Return false to disable selection, return 0 to allow double click on disabled items
      * @param args
      */
     canSelect: null,
@@ -644,9 +644,10 @@ export default Component.extend(OutsideClick, {
     __updateUiSelection(day) {
         let mode = this.get('mode'),
             date = day.get('date'),
-            canSelect = this.get('canSelect');
+            canSelectFun = this.get('canSelect'),
+            isDisabled = false;
 
-        let isDisabled = canSelect && canSelect({
+        let canSelect = canSelectFun && canSelectFun({
             mode: mode,
             date: date,
             selection: mode === 'range' ?
@@ -655,7 +656,13 @@ export default Component.extend(OutsideClick, {
                     end: this.get('rangeEnd'),
                     waitingForEndSelection: this.get('___rangeSelectionState') === 1
                 } : (mode === 'multiple' ? this.get('selectedItems') : this.get('date'))
-        }) === false;
+        });
+
+        if(canSelect === false) {
+            isDisabled = true;
+        } else if(canSelect === 0) {
+            isDisabled = 1;
+        }
 
         if(mode === 'single')
         {
@@ -910,6 +917,13 @@ export default Component.extend(OutsideClick, {
         },
         select(day) {
             if(!day || day.get('isDisabled')) return;
+            this._closeDetailPickers();
+            this._select(day.date);
+        },
+        selectWithReset(day) {
+            //If isDisabled is 1, allow double click!
+            if(!day || day.get('isDisabled') === true) return;
+            this.set('___rangeSelectionState', 0);
             this._closeDetailPickers();
             this._select(day.date);
         },

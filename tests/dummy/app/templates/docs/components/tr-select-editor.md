@@ -110,9 +110,31 @@ Dropdown appears in the wrong place if browser-window is scrolled.
     {{/tr-select-editor}}
       <p>Selected: {{selectedItem.value}}</p>
   {{/demo.example}}
-  {{demo.snippet 'tr-select-editor-objects.hbs' label='template.hbs'}}
-  {{demo.snippet 'tr-select-editor-objects.js' label='controller.js'}}
-  {{demo.snippet 'tr-select-editor-objects.css' label='style.scss'}}
+  {{demo.snippet 'tr-select-editor-styles.hbs' label='template.hbs'}}
+  {{demo.snippet 'tr-select-editor-styles.js' label='controller.js'}}
+  {{demo.snippet 'tr-select-editor-styles.css' label='style.scss'}}
+{{/docs-demo}}
+
+## Multiple Selection
+
+{{#docs-demo as |demo|}}
+  {{#demo.example name='tr-select-editor-multiple.hbs'}}
+    <div class="docu-options-block">
+      <button {{action 'selectItemByKey' 'key 1'}}>Select item 1</button>
+      <button {{action 'selectItemByKey' 'key 2'}}>Select item 2</button>
+      <button {{action 'selectItemByKey' 'key 3'}}>Select item 3</button>      
+    </div>
+    {{#tr-select-editor items=items selectedItems=selectedItems style='popout' isMultiple=true as |select|}}
+        {{#select.itemTemplate as |item isSelected|}}
+            <strong>Item with super {{item.key}} {{isSelected}}</strong><br>
+            <small>{{item.value}}</small>        
+        {{/select.itemTemplate}}
+    {{/tr-select-editor}}
+      <p>Selected: {{selectedItem.value}}</p>
+  {{/demo.example}}
+  {{demo.snippet 'tr-select-editor-multiple.hbs' label='template.hbs'}}
+  {{demo.snippet 'tr-select-editor-multiple.js' label='controller.js'}}
+  {{demo.snippet 'tr-select-editor-multiple.css' label='style.scss'}}
 {{/docs-demo}}
 
 ## Simple usage within scrollables

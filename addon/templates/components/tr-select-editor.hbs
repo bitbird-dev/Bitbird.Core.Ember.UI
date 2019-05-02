@@ -32,7 +32,7 @@
             {{#with emptyText}}
                 {{#tr-listview items=filteredItems itemClass=null selectedItem=(readonly selectedItem) onSelectedItemChanged=(action 'onSelectedItemChanged') as |listView|}}
                     {{#if listView.itemTemplate}}
-                        {{yield (hash data=listView.data isSelected=(contains selectedItems listView.data selectedItems.length) itemTemplate=(component 'tr-container'))}}
+                        {{yield (hash data=listView.data isSelected=(contains listView.data selectedItems) itemTemplate=(component 'tr-contentpresenter' context=listView.data param1=(contains listView.data selectedItems)))}}
                     {{else}}
                         {{#if valueProperty}}
                             {{tr-select-editor-item content=listView.data valueProperty=valueProperty}}

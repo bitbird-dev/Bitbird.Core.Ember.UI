@@ -3,6 +3,7 @@ import EmberObject from '@ember/object';
 import {A} from '@ember/array';
 
 export default Controller.extend({
+  selectedItems: A(),
   selectedItem: null,
   selectedKey: 'key 1',
   items: null,

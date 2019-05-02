@@ -10,6 +10,8 @@ export default Component.extend({
         this._super(...arguments);
         if(this.get('autoGeocode') === true) {
             this.addObserver('address', this, '_autoGeocodeAddress');
+            this.addObserver('geocoder', this, '_autoGeocodeAddress');
+            this._autoGeocodeAddress();
         }
     },
 
@@ -18,16 +20,26 @@ export default Component.extend({
     googleMapsApi: Ember.inject.service(),
     google: reads('googleMapsApi.google'),
     geocoder: Ember.computed(function() {
+        let self = this;
+
         if(this._geocoder) return this._geocoder;
 
-        let google = this.get('googleMapsApi.google').content;
-        if(google && google.maps) return this._geocoder = new google.maps.Geocoder();
+        let google = this.get('googleMapsApi.google');
+
+        if(!google.isFulfilled) {
+            google.then(function() {
+                self.notifyPropertyChange('geocoder');
+            });
+            return null;
+        }
+
+        if(google.content && google.content.maps) return this._geocoder = new google.content.maps.Geocoder();
         return null;
     }).volatile(),
 
     autoGeocode: false,
 
-    zoom: 11,
+    zoom: 2,
     lat: 0.0001,
     lng: 0.0001,
     title: null,

@@ -7,6 +7,24 @@
             {{title}}
         </div>
     {{/g.overlay}}
+    {{#if coordinates}}
+        {{#if connectCoordinates}}
+            {{g.polyline path=coordinates
+                         geodesic=true
+                         strokeColor=color
+                         strokeOpacity=1.0
+                         strokeWeight=3}}
+        {{/if}}
+        {{#if showCoordinateMarkers}}
+            {{#each coordinates as |l|}}
+                {{g.marker
+                        lat=l.lat
+                        lng=l.lng
+                        draggable=false
+                        onClick=(action "onMarkerClick")}}
+            {{/each}}
+        {{/if}}
+    {{/if}}
 {{/g-map}}
 {{#unless disableCoordinates}}
 <small class="tr-map-editor-location fade margin-h">Latitude {{lat}}, Longitude {{lng}}</small>

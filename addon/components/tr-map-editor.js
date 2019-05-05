@@ -48,6 +48,12 @@ export default Component.extend({
     disableAddressSearch: false,
     disableCoordinates: false,
 
+    color: "#222",
+
+    coordinates: null,
+    connectCoordinates: false,
+    showCoordinateMarkers: true,
+
     disableDefaultUI: true,
     zoomControl: true,
 
@@ -93,6 +99,9 @@ export default Component.extend({
                 lat: event.googleEvent.latLng.lat(),
                 lng: event.googleEvent.latLng.lng()
             });
+        },
+        onMarkerClick() {
+
         }
     }
 });

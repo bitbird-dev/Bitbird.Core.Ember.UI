@@ -1,13 +1,23 @@
 import Ember from 'ember';
 import Component from '@ember/component';
 import layout from '../templates/components/tr-map-editor';
+import { computed } from '@ember/object';
 import { reads } from '@ember/object/computed';
 
 export default Component.extend({
     layout,
+    googleMapsApi: Ember.inject.service(),
 
     init() {
+        let self = this;
+
         this._super(...arguments);
+        this.set('_google', this.get('googleMapsApi.google'));
+        this.get('_google').then(function(google) {
+            self.set('geocoder', new google.maps.Geocoder());
+            self.notifyPropertyChange('_polyLineIcons');
+        });
+
         if(this.get('autoGeocode') === true) {
             this.addObserver('address', this, '_autoGeocodeAddress');
             this.addObserver('geocoder', this, '_autoGeocodeAddress');
@@ -15,27 +25,11 @@ export default Component.extend({
         }
     },
 
+    _google: null,
+
     classNames: 'tr-map-editor',
 
-    googleMapsApi: Ember.inject.service(),
-    google: reads('googleMapsApi.google'),
-    geocoder: Ember.computed(function() {
-        let self = this;
-
-        if(this._geocoder) return this._geocoder;
-
-        let google = this.get('googleMapsApi.google');
-
-        if(!google.isFulfilled) {
-            google.then(function() {
-                self.notifyPropertyChange('geocoder');
-            });
-            return null;
-        }
-
-        if(google.content && google.content.maps) return this._geocoder = new google.content.maps.Geocoder();
-        return null;
-    }).volatile(),
+    geocoder: null,
 
     autoGeocode: false,
 
@@ -49,7 +43,38 @@ export default Component.extend({
     disableCoordinates: false,
 
     color: "#222",
+    lineSymbol: null,
+    _polyLineIcons: computed('symbol', function() {
+        let symbol = (this.get('lineSymbol') || '').toUpperCase(),
+            google = this.get('_google'),
+            maps = google.get('maps'),
+            _icons = [{
+                icon: null,
+                offset: '100%'
+            }];
 
+        if(!google || !maps) return null;
+
+        switch(symbol) {
+            case "CIRCLE":
+                _icons[0].icon = maps.SymbolPath.CIRCLE;
+                return _icons;
+            case "BACKWARD_CLOSED_ARROW":
+                _icons[0].icon = maps.SymbolPath.BACKWARD_CLOSED_ARROW;
+                return _icons;
+            case "FORWARD_CLOSED_ARROW":
+                _icons[0].icon = maps.SymbolPath.FORWARD_CLOSED_ARROW;
+                return _icons;
+            case "BACKWARD_OPEN_ARROW":
+                _icons[0].icon = maps.SymbolPath.BACKWARD_OPEN_ARROW;
+                return _icons;
+            case "FORWARD_OPEN_ARROW":
+                _icons[0].icon = maps.SymbolPath.FORWARD_OPEN_ARROW;
+                return _icons;
+            default:
+                return null;
+        }
+    }),
     coordinates: null,
     connectCoordinates: false,
     showCoordinateMarkers: true,

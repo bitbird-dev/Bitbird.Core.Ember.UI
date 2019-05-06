@@ -10,6 +10,7 @@
     {{#if coordinates}}
         {{#if connectCoordinates}}
             {{g.polyline path=coordinates
+                         icons=_polyLineIcons
                          geodesic=true
                          strokeColor=color
                          strokeOpacity=1.0

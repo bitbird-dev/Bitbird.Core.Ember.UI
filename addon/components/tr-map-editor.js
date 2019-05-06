@@ -82,6 +82,8 @@ export default Component.extend({
     disableDefaultUI: true,
     zoomControl: true,
 
+    onMarkerClick: null,
+
     _autoGeocodeAddress() {
         this.geocodeAddress(this.get('address'), false)
     },
@@ -125,8 +127,11 @@ export default Component.extend({
                 lng: event.googleEvent.latLng.lng()
             });
         },
-        onMarkerClick() {
-
+        onMarkerClick(args) {
+            let onMarkerClick = this.get('onMarkerClick');
+            if(onMarkerClick) {
+                onMarkerClick(args);
+            }
         }
     }
 });

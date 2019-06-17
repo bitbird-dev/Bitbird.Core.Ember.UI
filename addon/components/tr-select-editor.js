@@ -399,8 +399,6 @@ export default Editor.extend(OutsideClick, {
             return self._getValue(item);
         });
 
-        if(this.get('selectedValue'))
-
         return !(itemValues.indexOf(this._getValue(selectedItem)) === -1 && this.get('allowUnknownValue'));
 
     },

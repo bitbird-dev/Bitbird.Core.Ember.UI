@@ -250,6 +250,7 @@ export default Editor.extend(OutsideClick, {
                 selectedKey: this._getKey(selectedItem),
                 selectedValue: this._getValue(selectedItem),
                 suggestedItem: null,
+                suggestedValue: null
             });
             //this.close();
         //});
@@ -272,13 +273,6 @@ export default Editor.extend(OutsideClick, {
             }
             this.set('selectedItem', null);
         //});
-    }),
-
-    _suggestedItemChanged: observer('suggestedItem', function(){
-        let suggestedItem = this.get('suggestedItem');
-        next(this, function() {
-            this.set('suggestedValue', this._getValue(suggestedItem));
-        });
     }),
 
     /*** Exposed Events **/
@@ -348,15 +342,15 @@ export default Editor.extend(OutsideClick, {
 
     /*** Helpers ***/
 
-    onTextChanged: function(value) {
+    _onTextChanged: function(text) {
         let all = this.get('items'),
             editable = this.get('editable'),
             self = this;
 
-        if(editable && value && value.length > 0) {
+        if(editable && text && text.length > 0) {
             let filtered = all.filter(function(item) {
                 let currentValue = self._getValue(item) || '';
-                return currentValue.toLowerCase().indexOf(value.toLowerCase()) === 0;
+                return currentValue.toLowerCase().indexOf(text.toLowerCase()) === 0;
             });
 
             if(filtered && filtered.length > 0) {
@@ -364,13 +358,13 @@ export default Editor.extend(OutsideClick, {
             } else {
                 this.set('suggestedItem', null);
             }
-            this.updateSuggestedValue(value);
+            this.updateSuggestedValue(text);
             this.set('filteredItems', filtered);
         }
         else
         {
             this.set('suggestedItem', null);
-            this.updateSuggestedValue(value);
+            this.updateSuggestedValue(text);
             this.set('filteredItems', all);
         }
     },
@@ -379,16 +373,26 @@ export default Editor.extend(OutsideClick, {
         let selectedItem = this.get('selectedItem'),
             suggestedItem = this.get('suggestedItem') || selectedItem;
 
-        if(!this.get('isDestroyed')) {
-            if(this._selectionIsValid()) {
-                this.set('selectedItem', suggestedItem);
-                this.set('suggestedItem', null);
-            } else {
-                this.set('selectedItem', null);
-                this.set('suggestedItem', null);
-            }
-            this.notifyPropertyChange('selectedValue');
+        console.log(selectedItem);
+        console.log(suggestedItem);
+
+        if(this.get('isDestroyed')) {
+            return;
         }
+
+        if(this._selectionIsValid()) {
+            selectedItem = suggestedItem
+            //this.set('selectedItem', suggestedItem);
+        } else {
+            selectedItem = null;
+            //this.set('selectedItem', null);
+        }
+
+        this.setProperties({
+            selectedItem: selectedItem,
+            suggestedItem: null,
+            suggestedValue: null
+        });
     },
 
     _selectionIsValid() {
@@ -400,12 +404,10 @@ export default Editor.extend(OutsideClick, {
         });
 
         return !(itemValues.indexOf(this._getValue(selectedItem)) === -1 && this.get('allowUnknownValue'));
-
     },
 
     _itemsDidChange: observer('items', function() {
-        debounce(this, this.onTextChanged, 150);
-        //this.onTextChanged();
+        debounce(this, this._onTextChanged, 150);
     }),
 
     updateSuggestedValue: function(text) {
@@ -459,7 +461,7 @@ export default Editor.extend(OutsideClick, {
         onTextChanged: function(value) {
             if(this.get('isDisabled') || this.get('isReadonly')) return;
 
-            this.onTextChanged(value);
+            this._onTextChanged(value);
         },
         editableClick: function(event) {
             event.preventDefault();
@@ -491,6 +493,10 @@ export default Editor.extend(OutsideClick, {
             if(this.get('isDisabled') || this.get('isReadonly')) return;
 
             this.set('selectedItem', null);
+            if(this.get('selectedItems'))
+            {
+                this.get('selectedItems').clear();
+            }
             this.set('suggestedItem', null);
 
             if(!this.get('isMultiple')) this.close();

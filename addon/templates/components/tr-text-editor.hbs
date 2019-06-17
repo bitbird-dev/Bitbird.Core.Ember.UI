@@ -11,6 +11,7 @@
     {{/if}}
     {{#e.content}}
         {{input value=value placeholder=placeholder disabled=isDisabled readonly=isReadonly autocomplete=autocomplete visible=isVisible maxlength=maxLength}}
+        {{yield}}
     {{/e.content}}
     {{#if postfix}}
         {{#e.postfix}}

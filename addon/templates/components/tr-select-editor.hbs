@@ -54,7 +54,19 @@
 {{else}}
     {{#if editable}}
         {{input value=(readonly suggestedValue) class="tr-select-editor-suggestion" readonly="readonly" click=(action "editableClick")}}
-        {{tr-text-editor value=(readonly selectedValue) label=label placeholder=placeholder errors=errors onTextChanged=(action 'onTextChanged') prefix=prefix postfix=postfix}}
+        {{#tr-text-editor value=(readonly selectedValue) label=label placeholder=placeholder errors=errors onTextChanged=(action 'onTextChanged') prefix=prefix postfix=postfix}}
+            <div class="button-placeholder">
+            {{#unless isDisabledOrReadonly}}
+                {{#if allowNull}}
+                    <button class="tr-select-editor-button-clear" {{action 'onClearValue' bubbles=false}} disabled={{isDisabled}}><span>&#10006;</span></button>
+                {{/if}}
+            {{/unless}}
+            <button class="tr-select-editor-button-arrow" {{action 'onToggleState' bubbles=false}} disabled={{isDisabled}}><span>&#9660;</span></button>
+            {{#if isBusy}}
+                {{tr-text-loader}}
+            {{/if}}
+            </div>
+        {{/tr-text-editor}}
     {{else}}
         {{#tr-button-editor text=displayValue label=label placeholder=placeholder errors=errors buttonClass=buttonClass isDisabled=isDisabled readonly=isReadonly prefix=prefix postfix=postfix
             onClick=(action 'onToggleState' bubbles=false)}}

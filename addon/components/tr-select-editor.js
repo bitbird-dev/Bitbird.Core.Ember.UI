@@ -225,6 +225,11 @@ export default Editor.extend(OutsideClick, {
     allowNull: true,
 
     /**
+     * Allow to select unknown values
+     */
+    allowUnknownValue: false,
+
+    /**
      * Item property to use as id value
      */
     idPropertyName: 'id',
@@ -240,9 +245,12 @@ export default Editor.extend(OutsideClick, {
     /*** OBSERVER ***/
     _selectedItemChanged: observer('selectedItem', function() {
         //next(this, function() {
-            this.set('selectedKey', this._getKey(this.get('selectedItem')));
-            this.set('selectedValue', this._getValue(this.get('selectedItem')));
-            this.set('suggestedItem', null);
+            let selectedItem = this.get('selectedItem');
+            this.setProperties({
+                selectedKey: this._getKey(selectedItem),
+                selectedValue: this._getValue(selectedItem),
+                suggestedItem: null,
+            });
             //this.close();
         //});
     }),
@@ -268,9 +276,9 @@ export default Editor.extend(OutsideClick, {
 
     _suggestedItemChanged: observer('suggestedItem', function(){
         let suggestedItem = this.get('suggestedItem');
-        //next(this, function() {
+        next(this, function() {
             this.set('suggestedValue', this._getValue(suggestedItem));
-        //});
+        });
     }),
 
     /*** Exposed Events **/
@@ -309,14 +317,7 @@ export default Editor.extend(OutsideClick, {
           return;
         }
 
-        let selectedItem = this.get('selectedItem'),
-            suggestedItem = this.get('suggestedItem') || selectedItem;
-
-        if(!this.get('isDestroyed')) {
-            this.set('selectedItem', suggestedItem);
-            this.set('suggestedItem', null);
-        }
-
+        this._selectSuggestion();
         this.close();
     },
 
@@ -355,8 +356,7 @@ export default Editor.extend(OutsideClick, {
         if(editable && value && value.length > 0) {
             let filtered = all.filter(function(item) {
                 let currentValue = self._getValue(item) || '';
-                let isMatch = currentValue.toLowerCase().indexOf(value.toLowerCase()) === 0;
-                return isMatch;
+                return currentValue.toLowerCase().indexOf(value.toLowerCase()) === 0;
             });
 
             if(filtered && filtered.length > 0) {
@@ -373,6 +373,36 @@ export default Editor.extend(OutsideClick, {
             this.updateSuggestedValue(value);
             this.set('filteredItems', all);
         }
+    },
+
+    _selectSuggestion() {
+        let selectedItem = this.get('selectedItem'),
+            suggestedItem = this.get('suggestedItem') || selectedItem;
+
+        if(!this.get('isDestroyed')) {
+            if(this._selectionIsValid()) {
+                this.set('selectedItem', suggestedItem);
+                this.set('suggestedItem', null);
+            } else {
+                this.set('selectedItem', null);
+                this.set('suggestedItem', null);
+            }
+            this.notifyPropertyChange('selectedValue');
+        }
+    },
+
+    _selectionIsValid() {
+        let selectedItem = this.get('selectedItem'),
+            self = this;
+
+        let itemValues = this.get('items').map(function(item) {
+            return self._getValue(item);
+        });
+
+        if(this.get('selectedValue'))
+
+        return !(itemValues.indexOf(this._getValue(selectedItem)) === -1 && this.get('allowUnknownValue'));
+
     },
 
     _itemsDidChange: observer('items', function() {
@@ -408,6 +438,23 @@ export default Editor.extend(OutsideClick, {
             return obj.get(this.get('keyProperty'));
         }
         return obj[this.get('keyProperty')];
+    },
+
+    keyDown:function(event) {
+        //select and enter
+        if(event.keyCode === 13) {
+            if(this.get('suggestedValue')) {
+                this._selectSuggestion();
+                this.close();
+            }
+        }
+    },
+
+    focusOut: function() {
+        if(!this._selectionIsValid()) {
+            this.set('selectedItem', null);
+            this.set('suggestedItem', null);
+        }
     },
 
     actions: {
@@ -446,6 +493,7 @@ export default Editor.extend(OutsideClick, {
             if(this.get('isDisabled') || this.get('isReadonly')) return;
 
             this.set('selectedItem', null);
+            this.set('suggestedItem', null);
 
             if(!this.get('isMultiple')) this.close();
         },

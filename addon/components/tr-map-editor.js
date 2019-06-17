@@ -44,6 +44,16 @@ export default Component.extend({
 
     color: "#222",
     lineSymbol: null,
+    
+    coordinates: null,
+    connectCoordinates: false,
+    showCoordinateMarkers: true,
+
+    disableDefaultUI: true,
+    zoomControl: true,
+
+    onMarkerClick: null,
+
     _polyLineIcons: computed('symbol', function() {
         let symbol = (this.get('lineSymbol') || '').toUpperCase(),
             google = this.get('_google'),
@@ -75,14 +85,6 @@ export default Component.extend({
                 return null;
         }
     }),
-    coordinates: null,
-    connectCoordinates: false,
-    showCoordinateMarkers: true,
-
-    disableDefaultUI: true,
-    zoomControl: true,
-
-    onMarkerClick: null,
 
     _autoGeocodeAddress() {
         this.geocodeAddress(this.get('address'), false)

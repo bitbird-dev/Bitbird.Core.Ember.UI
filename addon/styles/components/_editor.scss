@@ -391,13 +391,17 @@
       > .tr-textarea-editor textarea {
         background-color: transparent;
       }
-      > .tr-button-editor {
+      > .tr-button-editor, > .tr-text-editor {
         > .tr-editor {
           > .tr-editor-content-wrapper {
             border: 1px solid $color-background-low;
             height: 28px;
             > .tr-editor-content {
-              > button {
+              > input[type=text] {
+                padding-right: 25px+8px;
+              }
+              > button,
+              > .button-placeholder {
                 padding-right: 4px+25px;
                 text-overflow: ellipsis;
                 overflow: hidden;
@@ -442,6 +446,13 @@
                   }
                 }
               }
+              > .button-placeholder {
+                position: absolute;
+                top: 0;
+                right: 0;
+                height: 100%;
+                width: 50px;
+              }
             }
           }
         }
@@ -449,7 +460,8 @@
           > .tr-editor {
             > .tr-editor-content-wrapper {
               > .tr-editor-content {
-                > button {
+                > button,
+                > .button-placeholder {
                   > .tr-select-editor-button-arrow, > .tr-select-editor-button-clear {
                     color: $color-foreground;
                     background-color: darken($color-background-low, 8%);
@@ -467,7 +479,8 @@
           > .tr-editor {
             > .tr-editor-content-wrapper {
               > .tr-editor-content {
-                > button {
+                > button,
+                > .button-placeholder  {
                   > .tr-select-editor-button-arrow {
                     //color: $color-foreground-highest;
                     background-color: $color-background-normal;

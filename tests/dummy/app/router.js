@@ -15,6 +15,7 @@ Router.map(function() {
       this.route('tr-toggle');
       this.route('tr-table');
       this.route('splitview');
+      this.route('tr-select');
       this.route('tr-select-editor');
       this.route('tr-numeric-editor');
       this.route('tr-datetime-picker');

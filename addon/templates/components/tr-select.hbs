@@ -1,0 +1,118 @@
+{{!-- Required to fix async binding issues --}}
+<ul style="display:none;">
+    {{#each selectedItems as |selectedItem|}}
+        <li>-{{selectedItem.isLoading}}</li>
+    {{/each}}
+</ul>
+
+
+{{#if (compare style 'flat')}}
+    {{#tr-label}}
+        {{yield (hash label=(component 'tr-contentpresenter'))}}
+    {{/tr-label}}
+    {{#each filteredItems as |item|}}
+        {{tr-button-editor value=(get item keyProperty) text=(get item valueProperty) style="toggle"
+                           isOn=(compare (get item keyProperty) selectedKey)
+                           onClick=(action 'onSelectedItemChanged' item)
+        }}
+    {{/each}}
+{{else if (compare style 'popout')}}
+    {{#tr-button-editor text=displayValue label=label placeholder=placeholder errors=errors buttonClass=buttonClass isDisabled=isDisabled readonly=isReadonly}}
+        {{#unless isDisabledOrReadonly}}
+            {{#if allowNull}}
+                <button class="tr-select-editor-button-clear" {{action 'onClearValue' bubbles=false}} disabled="{{isDisabled}}" readonly="{{isReadonly}}"><span>&#10006;</span></button>
+            {{/if}}
+        {{/unless}}
+        <button class="tr-select-editor-button-arrow" {{action 'onToggleState' bubbles=false}} disabled={{isDisabled}}><span>&#9660;</span></button>
+    {{/tr-button-editor}}
+    {{#unless isDisabled}}
+        {{#tr-modal-dialog header=popoutHeader isVisible=isOpen wrapperClass="tr-select-editor-popout" isMessage=false
+                           onClickOverlay=(action 'onClickOverlay')
+                           primaryAction=(action 'onToggleState') primaryText=popoutPrimaryText}}
+            {{#with emptyText}}
+                {{#tr-listview items=filteredItems itemClass=null selectedItem=(readonly selectedItem) onSelectedItemChanged=(action 'onSelectedItemChanged') as |listView|}}
+                    {{#if listView.itemTemplate}}
+                        {{yield (hash data=listView.data isSelected=(contains listView.data selectedItems) itemTemplate=(component 'tr-contentpresenter' context=listView.data param1=(contains listView.data selectedItems)))}}
+                    {{else}}
+                        {{#if valueProperty}}
+                            {{tr-select-editor-item content=listView.data valueProperty=valueProperty}}
+                        {{else}}
+                            <span title="{{listView.data}}">{{listView.data}}</span>
+                        {{/if}}
+                    {{/if}}
+                    {{#item.empty}}
+                        {{#if emptyText}}
+                            <span class="tr-select-editor-empty">
+                                {{emptyText}}
+                            </span>
+                        {{/if}}
+                    {{/item.empty}}
+                {{/tr-listview}}
+            {{/with}}
+        {{/tr-modal-dialog}}
+    {{/unless}}
+{{else}}
+    {{#if editable}}
+        {{input value=(readonly suggestedValue) class="tr-select-editor-suggestion" readonly="readonly" click=(action "editableClick")}}
+        {{#tr-text-editor value=(readonly selectedValue) label=label placeholder=placeholder errors=errors onTextChanged=(action 'onTextChanged') prefix=prefix postfix=postfix}}
+            <div class="button-placeholder">
+                {{#unless isDisabledOrReadonly}}
+                    {{#if allowNull}}
+                        <button class="tr-select-editor-button-clear" {{action 'onClearValue' bubbles=false}} disabled={{isDisabled}}><span>&#10006;</span></button>
+                    {{/if}}
+                {{/unless}}
+                <button class="tr-select-editor-button-arrow" {{action 'onToggleState' bubbles=false}} disabled={{isDisabled}}><span>&#9660;</span></button>
+                {{#if isBusy}}
+                    {{tr-text-loader}}
+                {{/if}}
+            </div>
+        {{/tr-text-editor}}
+    {{else}}
+        {{#tr-button-editor text=displayValue label=label placeholder=placeholder errors=errors buttonClass=buttonClass isDisabled=isDisabled readonly=isReadonly prefix=prefix postfix=postfix
+                            onClick=(action 'onToggleState' bubbles=false)}}
+            {{#unless isDisabledOrReadonly}}
+                {{#if allowNull}}
+                    <button class="tr-select-editor-button-clear" {{action 'onClearValue' bubbles=false}} disabled={{isDisabled}}><span>&#10006;</span></button>
+                {{/if}}
+            {{/unless}}
+            <button class="tr-select-editor-button-arrow" {{action 'onToggleState' bubbles=false}} disabled={{isDisabled}}><span>&#9660;</span></button>
+            {{#if isBusy}}
+                {{tr-text-loader}}
+            {{/if}}
+        {{/tr-button-editor}}
+    {{/if}}
+    <!--<div class="tr-select-editor-buttons">-->
+
+    <!--</div>-->
+    {{#unless isDisabled}}
+        {{#if isOpen}}
+            {{#with emptyText}}
+                {{#ember-wormhole to=_popupDestinationElement}}
+                    <div>
+                        {{#tr-listview items=filteredItems selectedItem=(readonly selectedItem) onSelectedItemChanged=(action 'onSelectedItemChanged') as |listView item|}}
+                            {{#if hasBlock}}
+                                {{#listView.itemTemplate}}
+                                    {{yield (hash itemTemplate=(component 'tr-contentpresenter' context=listView.data))}}
+                                {{/listView.itemTemplate}}
+                            {{else}}
+                                {{#if valueProperty}}
+                                    {{tr-select-editor-item content=listView.data valueProperty=valueProperty}}
+                                {{else}}
+                                    <span title="{{listView.data}}">{{listView.data}}</span>
+                                {{/if}}
+                                {{#item.empty}}
+                                    {{#if emptyText}}
+                                        <span class="tr-select-editor-empty">
+                                            {{emptyText}}
+                                        </span>
+                                    {{/if}}
+                                {{/item.empty}}
+                            {{/if}}
+                        {{/tr-listview}}
+                    </div>
+                {{/ember-wormhole}}
+            {{/with}}
+        {{!/if}}
+        {{/if}}
+    {{/unless}}
+{{/if}}

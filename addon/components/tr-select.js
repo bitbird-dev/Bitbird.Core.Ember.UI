@@ -3,6 +3,7 @@ import Editor from './tr-editor';
 import OutsideClick from '../mixins/tr-outside-click';
 import { A } from '@ember/array';
 import { next, debounce } from '@ember/runloop';
+import { isPresent } from '@ember/utils';
 import layout from '../templates/components/tr-select';
 import Ember from 'ember';
 
@@ -28,14 +29,60 @@ export default Editor.extend(OutsideClick, {
 
     isMultiple: false,
 
-    selectedItem: null,
+    _selectedItem: null,
+
+    selectedItem: computed({
+        get() {
+            return this._selectedItem;
+        },
+        set(key, value) {
+            //this._setSuggestedItems(null);
+            this._resetSuggestedItems(false);
+
+            if(value === this._selectedItem) {
+                return value;
+            }
+
+            let item = value;
+
+            this._selectedItem = item;
+
+            this._selectItem(this._selectedItem);
+
+            this.setProperties({
+                selectedKey: this._getKey(item),
+                selectedValue: this._getValue(item)
+            });
+            let action = this.get('onSelectedItemChanged');
+            if(action) {
+                action(item);
+            }
+
+            if(this.get('isMultiple') && this.get('selectedItems')) {
+                if(this.get('selectedItems').includes(item)) {
+                    this.get('selectedItems').removeObject(item);
+                } else {
+                    this.get('selectedItems').pushObject(item);
+                }
+            }
+
+            action = this.get('onSelectedItemsChanged');
+            if(action) {
+                action(item);
+            }
+
+            this.notifyPropertyChange('selectedItem');
+
+            return this._selectedItem;
+        }
+    }).volatile(),
     selectedValue: null,
     selectedKey: null,
 
     selectedItems: null,
 
-    suggestedItem: null,
-    suggestedValue: null,
+    suggestedItem: undefined,
+    suggestedValue: undefined,
 
     keyProperty: 'key',
     valueProperty: 'value',
@@ -137,6 +184,8 @@ export default Editor.extend(OutsideClick, {
      */
     idPropertyName: 'id',
 
+    noFilterResultText: 'Filter does not match any item.',
+
     popoutHeader: null,
 
     popoutPrimaryText: 'Ok',
@@ -172,14 +221,104 @@ export default Editor.extend(OutsideClick, {
     },
 
     /*** Events **/
-    clickOutside() {
+    clickOutside(event) {
         if(this.get('style') === 'popout' && this.get('isMultiple')) {
             //should be handled by modal dialog
             return;
         }
 
-        this._setSuggestedItems(null);
+        //this._handleInputEvent(event, true, undefined);
+        this._selectSuggested(true);
+    },
+
+    _selectSuggested(closeList) {
+        if(this.get('style') === 'popout' && this.get('isMultiple')) {
+            //should be handled by modal dialog
+            return;
+        }
+
+        let allowNull = this.get('allowNull'),
+            currentInput = this.$('.tr-select-text-editor input').val(),
+            suggestedItem = this.get('suggestedItem');
+
+        if(!currentInput && allowNull) {
+            suggestedItem = null;
+        }
+
+        this._selectItem(suggestedItem);
+
+        //next(this, function() {
+            this._resetSuggestedItems(!closeList);
+            this.$('.tr-select-text-editor input').val(this._getDisplayValue());
+        //});
+        if(closeList)
+        {
+            this.close();
+        }
+        return false;
+    },
+
+    _reset() {
+        this.$('.tr-select-text-editor input').val(this._getDisplayValue());
+
+        //this._setSuggestedItems(null);
+        this._resetSuggestedItems();
         this.close();
+    },
+
+    _handleInputEvent(event, useSuggestedItem=true, suggestedFallbackItem=undefined) {
+        if(this.get('style') === 'popout' && this.get('isMultiple')) {
+            //should be handled by modal dialog
+            return;
+        }
+
+        if(useSuggestedItem) {
+            //if(this.get('suggestedItem')) {
+            if(!this._selectItem(this.get('suggestedItem') || suggestedFallbackItem)) {
+                console.log("NIX STIMMT");
+            }
+            next(this, function() {
+                //this._setSuggestedItems(null);
+                this._resetSuggestedItems();
+                this.$('.tr-select-text-editor input').val(this._getDisplayValue());
+            });
+            this.close();
+            return false;
+            //}
+        }
+
+        this.$('.tr-select-text-editor input').val(this._getDisplayValue());
+
+        //this._setSuggestedItems(null);
+        this._resetSuggestedItems();
+        this.close();
+    },
+
+    _getDisplayValue() {
+        if(this.get('isMultiple')) {
+            let items = this.get('selectedItems'),
+                values = A();
+
+            if(!items) return null;
+
+            items.forEach(function(item) {
+                values.pushObject(this._getValue(item));
+            }, this);
+            return values.toString();
+        }
+
+        let selectedItem = this.get('selectedItem');
+        if(!selectedItem) return selectedItem;
+
+        let isBusy = selectedItem.then && !selectedItem.isFulfilled;
+        if(isBusy) {
+            this.busy('displayValue');
+        } else {
+            this.idle('displayValue');
+        }
+        if(isBusy) return null;
+
+        return this._getValue(selectedItem);
     },
 
     clickInside() {
@@ -204,7 +343,8 @@ export default Editor.extend(OutsideClick, {
 
         if(this.get('isDisabled')) return;
 
-        this.clickOutside();
+        //Select suggested item
+        this._handleInputEvent(null, true);
     },
 
     /*** Popup ***/
@@ -215,7 +355,8 @@ export default Editor.extend(OutsideClick, {
         let editable = this.get('editable'),
             $target = $('#' + this.get('_popupDestinationElement')),
             $source = $('#' + this.get('elementId')),
-            $innerSource = $('#' + this.get('elementId') + ' > .tr-editor > .tr-editor > .tr-editor-content-wrapper');
+            $innerSource = $('#' + this.get('elementId') + ' > .tr-editor > .tr-editor > .tr-editor-content-wrapper'),
+            $innerLabelSource = $('#' + this.get('elementId') + ' > .tr-editor > .tr-editor > .tr-label');
 
         //console.log($source.scrollParent().scrollTop());
         let topOffset = $source[0].getBoundingClientRect().top;
@@ -229,26 +370,26 @@ export default Editor.extend(OutsideClick, {
         $target.css('min-width', $source.outerWidth());
         $target.css('opacity', '1');
 
-        let topWhenBelow = topOffset + $innerSource.outerHeight();
+        let topWhenBelow = topOffset + $innerSource.outerHeight() + $innerLabelSource.outerHeight();
         let bottomWhenBelow = topWhenBelow + $target.outerHeight();
         let viewPortBottom = this.$(window).height();
         let canOpenBelow = bottomWhenBelow <= viewPortBottom;
         if(canOpenBelow) {
             this.set('_popupPosition', 'is-open-below');
             $target.addClass("tr-select-editor-below");
-            $target.css('top', topOffset + $innerSource.outerHeight());
+            $target.css('top', topOffset + $innerSource.outerHeight() + $innerLabelSource.outerHeight());
             $target.css('left', $source.offset().left);
             $target.css('right', '');
             $target.css('bottom', '');
             return;
         }
 
-        let topWhenAbove = topOffset  - $target.outerHeight();
+        let topWhenAbove = topOffset  - $target.outerHeight() + $innerLabelSource.outerHeight();
         let canOpenAbove = topWhenAbove > 0;
         if(canOpenAbove) {
             this.set('_popupPosition', 'is-open-above');
             $target.addClass("tr-select-editor-above");
-            $target.css('top', topOffset - $target.outerHeight());
+            $target.css('top', topOffset - $target.outerHeight() + $innerLabelSource.outerHeight());
             $target.css('left', $source.offset().left);
             $target.css('right', '');
             $target.css('bottom', '');
@@ -324,7 +465,8 @@ export default Editor.extend(OutsideClick, {
         }
         else
         {
-            this._setSuggestedItems(null);
+            //this._setSuggestedItems(null);
+            this._resetSuggestedItems();
         }
     },
 
@@ -333,6 +475,10 @@ export default Editor.extend(OutsideClick, {
     }),
 
     _selectionIsValid(item) {
+        if(item === null && this.get('allowNull')) {
+            return true;
+        }
+
         let selectedItem = item || this.get('selectedItem'),
             self = this;
 
@@ -343,21 +489,50 @@ export default Editor.extend(OutsideClick, {
         return !(itemValues.indexOf(this._getValue(selectedItem)) === -1 && this.get('allowUnknownValue'));
     },
 
-    _setSuggestedItems: function(suggestedItems, currentUiText) {
-        let suggestedValue = null,
-            suggestedItem = null;
+    _resetSuggestedItems: function(resetFilter = true) {
+        if(resetFilter) {
+            this.setProperties({
+                filteredItems: null,
+                suggestedItem: undefined,
+                suggestedValue: undefined
+            });
+        } else {
+            this.setProperties({
+                suggestedItem: undefined,
+                suggestedValue: undefined
+            });
+        }
+    },
 
-        if(suggestedItems && suggestedItems.length > 0) {
-            suggestedItem = suggestedItems.objectAt(0);
-            suggestedValue = this._getValue(suggestedItem);
+    _setSuggestedItems: function(suggestedItems, currentUiText) {
+        let suggestedValue = undefined,
+            suggestedItem = undefined;
+
+        if(currentUiText === undefined) {
+            this.setProperties({
+                filteredItems: suggestedItems,
+                suggestedItem: suggestedItem,
+                suggestedValue: suggestedValue
+            });
+            return;
         }
 
-        //take the chars from the textbox to match casing!
-        if(suggestedValue && currentUiText) {
-            suggestedValue = currentUiText + suggestedValue.substr(currentUiText.length)
+        if(currentUiText === null && this.get('allowNull')) {
+            suggestedItem = null;
+            suggestedValue = '';
         } else {
-            //if no ui text is present, no suggested value
-            suggestedValue = null;
+            //take the chars from the textbox to match casing!
+            if(suggestedValue && currentUiText) {
+                suggestedValue = currentUiText + suggestedValue.substr(currentUiText.length)
+            } else {
+                //if no ui text is present, no suggested value
+                suggestedValue = null;
+            }
+
+            if(suggestedItems && suggestedItems.length > 0) {
+                suggestedItem = suggestedItems.objectAt(0);
+                suggestedValue = this._getValue(suggestedItem);
+            }
         }
 
         this.setProperties({
@@ -370,33 +545,15 @@ export default Editor.extend(OutsideClick, {
     _selectItem(item) {
         if(this.get('isDisabled') || this.get('isReadonly')) return;
 
+        if(item === undefined) {
+            return true;
+        }
+
         if(!this._selectionIsValid(item)){
             return false;
         }
 
         this.set('selectedItem', item);
-        this.setProperties({
-            selectedItem: item,
-            selectedKey: this._getKey(item),
-            selectedValue: this._getValue(item)
-        });
-        let action = this.get('onSelectedItemChanged');
-        if(action) {
-            action(item);
-        }
-
-        if(this.get('isMultiple') && this.get('selectedItems')) {
-            if(this.get('selectedItems').includes(item)) {
-                this.get('selectedItems').removeObject(item);
-            } else {
-                this.get('selectedItems').pushObject(item);
-            }
-        }
-
-        action = this.get('onSelectedItemsChanged');
-        if(action) {
-            action(item);
-        }
 
         return true;
     },
@@ -414,7 +571,8 @@ export default Editor.extend(OutsideClick, {
         {
             this.get('selectedItems').clear();
         }
-        this._setSuggestedItems(null);
+        //this._setSuggestedItems(null);
+        this._resetSuggestedItems();
     },
 
     _getValue: function(obj) {
@@ -435,31 +593,31 @@ export default Editor.extend(OutsideClick, {
     },
 
     keyDown:function(event) {
-        //select and enter
+        //ENTER
         if(event.keyCode === 13) {
-            if(this.get('suggestedItem')) {
-                this._selectItem(this.get('suggestedItem'));
-                next(this, function() {
-                    this._setSuggestedItems(null);
-                });
-                this.close();
-                return false;
-            }
+            this._selectSuggested(true);
+            return false;
+        }
+        //TAB
+        else if (event.keyCode === 9) {
+            this._selectSuggested(true);
+            return true;
+        }
+        //ESC
+        else if (event.keyCode === 27) {
+            this._reset();
+            return true;
         }
     },
 
-    focusOut: function() {
-        if(!this._selectionIsValid()) {
-            this.set('selectedItem', null);
-            this._setSuggestedItems(null);
-        }
+    keyUp: function(event) {
+        if(this.get('isDisabled') || this.get('isReadonly')) return;
+        this._onTextChanged(this.$(event.target).val());
     },
 
     actions: {
         onTextChanged: function(value) {
-            if(this.get('isDisabled') || this.get('isReadonly')) return;
 
-            this._onTextChanged(value);
         },
         editableClick: function(event) {
             event.preventDefault();

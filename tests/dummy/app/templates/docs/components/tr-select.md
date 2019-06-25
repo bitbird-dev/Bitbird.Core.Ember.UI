@@ -15,7 +15,9 @@ Dropdown appears in the wrong place if browser-window is scrolled.
     </div>
     <p>Selected: {{selectedItem.value}}</p>
     <p>Suggested: {{suggestedValue}}</p>
-    {{tr-select items=items selectedItem=selectedItem editable=true _suggestedValue=suggestedValue}}
+    {{tr-select label="Select something" items=items selectedItem=selectedItem editable=true suggestedValue=suggestedValue}}
+    {{selectedKey}} == {{selectedValue}}
+    {{tr-select label="Select something again" items=items selectedKey=selectedKey editable=true}}
   {{/demo.example}}
   {{demo.snippet 'tr-select-filter.hbs' label='template.hbs'}}
   {{demo.snippet 'tr-select-filter.js' label='controller.js'}}

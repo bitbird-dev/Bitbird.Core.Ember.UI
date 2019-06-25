@@ -2968,7 +2968,7 @@ a.active {
     .tr-editor.tr-select-editor.tr-select-editor-select > .tr-select-editor-suggestion, .tr-editor.tr-select-editor.tr-select-editor-popout > .tr-select-editor-suggestion {
       position: absolute;
       background-color: inherit;
-      border: 1px solid transparent;
+      border-left: 1px solid transparent;
       box-shadow: none;
       opacity: 0.5;
       bottom: 0;
@@ -3143,6 +3143,10 @@ a.active {
     white-space: nowrap;
     line-height: 4em;
     text-align: center; }
+  .tr-select-editor-wormhole-list .tr-select-editor-filter-no-result {
+    font-size: 0.8em;
+    padding: 16px 8px;
+    color: #919191; }
 
 .tr-error-tooltip {
   position: relative;

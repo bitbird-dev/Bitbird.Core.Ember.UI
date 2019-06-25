@@ -54,7 +54,7 @@
 {{else}}
     {{#if editable}}
         {{input value=(readonly suggestedValue) class="tr-select-editor-suggestion" readonly="readonly" click=(action "editableClick")}}
-        {{#tr-text-editor value=(readonly selectedValue) label=label placeholder=placeholder errors=errors onTextChanged=(action 'onTextChanged') prefix=prefix postfix=postfix}}
+        {{#tr-text-editor class="tr-select-text-editor" value=(readonly selectedValue) label=label placeholder=placeholder errors=errors onTextChanged=(action 'onTextChanged') prefix=prefix postfix=postfix}}
             <div class="button-placeholder">
                 {{#unless isDisabledOrReadonly}}
                     {{#if allowNull}}
@@ -90,6 +90,11 @@
                 {{#ember-wormhole to=_popupDestinationElement}}
                     <div>
                         {{#tr-listview items=filteredItems selectedItem=(readonly selectedItem) onSelectedItemChanged=(action 'onSelectedItemChanged') as |listView item|}}
+                            {{#listView.empty}}
+                                <div class="tr-select-editor-filter-no-result">
+                                    {{noFilterResultText}}
+                                </div>
+                            {{/listView.empty}}
                             {{#if hasBlock}}
                                 {{#listView.itemTemplate}}
                                     {{yield (hash itemTemplate=(component 'tr-contentpresenter' context=listView.data))}}

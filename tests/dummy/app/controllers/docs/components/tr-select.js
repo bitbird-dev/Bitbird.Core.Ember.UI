@@ -17,7 +17,7 @@ export default Controller.extend({
 
     init(){
         this._super(...arguments);
-// BEGIN-SNIPPET tr-select-editor.js
+// BEGIN-SNIPPET tr-select.js
         let items = A(),
             values = A();
         for (let index = 1; index < 11; index++) {
@@ -34,10 +34,10 @@ export default Controller.extend({
     },
     actions: {
         selectItemByKey(key) {
-            this.set('selectedItem', this.get('items').findBy('key', key));
-        },
-        selectKey(key) {
-            this.set('selectedKey', key);
+            this.setProperties({
+                selectedKey: key,
+                selectedItem: this.get('items').findBy('key', key)
+            });
         },
         selectStyle(key) {
             this.set('style', key);

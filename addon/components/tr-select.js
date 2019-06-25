@@ -53,6 +53,9 @@ export default Editor.extend(OutsideClick, {
                 selectedKey: this._getKey(item),
                 selectedValue: this._getValue(item)
             });
+
+            this.notifyPropertyChange('selectedItem');
+
             let action = this.get('onSelectedItemChanged');
             if(action) {
                 action(item);
@@ -71,13 +74,26 @@ export default Editor.extend(OutsideClick, {
                 action(item);
             }
 
-            this.notifyPropertyChange('selectedItem');
-
             return this._selectedItem;
         }
     }).volatile(),
+    selectedKey: computed('selectedItem', {
+        get() {
+            return this._getKey(this.get('selectedItem'));
+        },
+        set(key, value) {
+            let self = this,
+                all = this.get('items') || [];
+
+            let match = all.find(function(currentItem) {
+                return self._getKey(currentItem) === value;
+            });
+
+            let selectedItem = this.set('selectedItem', match);
+            return this._getKey(selectedItem);
+        }
+    }),
     selectedValue: null,
-    selectedKey: null,
 
     selectedItems: null,
 
@@ -635,11 +651,11 @@ export default Editor.extend(OutsideClick, {
 
             if(!this.get('isMultiple')) this.close();
         },
-        onToggle(key) {
+        /*onToggle(key) {
             if(this.get('isDisabled') || this.get('isReadonly')) return;
 
             this.set('selectedKey', key);
-        },
+        },*/
         onToggleState() {
             if(this.get('isDisabled')) return;
 

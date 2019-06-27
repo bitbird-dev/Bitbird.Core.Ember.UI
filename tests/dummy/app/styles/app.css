@@ -2968,6 +2968,7 @@ a.active {
     .tr-editor.tr-select-editor.tr-select-editor-select > .tr-select-editor-suggestion, .tr-editor.tr-select-editor.tr-select-editor-popout > .tr-select-editor-suggestion {
       position: absolute;
       background-color: inherit;
+      border: none;
       border-left: 1px solid transparent;
       box-shadow: none;
       opacity: 0.5;
@@ -2976,7 +2977,8 @@ a.active {
       margin: 0;
       border-radius: 2px;
       box-sizing: border-box;
-      outline: none; }
+      outline: none;
+      height: 28px; }
       .tr-editor.tr-select-editor.tr-select-editor-select > .tr-select-editor-suggestion:focus, .tr-editor.tr-select-editor.tr-select-editor-popout > .tr-select-editor-suggestion:focus {
         box-shadow: none; }
     .tr-editor.tr-select-editor.tr-select-editor-select.is-open .tr-select-editor-button-arrow > span, .tr-editor.tr-select-editor.tr-select-editor-select.is-open-below .tr-select-editor-button-arrow > span, .tr-editor.tr-select-editor.tr-select-editor-popout.is-open .tr-select-editor-button-arrow > span, .tr-editor.tr-select-editor.tr-select-editor-popout.is-open-below .tr-select-editor-button-arrow > span {

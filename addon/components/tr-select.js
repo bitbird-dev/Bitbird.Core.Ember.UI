@@ -200,6 +200,9 @@ export default Editor.extend(OutsideClick, {
      */
     idPropertyName: 'id',
 
+    /**
+     * Text to show if filter has no result
+     */
     noFilterResultText: 'Filter does not match any item.',
 
     popoutHeader: null,
@@ -537,17 +540,17 @@ export default Editor.extend(OutsideClick, {
             suggestedItem = null;
             suggestedValue = '';
         } else {
+            if(suggestedItems && suggestedItems.length > 0) {
+                suggestedItem = suggestedItems.objectAt(0);
+                suggestedValue = this._getValue(suggestedItem);
+            }
+
             //take the chars from the textbox to match casing!
             if(suggestedValue && currentUiText) {
                 suggestedValue = currentUiText + suggestedValue.substr(currentUiText.length)
             } else {
                 //if no ui text is present, no suggested value
                 suggestedValue = null;
-            }
-
-            if(suggestedItems && suggestedItems.length > 0) {
-                suggestedItem = suggestedItems.objectAt(0);
-                suggestedValue = this._getValue(suggestedItem);
             }
         }
 

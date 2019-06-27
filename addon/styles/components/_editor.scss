@@ -1,4 +1,5 @@
 .tr-editor {
+  $editor-height: 28px;
   $editor-focus-box-shadow: inset 0 0 0px 1px $color-background-normal-low;
   $editor-radius: 2px;
   $editor-radius-bubble: 40px;
@@ -91,10 +92,10 @@
     text-align: left;
     .tr-checkbox-editor-control {
       position: relative;
-      width: 28px;
-      height: 28px;
-      min-height: 28px;
-      min-width: 28px;
+      width: $editor-height;
+      height: $editor-height;
+      min-height: $editor-height;
+      min-width: $editor-height;
       background-color: $color-background-low;
       border-radius: 2px;
       box-sizing: border-box;
@@ -395,7 +396,7 @@
         > .tr-editor {
           > .tr-editor-content-wrapper {
             border: 1px solid $color-background-low;
-            height: 28px;
+            height: $editor-height;
             > .tr-editor-content {
               > input[type=text] {
                 padding-right: 25px+8px;
@@ -417,7 +418,7 @@
                   bottom: 0;
                   right: 0;
                   width: 25px;
-                  line-height: 28px;
+                  line-height: $editor-height;
                   text-align: center;
                   color: $color-foreground-normal-low;
                   padding: 1px 0 0 0;
@@ -501,6 +502,7 @@
       > .tr-select-editor-suggestion {
         position: absolute;
         background-color: inherit;
+        border: none;
         border-left: 1px solid transparent;
         box-shadow: none;
         opacity: 0.5;
@@ -510,6 +512,7 @@
         border-radius: 2px;
         box-sizing: border-box;
         outline: none;
+        height: $editor-height;
         &:focus {
           box-shadow: none;
         }
@@ -583,7 +586,7 @@
   }
   &.tr-display {
     > .tr-editor > .tr-editor-content-wrapper {
-      line-height: 28px;
+      line-height: $editor-height;
     }
   }
   &.tr-qrcode-editor {

@@ -54,7 +54,8 @@
 {{else}}
     {{#if editable}}
         {{input value=(readonly suggestedValue) class="tr-select-editor-suggestion" readonly="readonly" click=(action "editableClick")}}
-        {{#tr-text-editor class="tr-select-text-editor" value=(readonly selectedValue) label=label placeholder=placeholder errors=errors onTextChanged=(action 'onTextChanged') prefix=prefix postfix=postfix}}
+        {{#tr-text-editor class="tr-select-text-editor" value=(readonly selectedValue) label=label placeholder=placeholder errors=errors onTextChanged=(action 'onTextChanged') prefix=prefix postfix=postfix
+            isDisabled=isDisabled isReadonly=isReadonly}}
             <div class="button-placeholder">
                 {{#unless isDisabledOrReadonly}}
                     {{#if allowNull}}

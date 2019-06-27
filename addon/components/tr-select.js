@@ -251,13 +251,16 @@ export default Editor.extend(OutsideClick, {
     },
 
     _selectSuggested(closeList) {
+        if(this.isDestroyed) return;
+
         if(this.get('style') === 'popout' && this.get('isMultiple')) {
             //should be handled by modal dialog
             return;
         }
 
         let allowNull = this.get('allowNull'),
-            currentInput = this.$('.tr-select-text-editor input').val(),
+            $input = this.$('.tr-select-text-editor input'),
+            currentInput = $input ? $input.val() : null,
             suggestedItem = this.get('suggestedItem');
 
         if(!currentInput && allowNull) {

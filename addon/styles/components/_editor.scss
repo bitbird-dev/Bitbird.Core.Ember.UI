@@ -403,7 +403,7 @@
               }
               > button,
               > .button-placeholder {
-                padding-right: 4px+25px;
+                padding-right: 0;//2*25px;
                 text-overflow: ellipsis;
                 overflow: hidden;
                 position: relative;

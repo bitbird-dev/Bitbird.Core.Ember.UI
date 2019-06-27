@@ -2867,7 +2867,7 @@ a.active {
       .tr-editor.tr-select-editor.tr-select-editor-select > .tr-text-editor > .tr-editor > .tr-editor-content-wrapper > .tr-editor-content > .button-placeholder, .tr-editor.tr-select-editor.tr-select-editor-popout > .tr-button-editor > .tr-editor > .tr-editor-content-wrapper > .tr-editor-content > button,
       .tr-editor.tr-select-editor.tr-select-editor-popout > .tr-button-editor > .tr-editor > .tr-editor-content-wrapper > .tr-editor-content > .button-placeholder, .tr-editor.tr-select-editor.tr-select-editor-popout > .tr-text-editor > .tr-editor > .tr-editor-content-wrapper > .tr-editor-content > button,
       .tr-editor.tr-select-editor.tr-select-editor-popout > .tr-text-editor > .tr-editor > .tr-editor-content-wrapper > .tr-editor-content > .button-placeholder {
-        padding-right: 29px;
+        padding-right: 0;
         text-overflow: ellipsis;
         overflow: hidden;
         position: relative;

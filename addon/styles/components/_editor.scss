@@ -533,7 +533,7 @@
       }
       &.disabled {
         cursor: pointer;
-        > .tr-button-editor {
+        > .tr-button-editor, > .tr-text-editor {
           > .tr-editor, &:hover > .tr-editor, &:active > .tr-editor, &:focus > .tr-editor {
             > .tr-editor-content-wrapper {
               > .tr-editor-content {

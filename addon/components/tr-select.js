@@ -12,7 +12,6 @@ export default Editor.extend(OutsideClick, {
     i18nProperties: ['placeholder'],
 
     init: function() {
-        let self = this;
         this._super();
 
         this.on('willDestroyElement', this, function() {
@@ -105,7 +104,7 @@ export default Editor.extend(OutsideClick, {
 
     displayValue: computed(
         'selectedItems', 'selectedItems.{length,@each.isLoaded,@each.isLoading,isPending}',
-        'selectedItem', 'selectedItem.isFulfilled',
+        'selectedItem', 'selectedItem.{isFulfilled,isLoaded}',
         'isMultiple', 'i18n.locale', function() {
             if(this.get('isMultiple')) {
                 let items = this.get('selectedItems'),
@@ -357,6 +356,7 @@ export default Editor.extend(OutsideClick, {
     focusInside() {
         //this.open();
     },
+
     focusOutside(){
         if(this.get('style') === 'popout' && this.get('isMultiple')) {
             //should be handled by modal dialog

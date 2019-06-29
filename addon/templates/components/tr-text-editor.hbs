@@ -10,7 +10,17 @@
         {{/e.prefix}}
     {{/if}}
     {{#e.content}}
-        {{input value=value placeholder=placeholder disabled=isDisabled readonly=isReadonly autocomplete=autocomplete visible=isVisible maxlength=maxLength}}
+        {{input
+                value=value
+                placeholder=placeholder
+                disabled=isDisabled
+                readonly=isReadonly
+                autocomplete=autocomplete
+                visible=isVisible
+                maxlength=maxLength
+                focus-in=(action "handleFocusIn")
+                focus-out=(action "handleFocusOut")
+        }}
         {{yield}}
     {{/e.content}}
     {{#if postfix}}

@@ -111,9 +111,9 @@
             mode='range' 
             rangeBegin=rangeBegin 
             rangeEnd=rangeEnd 
-            as |displayValue mode date range selectedItems toggle|}}
-            {{tr-text-editor label="Bound Begin" value=range.beginDisplayValue}}
-            {{tr-text-editor label="Bound End" value=range.endDisplayValue}}
+            as |displayValue mode date range selectedItems toggle refreshDisplay|}}
+            {{tr-text-editor label="Bound Begin" value=range.beginDisplayValue focus-out=refreshDisplay}}
+            {{tr-text-editor label="Bound End" value=range.endDisplayValue focus-out=refreshDisplay}}
             {{tr-text-editor isDisabled=true label="ReadOnly Range" value=displayValue}}
         {{/tr-datetime-picker}}
         {{/demo.example}}

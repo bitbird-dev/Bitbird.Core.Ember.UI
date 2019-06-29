@@ -245,12 +245,14 @@ export default Component.extend(OutsideClick, {
                 this._focus(date);
             } else if(mode === 'range') {
                 if(valuePropertyName === 'rangeBegin') {
-                    this.set('beginTime', this._buildTime(date.getHours(), date.getMinutes(), date.getSeconds()));
-                    next(this, function() {
+                    let time = this._buildTime(date.getHours(), date.getMinutes(), date.getSeconds());
+                    this.set('beginTime', time);
+                    //next(this, function() {
                         this.set('rangeBegin', date);
                         let day = this.days[date.toDateString()];
                         if(day) day.set('isSelected', true);
-                    });
+                        this.__updateUiForAllDays();
+                    //});
 
                     this.__updateUiForAllDays();
                 } else if(valuePropertyName === 'rangeEnd') {
@@ -1009,6 +1011,12 @@ export default Component.extend(OutsideClick, {
         toggleYearPicker() {
             this.set('isMonthPickerVisible', false);
             this.set('isYearPickerVisible', !this.get('isYearPickerVisible'));
+        },
+        refreshDisplayValue() {
+            this._updateTimeFromValue();
+            this.notifyPropertyChange('rangeBeginDisplayValue');
+            this.notifyPropertyChange('rangeEndDisplayValue');
+            this.__updateUiForAllDays();
         }
     }
 });

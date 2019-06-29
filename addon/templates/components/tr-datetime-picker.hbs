@@ -1,5 +1,18 @@
 <div class="tr-datetime-picker-control">
-    {{yield displayValue mode date (hash begin=rangeBegin beginDisplayValue=rangeBeginDisplayValue end=rangeEnd endDisplayValue=rangeEndDisplayValue) selectedItems (action 'toggle')}}
+    {{yield
+            displayValue
+            mode
+            date
+            (hash
+                    begin=rangeBegin
+                    beginDisplayValue=rangeBeginDisplayValue
+                    end=rangeEnd
+                    endDisplayValue=rangeEndDisplayValue
+            )
+            selectedItems
+            (action 'toggle')
+            (action 'refreshDisplayValue')
+    }}
 </div>
 {{#ember-wormhole to=(concat "datetime-pickers-" elementId)}}
     <div class="tr-datetime-picker-wrapper {{timeCssClass}}">

@@ -52,5 +52,23 @@ export default Editor.extend({
 
         // Return results
         return selection;
+    },
+
+    "focus-in": null,
+    "focus-out": null,
+
+    actions: {
+        handleFocusIn(event) {
+            console.log("in");
+            let _ = this.get('focus-in');
+            if(_) return _(event);
+            return true;
+        },
+        handleFocusOut(event) {
+            console.log("out");
+            let _ = this.get('focus-out');
+            if(_) return _(event);
+            return true;
+        },
     }
 });

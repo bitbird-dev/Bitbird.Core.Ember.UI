@@ -34,7 +34,15 @@ export default Component.extend({
      */
     value: computed('rawValue', 'rawValue.content','rawValue.isPending', function() {
         let rawValue = this.get('rawValue'),
-            rawValueContent = isNone(rawValue) || isNone(rawValue.get) ? null : rawValue.get('content');
+            rawValueContent;
+
+        if(isNone(rawValue)) {
+            rawValueContent = rawValue;
+        } else if (rawValue.get) {
+            rawValueContent = rawValue.get('content');
+        } else {
+            rawValueContent = rawValue['content'];
+        }
 
         return isNone(rawValueContent) ? rawValue : rawValueContent;
     }),

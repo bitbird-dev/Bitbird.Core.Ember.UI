@@ -17,6 +17,7 @@ export default Editor.extend(OutsideClick, {
         this.on('willDestroyElement', this, function() {
             this._popupReset();
         });
+        this._refreshFilteredItems();
     },
 
     classNames: 'tr-select-editor',
@@ -101,6 +102,8 @@ export default Editor.extend(OutsideClick, {
 
     keyProperty: 'key',
     valueProperty: 'value',
+
+    filteredItems: null,
 
     displayValue: computed(
         'selectedItems', 'selectedItems.{length,@each.isLoaded,@each.isLoading,isPending}',
@@ -237,6 +240,15 @@ export default Editor.extend(OutsideClick, {
             this.open();
         }
     },
+
+    /*** Handle Style Specifics ***/
+    _refreshFilteredItems: observer('style', 'items', function() {
+        let style = this.get('style') || '';
+        if(style.toLowerCase() === 'select') {
+            return;
+        }
+        this.set('filteredItems', this.get('items'));
+    }),
 
     /*** Events **/
     clickOutside(event) {

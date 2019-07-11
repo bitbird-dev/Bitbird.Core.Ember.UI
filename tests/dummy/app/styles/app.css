@@ -3885,6 +3885,29 @@ a.active {
   box-sizing: border-box;
   padding: 8px; }
 
+.rating-editor .rating-editor-content {
+  unicode-bidi: bidi-override;
+  color: #e9e9e9;
+  font-size: 64px;
+  position: relative;
+  margin: 0;
+  padding: 0; }
+  .rating-editor .rating-editor-content .rating-editor-content-fill {
+    color: #009fe4;
+    padding: 0;
+    position: absolute;
+    z-index: 1;
+    display: block;
+    top: 0;
+    left: 0;
+    overflow: hidden; }
+    .rating-editor .rating-editor-content .rating-editor-content-fill span {
+      display: inline-block; }
+  .rating-editor .rating-editor-content .rating-editor-content-empty {
+    padding: 0;
+    display: block;
+    z-index: 0; }
+
 .tr-scroll-panel {
   width: 100%;
   height: 100%;

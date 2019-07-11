@@ -1,0 +1,30 @@
+.rating-editor {
+  .rating-editor-content {
+    unicode-bidi: bidi-override;
+    color: $color-foreground-high;
+    font-size: 64px;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    .rating-editor-content-fill {
+      color: $color-accent;
+      padding: 0;
+      position: absolute;
+      z-index: 1;
+      display: block;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+
+      // Allows us to grab the width of the span elements
+      span {
+        display: inline-block;
+      }
+    }
+    .rating-editor-content-empty {
+      padding: 0;
+      display: block;
+      z-index: 0;
+    }
+  }
+}

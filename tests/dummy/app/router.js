@@ -21,6 +21,7 @@ Router.map(function() {
       this.route('tr-datetime-picker');
       this.route('tr-menubar');
       this.route('tr-button-editor');
+      this.route('rating-editor');
     });
   });
   this.route('not-found', { path: '/*path' });

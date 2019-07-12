@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 
+// BEGIN-SNIPPET rating-editor.js
 export default Controller.extend({
-    // BEGIN-SNIPPET rating-editor.js
     value: 60,
     lower: 40,
     upper: 90,
@@ -11,10 +11,10 @@ export default Controller.extend({
     glyph: '★',
     repeat: 5,
     fillBackground: false,
-    // END-SNIPPET
     actions: {
         setGlyph(glyph) {
             this.set('glyph', glyph);
         }
     }
 });
+// END-SNIPPET

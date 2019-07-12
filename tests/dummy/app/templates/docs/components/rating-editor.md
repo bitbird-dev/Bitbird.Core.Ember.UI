@@ -61,5 +61,6 @@
         </div>
      </div>
   {{demo.snippet "rating-editor.hbs" label="template.hbs"}}
+  {{demo.snippet "rating-editor.js" label="controller.js"}}
 {{/docs-demo}}
 

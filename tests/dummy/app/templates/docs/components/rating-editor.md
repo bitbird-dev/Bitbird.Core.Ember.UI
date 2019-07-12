@@ -46,7 +46,7 @@
                 maxValue=maxValue
                 stepping=stepping
                 glyph=glyph
-                length=length}}
+                repeat=repeat}}
         {{/demo.example}}
         </div>
      </div>

@@ -2614,7 +2614,7 @@ a.active {
   position: relative; }
   .tr-editor.tr-button-editor button {
     position: relative;
-    padding: 4px 8px;
+    padding: 0 1em;
     border: none;
     background-color: #dedede;
     margin: 0;
@@ -2794,7 +2794,7 @@ a.active {
     .tr-editor.tr-text-editor.tr-editor-x4, .tr-editor.tr-textarea-editor.tr-editor-x4, .tr-editor.tr-password-editor.tr-editor-x4, .tr-editor.tr-datetime-editor.tr-editor-x4, .tr-editor.tr-datetime-picker.tr-editor-x4, .tr-editor.tr-select-editor.tr-editor-x4, .tr-editor.tr-display.tr-editor-x4 {
       width: 784px; }
   .tr-editor.tr-text-editor input, .tr-editor.tr-text-editor textarea, .tr-editor.tr-textarea-editor input, .tr-editor.tr-textarea-editor textarea, .tr-editor.tr-password-editor input, .tr-editor.tr-password-editor textarea, .tr-editor.tr-datetime-editor input, .tr-editor.tr-datetime-editor textarea {
-    padding: 4px 8px;
+    padding: 0 1em;
     border: none;
     margin: 0;
     border-radius: 0;
@@ -2846,7 +2846,7 @@ a.active {
     .tr-editor.tr-select-editor.tr-select-editor-select .tr-select-editor-empty, .tr-editor.tr-select-editor.tr-select-editor-popout .tr-select-editor-empty {
       display: block;
       opacity: 0.5;
-      padding: 4px 8px;
+      padding: 0 1em;
       font-size: 0.7em;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -2973,7 +2973,7 @@ a.active {
       box-shadow: none;
       opacity: 0.5;
       bottom: 0;
-      padding: 4px 8px;
+      padding: 0 1em;
       margin: 0;
       border-radius: 2px;
       box-sizing: border-box;
@@ -3076,7 +3076,7 @@ a.active {
       -webkit-flex: 1;
       flex: 1 1 auto; }
     .tr-editor > .tr-editor-content-wrapper > .tr-editor-prefix, .tr-editor > .tr-editor-content-wrapper > .tr-editor-postfix {
-      padding: 4px 8px;
+      padding: 0 1em;
       box-sizing: border-box;
       margin-top: 0;
       background-color: #f4f4f4;
@@ -3119,7 +3119,7 @@ a.active {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
-    padding: 4px 8px;
+    padding: 0 1em;
     font-size: 0.7em;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -3138,7 +3138,7 @@ a.active {
   .tr-select-editor-wormhole-list .tr-select-editor-empty {
     display: block;
     opacity: 0.5;
-    padding: 4px 8px;
+    padding: 0 1em;
     font-size: 0.7em;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -3278,7 +3278,7 @@ a.active {
   .form > .form-block.form-block-with-header > .form-block-header {
     position: relative;
     margin: 8px 8px 0 8px;
-    padding: 4px 8px;
+    padding: 0 1em;
     border-radius: 4px 4px 0 0;
     font-family: 'PT Sans', sans-serif;
     color: #2d2d2d;
@@ -3290,7 +3290,7 @@ a.active {
   .form > .form-block.form-block-with-header > .form-block-header-sub {
     position: relative;
     margin: 8px 8px 0 8px;
-    padding: 4px 8px;
+    padding: 0 1em;
     border-radius: 4px 4px 0 0;
     font-family: 'PT Sans', sans-serif;
     color: #2d2d2d;
@@ -3618,7 +3618,7 @@ a.active {
       .tr-listmenu > .tr-listmenu-pane > .tr-scroll-panel > .tr-scroll-panel-bar > .tr-scroll-panel-force-overflow .tr-listmenu-items > .tr-listmenu-item > a {
         position: relative;
         display: block;
-        padding: 8px 16px;
+        padding: 0 1em;
         overflow: hidden;
         text-overflow: ellipsis; }
         .tr-listmenu > .tr-listmenu-pane > .tr-scroll-panel > .tr-scroll-panel-bar > .tr-scroll-panel-force-overflow .tr-listmenu-items > .tr-listmenu-item > a.active {
@@ -3797,33 +3797,35 @@ a.active {
     height: 100%;
     border-radius: 0; }
   .tr-menubar .tr-editor.tr-button-editor button, .tr-menubar .tr-editor.tr-button-editor input, .tr-menubar .tr-editor.tr-datetime-editor button, .tr-menubar .tr-editor.tr-datetime-editor input, .tr-menubar .tr-editor.tr-text-editor button, .tr-menubar .tr-editor.tr-text-editor input {
-    background: #fff;
     border-radius: 0;
-    color: #646464;
-    font-size: 0.8em;
     font-family: 'PT Sans Narrow', sans-serif;
-    padding: 8px 16px; }
-  .tr-menubar .tr-editor.tr-button-editor button.tr-select-editor-button-arrow, .tr-menubar .tr-editor.tr-datetime-editor button.tr-select-editor-button-arrow, .tr-menubar .tr-editor.tr-text-editor button.tr-select-editor-button-arrow {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 25px;
-    line-height: 28px;
-    text-align: center;
-    color: #646464;
-    padding: 1px 0 0 0;
-    font-size: 72%;
-    outline: none;
-    border: 0px none transparent;
-    /*-webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;*/
-    transition: all 225ms; }
-  .tr-menubar .tr-editor.tr-button-editor button:hover, .tr-menubar .tr-editor.tr-datetime-editor button:hover, .tr-menubar .tr-editor.tr-text-editor button:hover {
-    background-color: rgba(34, 34, 34, 0.15);
-    color: white; }
+    padding: 0 1em; }
+  .tr-menubar .tr-editor.tr-button-editor button, .tr-menubar .tr-editor.tr-datetime-editor button, .tr-menubar .tr-editor.tr-text-editor button {
+    background: inherit;
+    color: inherit; }
+    .tr-menubar .tr-editor.tr-button-editor button.tr-select-editor-button-arrow, .tr-menubar .tr-editor.tr-datetime-editor button.tr-select-editor-button-arrow, .tr-menubar .tr-editor.tr-text-editor button.tr-select-editor-button-arrow {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 25px;
+      line-height: 28px;
+      text-align: center;
+      color: #646464;
+      padding: 1px 0 0 0;
+      font-size: 72%;
+      outline: none;
+      border: 0px none transparent;
+      /*-webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;*/
+      transition: all 225ms; }
+    .tr-menubar .tr-editor.tr-button-editor button:hover, .tr-menubar .tr-editor.tr-datetime-editor button:hover, .tr-menubar .tr-editor.tr-text-editor button:hover {
+      background-color: rgba(34, 34, 34, 0.15);
+      color: white; }
   .tr-menubar .tr-editor.tr-button-editor input, .tr-menubar .tr-editor.tr-datetime-editor input, .tr-menubar .tr-editor.tr-text-editor input {
+    background: #fff;
+    color: #646464;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none; }
@@ -3960,7 +3962,7 @@ a.active {
   .tr-select-editor-popout .modal-dialog-content.tr-scroll-panel {
     padding: 0; }
   .tr-select-editor-popout .tr-listview-item {
-    padding: 4px 8px;
+    padding: 0 1em;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
@@ -4328,7 +4330,7 @@ a.active {
     .tr-table .tr-table-row .tr-table-cell {
       display: table-cell;
       text-align: left;
-      padding: 4px 8px; }
+      padding: 0 1em; }
       .tr-table .tr-table-row .tr-table-cell .tr-table-on-row-focus {
         display: none; }
     .tr-table .tr-table-row.tr-table-header {
@@ -4792,7 +4794,7 @@ a.active {
         display: table-cell;
         border: #000;
         text-align: left;
-        padding: 4px 8px; }
+        padding: 0 1em; }
   .btbrd-table .btbrd-table-column-group {
     display: table-column-group; }
     .btbrd-table .btbrd-table-column-group .btbrd-table-column {

@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import layout from '../templates/components/rating-editor';
 import { isPresent } from '@ember/utils';
 import { computed, observer } from '@ember/object';
-import { next, run } from '@ember/runloop';
+import { run, debounce } from '@ember/runloop';
 import Editor from './tr-editor';
 
 export default Editor.extend({
@@ -103,6 +103,13 @@ export default Editor.extend({
         this.notifyPropertyChange('_percentage');
     }),
 
+    _isDisabledChanged: observer('isDisabled', function() {
+        this._detachEventHandler();
+        if(!this.get('isDisabled')) {
+            this._attachEventHandler();
+        }
+    }),
+
     didInsertElement() {
         this._attachEventHandler();
     },
@@ -131,12 +138,14 @@ export default Editor.extend({
     },
 
     _attachEventHandler(){
-        if(this.get('isDisabledOrReadonly')) {
-            return;
-        }
-        let self = this;
-        this.$('.rating-editor-content').on('click', this, this._handler);
+        debounce(this, function() {
+            if(this.get('isDisabledOrReadonly')) {
+                return;
+            }
+            this.$('.rating-editor-content').on('click', this, this._handler);
+        }, 50);
     },
+
     _detachEventHandler() {
         this.$('.rating-editor-content').off('click', this, this._handler);
     }

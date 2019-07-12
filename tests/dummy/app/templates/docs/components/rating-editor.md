@@ -27,16 +27,26 @@
         <span>Stepping</span>
           {{tr-numeric-editor value=stepping}}
       </div>
+      <div>
+        <span>Glyph</span>
+          {{tr-text-editor value=glyph}}
+      </div>
+      <div>
+        <span>Repeat</span>
+          {{tr-numeric-editor value=repeat}}
+      </div>
         <div>
         {{#demo.example name="rating-editor.hbs"}}
             {{rating-editor
-                label="My Rating"
+                label="My Rating is sooopppaaaa!"
                 value=value
                 lower=lower
                 upper=upper
                 minValue=minValue
                 maxValue=maxValue
-                stepping=stepping}}
+                stepping=stepping
+                glyph=glyph
+                length=length}}
         {{/demo.example}}
         </div>
      </div>

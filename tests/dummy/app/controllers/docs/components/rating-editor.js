@@ -8,5 +8,7 @@ export default Controller.extend({
     minValue: 60,
     maxValue: 85,
     stepping: 10,
+    glyph: '★',
+    repeat: 5
     // END-SNIPPET
 });

@@ -36,6 +36,16 @@ export default Editor.extend({
     stepping: 10,
 
     /**
+     * Glyph to use
+     */
+    glyph: '★',
+
+    /**
+     * Number of glyphs to show
+     */
+    repeat: 5,
+
+    /**
      * Percentage to be used for rendering
      */
     _percentage: computed({

@@ -1,5 +1,6 @@
 .rating-editor {
   .rating-editor-content {
+    display: inline-block;
     unicode-bidi: bidi-override;
     color: $color-foreground-high;
     position: relative;

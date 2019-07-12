@@ -12,11 +12,30 @@ export default Component.extend({
     classNameBindings: ['computedClassNames', 'isReverse'],
     classNames: 'split-view',
 
-    orientation: 'vertical', //horizontal, vertical
+    /**
+     * Orientation of the splitview
+     * POssible values: horizontal, vertical
+     */
+    orientation: 'vertical',
+
+    /**
+     * Makes the view resizable
+     */
     isResizable: false,
+
+    /**
+     * Reverses pane and content
+     */
     isReverse: false,
+
+    /**
+     * Makes the pane using the full available space (height or width depending on the orientation)
+     */
     isFullSize: false,
 
+    /**
+     * Sets the size of the pane (height or width depending on the orientation)
+     */
     panelSize: null,
 
     _panelSizeChange: observer('orientation', 'panelSize', function(sender, key) {

@@ -3886,6 +3886,7 @@ a.active {
   padding: 8px; }
 
 .rating-editor .rating-editor-content {
+  display: inline-block;
   unicode-bidi: bidi-override;
   color: #e9e9e9;
   position: relative;

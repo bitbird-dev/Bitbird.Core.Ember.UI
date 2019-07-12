@@ -11,7 +11,7 @@
     {{/if}}
     {{#e.content}}
         <div class="rating-editor-content">
-            <div class="rating-editor-content-fill" style="width: {{_percentage}}%;">
+            <div class="rating-editor-content-fill {{if fillBackground 'fill-background'}}" style="width: {{_percentage}}%;">
                 <span>
                     {{#each (range 0 repeat)}}{{glyph}}{{/each}}
                 </span>

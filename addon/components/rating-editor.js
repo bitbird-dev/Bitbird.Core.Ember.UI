@@ -46,6 +46,11 @@ export default Editor.extend({
     repeat: 5,
 
     /**
+     * If set, colorizes the background instead of the foreground
+     */
+    fillBackground: false,
+
+    /**
      * Percentage to be used for rendering
      */
     _percentage: computed({

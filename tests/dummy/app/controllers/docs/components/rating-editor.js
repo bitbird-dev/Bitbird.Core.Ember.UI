@@ -9,6 +9,12 @@ export default Controller.extend({
     maxValue: 85,
     stepping: 10,
     glyph: '★',
-    repeat: 5
+    repeat: 5,
+    fillBackground: false,
     // END-SNIPPET
+    actions: {
+        setGlyph(glyph) {
+            this.set('glyph', glyph);
+        }
+    }
 });

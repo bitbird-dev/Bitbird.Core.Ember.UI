@@ -28,8 +28,17 @@
           {{tr-numeric-editor value=stepping}}
       </div>
       <div>
+        <span>Fill Background</span>
+          {{tr-checkbox-editor value=fillBackground}}
+      </div>
+      <div>
         <span>Glyph</span>
           {{tr-text-editor value=glyph}}
+          <button style="padding:0 2px;" {{action "setGlyph" "▓"}}>▓</button>
+          <button style="padding:0 2px;" {{action "setGlyph" "★"}}>★</button>
+          <button style="padding:0 2px;" {{action "setGlyph" "❤"}}>❤</button>
+          <button style="padding:0 2px;" {{action "setGlyph" "■"}}>■</button>
+          <button style="padding:0 2px;" {{action "setGlyph" "⌚"}}>⌚</button>
       </div>
       <div>
         <span>Repeat</span>
@@ -46,7 +55,8 @@
                 maxValue=maxValue
                 stepping=stepping
                 glyph=glyph
-                repeat=repeat}}
+                repeat=repeat
+                fillBackground=fillBackground}}
         {{/demo.example}}
         </div>
      </div>

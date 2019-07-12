@@ -15,6 +15,10 @@
       top: 0;
       left: 0;
       overflow: hidden;
+      &.fill-background {
+        background-color: $color-accent;
+        color: inherit;
+      }
 
       // Allows us to grab the width of the span elements
       span {

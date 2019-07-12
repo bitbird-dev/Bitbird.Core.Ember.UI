@@ -3901,6 +3901,9 @@ a.active {
     top: 0;
     left: 0;
     overflow: hidden; }
+    .rating-editor .rating-editor-content .rating-editor-content-fill.fill-background {
+      background-color: #009fe4;
+      color: inherit; }
     .rating-editor .rating-editor-content .rating-editor-content-fill span {
       display: inline-block; }
   .rating-editor .rating-editor-content .rating-editor-content-empty {

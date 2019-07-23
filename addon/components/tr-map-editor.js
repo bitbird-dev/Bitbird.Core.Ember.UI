@@ -1,8 +1,8 @@
-import Ember from 'ember';
-import Component from '@ember/component';
-import layout from '../templates/components/tr-map-editor';
-import { computed } from '@ember/object';
-import { reads } from '@ember/object/computed';
+import Ember from "ember";
+import Component from "@ember/component";
+import layout from "../templates/components/tr-map-editor";
+import { computed } from "@ember/object";
+import { reads } from "@ember/object/computed";
 
 export default Component.extend({
     layout,
@@ -12,22 +12,22 @@ export default Component.extend({
         let self = this;
 
         this._super(...arguments);
-        this.set('_google', this.get('googleMapsApi.google'));
-        this.get('_google').then(function(google) {
-            self.set('geocoder', new google.maps.Geocoder());
-            self.notifyPropertyChange('_polyLineIcons');
+        this.set("_google", this.get("googleMapsApi.google"));
+        this.get("_google").then(function(google) {
+            self.set("geocoder", new google.maps.Geocoder());
+            self.notifyPropertyChange("_polyLineIcons");
         });
 
-        if(this.get('autoGeocode') === true) {
-            this.addObserver('address', this, '_autoGeocodeAddress');
-            this.addObserver('geocoder', this, '_autoGeocodeAddress');
+        if (this.get("autoGeocode") === true) {
+            this.addObserver("address", this, "_autoGeocodeAddress");
+            this.addObserver("geocoder", this, "_autoGeocodeAddress");
             this._autoGeocodeAddress();
         }
     },
 
     _google: null,
 
-    classNames: 'tr-map-editor',
+    classNames: "tr-map-editor",
 
     geocoder: null,
 
@@ -44,7 +44,7 @@ export default Component.extend({
 
     color: "#222",
     lineSymbol: null,
-    
+
     coordinates: null,
     connectCoordinates: false,
     showCoordinateMarkers: true,
@@ -52,20 +52,24 @@ export default Component.extend({
     disableDefaultUI: true,
     zoomControl: true,
 
+    streetViewControl: false,
+
     onMarkerClick: null,
 
-    _polyLineIcons: computed('symbol', function() {
-        let symbol = (this.get('lineSymbol') || '').toUpperCase(),
-            google = this.get('_google'),
-            maps = google.get('maps'),
-            _icons = [{
-                icon: null,
-                offset: '100%'
-            }];
+    _polyLineIcons: computed("symbol", function() {
+        let symbol = (this.get("lineSymbol") || "").toUpperCase(),
+            google = this.get("_google"),
+            maps = google.get("maps"),
+            _icons = [
+                {
+                    icon: null,
+                    offset: "100%",
+                },
+            ];
 
-        if(!google || !maps) return null;
+        if (!google || !maps) return null;
 
-        switch(symbol) {
+        switch (symbol) {
             case "CIRCLE":
                 _icons[0].icon = maps.SymbolPath.CIRCLE;
                 return _icons;
@@ -87,33 +91,33 @@ export default Component.extend({
     }),
 
     _autoGeocodeAddress() {
-        this.geocodeAddress(this.get('address'), false)
+        this.geocodeAddress(this.get("address"), false);
     },
 
     geocodeAddress(address, updateAddress) {
         let self = this,
-            geocoder = this.get('geocoder');
+            geocoder = this.get("geocoder");
 
-        if(!geocoder) {
+        if (!geocoder) {
             return;
         }
 
-        geocoder.geocode({'address': address}, function(results, status) {
-            if (status === 'OK') {
+        geocoder.geocode({ address: address }, function(results, status) {
+            if (status === "OK") {
                 let result = results[0];
                 self.setProperties({
                     lat: result.geometry.location.lat(),
-                    lng: result.geometry.location.lng()
+                    lng: result.geometry.location.lng(),
                 });
-                if(updateAddress !== false) {
-                    self.set('address', result.formatted_address);
+                if (updateAddress !== false) {
+                    self.set("address", result.formatted_address);
                 }
             } else {
                 //Ember.Warn('Geocode was not successful for the following reason: ' + status);
                 self.setProperties({
                     lat: null,
                     lng: null,
-                    zoom: 1
+                    zoom: 1,
                 });
             }
         });
@@ -121,19 +125,19 @@ export default Component.extend({
 
     actions: {
         geocodeAddress() {
-            this.geocodeAddress(this.get('address'));
+            this.geocodeAddress(this.get("address"));
         },
         onClick(event) {
             this.setProperties({
                 lat: event.googleEvent.latLng.lat(),
-                lng: event.googleEvent.latLng.lng()
+                lng: event.googleEvent.latLng.lng(),
             });
         },
         onMarkerClick(args) {
-            let onMarkerClick = this.get('onMarkerClick');
-            if(onMarkerClick) {
+            let onMarkerClick = this.get("onMarkerClick");
+            if (onMarkerClick) {
                 onMarkerClick(args);
             }
-        }
-    }
+        },
+    },
 });

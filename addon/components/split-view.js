@@ -106,7 +106,7 @@ export default Component.extend({
         if(this.get('isFullSize')) {
             this.setProperties({
                 isFullSize: false,
-                panelSize: 0
+                panelSize: RESIZE_HANDLE_SIZE
             });
         } else {
             this.set('isFullSize', true);

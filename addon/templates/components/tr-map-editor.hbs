@@ -1,5 +1,6 @@
 {{#g-map lat=lat lng=lng zoom=zoom
          disableDefaultUI=disableDefaultUI
+         streetViewControl=streetViewControl
          zoomControl=zoomControl zoomControlOptions=zoomControlOptions
          onClick=(action "onClick") as |g|}}
     {{#g.overlay lat=(if lat lat 0.0001) lng=(if lng lng 0.0001)}}

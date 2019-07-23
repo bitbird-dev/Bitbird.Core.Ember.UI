@@ -220,7 +220,7 @@ export default Editor.extend(OutsideClick, {
     open: function() {
         this._attachClickOutsideHandler();
         this.set('isOpen', true);
-        this.set('filteredItems', this.get('items'));
+        this.set('filteredItems', this.get('items') || []);
         //this._popupUpdatePosition();
         next(this, function() {
             this._popupUpdatePosition(true);
@@ -247,7 +247,7 @@ export default Editor.extend(OutsideClick, {
         if(style.toLowerCase() === 'select') {
             return;
         }
-        this.set('filteredItems', this.get('items'));
+        this.set('filteredItems', this.get('items') || []);
     }),
 
     /*** Events **/
@@ -480,7 +480,7 @@ export default Editor.extend(OutsideClick, {
 
     /*** Helpers ***/
     _onTextChanged: function(text) {
-        let all = this.get('items'),
+        let all = this.get('items') || [],
             editable = this.get('editable'),
             self = this;
 
@@ -513,10 +513,11 @@ export default Editor.extend(OutsideClick, {
             return true;
         }
 
-        let selectedItem = item || this.get('selectedItem'),
+        let items = this.get('items') || [],
+            selectedItem = item || this.get('selectedItem'),
             self = this;
 
-        let itemValues = this.get('items').map(function(item) {
+        let itemValues = items.map(function(item) {
             return self._getValue(item);
         });
 

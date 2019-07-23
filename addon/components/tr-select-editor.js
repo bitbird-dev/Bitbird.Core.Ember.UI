@@ -373,8 +373,8 @@ export default Editor.extend(OutsideClick, {
         let selectedItem = this.get('selectedItem'),
             suggestedItem = this.get('suggestedItem') || selectedItem;
 
-        console.log(selectedItem);
-        console.log(suggestedItem);
+        //console.log(selectedItem);
+        //console.log(suggestedItem);
 
         if(this.get('isDestroyed')) {
             return;

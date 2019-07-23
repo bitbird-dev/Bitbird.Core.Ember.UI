@@ -102,7 +102,7 @@ export default Component.extend({
         if(!this.get('isResizable')) {
             return;
         }
-        console.log("MAXIMIZE");
+
         if(this.get('isFullSize')) {
             this.setProperties({
                 isFullSize: false,

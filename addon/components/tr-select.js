@@ -308,7 +308,7 @@ export default Editor.extend(OutsideClick, {
         if(useSuggestedItem) {
             //if(this.get('suggestedItem')) {
             if(!this._selectItem(this.get('suggestedItem') || suggestedFallbackItem)) {
-                console.log("NIX STIMMT");
+                //console.log("NIX STIMMT");
             }
             next(this, function() {
                 //this._setSuggestedItems(null);

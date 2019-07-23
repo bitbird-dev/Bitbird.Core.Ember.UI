@@ -5,6 +5,7 @@ export default Controller.extend({
   sidebarMode: false,
   toggleIsResizable: false,
   toggleIsFullSIze: false,
+  toggleDoubleClickToToggle: false,
   enableBackdrop: false,
   selectedOption: 'vertical',
   orientationOptions: null,

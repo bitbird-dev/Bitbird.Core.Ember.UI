@@ -25,6 +25,12 @@
         {{input type="checkbox" checked=toggleIsFullSize}}
       </div>
       <div>
+      {{#if toggleIsResizable}}
+          <div>
+            <span>doubleClickToToggle (on handle)</span>
+            {{input type="checkbox" checked=toggleDoubleClickToToggle}}
+          </div>
+      {{/if}}
       <span>panelSize</span>
         {{input type="text" value=panelSize}} (px, initially % is accepted)
       </div>
@@ -36,6 +42,7 @@
               isResizable=toggleIsResizable
               isReverse=toggleIsReverse
               isFullSize=toggleIsFullSize
+              doubleClickToToggle=toggleDoubleClickToToggle
               as |sv|}}
               {{#sv.pane style="background-color:#cb91ce;"}}
                 <h1>PANE</h1>

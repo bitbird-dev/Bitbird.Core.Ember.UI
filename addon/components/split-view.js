@@ -38,6 +38,11 @@ export default Component.extend({
      */
     panelSize: null,
 
+    /**
+     * Enables double clicking the handle to toggle the panel
+     */
+    doubleClickToToggle: true,
+
     _panelSizeChange: observer('orientation', 'panelSize', function(sender, key) {
         if(this.get('panelSize') !== null  && (key === 'panelSize' || key === undefined)) {
             let paneSize, availableSize;
@@ -72,7 +77,7 @@ export default Component.extend({
                 this.$('>.split-view-pane').height(this.$().height());
             }
         }
-        else if(panelSize)
+        else if(panelSize >= 0)
         {
             if(isVertical) {
                 this.$('>.split-view-pane').height('');
@@ -85,19 +90,47 @@ export default Component.extend({
         once(this, this._fixPanelSize);
     }).on('didInsertElement'),
 
+    _maximizeDelegate: null,
+
     computedClassNames: computed('orientation', 'isResizable', function () {
         let resizableClass = this.get('isResizable') ? 'split-view-resizable' : '';
 
         return `split-view-${this.get('orientation')} ${resizableClass}`;
     }),
 
-    _resizable: observer('isResizable', 'isReverse', 'orientation', function (sender, attr) {
+    maximize() {
+        if(!this.get('isResizable')) {
+            return;
+        }
+        console.log("MAXIMIZE");
+        if(this.get('isFullSize')) {
+            this.setProperties({
+                isFullSize: false,
+                panelSize: 0
+            });
+        } else {
+            this.set('isFullSize', true);
+        }
+
+    },
+
+    _resizable: observer('isResizable', 'isReverse', 'orientation', 'doubleClickToToggle', function (sender, attr) {
         let self = this,
             isVertical = this.get('orientation') === "vertical",
-            isReverse = this.get('isReverse');
+            isReverse = this.get('isReverse'),
+            doubleClickToToggle = this.get('doubleClickToToggle');
+
+        if(!this._maximizeDelegate) {
+            this._maximizeDelegate = function() {
+                self.maximize.call(self);
+            };
+        }
+
+        //this.$().find('"').off(this._maximizeDelegate);
+        this.$().off('dblclick', '.ui-resizable-handle', this._maximizeDelegate);
 
         if (!this.get('isResizable')) {
-            if (this.$('> .split-view-pane').is('.ui-resizable')) {
+            if (this.$('>.split-view-pane').is('.ui-resizable')) {
                 this.$('>.split-view-pane').resizable('destroy');
             }
             return;
@@ -116,11 +149,21 @@ export default Component.extend({
                 this.$('>.split-view-pane').resizable("option", "maxHeight", jqMaxHeight);
                 this.$('>.split-view-pane').resizable("option", "minWidth", jqMinWidth);
                 this.$('>.split-view-pane').resizable("option", "maxWidth", jqMaxWidth);
+                if(doubleClickToToggle)
+                {
+                    //this.$().find('.ui-resizable-handle').dblclick(this._maximizeDelegate);
+                    this.$().on('dblclick', '.ui-resizable-handle', this._maximizeDelegate);
+                }
             }
             else {
                 self.$('>.split-view-pane').resizable({
                     create: function () {
                         self.$().find('.ui-resizable-handle').css('z-index', 49);
+                        if(doubleClickToToggle)
+                        {
+                            //self.$().find('.ui-resizable-handle').dblclick(self._maximizeDelegate);
+                            self.$().on('dblclick', '.ui-resizable-handle', self._maximizeDelegate);
+                        }
                     },
                     handles: jqHandles,
                     minHeight: jqMinHeight,

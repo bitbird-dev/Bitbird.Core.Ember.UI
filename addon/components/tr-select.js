@@ -612,11 +612,19 @@ export default Editor.extend(OutsideClick, {
 
     _getValue: function(obj) {
         if(!obj || typeof obj !== 'object') return obj;
+
+        let returnValue = null;
         if(obj.get) {
-            return obj.get(this.get('valueProperty'));
+            returnValue = obj.get(this.get('valueProperty'));
+        } else {
+            returnValue = obj[this.get('valueProperty')];
         }
 
-        return obj[this.get('valueProperty')];
+        if(returnValue.string) {
+            return returnValue.string;
+        }
+
+        return returnValue;
     },
 
     _getKey: function(obj) {

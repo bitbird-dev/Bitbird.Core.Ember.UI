@@ -3,7 +3,7 @@ import Editor from './tr-editor';
 import OutsideClick from '../mixins/tr-outside-click';
 import { A } from '@ember/array';
 import { next, debounce } from '@ember/runloop';
-import { isPresent } from '@ember/utils';
+import { isPresent, isNone } from '@ember/utils';
 import layout from '../templates/components/tr-select';
 import Ember from 'ember';
 

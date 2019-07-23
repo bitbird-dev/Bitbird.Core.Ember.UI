@@ -611,16 +611,19 @@ export default Editor.extend(OutsideClick, {
     },
 
     _getValue: function(obj) {
-        if(!obj || typeof obj !== 'object') return obj;
-
         let returnValue = null;
-        if(obj.get) {
+
+        if(!obj || typeof obj !== 'object') {
+            returnValue = obj;
+        }
+        else if(obj.get) {
             returnValue = obj.get(this.get('valueProperty'));
-        } else {
+        }
+        else {
             returnValue = obj[this.get('valueProperty')];
         }
 
-        if(returnValue.string) {
+        if(!isNone(returnValue) && returnValue.constructor.name === "SafeString") {
             return returnValue.string;
         }
 
@@ -628,11 +631,23 @@ export default Editor.extend(OutsideClick, {
     },
 
     _getKey: function(obj) {
-        if(!obj || typeof obj !== 'object') return obj;
-        if(obj.get) {
-            return obj.get(this.get('keyProperty'));
+        let returnValue = null;
+
+        if(!obj || typeof obj !== 'object') {
+            returnValue = obj;
         }
-        return obj[this.get('keyProperty')];
+        else if(obj.get) {
+            returnValue = obj.get(this.get('keyProperty'));
+        }
+        else {
+            returnValue = obj[this.get('keyProperty')];
+        }
+
+        if(!isNone(returnValue) && returnValue.constructor.name === "SafeString") {
+            return returnValue.string;
+        }
+
+        return returnValue;
     },
 
     keyDown:function(event) {

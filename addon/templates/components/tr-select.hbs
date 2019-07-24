@@ -5,7 +5,6 @@
     {{/each}}
 </ul>
 
-
 {{#if (compare style 'flat')}}
     {{#tr-label}}
         {{yield (hash label=(component 'tr-contentpresenter'))}}
@@ -52,7 +51,7 @@
         {{/tr-modal-dialog}}
     {{/unless}}
 {{else}}
-    {{#if editable}}
+    {{#if (and editable _editable)}}
         {{input value=(readonly suggestedValue) class="tr-select-editor-suggestion" readonly="readonly" click=(action "editableClick")}}
         {{#tr-text-editor class="tr-select-text-editor" value=(readonly selectedValue) label=label placeholder=placeholder errors=errors onTextChanged=(action 'onTextChanged') prefix=prefix postfix=postfix
             isDisabled=isDisabled isReadonly=isReadonly}}

@@ -5,6 +5,7 @@ import { A } from '@ember/array';
 import { next, debounce } from '@ember/runloop';
 import { isPresent, isNone } from '@ember/utils';
 import layout from '../templates/components/tr-select';
+import { Promise } from 'rsvp';
 import Ember from 'ember';
 
 export default Editor.extend(OutsideClick, {
@@ -48,6 +49,21 @@ export default Editor.extend(OutsideClick, {
             this._selectedItem = item;
 
             this._selectItem(this._selectedItem);
+
+            if(item && item.then && item.isPending) {
+                let self = this;
+                this.set('_editable', false);
+                item.then((resolvedData) => {
+                    self.set('_editable', true);
+                    //self.set('selectedItem', value);
+                    //self.notifyPropertyChange("selectedItem");
+                    self.setProperties({
+                        selectedKey: self._getKey(resolvedData),
+                        selectedValue: self._getValue(resolvedData)
+                    });
+                });
+                //return;
+            }
 
             this.setProperties({
                 selectedKey: this._getKey(item),
@@ -210,6 +226,8 @@ export default Editor.extend(OutsideClick, {
     popoutHeader: null,
 
     popoutPrimaryText: 'Ok',
+
+    _editable: true,
 
     /*** Exposed Events **/
     onSelectedItemChanged: null,

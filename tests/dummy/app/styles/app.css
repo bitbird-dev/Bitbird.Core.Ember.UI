@@ -1640,11 +1640,11 @@ a.active {
   box-shadow: 0 0 10px #222;
   padding: 0;
   z-index: 51;
-  position: fixed;
   min-width: 400px;
   max-width: 600px;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  position: fixed; }
   .ember-modal-dialog.emd-in-place {
     position: static; }
   .ember-modal-dialog .modal-dialog-header {
@@ -3960,7 +3960,8 @@ a.active {
 .tr-select-editor-popout {
   user-select: none; }
   .tr-select-editor-popout .modal-dialog-content.tr-scroll-panel {
-    padding: 0; }
+    padding: 0;
+    display: contents; }
   .tr-select-editor-popout .tr-listview-item {
     padding: 0.2em 0.4em;
     -webkit-box-shadow: none;

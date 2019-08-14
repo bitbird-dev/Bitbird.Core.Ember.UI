@@ -31,7 +31,7 @@ module.exports = function(environment) {
             language: "de",
             region: "AT",
             protocol: "https",
-            version: "3.34",
+            version: "3.36",
             libraries: ["geometry", "places"],
             // client: undefined,
             // channel: undefined,

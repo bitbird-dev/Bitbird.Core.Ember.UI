@@ -1,6 +1,6 @@
 {
     "name": "bitbird-core-ember-ui",
-    "version": "1.0.101",
+    "version": "1.0.102",
     "description": "Bitbird components for ember.js.",
     "keywords": [
         "ember-addon",
@@ -29,7 +29,7 @@
         "ember-cli-htmlbars-inline-precompile": "^1.0.5",
         "ember-code-snippet": "^2.4.0",
         "ember-file-upload": "^2.6.1",
-        "ember-google-maps": "^2.2.2",
+        "ember-google-maps": "2.1.1",
         "ember-highcharts": "^1.1.1",
         "ember-modal-dialog": "^3.0.0",
         "ember-qrcode-shim": "^0.3.0",

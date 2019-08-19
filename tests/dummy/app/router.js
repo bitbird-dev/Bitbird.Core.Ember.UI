@@ -23,6 +23,7 @@ Router.map(function() {
             this.route("tr-button-editor");
             this.route("tr-map-editor");
             this.route("rating-editor");
+            this.route("tr-checkbox-editor");
         });
     });
     this.route("not-found", { path: "/*path" });

@@ -412,6 +412,7 @@ export default Component.extend(OutsideClick, {
     },
 
     close() {
+        this.set('___rangeSelectionState', 0);
         this.set('isOpen', false);
         if(this.get('animate')) {
           this.$(this.$popup[0]).hide('fast');

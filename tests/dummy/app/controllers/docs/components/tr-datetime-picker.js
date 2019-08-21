@@ -13,14 +13,14 @@ export default Controller.extend({
     selectedTimeMode: null,
 
     weekNumberOptions: null,
-    selectedWeekNumber: 'iso',
+    selectedWeekNumber: null,
 
     isOpen: false,
     animate: true,
 
     init() {
         this._super(...arguments);
-        this.set('selectedWeekNumber', 'iso');
+        this.set('selectedWeekNumber', null);
         this.set('selectedDate', new Date());
         this.set('modeOptions', [
             {value: 'single', name: 'single'},

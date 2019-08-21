@@ -12,10 +12,15 @@ export default Controller.extend({
     timeModeOptions: null,
     selectedTimeMode: null,
 
+    weekNumberOptions: null,
+    selectedWeekNumber: 'iso',
+
     isOpen: false,
+    animate: true,
 
     init() {
         this._super(...arguments);
+        this.set('selectedWeekNumber', 'iso');
         this.set('selectedDate', new Date());
         this.set('modeOptions', [
             {value: 'single', name: 'single'},
@@ -26,6 +31,10 @@ export default Controller.extend({
             {value: null, name: ''},
             {value: 'hm', name: 'hm'},
             {value: 'hms', name: 'hms'}
+        ]);
+        this.set('weekNumberOptions', [
+            {value: null, name: ''},
+            {value: 'iso', name: 'iso'}
         ]);
     },
     // BEGIN-SNIPPET tr-datetime-picker-actions.js
@@ -38,6 +47,9 @@ export default Controller.extend({
         },
         selectTimeMode: function (selected) {
             this.set('selectedTimeMode', selected);
+        },
+        selectWeekNumber: function (selected) {
+            this.set('selectedWeekNumber', selected);
         }
     },
     // END-SNIPPET

@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { observer, computed } from '@ember/object';
+import { readOnly } from '@ember/object/computed';
 import layout from '../templates/components/tr-datetime-picker';
 import Ember from 'ember';
 import Moment from 'moment';
@@ -51,6 +52,8 @@ export default Component.extend(OutsideClick, {
         50,51,52,53,54,55,56,57,58,59
     ],
 
+    animate: true,
+
     init() {
         this._updateTimeFromValue();
         this._super(...arguments);
@@ -80,6 +83,15 @@ export default Component.extend(OutsideClick, {
      */
     mode: 'single',
 
+    /**
+    * null, 'iso'
+    */
+    weekNumbers: null,
+
+    showWeekNumbers: readOnly('weekNumbers', function() {
+        return ['iso'].indexOf(this.get('weekNumbers')) > -1;
+    }),
+
     startsOnMonday: true,
     isOpen: false,
 
@@ -89,14 +101,19 @@ export default Component.extend(OutsideClick, {
      */
     timeMode: null,
 
-    timeCssClass: computed('mode', function() {
+    timeCssClass: computed('mode', 'timeMode', 'showWeekNumbers', function() {
         let mode = this.get('mode'),
             timeMode = this.get('timeMode') || '',
+            showWeekNumbers = this.get('showWeekNumbers'),
             cssClassNames = [];
 
         if(timeMode.indexOf('hm') === 0) {
             cssClassNames.push('allow-begin-time');
             if(mode === 'range') cssClassNames.push('allow-end-time');
+        }
+
+        if(showWeekNumbers) {
+            cssClassNames.push('show-week-numbers');
         }
 
         return cssClassNames.join(' ');
@@ -369,7 +386,12 @@ export default Component.extend(OutsideClick, {
         //if(this.$popup.is(':visible')) return;
         this._closeDetailPickers();
         this._updatePopupPosition();
-        this.$popup.show('fast');
+        if(this.get('animate'))
+        {
+          this.$popup.show('fast');
+        } else {
+          this.$popup.show();
+        }
 
         switch(this.get('mode')) {
             case 'single':
@@ -391,7 +413,11 @@ export default Component.extend(OutsideClick, {
 
     close() {
         this.set('isOpen', false);
-        this.$(this.$popup[0]).hide('fast');
+        if(this.get('animate')) {
+          this.$(this.$popup[0]).hide('fast');
+        } else {
+          this.$(this.$popup[0]).hide();
+        }
     },
 
     toggle() {
@@ -538,6 +564,10 @@ export default Component.extend(OutsideClick, {
                     days[current.toDateString()] = day;
 
                     current = this._addDays(this._copyDate(current), 1);
+                }
+                if(this.get('weekNumbers') === 'iso')
+                {
+                  weekData.number = Moment(weekData.objectAt(0).date).isoWeek();
                 }
                 data.pushObject(weekData);
             }

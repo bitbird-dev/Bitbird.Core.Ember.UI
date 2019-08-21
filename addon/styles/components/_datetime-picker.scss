@@ -394,4 +394,37 @@
       }
     }
   }
+
+  &.show-week-numbers {
+    &:before {
+      content: ' ';
+      height: 7*$picker-item-size;
+      width: $picker-item-size;
+      position: absolute;
+      top: $picker-header-size;
+      left: 0;
+      border-right: 1px dashed $color-foreground-normal-high;
+    }
+    .tr-datetime-picker-month-button {
+      margin-left: $picker-item-size;
+    }
+    .tr-datetime-picker-date-panel {
+      .tr-datetime-picker-month-header,
+      .tr-datetime-picker-month-dates {
+        width: 8*$picker-item-size;
+        ol > li.tr-datetime-picker-month-number {
+          color: $color-foreground-normal-high;
+          &:hover {
+            background-color: inherit;
+            color: $color-foreground-normal-high;
+          }
+        }
+      }
+    }
+    .tr-datetime-picker-detail-overlay {
+      .tr-datetime-picker-content {
+        width: 8*$picker-item-size;
+      }
+    }
+  }
 }

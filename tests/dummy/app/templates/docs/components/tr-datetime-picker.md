@@ -15,10 +15,27 @@
             <span>isOpen</span>
             {{input type="checkbox" checked=isOpen}}
         </div>
+        <div>
+            <span>animate</span>
+            {{input type="checkbox" checked=animate}}
+        </div>
+        <div>
+            <span>weekNumbers</span>
+            <select required name="weekNumberOptions" onchange={{action "selectWeekNumber" value="target.value"}}>
+              {{#each weekNumberOptions as |option|}}        
+                <option value={{option.value}}>{{option.name}}</option>      
+              {{/each}}
+            </select>
+        </div>
     </div>
     <div>
         {{#demo.example name="tr-datetime-picker.hbs"}}
-        {{#tr-datetime-picker timeMode=selectedTimeMode isOpen=isOpen as |displayValue mode date range selectedItems toggle|}}
+        {{#tr-datetime-picker 
+            timeMode=selectedTimeMode 
+            isOpen=isOpen 
+            animate=animate 
+            weekNumbers=selectedWeekNumber
+            as |displayValue mode date range selectedItems toggle|}}
             {{#if displayValue}}
                 <div {{action toggle}}>{{displayValue}}</div>
             {{else}}

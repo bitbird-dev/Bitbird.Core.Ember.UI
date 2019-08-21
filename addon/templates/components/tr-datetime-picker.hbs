@@ -27,6 +27,9 @@
                 </div>
                 <div class="tr-datetime-picker-month-header">
                     <ol>
+                        {{#if weekNumbers}}
+                          <li class="tr-datetime-picker-month-number">&nbsp;</li>
+                        {{/if}}
                         {{#each weeks.[0] as |day|}}
                             <li>{{moment-format day.date 'dd'}}</li>
                         {{/each}}
@@ -35,9 +38,12 @@
                 <div class="tr-datetime-picker-month-dates">
                     {{#each weeks as |week|}}
                         <ol>
+                            {{#if (compare weekNumbers 'iso')}}
+                              <li class="tr-datetime-picker-month-number">{{week.number}}</li>
+                            {{/if}}
                             {{#each week as |day|}}
                                 <li {{action 'select' day}}  {{action 'selectWithReset' day on="doubleClick"}} class="
-                    {{unless day.isCurrentMonth 'is-other-month '}}
+                                    {{unless day.isCurrentMonth 'is-other-month '}}
                                     {{if day.isDisabled 'is-disabled '}}
                                     {{if day.isSelected 'is-selected '}}
                                     {{if day.isToday ' is-today'}}

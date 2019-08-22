@@ -399,7 +399,7 @@
     &:before {
       content: ' ';
       height: 7*$picker-item-size;
-      width: $picker-item-size;
+      width: $picker-item-size - 1px;
       position: absolute;
       top: $picker-header-size;
       left: 0;

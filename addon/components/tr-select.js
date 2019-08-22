@@ -40,11 +40,20 @@ export default Editor.extend(OutsideClick, {
             //this._setSuggestedItems(null);
             this._resetSuggestedItems(false);
 
+            let item = value;
+
+            if(this.get('isMultiple') && this.get('selectedItems')) {
+                if(this.get('selectedItems').includes(item)) {
+                    this.get('selectedItems').removeObject(item);
+                } else {
+                    this.get('selectedItems').pushObject(item);
+                }
+                this.fireEvent(this.get('onSelectedItemsChanged'), this.get('selectedItems'));
+            }
+
             if(value === this._selectedItem) {
                 return value;
             }
-
-            let item = value;
 
             this._selectedItem = item;
 
@@ -73,16 +82,6 @@ export default Editor.extend(OutsideClick, {
             this.notifyPropertyChange('selectedItem');
 
             this.fireEvent(this.get('onSelectedItemChanged'), item);
-
-            if(this.get('isMultiple') && this.get('selectedItems')) {
-                if(this.get('selectedItems').includes(item)) {
-                    this.get('selectedItems').removeObject(item);
-                } else {
-                    this.get('selectedItems').pushObject(item);
-                }
-            }
-
-            this.fireEvent(this.get('onSelectedItemsChanged'), item);
 
             return this._selectedItem;
         }

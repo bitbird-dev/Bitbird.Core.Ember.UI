@@ -27,7 +27,7 @@
     {{#unless isDisabled}}
         {{#tr-modal-dialog header=popoutHeader isVisible=isOpen wrapperClass="tr-select-editor-popout" isMessage=false
                            onClickOverlay=(action 'onClickOverlay')
-                           primaryAction=(action 'onToggleState') primaryText=popoutPrimaryText}}
+                           primaryAction=(action 'onPrimary') primaryText=popoutPrimaryText}}
             {{#with emptyText}}
                 {{#tr-listview items=filteredItems itemClass=null selectedItem=(readonly selectedItem) onSelectedItemChanged=(action 'onSelectedItemChanged') as |listView|}}
                     {{#if listView.itemTemplate}}

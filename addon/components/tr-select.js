@@ -72,10 +72,7 @@ export default Editor.extend(OutsideClick, {
 
             this.notifyPropertyChange('selectedItem');
 
-            let action = this.get('onSelectedItemChanged');
-            if(action) {
-                action(item);
-            }
+            this.fireEvent(this.get('onSelectedItemChanged'), item);
 
             if(this.get('isMultiple') && this.get('selectedItems')) {
                 if(this.get('selectedItems').includes(item)) {
@@ -85,10 +82,7 @@ export default Editor.extend(OutsideClick, {
                 }
             }
 
-            action = this.get('onSelectedItemsChanged');
-            if(action) {
-                action(item);
-            }
+            this.fireEvent(this.get('onSelectedItemsChanged'), item);
 
             return this._selectedItem;
         }
@@ -227,11 +221,16 @@ export default Editor.extend(OutsideClick, {
 
     popoutPrimaryText: 'Ok',
 
+    isCloseOnPrimary: true,
+
     _editable: true,
 
     /*** Exposed Events **/
     onSelectedItemChanged: null,
     onSelectedItemsChanged: null,
+    onOpen: null,
+    onClose: null,
+    onPrimaryAction: null,
 
     /*** UI Methods ***/
 
@@ -239,9 +238,11 @@ export default Editor.extend(OutsideClick, {
         this._attachClickOutsideHandler();
         this.set('isOpen', true);
         this.set('filteredItems', this.get('items') || []);
-        //this._popupUpdatePosition();
+        
         next(this, function() {
             this._popupUpdatePosition(true);
+
+            this.fireEvent(this.get('onOpen'));
         });
     },
     close: function() {
@@ -249,6 +250,8 @@ export default Editor.extend(OutsideClick, {
             this.set('isOpen', false);
         }
         this._removeClickOutsideHandler();
+
+        this.fireEvent(this.get('onClose'));
     },
     toggle: function() {
         let isOpen = this.get('isOpen');
@@ -397,6 +400,17 @@ export default Editor.extend(OutsideClick, {
 
         //Select suggested item
         this._handleInputEvent(null, true);
+    },
+
+    /** calls the given eventHandler-function */
+    fireEvent(eventHandler, args) {
+        if(!eventHandler) return;
+
+        if(typeof(eventHandler) === 'function'){
+            next(this, () => eventHandler(args));
+        } else {
+            console.warn('tr-select.fireEvent: eventHandler not a function');
+        }
     },
 
     /*** Popup ***/
@@ -721,6 +735,17 @@ export default Editor.extend(OutsideClick, {
 
             this.toggle();
             this._clickIsInside = true;
+        },
+        /** for popout-editor primary action button */
+        onPrimary(){
+            if(this.get('isDisabled')) return;
+
+            if(this.get('isCloseOnPrimary')) {
+                this.close();
+            }
+            this._clickIsInside = true;
+
+            this.fireEvent(this.get('onPrimaryAction'))
         },
         onClose() {
             this.close();

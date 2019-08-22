@@ -7,6 +7,7 @@ export default Controller.extend({
     selectedItem: null,
     selectedKey: null,
     items: null,
+    isCloseOnPrimary: true,
 
     values: null,
 
@@ -24,6 +25,11 @@ export default Controller.extend({
         this.set('selectedItem', match);
     }),
 
+    eventOutput: '',
+    feedEventOutput: null,
+    onPrimaryAction: null,
+    onOpen: null,
+    onClose: null,
     init(){
 // BEGIN-SNIPPET tr-select.js
         let items = A(),
@@ -36,7 +42,20 @@ export default Controller.extend({
         }
         this.setProperties({
             items: items,
-            values: values
+            values: values,
+            // isCloseOnPrimary: true,
+            feedEventOutput: (text) => {
+                this.set('eventOutput', this.get('eventOutput') + `${moment().format('HH:mm:ss')}: ${text}\n`);
+            },
+            onPrimaryAction: () => {
+                this.get('feedEventOutput')('onPrimaryAction');
+            },
+            onOpen: () => {
+                this.get('feedEventOutput')('onOpen');
+            },
+            onClose: () => {
+                this.get('feedEventOutput')('onClose');
+            }
         });
 
         this._super(...arguments);

@@ -1,5 +1,8 @@
 # tr-select-editor
 
+###  <span style="color:red">Deprecated</span>
+Use [tr-select](/docs/components/tr-select ) instead
+
 ## Issues
 
 Dropdown appears in the wrong place if browser-window is scrolled.

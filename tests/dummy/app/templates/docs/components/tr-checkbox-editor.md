@@ -7,6 +7,7 @@
         <ul>
             <li>{{input type="checkbox" class="checkbox" checked=isSelected}} isSelected</li>
             <li>{{input type="checkbox" class="checkbox" checked=allowNull}} allowNull</li>
+            <li>{{input type="checkbox" class="checkbox" checked=isReadonly}} isReadonly</li>
             <li>label {{input type="text" value=label}}</li>
             <li>placeholder {{input type="text" value=placeholder}}</li>
             <li>info title {{input type="text" value=info.title}}</li>
@@ -18,6 +19,7 @@
             label=label
             info=info.content
             title=info.title
+            isReadonly=isReadonly
             errors=errors
             placeholder=placeholder
             allowNull=allowNull

@@ -151,6 +151,56 @@ export default Component.extend(OutsideClick, {
         }
     }),
 
+    rangeBeginDateDisplayValue: computed('mode', 'date', 'selectedItems', 'selectedItems.length', 'rangeBegin', {
+        set(key, value) {
+            let rangeBegin = this.get('rangeBegin');
+
+            if(value) {
+                value = value.trim();
+            }
+
+            if(rangeBegin) {
+                value += " " + rangeBegin.toLocaleTimeString()
+            }
+
+            this._setValueFromString(value, 'rangeBegin');
+            return this.get('rangeBeginDateDisplayValue');
+        },
+        get() {
+            let date = this.get('rangeBegin');
+            if(!date)
+            {
+                return null;
+            }
+            return this._displayValueForDate(date, 'date');
+        }
+    }),
+
+    rangeBeginTimeDisplayValue: computed('mode', 'date', 'selectedItems', 'selectedItems.length', 'rangeBegin', {
+        set(key, value) {
+            let rangeBegin = this.get('rangeBegin') || new Date();
+
+            if(value) {
+                value = value.trim();
+            }
+
+            if(rangeBegin) {
+                value = rangeBegin.toLocaleDateString() + " " + value;
+            }
+
+            this._setValueFromString(value, 'rangeBegin');
+            return this.get('rangeBeginTimeDisplayValue');
+        },
+        get() {
+            let date = this.get('rangeBegin');
+            if(!date)
+            {
+                return null;
+            }
+            return this._displayValueForDate(date, 'time');
+        }
+    }),
+
     rangeEndDisplayValue: computed('mode', 'date', 'selectedItems', 'selectedItems.length', 'rangeEnd', {
         set(key, value) {
             this._setValueFromString(value, 'rangeEnd');
@@ -163,6 +213,56 @@ export default Component.extend(OutsideClick, {
                 return null;
             }
             return this._displayValueForDate(date);
+        }
+    }),
+
+    rangeEndDateDisplayValue: computed('mode', 'date', 'selectedItems', 'selectedItems.length', 'rangeEnd', {
+        set(key, value) {
+            let rangeEnd = this.get('rangeEnd');
+
+            if(value) {
+                value = value.trim();
+            }
+
+            if(rangeEnd) {
+                value += " " + rangeEnd.toLocaleTimeString()
+            }
+
+            this._setValueFromString(value, 'rangeEnd');
+            return this.get('rangeEndDateDisplayValue');
+        },
+        get() {
+            let date = this.get('rangeEnd');
+            if(!date)
+            {
+                return null;
+            }
+            return this._displayValueForDate(date, 'date');
+        }
+    }),
+
+    rangeEndTimeDisplayValue: computed('mode', 'date', 'selectedItems', 'selectedItems.length', 'rangeEnd', {
+        set(key, value) {
+            let rangeEnd = this.get('rangeEnd') || new Date();
+
+            if(value) {
+                value = value.trim();
+            }
+
+            if(rangeEnd) {
+                value = rangeEnd.toLocaleDateString() + " " + value;
+            }
+
+            this._setValueFromString(value, 'rangeEnd');
+            return this.get('rangeEndTimeDisplayValue');
+        },
+        get() {
+            let date = this.get('rangeEnd');
+            if(!date)
+            {
+                return null;
+            }
+            return this._displayValueForDate(date, 'time');
         }
     }),
 
@@ -223,25 +323,30 @@ export default Component.extend(OutsideClick, {
         }
     }),
 
-    _displayValueForDate(date) {
-        let timeMode = this.get('timeMode'),
-            formatString = null;
+    _displayValueForDate(date, format) {
+        let formatString = '';
 
         if(date === undefined || date === null) return null;
 
-        switch(timeMode) {
-            case 'hm':
-                formatString = 'L LT';
-                break;
-            case 'hms':
-                formatString = 'L LTS';
-                break;
-            default:
-                formatString = 'L';
-                break;
+        if(!format || format === "date") {
+            formatString = 'L ';
         }
 
-        return Moment(date).format(formatString);
+        if(!format || format === 'time') {
+            let timeMode = this.get('timeMode');
+            switch(timeMode) {
+                case 'hm':
+                    formatString += 'LT';
+                    break;
+                case 'hms':
+                    formatString += 'LTS';
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return Moment(date).format(formatString.trim());
     },
 
     _setValueFromString(value, valuePropertyName) {

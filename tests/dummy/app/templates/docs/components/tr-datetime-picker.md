@@ -132,6 +132,12 @@
             {{tr-text-editor label="Bound Begin" value=range.beginDisplayValue focus-out=refreshDisplay}}
             {{tr-text-editor label="Bound End" value=range.endDisplayValue focus-out=refreshDisplay}}
             {{tr-text-editor isDisabled=true label="ReadOnly Range" value=displayValue}}
+            <br>
+            {{tr-text-editor label="Bound Begin Date" value=range.beginDateDisplayValue focus-out=refreshDisplay}}
+            {{tr-text-editor label="Bound Begin Time" value=range.beginTimeDisplayValue focus-out=refreshDisplay}}
+            <br>
+            {{tr-text-editor label="Bound End Date" value=range.endDateDisplayValue focus-out=refreshDisplay}}
+            {{tr-text-editor label="Bound End Time" value=range.endTimeDisplayValue focus-out=refreshDisplay}}
         {{/tr-datetime-picker}}
         {{/demo.example}}
     </div>

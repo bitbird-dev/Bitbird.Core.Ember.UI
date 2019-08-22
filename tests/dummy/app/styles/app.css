@@ -2608,7 +2608,7 @@ a.active {
   .tr-datetime-picker-wrapper.show-week-numbers:before {
     content: ' ';
     height: 168px;
-    width: 24px;
+    width: 23px;
     position: absolute;
     top: 20px;
     left: 0;

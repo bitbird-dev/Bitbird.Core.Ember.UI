@@ -474,6 +474,7 @@ export default Component.extend(OutsideClick, {
         'rangeBegin',
         'rangeEnd',
         'startsOnMonday',
+        'weekNumbers',
         function () {
             let self = this,
                 year = this.get('year'),

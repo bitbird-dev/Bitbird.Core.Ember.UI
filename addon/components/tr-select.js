@@ -19,6 +19,7 @@ export default Editor.extend(OutsideClick, {
         });
         this._refreshFilteredItems();
         this.__updateDisplayValue();
+        this.__refreshDisplayValue();
     },
 
     classNames: 'tr-select-editor',
@@ -70,6 +71,9 @@ export default Editor.extend(OutsideClick, {
                         selectedKey: self._getKey(resolvedData),
                         selectedValue: self._getValue(resolvedData)
                     });
+
+                    resolvedData.removeObserver(self.get('valueProperty'), self, '_updateDisplayAndSelectedValue');
+                    resolvedData.addObserver(self.get('valueProperty'), self, '_updateDisplayAndSelectedValue');
                 });
                 //return;
             }
@@ -78,6 +82,12 @@ export default Editor.extend(OutsideClick, {
                 selectedKey: this._getKey(item),
                 selectedValue: this._getValue(item)
             });
+
+            if(item && item.addObserver)
+            {
+                item.removeObserver(this.get('valueProperty'), this, '_updateDisplayAndSelectedValue');
+                item.addObserver(this.get('valueProperty'), this, '_updateDisplayAndSelectedValue');
+            }
 
             this.notifyPropertyChange('selectedItem');
 
@@ -106,8 +116,8 @@ export default Editor.extend(OutsideClick, {
 
     selectedItems: null,
 
-    suggestedItem: undefined,
-    suggestedValue: undefined,
+    suggestedItem: null,
+    suggestedValue: null,
 
     keyProperty: 'key',
     valueProperty: 'value',
@@ -125,7 +135,7 @@ export default Editor.extend(OutsideClick, {
         }, this);
 
         this._updateDisplayAndSelectedValue();
-    }).on('init'),
+    }).on('didInsertElement'),
 
     filteredItems: null,
     _updateDisplayAndSelectedValue() {

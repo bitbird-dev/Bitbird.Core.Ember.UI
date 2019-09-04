@@ -8,13 +8,23 @@
       <button {{action 'selectItemByKey' 'key 12'}}>Select item 12</button>
       <button {{action 'selectItemByKey' 'key 21'}}>Select item 21</button>
       <button {{action 'selectItemByKey' 'key 33'}}>Select item 33</button>
+      <button {{action 'changeDisplayValues'}}>Change Values</button>
     </div>
     <p>Selected: {{selectedItem.value}}</p>
     <p>Suggested: {{suggestedValue}}</p>
-    {{tr-select label="Select something" items=items selectedItem=selectedItem editable=true suggestedValue=suggestedValue}}
+    {{tr-select 
+        label="Select something" 
+        items=items selectedItem=selectedItem 
+        editable=true 
+        suggestedValue=suggestedValue}}
     {{tr-select 
         label=(concat "Select by key " selectedKey "==" selectedItem.value) 
-        items=items selectedKey=selectedKey editable=true}}
+        items=items 
+        keyProperty='key'
+        valueProperty='value'
+        selectedKey=selectedKey 
+        editable=true}}
+
   {{/demo.example}}
   {{demo.snippet 'tr-select-filter.hbs' label='template.hbs'}}
   {{demo.snippet 'tr-select-filter.js' label='controller.js'}}

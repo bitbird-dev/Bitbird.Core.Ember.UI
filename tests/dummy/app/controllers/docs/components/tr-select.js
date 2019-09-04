@@ -140,6 +140,11 @@ export default Controller.extend({
 // END-SNIPPET
     },
     actions: {
+        changeDisplayValues(){
+            this.get('items').forEach((item, idx) => {
+                item.set('value', 'value ' + idx + '-' + new Date().getMilliseconds());
+            });
+        },
         selectItemByKey(key) {
             this.setProperties({
                 selectedKey: key,

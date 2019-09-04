@@ -18,6 +18,7 @@ export default Editor.extend(OutsideClick, {
             this._popupReset();
         });
         this._refreshFilteredItems();
+        this.__updateDisplayValue();
     },
 
     classNames: 'tr-select-editor',
@@ -111,9 +112,34 @@ export default Editor.extend(OutsideClick, {
     keyProperty: 'key',
     valueProperty: 'value',
 
-    filteredItems: null,
+    /**
+     * Adds observer to each items displayValue property to update it if necessary
+     */
+    __refreshDisplayValue: observer('valueProperty', 'items', function() {
+        let valueProperty = this.get('valueProperty'),
+            items = this.get('items') || [];
 
-    displayValue: computed(
+        items.forEach(function(item) {
+            item.removeObserver(valueProperty, this, '_updateDisplayAndSelectedValue');
+            item.addObserver(valueProperty, this, '_updateDisplayAndSelectedValue');
+        }, this);
+
+        this._updateDisplayAndSelectedValue();
+    }).on('init'),
+
+    filteredItems: null,
+    _updateDisplayAndSelectedValue() {
+        debounce(this, this._updateDisplayAndSelectedValueCore, 20);
+    },
+    _updateDisplayAndSelectedValueCore() {
+        let selectedItem = this.get('selectedItem');
+        if (selectedItem)
+        {
+            this.set('selectedValue', this._getValue(selectedItem));
+        }
+        this.__updateDisplayValue();
+    },
+    __updateDisplayValue: observer(
         'selectedItems', 'selectedItems.{length,@each.isLoaded,@each.isLoading,isPending}',
         'selectedItem', 'selectedItem.{isFulfilled,isLoaded}',
         'isMultiple', 'i18n.locale', function() {
@@ -121,16 +147,23 @@ export default Editor.extend(OutsideClick, {
                 let items = this.get('selectedItems'),
                     values = A();
 
-                if(!items) return null;
+                if(!items) {
+                    this.set('displayValue', null);
+                    return;
+                }
 
                 items.forEach(function(item) {
                     values.pushObject(this._getValue(item));
                 }, this);
-                return values.toString();
+                this.set('displayValue', values.toString());
+                return;
             }
 
             let selectedItem = this.get('selectedItem');
-            if(!selectedItem) return selectedItem;
+            if(!selectedItem) {
+                this.set('displayValue', selectedItem);
+                return;
+            }
 
             let isBusy = selectedItem.then && !selectedItem.isFulfilled;
             if(isBusy) {
@@ -138,10 +171,15 @@ export default Editor.extend(OutsideClick, {
             } else {
                 this.idle('displayValue');
             }
-            if(isBusy) return null;
+            if(isBusy) {
+                this.set('displayValue', null);
+                return;
+            }
 
-            return this._getValue(selectedItem);
+            this.set('displayValue', this._getValue(selectedItem));
         }),
+
+    displayValue: null,
 
     /*** UI PROPERTIES ***/
 

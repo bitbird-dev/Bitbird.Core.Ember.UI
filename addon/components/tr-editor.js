@@ -62,6 +62,8 @@ export default Component.extend(BusyKeys, {
             if (value) {
                 if (value.string) {
                     length = value.string.length;
+                } else if (value.get) {
+                    length = value.get('length');
                 } else if (value.length) {
                     length = value.length;
                 }

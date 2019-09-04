@@ -5,7 +5,6 @@ import { A } from '@ember/array';
 import { next, debounce } from '@ember/runloop';
 import { isPresent, isNone } from '@ember/utils';
 import layout from '../templates/components/tr-select';
-import { Promise } from 'rsvp';
 import Ember from 'ember';
 
 export default Editor.extend(OutsideClick, {
@@ -237,7 +236,7 @@ export default Editor.extend(OutsideClick, {
         this._attachClickOutsideHandler();
         this.set('isOpen', true);
         this.set('filteredItems', this.get('items') || []);
-        
+
         next(this, function() {
             this._popupUpdatePosition(true);
 

@@ -72,8 +72,11 @@ export default Editor.extend(OutsideClick, {
                         selectedValue: self._getValue(resolvedData)
                     });
 
-                    resolvedData.removeObserver(self.get('valueProperty'), self, '_updateDisplayAndSelectedValue');
-                    resolvedData.addObserver(self.get('valueProperty'), self, '_updateDisplayAndSelectedValue');
+                    if(resolvedData && resolvedData.addObserver)
+                    {
+                        resolvedData.removeObserver(self.get('valueProperty'), self, '_updateDisplayAndSelectedValue');
+                        resolvedData.addObserver(self.get('valueProperty'), self, '_updateDisplayAndSelectedValue');
+                    }
                 });
                 //return;
             }
@@ -143,7 +146,7 @@ export default Editor.extend(OutsideClick, {
     },
     _updateDisplayAndSelectedValueCore() {
         let selectedItem = this.get('selectedItem');
-        if (selectedItem)
+        if (selectedItem &&  !this.get('isDestroyed'))
         {
             this.set('selectedValue', this._getValue(selectedItem));
         }

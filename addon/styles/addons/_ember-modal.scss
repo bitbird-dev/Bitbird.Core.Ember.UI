@@ -14,6 +14,11 @@
     position: static;
   }
 
+  .modal-dialog-container {
+    height: 100%;
+    background-color: $color-background;
+  }
+
   .modal-dialog-header {
     border-radius: 4px 4px 0 0;
     background-color: $color-background-low;
@@ -41,6 +46,7 @@
     background-color: $color-background-low;
     border-radius: 0 0 4px 4px;
     padding: 0;
+    @include clearfix();
     > .tr-editor.tr-button-editor > .tr-editor > .tr-editor-content-wrapper {
       border: none;
       button {
@@ -88,7 +94,10 @@
       max-height: 70%;
       overflow: hidden;
       transform: translate(-50%, -0%);
-      &.fullsize {
+      &.is-full-height {
+        height: 70%
+      }
+      &.fullsize, &.is-full-size {
         top: auto;
         left: auto;
         transform: none;
@@ -99,6 +108,9 @@
         padding: 30px;
         box-sizing: border-box;
         background: no-repeat;
+        .modal-dialog-container {
+          margin-bottom: 30px;
+        }
       }
     }
   }

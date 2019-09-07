@@ -16,6 +16,7 @@ export default Controller.extend({
     values: null,
 
     style: 'popout',
+    popoutSize: 'fullHeight',
 
     toggleAllowNull:false,
 
@@ -153,6 +154,9 @@ export default Controller.extend({
         },
         selectStyle(key) {
             this.set('style', key);
+        },
+        selectPopoutSize(key) {
+            this.set('popoutSize', key);
         }
     }
 });

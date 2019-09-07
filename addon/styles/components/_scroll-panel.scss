@@ -4,6 +4,9 @@
   margin: auto;
   @include clearfix();
   > .tr-scroll-panel-bar >.tr-scroll-panel-force-overflow{
+    > .tr-sticky-header {
+      z-index: 1;
+    }
     > .tr-alert {
       border-radius: 0;
       border-style: none;

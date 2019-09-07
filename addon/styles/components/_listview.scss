@@ -45,6 +45,9 @@
       padding: 8px;
       display: block;
       position: relative;
+      > .is-selected {
+        color: $color-accent;
+      }
     }
   }
   .tr-listview-busy {

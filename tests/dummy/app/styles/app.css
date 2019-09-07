@@ -1647,6 +1647,9 @@ a.active {
   position: fixed; }
   .ember-modal-dialog.emd-in-place {
     position: static; }
+  .ember-modal-dialog .modal-dialog-container {
+    height: 100%;
+    background-color: #fff; }
   .ember-modal-dialog .modal-dialog-header {
     border-radius: 4px 4px 0 0;
     background-color: #dedede;
@@ -1670,6 +1673,12 @@ a.active {
     background-color: #dedede;
     border-radius: 0 0 4px 4px;
     padding: 0; }
+    .ember-modal-dialog .modal-dialog-footer:after {
+      content: " ";
+      clear: both;
+      display: block;
+      visibility: hidden;
+      height: 0px; }
     .ember-modal-dialog .modal-dialog-footer > .tr-editor.tr-button-editor > .tr-editor > .tr-editor-content-wrapper {
       border: none; }
       .ember-modal-dialog .modal-dialog-footer > .tr-editor.tr-button-editor > .tr-editor > .tr-editor-content-wrapper button {
@@ -1703,7 +1712,9 @@ a.active {
   max-height: 70%;
   overflow: hidden;
   transform: translate(-50%, 0%); }
-  .ember-modal-wrapper.emd-static.emd-wrapper-target-attachment-center .ember-modal-dialog.fullsize {
+  .ember-modal-wrapper.emd-static.emd-wrapper-target-attachment-center .ember-modal-dialog.is-full-height {
+    height: 70%; }
+  .ember-modal-wrapper.emd-static.emd-wrapper-target-attachment-center .ember-modal-dialog.fullsize, .ember-modal-wrapper.emd-static.emd-wrapper-target-attachment-center .ember-modal-dialog.is-full-size {
     top: auto;
     left: auto;
     transform: none;
@@ -1714,6 +1725,8 @@ a.active {
     padding: 30px;
     box-sizing: border-box;
     background: no-repeat; }
+    .ember-modal-wrapper.emd-static.emd-wrapper-target-attachment-center .ember-modal-dialog.fullsize .modal-dialog-container, .ember-modal-wrapper.emd-static.emd-wrapper-target-attachment-center .ember-modal-dialog.is-full-size .modal-dialog-container {
+      margin-bottom: 30px; }
 .ember-modal-wrapper.emd-animatable.emd-wrapper-target-attachment-center {
   width: 100vw;
   height: 100vh;
@@ -3705,6 +3718,9 @@ a.active {
       padding: 8px;
       display: block;
       position: relative; }
+      .tr-listview .tr-listview-item a > .tr-listview-item-content > .is-selected,
+      .tr-listview .tr-listview-item .tr-listview-item-content > .is-selected {
+        color: #009fe4; }
   .tr-listview .tr-listview-busy {
     position: absolute;
     top: 0;
@@ -3945,6 +3961,8 @@ a.active {
     display: block;
     visibility: hidden;
     height: 0px; }
+  .tr-scroll-panel > .tr-scroll-panel-bar > .tr-scroll-panel-force-overflow > .tr-sticky-header {
+    z-index: 1; }
   .tr-scroll-panel > .tr-scroll-panel-bar > .tr-scroll-panel-force-overflow > .tr-alert {
     border-radius: 0;
     border-style: none;

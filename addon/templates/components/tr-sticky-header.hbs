@@ -3,11 +3,15 @@
         {{imagePlaceholder}}
     {{/tr-image-upload}}
 {{/if}}
-<div class="tr-sticky-header-content">
-    {{#if subheader}}
-        <h2>{{subheader}}</h2>
-    {{/if}}
-    {{#if header}}<h1>{{header}}</h1>{{/if}}
-    {{yield (hash content=(component 'tr-contentpresenter'))}}
-</div>
-{{yield (hash menu=(component 'tr-menubar'))}}
+{{#if showHeader}}
+    <div class="tr-sticky-header-content">
+        {{#if subheader}}
+            <h2>{{subheader}}</h2>
+        {{/if}}
+        {{#if header}}<h1>{{header}}</h1>{{/if}}
+        {{yield (hash content=(component 'tr-container'))}}
+    </div>
+{{/if}}
+{{#if showMenu}}
+    {{yield (hash menu=(component 'tr-menubar'))}}
+{{/if}}

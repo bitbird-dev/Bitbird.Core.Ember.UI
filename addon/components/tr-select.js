@@ -3,7 +3,7 @@ import Editor from './tr-editor';
 import OutsideClick from '../mixins/tr-outside-click';
 import { A } from '@ember/array';
 import { next, debounce } from '@ember/runloop';
-import { isPresent, isNone } from '@ember/utils';
+import { isNone } from '@ember/utils';
 import layout from '../templates/components/tr-select';
 import Ember from 'ember';
 
@@ -57,8 +57,9 @@ export default Editor.extend(OutsideClick, {
             }
 
             this._selectedItem = item;
+            this.notifyPropertyChange('selectedItem');
 
-            this._selectItem(this._selectedItem);
+            this._selectItem(this._selectedItem, false);
 
             if(item && item.then && item.isPending) {
                 let self = this;
@@ -229,6 +230,11 @@ export default Editor.extend(OutsideClick, {
     }),
 
     /**
+     * Defines the size of the popout: fullHeight, fullSize
+     */
+    popoutSize: 'fullHeight',
+
+    /**
      * Alignment of the combo content:
      * auto - stretches the combo to the control width
      * left - aligns combo to the left border of the control
@@ -271,6 +277,10 @@ export default Editor.extend(OutsideClick, {
     popoutPrimaryText: 'Ok',
 
     isCloseOnPrimary: true,
+
+    showHeader: false,
+
+    showMenu: false,
 
     _editable: true,
 
@@ -321,8 +331,8 @@ export default Editor.extend(OutsideClick, {
     }),
 
     /*** Events **/
-    clickOutside(event) {
-        if(this.get('style') === 'popout' && this.get('isMultiple')) {
+    clickOutside() {
+        if(this.get('style') === 'popout') {
             //should be handled by modal dialog
             return;
         }
@@ -440,7 +450,7 @@ export default Editor.extend(OutsideClick, {
     },
 
     focusOutside(){
-        if(this.get('style') === 'popout' && this.get('isMultiple')) {
+        if(this.get('style') === 'popout') {
             //should be handled by modal dialog
             return;
         }
@@ -457,8 +467,6 @@ export default Editor.extend(OutsideClick, {
 
         if(typeof(eventHandler) === 'function'){
             next(this, () => eventHandler(args));
-        } else {
-            console.warn('tr-select.fireEvent: eventHandler not a function');
         }
     },
 
@@ -658,7 +666,7 @@ export default Editor.extend(OutsideClick, {
         });
     },
 
-    _selectItem(item) {
+    _selectItem(item, set) {
         if(this.get('isDisabled') || this.get('isReadonly')) return;
 
         if(item === undefined) {
@@ -669,7 +677,7 @@ export default Editor.extend(OutsideClick, {
             return false;
         }
 
-        this.set('selectedItem', item);
+        if(set !== false) this.set('selectedItem', item);
 
         return true;
     },

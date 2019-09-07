@@ -21,12 +21,16 @@ export default Component.extend({
 
     isVisible: true,
     isMessage: false,
+    isFullHeight: false,
+    isFullSize: false,
 
     scrollingDisabled: false,
 
     wrapperClass: null,
-    containerClassNames: computed('isMessage', function() {
-        return this.get('isMessage') ? 'tr-message-box' : null;
+    containerClassNames: computed('isMessage', 'isFullHeight', 'isFullSize', function() {
+        return (this.get('isMessage') ? 'tr-message-box' : '') +
+            (this.get('isFullHeight') ? 'is-full-height' : '') +
+            (this.get('isFullSize') ? 'is-full-size' : '');
     }),
 
     isFooterVisible: computed('primaryAction', 'secondaryAction', {

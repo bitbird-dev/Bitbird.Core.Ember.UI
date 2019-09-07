@@ -15,6 +15,8 @@ export default Component.extend({
     showImageUpload: false,
     showImageDelete: false,
     showImagePlaceholder: true,
+    showHeader: true,
+    showMenu: false,
 
     onUpload: null,
     onDelete: null

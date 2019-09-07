@@ -1,5 +1,48 @@
 # tr-select
 
+## Use styles
+
+{{#docs-demo as |demo|}}
+    <div class="docu-options-block">
+      <button {{action 'selectStyle' 'default'}}>Default</button>
+      <button {{action 'selectStyle' 'popout'}}>Popout</button>
+      <button {{action 'selectStyle' 'flat'}}>Flat</button>
+      <div>
+          {{#if (compare style 'popout')}}
+            <button {{action 'selectPopoutSize' 'fullHeight'}}>Full Height</button>      
+            <button {{action 'selectPopoutSize' 'fullSize'}}>Full Size</button>      
+          {{/if}}      
+      </div>
+    </div>
+  {{#demo.example name='tr-select-style.hbs'}}
+    {{#tr-select 
+        label=(concat "Select by key " selectedKey "==" selectedItem.value) 
+        items=items 
+        keyProperty='key'
+        valueProperty='value'
+        selectedKey=selectedKey 
+        editable=true
+        showHeader=true
+        showMenu=true
+        popoutSize=popoutSize
+        header="Hhuhu"
+        style=style as |select|}}
+        {{#select.itemTemplate as |item|}}
+            {{item.value}}
+        {{/select.itemTemplate}}
+        {{#select.header}}
+            Select an item
+        {{/select.header}}
+        {{#select.menu}}
+            And add a menu here.
+        {{/select.menu}}
+    {{/tr-select}}
+  {{/demo.example}}
+  {{demo.snippet 'tr-select-style.hbs' label='template.hbs'}}
+  {{demo.snippet 'tr-select-style.js' label='controller.js'}}
+  {{demo.snippet 'tr-select-style.css' label='style.scss'}}
+{{/docs-demo}}
+
 ## Use filter and suggestions
 
 {{#docs-demo as |demo|}}
@@ -12,11 +55,23 @@
     </div>
     <p>Selected: {{selectedItem.value}}</p>
     <p>Suggested: {{suggestedValue}}</p>
-    {{tr-select 
+    {{#tr-select 
         label="Select something" 
         items=items selectedItem=selectedItem 
         editable=true 
-        suggestedValue=suggestedValue}}
+        showHeader=true
+        showMenu=true
+        suggestedValue=suggestedValue as |select|}}
+        {{#select.header}}
+            Header Supa
+        {{/select.header}}
+        {{#select.menu}}
+            Menu Supa
+        {{/select.menu}}
+        {{#select.itemTemplate as |i|}}
+            {{i.value}}
+        {{/select.itemTemplate}}
+    {{/tr-select}}
     {{tr-select 
         label=(concat "Select by key " selectedKey "==" selectedItem.value) 
         items=items 

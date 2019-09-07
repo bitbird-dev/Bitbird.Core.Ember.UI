@@ -47,6 +47,16 @@ export default Component.extend({
      */
     scrollbarAutohide: false,
 
+    /**
+     * Hides or shows the header
+     */
+    showHeader: false,
+
+    /**
+     * Hides or shows the menu
+     */
+    showMenu: false,
+
     /*keyDown(e) {
         if(e.keyCode == 40) {
             let items = this.get('items');

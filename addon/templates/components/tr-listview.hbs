@@ -7,9 +7,17 @@
 {{!--/tr-listview--}}
 
 {{#tr-scroll-panel autohide=scrollbarAutohide}}
-    {{yield (hash header=(component 'tr-sticky-header'))}}
-    {{yield (hash menu=(component 'tr-container'))}}
-    {{yield (hash itemsHeader=(component 'tr-container' classNames='tr-listview-items-header'))}}
+    {{#tr-sticky-header showHeader=showHeader showMenu=showMenu as |sh|}}
+        {{#sh.content}}
+            {{yield (hash header=(component 'tr-container'))}}
+        {{/sh.content}}
+        {{#sh.menu}}
+            {{yield (hash menu=(component 'tr-container'))}}
+        {{/sh.menu}}
+    {{/tr-sticky-header}}
+    {{!--yield (hash header=(component 'tr-sticky-header'))}}
+    {{yield (hash menu=(component 'tr-sticky-menu'))--}}
+    {{yield (hash itemsHeader=(component 'tr-contentpresenter' classNames='tr-listview-items-header'))}}
     <div style="position: relative;">
         {{#if items}}
             <ul class="tr-listview-items">
@@ -33,12 +41,12 @@
                 {{/each}}
             </ul>
         {{else}}
-            {{yield (hash empty=(component 'tr-container' classNames='tr-listview-empty'))}}
+            {{yield (hash empty=(component 'tr-contentpresenter' classNames='tr-listview-empty'))}}
         {{/if}}
 
         {{#if isBusy}}
-            {{yield (hash busy=(component 'tr-container' classNames='tr-listview-busy'))}}
+            {{yield (hash busy=(component 'tr-contentpresenter' classNames='tr-listview-busy'))}}
         {{/if}}
     </div>
-    {{yield (hash itemsFooter=(component 'tr-container' classNames='tr-listview-items-footer'))}}
+    {{yield (hash itemsFooter=(component 'tr-contentpresenter' classNames='tr-listview-items-footer'))}}
 {{/tr-scroll-panel}}

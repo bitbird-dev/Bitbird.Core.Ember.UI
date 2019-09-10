@@ -8,8 +8,12 @@
         {{#if subheader}}
             <h2>{{subheader}}</h2>
         {{/if}}
-        {{#if header}}<h1>{{header}}</h1>{{/if}}
-        {{yield (hash content=(component 'tr-container'))}}
+        {{#if header}}
+            <h1>{{header}}</h1>
+        {{else}}
+            {{yield (hash header=(component 'tr-container' tagName=''))}}
+        {{/if}}
+        {{yield (hash content=(component 'tr-container' tagName=''))}}
     </div>
 {{/if}}
 {{#if showMenu}}

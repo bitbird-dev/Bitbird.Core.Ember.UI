@@ -22,20 +22,17 @@
         valueProperty='value'
         selectedKey=selectedKey 
         editable=true
-        showHeader=true
-        showMenu=true
         popoutSize=popoutSize
         header="Hhuhu"
         style=style as |select|}}
         {{#select.itemTemplate as |item|}}
             {{item.value}}
         {{/select.itemTemplate}}
-        {{#select.header}}
-            Select an item
+        {{#select.header header="Select ab item" subheader="This is where you can select items" showMenu=true as |header|}}
+            {{#header.menu}}
+                {{tr-button-editor text="Click me"}}
+            {{/header.menu}}
         {{/select.header}}
-        {{#select.menu}}
-            And add a menu here.
-        {{/select.menu}}
     {{/tr-select}}
   {{/demo.example}}
   {{demo.snippet 'tr-select-style.hbs' label='template.hbs'}}
@@ -59,8 +56,7 @@
         label="Select something" 
         items=items selectedItem=selectedItem 
         editable=true 
-        showHeader=true
-        showMenu=true
+
         suggestedValue=suggestedValue as |select|}}
         {{#select.header}}
             Header Supa

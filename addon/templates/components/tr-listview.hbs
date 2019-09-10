@@ -7,14 +7,19 @@
 {{!--/tr-listview--}}
 
 {{#tr-scroll-panel autohide=scrollbarAutohide}}
-    {{#tr-sticky-header showHeader=showHeader showMenu=showMenu as |sh|}}
+    {{!--#tr-sticky-header showHeader=showHeader showMenu=showMenu header=header subheader=subHeader as |sh|}}
+        {{#sh.header}}
+            {{yield (hash header=(component 'tr-container' tagName='' context=items))}}
+        {{/sh.header}}
         {{#sh.content}}
-            {{yield (hash header=(component 'tr-container'))}}
+            {{yield (hash headerContent=(component 'tr-container' tagName='' context=items))}}
         {{/sh.content}}
         {{#sh.menu}}
-            {{yield (hash menu=(component 'tr-container'))}}
+            {{yield (hash menu=(component 'tr-container' tagName='' context=items))}}
         {{/sh.menu}}
-    {{/tr-sticky-header}}
+    {{/tr-sticky-header--}}
+    {{yield (hash header=(component 'tr-sticky-header'))}}
+    {{yield (hash customHeader=(component 'tr-container' tagName=''))}}
     {{!--yield (hash header=(component 'tr-sticky-header'))}}
     {{yield (hash menu=(component 'tr-sticky-menu'))--}}
     {{yield (hash itemsHeader=(component 'tr-contentpresenter' classNames='tr-listview-items-header'))}}
@@ -27,14 +32,14 @@
                         {{#link-to linkRouteName item.id current-when=linkRouteCurrentWhen tagName="li" href=false class="tr-listview-item" classNameBindings="itemClass"}}
                             {{#link-to linkRouteName item.id}}
                                 <div class="tr-listview-item-content">
-                                    {{yield (hash data=item.item itemTemplate=(component 'tr-container')) item.item}}
+                                    {{yield (hash data=item.item itemTemplate=(component 'tr-container' context=item.item))}}
                                 </div>
                             {{/link-to}}
                         {{/link-to}}
                     {{else}}
                         <li class="tr-listview-item {{itemClass}} {{if (compare item selectedItem) 'active'}}" {{action "select" item.item}}>
                             <div class="tr-listview-item-content">
-                                {{yield (hash data=item.item itemTemplate=(component 'tr-container' item.item)) item.item}}
+                                {{yield (hash data=item.item itemTemplate=(component 'tr-container' context=item.item))}}
                             </div>
                         </li>
                     {{/if}}

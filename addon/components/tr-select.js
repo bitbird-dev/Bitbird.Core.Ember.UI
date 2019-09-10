@@ -278,10 +278,6 @@ export default Editor.extend(OutsideClick, {
 
     isCloseOnPrimary: true,
 
-    showHeader: false,
-
-    showMenu: false,
-
     _editable: true,
 
     /*** Exposed Events **/

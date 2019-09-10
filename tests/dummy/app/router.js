@@ -24,6 +24,7 @@ Router.map(function() {
             this.route("tr-map-editor");
             this.route("rating-editor");
             this.route("tr-checkbox-editor");
+            this.route("tr-listview");
         });
     });
     this.route("not-found", { path: "/*path" });

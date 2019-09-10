@@ -16,14 +16,32 @@
         }}
     {{/each}}
 {{else if (compare style 'popout')}}
-    {{#tr-button-editor text=displayValue label=label placeholder=placeholder errors=errors buttonClass=buttonClass isDisabled=isDisabled readonly=isReadonly}}
-        {{#unless isDisabledOrReadonly}}
-            {{#if allowNull}}
-                <button class="tr-select-editor-button-clear" {{action 'onClearValue' bubbles=false}} disabled={{isDisabled}} readonly="{{isReadonly}}"><span>&#10006;</span></button>
-            {{/if}}
-        {{/unless}}
-        <button class="tr-select-editor-button-arrow" {{action 'onToggleState' bubbles=false}} disabled={{isDisabled}}><span>&#9660;</span></button>
-    {{/tr-button-editor}}
+    {{#if (and editable _editable)}}
+        {{input value=(readonly suggestedValue) class="tr-select-editor-suggestion" readonly="readonly" click=(action "editableClick")}}
+        {{#tr-text-editor class="tr-select-text-editor" value=(readonly selectedValue) label=label placeholder=placeholder errors=errors onTextChanged=(action 'onTextChanged') prefix=prefix postfix=postfix
+                          isDisabled=isDisabled isReadonly=isReadonly}}
+            <div class="button-placeholder">
+                {{#unless isDisabledOrReadonly}}
+                    {{#if allowNull}}
+                        <button class="tr-select-editor-button-clear" {{action 'onClearValue' bubbles=false}} disabled={{isDisabled}}><span>&#10006;</span></button>
+                    {{/if}}
+                {{/unless}}
+                <button class="tr-select-editor-button-arrow" {{action 'onToggleState' bubbles=false}} disabled={{isDisabled}}><span>&#9660;</span></button>
+                {{#if isBusy}}
+                    {{tr-text-loader}}
+                {{/if}}
+            </div>
+        {{/tr-text-editor}}
+    {{else}}
+        {{#tr-button-editor text=displayValue label=label placeholder=placeholder errors=errors buttonClass=buttonClass isDisabled=isDisabled readonly=isReadonly}}
+            {{#unless isDisabledOrReadonly}}
+                {{#if allowNull}}
+                    <button class="tr-select-editor-button-clear" {{action 'onClearValue' bubbles=false}} disabled={{isDisabled}} readonly="{{isReadonly}}"><span>&#10006;</span></button>
+                {{/if}}
+            {{/unless}}
+            <button class="tr-select-editor-button-arrow" {{action 'onToggleState' bubbles=false}} disabled={{isDisabled}}><span>&#9660;</span></button>
+        {{/tr-button-editor}}
+    {{/if}}
     {{#unless isDisabled}}
         {{#tr-modal-dialog header=popoutHeader isVisible=isOpen wrapperClass="tr-select-editor-popout"
                            onClickOverlay=(action 'onClickOverlay')
@@ -34,23 +52,12 @@
                            scrollingDisabled=true}}
             {{#with emptyText}}
                     <div style="height:100%;">
-                        {{#tr-listview showHeader=showHeader
-                                       showMenu=showMenu
-                                       items=filteredItems
+                        {{#tr-listview items=filteredItems
                                        selectedItem=(readonly selectedItem)
                                        onSelectedItemChanged=(action 'onSelectedItemChanged') as |listView item|}}
-                            {{#if header}}
-                                {{#listView.header}}
-                                    {{header}}
-                                {{/listView.header}}
-                            {{else}}
-                                {{#listView.header}}
-                                    {{yield (hash header=(component 'tr-container' tagName='' context=listView.data))}}
-                                {{/listView.header}}
-                            {{/if}}
-                            {{#listView.menu}}
-                                {{yield (hash menu=(component 'tr-container' tagName='' context=listView.data))}}
-                            {{/listView.menu}}
+                            {{#listView.customHeader}}
+                                {{yield (hash header=(component 'tr-sticky-header'))}}
+                            {{/listView.customHeader}}
                             {{#listView.empty}}
                                 <div class="tr-select-editor-filter-no-result">
                                     {{noFilterResultText}}
@@ -124,13 +131,10 @@
             {{#with emptyText}}
                 {{#ember-wormhole to=_popupDestinationElement}}
                     <div>
-                        {{#tr-listview showHeader=showHeader showMenu=showMenu items=filteredItems selectedItem=(readonly selectedItem) onSelectedItemChanged=(action 'onSelectedItemChanged') as |listView item|}}
-                            {{#listView.header}}
-                                {{yield (hash header=(component 'tr-container' tagName='' context=listView.data))}}
-                            {{/listView.header}}
-                            {{#listView.menu}}
-                                {{yield (hash menu=(component 'tr-container' tagName='' context=listView.data))}}
-                            {{/listView.menu}}
+                        {{#tr-listview items=filteredItems selectedItem=(readonly selectedItem) onSelectedItemChanged=(action 'onSelectedItemChanged') as |listView item|}}
+                            {{#listView.customHeader}}
+                                {{yield (hash header=(component 'tr-sticky-header'))}}
+                            {{/listView.customHeader}}
                             {{#listView.empty}}
                                 <div class="tr-select-editor-filter-no-result">
                                     {{noFilterResultText}}

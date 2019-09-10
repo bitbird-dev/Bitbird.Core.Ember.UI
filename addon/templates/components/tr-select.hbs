@@ -64,14 +64,16 @@
                                 </div>
                             {{/listView.empty}}
                             {{#if hasBlock}}
-                                {{#listView.itemTemplate class=(if (if isMultiple (contains listView.data selectedItems) (compare listView.data selectedItem)) "is-selected")}}
+                                {{#listView.itemTemplate class=(concat "tr-select-item" (if (if isMultiple (contains listView.data selectedItems) (compare listView.data selectedItem)) " is-selected"))}}
                                     {{yield (hash
                                                 data=listView.data
                                                 isSelected=(if isMultiple (contains listView.data selectedItems) (compare listView.data selectedItem))
-                                                itemTemplate=(component 'tr-contentpresenter'
-                                                tagName=''
-                                                context=listView.data
-                                                param1=(if isMultiple (contains listView.data selectedItems) (compare listView.data selectedItem))))}}
+                                                itemTemplate=(
+                                                    component 'tr-contentpresenter'
+                                                    context=listView.data
+                                                    param1=(if isMultiple (contains listView.data selectedItems) (compare listView.data selectedItem))
+                                                )
+                                            )}}
                                 {{/listView.itemTemplate}}
                             {{else}}
                                 {{#if valueProperty}}
@@ -141,10 +143,17 @@
                                 </div>
                             {{/listView.empty}}
                             {{#if hasBlock}}
-                                {{#listView.itemTemplate}}
+                                {{#listView.itemTemplate class=(concat "tr-select-item" (if (if isMultiple (contains listView.data selectedItems) (compare listView.data selectedItem)) " is-selected"))}}
                                     {{!--yield (hash itemTemplate=(component 'tr-container' tagName='' context=listView.data))--}}
-                                    {{yield (hash data=listView.data isSelected=(if isMultiple (contains listView.data selectedItems) (compare listView.data selectedItem)) itemTemplate=(component 'tr-contentpresenter' tagName=''
-                                        context=listView.data param1=(if isMultiple (contains listView.data selectedItems) (compare listView.data selectedItem))))}}
+                                    {{yield (hash
+                                                data=listView.data
+                                                isSelected=(if isMultiple (contains listView.data selectedItems) (compare listView.data selectedItem))
+                                                itemTemplate=(
+                                                    component 'tr-contentpresenter'
+                                                    context=listView.data
+                                                    param1=(if isMultiple (contains listView.data selectedItems) (compare listView.data selectedItem))
+                                                )
+                                            )}}
                                 {{/listView.itemTemplate}}
                             {{else}}
                                 {{#if valueProperty}}

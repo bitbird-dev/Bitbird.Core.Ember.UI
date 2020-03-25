@@ -1,4 +1,5 @@
 import { observer, computed } from '@ember/object';
+import { empty  } from '@ember/object/computed';
 import { copy } from '@ember/object/internals';
 import Widget from './tr-widget';
 import layout from '../../templates/components/widgets/tr-chart';
@@ -49,6 +50,9 @@ export default Widget.extend({
     spacingTop: 0,
     spacingLeft: 0,
     spacingRight: 0,
+
+
+    contentIsEmpty: empty('content'),
 
     internalChartOptions: computed('chartOptions', 'absWidth', 'absHeight', function() {
         let sourceOptions = this.get('chartOptions'),

@@ -89,6 +89,30 @@ $board-widget-size: 160px;
     }
     > .tr-board-widget-content {
       font-size: 80%;
+      text.tr-board-widget-content-empty-header{
+        position: absolute;
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%);
+        width: 100%;
+        font: lighter 130% "PT Sans Caption", Verdana, sans-serif;
+        color:#000;
+        font-size:15.6px;
+        fill:#000;
+        text-align: center;
+      }
+      text.tr-board-widget-content-empty-body{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 100%;
+        font: lighter 90% "PT Sans narrow", Verdana, sans-serif;
+        color:#919191;
+        font-size:16px;
+        fill:#919191;
+        text-align: center;
+      }
     }
     > .tr-board-widget-footer {
       height: fit-content;

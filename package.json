@@ -34,7 +34,7 @@
         "ember-modal-dialog": "^3.0.0",
         "ember-qrcode-shim": "^0.3.0",
         "g": "^2.0.1",
-        "highcharts": "^7.0.3",
+        "highcharts": "^9.0.0",
         "jquery-ui": "^1.12.1"
     },
     "devDependencies": {
